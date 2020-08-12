@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+function d()
+{
+
+	cd /c/third/windows
+	wget https://www.openssl.org/source/$1
+   
+
+}
+
+gz=`cat /c/archive/platform-windows/build/conf_source_openssl.txt`
+
+d $gz

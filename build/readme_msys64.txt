@@ -1,0 +1,1 @@
+PATH="/c/bergedge/lemon/msys/bin:$PATH"

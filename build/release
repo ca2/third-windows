@@ -1,0 +1,79 @@
+#!/bin/bash
+
+mkdir -p /c/archive/storage-windows/library/Win32/cube_basis/
+mkdir -p /c/archive/storage-windows/library/Win32/cube_stage/
+mkdir -p /c/archive/storage-windows/library/x64/cube_basis/
+mkdir -p /c/archive/storage-windows/library/x64/cube_stage/
+
+cp /c/third/windows/static/Win32/basis/lib/*.lib /c/archive/storage-windows/library/Win32/cube_basis/
+cp /c/third/windows/static/Win32/stage/lib/*.lib /c/archive/storage-windows/library/Win32/cube_stage/
+cp /c/third/windows/static/x64/basis/lib/*.lib /c/archive/storage-windows/library/x64/cube_basis/
+cp /c/third/windows/static/x64/stage/lib/*.lib /c/archive/storage-windows/library/x64/cube_stage/
+
+mkdir -p /c/archive/symbol-windows/binary/Win32/cube_basis/
+mkdir -p /c/archive/symbol-windows/binary/Win32/cube_stage/
+mkdir -p /c/archive/symbol-windows/binary/x64/cube_basis/
+mkdir -p /c/archive/symbol-windows/binary/x64/cube_stage/
+
+cp /c/third/windows/static/Win32/basis/lib/*.pdb /c/archive/symbol-windows/binary/Win32/cube_basis/
+cp /c/third/windows/static/Win32/stage/lib/*.pdb /c/archive/symbol-windows/binary/Win32/cube_stage/
+cp /c/third/windows/static/x64/basis/lib/*.pdb /c/archive/symbol-windows/binary/x64/cube_basis/
+cp /c/third/windows/static/x64/stage/lib/*.pdb /c/archive/symbol-windows/binary/x64/cube_stage/
+
+cp /c/third/windows/static/x64/stage/bin/*.exe /c/archive/tool/program
+
+mkdir -p /c/archive/storage-windows/binary/Win32/basis/
+mkdir -p /c/archive/storage-windows/binary/Win32/stage/
+mkdir -p /c/archive/storage-windows/binary/x64/basis/
+mkdir -p /c/archive/storage-windows/binary/x64/stage/
+
+cp /c/third/windows/dynamic/Win32/basis/bin/*.dll /c/archive/storage-windows/binary/Win32/basis/
+cp /c/third/windows/dynamic/Win32/stage/bin/*.dll /c/archive/storage-windows/binary/Win32/stage/
+cp /c/third/windows/dynamic/x64/basis/bin/*.dll /c/archive/storage-windows/binary/x64/basis/
+cp /c/third/windows/dynamic/x64/stage/bin/*.dll /c/archive/storage-windows/binary/x64/stage/
+
+mkdir -p /c/archive/storage-windows/library/Win32/basis/
+mkdir -p /c/archive/storage-windows/library/Win32/stage/
+mkdir -p /c/archive/storage-windows/library/x64/basis/
+mkdir -p /c/archive/storage-windows/library/x64/stage/
+
+cp /c/third/windows/dynamic/Win32/basis/bin/*.lib /c/archive/storage-windows/library/Win32/basis/
+cp /c/third/windows/dynamic/Win32/stage/bin/*.lib /c/archive/storage-windows/library/Win32/stage/
+cp /c/third/windows/dynamic/x64/basis/bin/*.lib /c/archive/storage-windows/library/x64/basis/
+cp /c/third/windows/dynamic/x64/stage/bin/*.lib /c/archive/storage-windows/library/x64/stage/
+
+cp /c/third/windows/dynamic/Win32/basis/lib/*.lib /c/archive/storage-windows/library/Win32/basis/
+cp /c/third/windows/dynamic/Win32/stage/lib/*.lib /c/archive/storage-windows/library/Win32/stage/
+cp /c/third/windows/dynamic/x64/basis/lib/*.lib /c/archive/storage-windows/library/x64/basis/
+cp /c/third/windows/dynamic/x64/stage/lib/*.lib /c/archive/storage-windows/library/x64/stage/
+
+mkdir -p /c/archive/symbol-windows/binary/Win32/basis/
+mkdir -p /c/archive/symbol-windows/binary/Win32/stage/
+mkdir -p /c/archive/symbol-windows/binary/x64/basis/
+mkdir -p /c/archive/symbol-windows/binary/x64/stage/
+
+cp /c/third/windows/dynamic/Win32/basis/bin/*.pdb /c/archive/symbol-windows/binary/Win32/basis/
+cp /c/third/windows/dynamic/Win32/stage/bin/*.pdb /c/archive/symbol-windows/binary/Win32/stage/
+cp /c/third/windows/dynamic/x64/basis/bin/*.pdb /c/archive/symbol-windows/binary/x64/basis/
+cp /c/third/windows/dynamic/x64/stage/bin/*.pdb /c/archive/symbol-windows/binary/x64/stage/
+
+
+mkdir -p /c/archive/storage-windows/library/Win32/cover/
+mkdir -p /c/archive/storage-windows/library/x64/cover/
+
+cp -Rf /c/archive/storage-windows/library/Win32/stage/* /c/archive/storage-windows/library/Win32/cover/
+cp -Rf /c/archive/storage-windows/library/x64/stage/* /c/archive/storage-windows/library/x64/cover/
+
+mkdir -p /c/archive/storage-windows/binary/Win32/cover/
+mkdir -p /c/archive/storage-windows/binary/x64/cover/
+
+cp -Rf /c/archive/storage-windows/binary/Win32/stage/* /c/archive/storage-windows/binary/Win32/cover/
+cp -Rf /c/archive/storage-windows/binary/x64/stage/* /c/archive/storage-windows/binary/x64/cover/
+
+cp -Rf /c/third/windows/dynamic/x64/stage/include/ /c/archive/platform-windows/include/
+
+
+
+
+
+

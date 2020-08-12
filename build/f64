@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+function m()
+{
+
+   cd /c/third/windows
+   mkdir ffmpeg64
+   tar -xjvf $1 -C ffmpeg64 --strip-components=1
+   cd ffmpeg64
+   ./configure --enable-gpl --enable-version3 --enable-nonfree --enable-asm --disable-doc --disable-ffplay --disable-ffprobe --disable-ffmpeg --enable-shared --disable-static --disable-bzlib --disable-libopenjpeg --disable-iconv --disable-zlib --prefix=/c/third/windows/dynamic/x64/stage --toolchain=msvc --arch=x86_64 --extra-cflags="-MD"
+   make -j8 install
+
+}
+
+bz2=`cat /c/archive/platform-windows/build/conf_source_ffmpeg.txt`
+
+m $bz2
+
+cd /c/third/windows/ffmpeg64

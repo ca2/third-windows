@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+function m()
+{
+
+   cd /c/third/windows
+   mkdir $1
+   tar -xzvf $2 -C $1 --strip-components=1
+   cd $1
+   perl Configure VC-WIN64A --openssldir=/c/third/windows/dynamic/ssl/x64/stage --prefix=/c/third/windows/dynamic/x64/stage CFLAGS=-MD CPPFLAGS=-MD
+   nmake 
+   nmake test
+   nmake install
+
+}
+
+gz=`cat /c/archive/platform-windows/build/conf_source_openssl.txt`
+
+m 'openssl64' $gz
+
+

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+function d()
+{
+
+	cd /c/third/windows
+	wget https://ffmpeg.org/releases/$1
+   
+
+}
+
+mkdir -p /c/third/windows
+
+gz=`cat /c/archive/platform-windows/build/conf_source_ffmpeg.txt`
+
+d $gz
