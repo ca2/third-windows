@@ -430,8 +430,6 @@ typedef struct _HANDLE_CREATOR
 
 WINPR_API BOOL ValidFileNameComponent(LPCWSTR lpFileName);
 
-#endif /* _WIN32 */
-
 #ifndef _UWP
 
 #ifdef __cplusplus
@@ -496,6 +494,8 @@ extern "C"
 
 #endif
 
+#endif /* _WIN32 */
+
 #define WILDCARD_STAR 0x00000001
 #define WILDCARD_QM 0x00000002
 #define WILDCARD_DOS 0x00000100
@@ -526,3 +526,5 @@ extern "C"
 #endif
 
 #endif /* WINPR_FILE_H */
+
+
