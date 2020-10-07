@@ -17,8 +17,6 @@
 #ifndef _OGG_H
 #define _OGG_H
 
-#include "aura/_.h"
-
 #include <string.h>
 #include <stdlib.h>
 #include <limits.h>
