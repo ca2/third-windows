@@ -112,7 +112,7 @@ enum AVFrameSideDataType {
      */
     AV_FRAME_DATA_AUDIO_SERVICE_TYPE,
     /**
-     * Mastering display metadata associated with a video frame. The payload is
+     * Mastering display metadata associated with a video frame. The ::payload is
      * an AVMasteringDisplayMetadata type and contains information about the
      * mastering display color volume.
      */
@@ -130,7 +130,7 @@ enum AVFrameSideDataType {
     AV_FRAME_DATA_SPHERICAL,
 
     /**
-     * Content light level (based on CTA-861.3). This payload contains data in
+     * Content light level (based on CTA-861.3). This ::payload contains data in
      * the form of the AVContentLightMetadata struct.
      */
     AV_FRAME_DATA_CONTENT_LIGHT_LEVEL,
