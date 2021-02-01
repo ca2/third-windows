@@ -115,7 +115,7 @@ struct _cairo_backend {
     cairo_status_t (*close_path) (void *cr);
 
     cairo_status_t (*arc) (void *cr, double xc, double yc, double radius, double angle1, double angle2, cairo_bool_t forward);
-    cairo_status_t (*rectangle_i32) (void *cr, double x, double y, double width, double height);
+    cairo_status_t (*rectangle) (void *cr, double x, double y, double width, double height);
 
     void (*path_extents) (void *cr, double *x1, double *y1, double *x2, double *y2);
     cairo_bool_t (*has_current_point) (void *cr);
@@ -150,7 +150,7 @@ struct _cairo_backend {
 
     cairo_status_t (*set_font_face) (void *cr, cairo_font_face_t *font_face);
     cairo_font_face_t *(*get_font_face) (void *cr);
-    cairo_status_t (*set_font_size) (void *cr, double size_i32);
+    cairo_status_t (*set_font_size) (void *cr, double size);
     cairo_status_t (*set_font_matrix) (void *cr, const cairo_matrix_t *matrix);
     void (*get_font_matrix) (void *cr, cairo_matrix_t *matrix);
     cairo_status_t (*set_font_options) (void *cr, const cairo_font_options_t *options);

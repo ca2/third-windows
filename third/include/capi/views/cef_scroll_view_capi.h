@@ -48,7 +48,7 @@ extern "C" {
 
 ///
 // A ScrollView will show horizontal and/or vertical scrollbars when necessary
-// based on the size_i32 of the attached content view. Methods must be called on the
+// based on the size of the attached content view. Methods must be called on the
 // browser process UI thread unless otherwise indicated.
 ///
 typedef struct _cef_scroll_view_t {
@@ -58,7 +58,7 @@ typedef struct _cef_scroll_view_t {
   cef_view_t base;
 
   ///
-  // Set the content View. The content View must have a specified size_i32 (e.g. via
+  // Set the content View. The content View must have a specified size (e.g. via
   // cef_view_t::SetBounds or cef_view_tDelegate::GetPreferredSize).
   ///
   void(CEF_CALLBACK* set_content_view)(struct _cef_scroll_view_t* self,

@@ -71,7 +71,7 @@
  * links against.
  *
  * However, new public symbols may be added and new members may be appended to
- * public structs whose size_i32 is not part of public ABI (most public structs in
+ * public structs whose size is not part of public ABI (most public structs in
  * FFmpeg). New macros and enum values may be added. Behavior in undocumented
  * situations may change slightly (and be documented). All those are accompanied
  * by an entry in doc/APIchanges and incrementing either the minor or micro
@@ -313,7 +313,7 @@ static inline void *av_x_if_null(const void *p, const void *x)
 /**
  * Compute the length of an integer list.
  *
- * @param elsize  size_i32 in bytes of each list element (only 1, 2, 4 or 8)
+ * @param elsize  size in bytes of each list element (only 1, 2, 4 or 8)
  * @param term    list terminator (usually 0 or -1)
  * @param list    pointer to the list
  * @return  length of the list, in elements, not counting the terminator
@@ -351,7 +351,7 @@ AVRational av_get_time_base_q(void);
  * Fill the provided buffer with a string containing a FourCC (four-character
  * code) representation.
  *
- * @param buf    a buffer with size_i32 in bytes of at least AV_FOURCC_MAX_STRING_SIZE
+ * @param buf    a buffer with size in bytes of at least AV_FOURCC_MAX_STRING_SIZE
  * @param fourcc the fourcc to represent
  * @return the buffer in input
  */

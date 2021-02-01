@@ -59,9 +59,9 @@ typedef struct _cairo_xlib_source cairo_xlib_source_t;
 typedef struct _cairo_xlib_proxy cairo_xlib_proxy_t;
 typedef struct _cairo_xlib_surface cairo_xlib_surface_t;
 
-/* size_i32 of color cube */
+/* size of color cube */
 #define CUBE_SIZE 6
-/* size_i32 of gray ramp */
+/* size of gray ramp */
 #define RAMP_SIZE 16
 /* maximum number of cached GC's */
 #define GC_CACHE_SIZE 4

@@ -69,7 +69,7 @@ FT_BEGIN_HEADER
    *   possible.
    *
    *   Note that for the cache to work correctly, the face ID values must be
-   *   **persistent**, which means that the contents they point_i32 to should not
+   *   **persistent**, which means that the contents they point to should not
    *   change at runtime, or that their value should not become invalid.
    *
    *   If this is unavoidable (e.g., when a font is uninstalled at runtime),
@@ -151,7 +151,7 @@ FT_BEGIN_HEADER
    *   An opaque pointer type that is used to identity face objects.  The
    *   contents of such objects is application-dependent.
    *
-   *   These pointers are typically used to point_i32 to a user-defined structure
+   *   These pointers are typically used to point to a user-defined structure
    *   containing a font file path, and face index.
    *
    * @note:
@@ -381,8 +381,8 @@ FT_BEGIN_HEADER
    *   The returned @FT_Face object is always owned by the manager.  You
    *   should never try to discard it yourself.
    *
-   *   The @FT_Face object doesn't necessarily have a current size_i32 object
-   *   (i.e., face->size_i32 can be~0).  If you need a specific 'font size_i32', use
+   *   The @FT_Face object doesn't necessarily have a current size object
+   *   (i.e., face->size can be~0).  If you need a specific 'font size', use
    *   @FTC_Manager_LookupSize instead.
    *
    *   Never change the face's transformation matrix (i.e., never call the
@@ -409,7 +409,7 @@ FT_BEGIN_HEADER
    *   FTC_ScalerRec
    *
    * @description:
-   *   A structure used to describe a given character size_i32 in either pixels
+   *   A structure used to describe a given character size in either pixels
    *   or points to the cache manager.  See @FTC_Manager_LookupSize.
    *
    * @fields:
@@ -480,7 +480,7 @@ FT_BEGIN_HEADER
    *
    * @output:
    *   asize ::
-   *     A handle to the size_i32 object.
+   *     A handle to the size object.
    *
    * @return:
    *   FreeType error code.  0~means success.
@@ -489,7 +489,7 @@ FT_BEGIN_HEADER
    *   The returned @FT_Size object is always owned by the manager.  You
    *   should never try to discard it by yourself.
    *
-   *   You can access the parent @FT_Face object simply as `size_i32->face` if
+   *   You can access the parent @FT_Face object simply as `size->face` if
    *   you need it.  Note that this object is also owned by the manager.
    *
    * @note:

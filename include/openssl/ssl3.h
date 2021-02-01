@@ -152,7 +152,7 @@ extern "C" {
 # endif
 
 /*
- * This is the maximum MAC (digest) size_i32 used by the SSL library. Currently
+ * This is the maximum MAC (digest) size used by the SSL library. Currently
  * maximum of 20 is used by SHA1, but we reserve for future extension for
  * 512-bit hashes.
  */
@@ -160,7 +160,7 @@ extern "C" {
 # define SSL3_RT_MAX_MD_SIZE                     64
 
 /*
- * Maximum block size_i32 used in all ciphersuites. Currently 16 for AES.
+ * Maximum block size used in all ciphersuites. Currently 16 for AES.
  */
 
 # define SSL_RT_MAX_CIPHER_BLOCK_SIZE            16
@@ -262,7 +262,7 @@ extern "C" {
 # define SSL3_CT_DSS_EPHEMERAL_DH                6
 # define SSL3_CT_FORTEZZA_DMS                    20
 /*
- * SSL3_CT_NUMBER is used to size_i32 arrays and it must be large enough to
+ * SSL3_CT_NUMBER is used to size arrays and it must be large enough to
  * contain all of the cert types defined for *either* SSLv3 and TLSv1.
  */
 # define SSL3_CT_NUMBER                  10

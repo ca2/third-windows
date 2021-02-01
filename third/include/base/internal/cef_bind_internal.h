@@ -96,7 +96,7 @@ namespace cef_internal {
 //                    There are |k*ARITY| InvokeHelper types.
 //  Invoker<> -- Unwraps the curried parameters and executes the Runnable.
 //               There are |(ARITY^2 + ARITY)/2| Invoketypes.
-//  BindState<> -- Stores the curried parameters, and is the main entry point_i32
+//  BindState<> -- Stores the curried parameters, and is the main entry point
 //                 into the Bind() system, doing most of the type resolution.
 //                 There are ARITY BindState types.
 

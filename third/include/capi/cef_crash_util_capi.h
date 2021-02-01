@@ -120,7 +120,7 @@ extern "C" {
 // Rate limiting is not supported on Linux.
 //
 // If "MaxDatabaseSizeInMb" is set to a positive value then crash report storage
-// on disk will be limited to that size_i32 in megabytes. For example, on Windows
+// on disk will be limited to that size in megabytes. For example, on Windows
 // each dump is about 600KB so a "MaxDatabaseSizeInMb" value of 20 equates to
 // about 34 crash reports stored on disk. Not supported on Linux.
 //
@@ -129,8 +129,8 @@ extern "C" {
 //
 // CrashKeys section:
 //
-// A maximum of 26 crash keys of each size_i32 can be specified for use by the
-// application. Crash key values will be truncated based on the specified size_i32
+// A maximum of 26 crash keys of each size can be specified for use by the
+// application. Crash key values will be truncated based on the specified size
 // (small = 64 bytes, medium = 256 bytes, large = 1024 bytes). The value of
 // crash keys can be set from any thread or process using the
 // CefSetCrashKeyValue function. These key/value pairs will be sent to the crash

@@ -45,7 +45,7 @@
 ///
 // This class typically, but not always, corresponds to a physical display
 // connected to the system. A fake Display may exist on a headless system, or a
-// Display may correspond to a remote, virtual display. All size_i32 and position
+// Display may correspond to a remote, virtual display. All size and position
 // values are in density independent pixels (DIP) unless otherwise indicated.
 // Methods must be called on the browser process UI thread unless otherwise
 // indicated.
@@ -60,8 +60,8 @@ class CefDisplay : public CefBaseRefCounted {
   static CefRefPtr<CefDisplay> GetPrimaryDisplay();
 
   ///
-  // Returns the Display nearest |point_i32|. Set |input_pixel_coords| to true if
-  // |point_i32| is in pixel coordinates instead of density independent pixels
+  // Returns the Display nearest |point|. Set |input_pixel_coords| to true if
+  // |point| is in pixel coordinates instead of density independent pixels
   // (DIP).
   ///
   /*--cef()--*/
@@ -108,21 +108,21 @@ class CefDisplay : public CefBaseRefCounted {
   virtual float GetDeviceScaleFactor() = 0;
 
   ///
-  // Convert |point_i32| from density independent pixels (DIP) to pixel coordinates
+  // Convert |point| from density independent pixels (DIP) to pixel coordinates
   // using this Display's device scale factor.
   ///
   /*--cef()--*/
   virtual void ConvertPointToPixels(CefPoint& point) = 0;
 
   ///
-  // Convert |point_i32| from pixel coordinates to density independent pixels (DIP)
+  // Convert |point| from pixel coordinates to density independent pixels (DIP)
   // using this Display's device scale factor.
   ///
   /*--cef()--*/
   virtual void ConvertPointFromPixels(CefPoint& point) = 0;
 
   ///
-  // Returns this Display's bounds. This is the full size_i32 of the display.
+  // Returns this Display's bounds. This is the full size of the display.
   ///
   /*--cef()--*/
   virtual CefRect GetBounds() = 0;

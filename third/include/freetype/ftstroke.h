@@ -154,7 +154,7 @@ FT_BEGIN_HEADER
    *
    * @values:
    *   FT_STROKER_LINECAP_BUTT ::
-   *     The end of lines is rendered as a full stop on the last point_i32
+   *     The end of lines is rendered as a full stop on the last point
    *     itself.
    *
    *   FT_STROKER_LINECAP_ROUND ::
@@ -294,13 +294,13 @@ FT_BEGIN_HEADER
    *
    *   miter_limit ::
    *     The maximum reciprocal sine of half-angle at the miter join,
-   *     expressed as 16.16 fixed point_i32 value.
+   *     expressed as 16.16 fixed point value.
    *
    * @note:
    *   The `radius` is expressed in the same units as the outline
    *   coordinates.
    *
-   *   The `miter_limit` multiplied by the `radius` gives the maximum size_i32
+   *   The `miter_limit` multiplied by the `radius` gives the maximum size
    *   of a miter spike, at which it is clipped for
    *   @FT_STROKER_LINEJOIN_MITER_VARIABLE or replaced with a bevel join for
    *   @FT_STROKER_LINEJOIN_MITER_FIXED.

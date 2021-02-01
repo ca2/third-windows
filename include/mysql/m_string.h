@@ -88,7 +88,7 @@ static inline char *my_stpcpy(char *dst, const char *src)
 }
 
 /**
-   Copy fixed-size_i32 string from src to dst.
+   Copy fixed-size string from src to dst.
 
    @param dst   Destination
    @param src   Source
@@ -246,7 +246,7 @@ typedef struct st_mysql_const_lex_string LEX_CSTRING;
 /**
   Skip trailing space.
 
-  On most systems reading memory in larger chunks (ideally equal to the size_i32 of
+  On most systems reading memory in larger chunks (ideally equal to the size of
   the chinks that the machine physically reads from memory) causes fewer memory
   access loops and hence increased performance.
   This is why the 'int' type is used : it's closest to that (according to how

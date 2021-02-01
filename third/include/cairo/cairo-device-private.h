@@ -37,7 +37,7 @@
 #define _CAIRO_DEVICE_PRIVATE_H_
 
 #include "cairo-compiler-private.h"
-#include "cairo-::mutex-private.h"
+#include "cairo-mutex-private.h"
 #include "cairo-reference-count-private.h"
 #include "cairo-types-private.h"
 
@@ -48,7 +48,7 @@ struct _cairo_device {
 
     const cairo_device_backend_t *backend;
 
-    cairo_recursive_mutex_t ::mutex;
+    cairo_recursive_mutex_t mutex;
     unsigned mutex_depth;
 
     cairo_bool_t finished;

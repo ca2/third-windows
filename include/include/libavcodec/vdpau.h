@@ -74,7 +74,7 @@ typedef int (*AVVDPAU_Render2)(struct AVCodecContext *, struct AVFrame *,
  * function call. In any case, they must be valid prior to calling
  * decoding functions.
  *
- * The size_i32 of this structure is not a part of the public ABI and must not
+ * The size of this structure is not a part of the public ABI and must not
  * be used outside of libavcodec. Use av_vdpau_alloc_context() to allocate an
  * AVVDPAUContext.
  */

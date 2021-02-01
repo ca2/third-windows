@@ -68,7 +68,7 @@
 #endif
 
 /* To support symbol prefixing it is necessary to know *before* including png.h
- * whether the fixed point_i32 (and maybe other) APIs are exported, because if they
+ * whether the fixed point (and maybe other) APIs are exported, because if they
  * are not internal definitions may be required.  This is handled below just
  * before png.h is included, but load the configuration now if it is available.
  */
@@ -359,7 +359,7 @@
          PNG_EMPTY attributes)
 #endif
 
-/* If floating or fixed point_i32 APIs are disabled they may still be compiled
+/* If floating or fixed point APIs are disabled they may still be compiled
  * internally.  To handle this make sure they are declared as the appropriate
  * internal extern function (otherwise the symbol prefixing stuff won't work and
  * the functions will be used without definitions.)
@@ -467,8 +467,8 @@
 #  define png_fixed_error(s1,s2) png_err(s1)
 #endif
 
-/* Some fixed point_i32 APIs are still required even if not exported because
- * they get used by the corresponding floating point_i32 APIs.  This magic
+/* Some fixed point APIs are still required even if not exported because
+ * they get used by the corresponding floating point APIs.  This magic
  * deals with this:
  */
 #ifdef PNG_FIXED_POINT_SUPPORTED
@@ -513,11 +513,11 @@
 #if defined(PNG_FLOATING_POINT_SUPPORTED) ||\
     defined(PNG_FLOATING_ARITHMETIC_SUPPORTED)
    /* png.c requires the following ANSI-C constants if the conversion of
-    * floating point_i32 to ASCII is implemented therein:
+    * floating point to ASCII is implemented therein:
     *
     *  DBL_DIG  Maximum number of decimal digits (can be set to any constant)
     *  DBL_MIN  Smallest normalized fp number (can be set to an arbitrary value)
-    *  DBL_MAX  Maximum floating point_i32 number (can be set to an arbitrary value)
+    *  DBL_MAX  Maximum floating point number (can be set to an arbitrary value)
     */
 #  include <float.h>
 
@@ -770,13 +770,13 @@
 #define PNG_OUT_OF_RANGE(value, ideal, delta) \
    ( (value) < (ideal)-(delta) || (value) > (ideal)+(delta) )
 
-/* Conversions between fixed and floating point_i32, only defined if
+/* Conversions between fixed and floating point, only defined if
  * required (to make sure the code doesn't accidentally use float
  * when it is supposedly disabled.)
  */
 #ifdef PNG_FLOATING_POINT_SUPPORTED
-/* The floating point_i32 conversion can't overflow, though it can and
- * does lose accuracy relative to the original fixed point_i32 value.
+/* The floating point conversion can't overflow, though it can and
+ * does lose accuracy relative to the original fixed point value.
  * In practice this doesn't matter because png_fixed_point only
  * stores numbers with very low precision.  The png_ptr and s
  * arguments are unused by default but are there in case error
@@ -784,10 +784,10 @@
  */
 #define png_float(png_ptr, fixed, s) (.00001 * (fixed))
 
-/* The fixed point_i32 conversion performs range checking and evaluates
+/* The fixed point conversion performs range checking and evaluates
  * its argument multiple times, so must be used with care.  The
  * range checking uses the PNG specification values for a signed
- * 32-bit fixed point_i32 value except that the values are deliberately
+ * 32-bit fixed point value except that the values are deliberately
  * rounded-to-zero to an integral value - 21474 (21474.83 is roughly
  * (2^31-1) * 100000). 's' is a string that describes the value being
  * converted.
@@ -1009,7 +1009,7 @@ PNG_INTERNAL_FUNCTION(int,png_user_version_check,(png_structrp png_ptr,
  * png_error (although that would be a bug in the application implementation.)
  */
 PNG_INTERNAL_FUNCTION(png_voidp,png_malloc_base,(png_const_structrp png_ptr,
-   png_alloc_size_t size_i32),PNG_ALLOCATED);
+   png_alloc_size_t size),PNG_ALLOCATED);
 
 #if defined(PNG_TEXT_SUPPORTED) || defined(PNG_sPLT_SUPPORTED) ||\
    defined(PNG_STORE_UNKNOWN_CHUNKS_SUPPORTED)
@@ -1047,7 +1047,7 @@ PNG_INTERNAL_FUNCTION(void,png_destroy_png_struct,(png_structrp png_ptr),
 PNG_INTERNAL_FUNCTION(void,png_free_jmpbuf,(png_structrp png_ptr),PNG_EMPTY);
 
 /* Function to allocate memory for zlib.  PNGAPI is disallowed. */
-PNG_INTERNAL_FUNCTION(voidpf,png_zalloc,(voidpf png_ptr, uInt items, uInt size_i32),
+PNG_INTERNAL_FUNCTION(voidpf,png_zalloc,(voidpf png_ptr, uInt items, uInt size),
    PNG_ALLOCATED);
 
 /* Function to free memory for zlib.  PNGAPI is disallowed. */
@@ -1108,7 +1108,7 @@ PNG_INTERNAL_FUNCTION(int,png_crc_error,(png_structrp png_ptr),PNG_EMPTY);
 
 /* Calculate the CRC over a section of data.  Note that we are only
  * passing a maximum of 64K on systems that have this as a memory limit,
- * since this is the maximum buffer size_i32 we can specify.
+ * since this is the maximum buffer size we can specify.
  */
 PNG_INTERNAL_FUNCTION(void,png_calculate_crc,(png_structrp png_ptr,
    png_const_bytep ptr, size_t length),PNG_EMPTY);
@@ -1296,7 +1296,7 @@ PNG_INTERNAL_FUNCTION(void,png_do_write_interlace,(png_row_infop row_info,
     png_bytep row, int pass),PNG_EMPTY);
 #endif
 
-/* Unfilter a row: check the filter value before calling this, there is no point_i32
+/* Unfilter a row: check the filter value before calling this, there is no point
  * calling it for PNG_FILTER_VALUE_NONE.
  */
 PNG_INTERNAL_FUNCTION(void,png_read_filter_row,(png_structrp pp, png_row_infop
@@ -1741,7 +1741,7 @@ PNG_INTERNAL_FUNCTION(size_t,png_safecat,(png_charp buffer, size_t bufsize,
  */
 #if defined(PNG_WARNINGS_SUPPORTED) || defined(PNG_TIME_RFC1123_SUPPORTED)
 /* Utility to dump an unsigned value into a buffer, given a start pointer and
- * and end pointer (which should point_i32 just *beyond* the end of the buffer!)
+ * and end pointer (which should point just *beyond* the end of the buffer!)
  * Returns the pointer to the start of the formatted string.  This utility only
  * does unsigned values.
  */
@@ -1752,7 +1752,7 @@ PNG_INTERNAL_FUNCTION(png_charp,png_format_number,(png_const_charp start,
 #define PNG_FORMAT_NUMBER(buffer,format,number) \
    png_format_number(buffer, buffer + (sizeof buffer), format, number)
 
-/* Suggested size_i32 for a number buffer (enough for 64 bits and a sign!) */
+/* Suggested size for a number buffer (enough for 64 bits and a sign!) */
 #define PNG_NUMBER_BUFFER_SIZE 24
 
 /* These are the integer formats currently supported, the name is formed from
@@ -1780,7 +1780,7 @@ typedef char png_warning_parameters[PNG_WARNING_PARAMETER_COUNT][
 
 PNG_INTERNAL_FUNCTION(void,png_warning_parameter,(png_warning_parameters p,
    int number, png_const_charp string),PNG_EMPTY);
-   /* Parameters are limited in size_i32 to PNG_WARNING_PARAMETER_SIZE characters,
+   /* Parameters are limited in size to PNG_WARNING_PARAMETER_SIZE characters,
     * including the trailing '\0'.
     */
 PNG_INTERNAL_FUNCTION(void,png_warning_parameter_unsigned,
@@ -1871,7 +1871,7 @@ PNG_INTERNAL_FUNCTION(void,png_ascii_from_fixed,(png_const_structrp png_ptr,
 #endif /* sCAL */
 
 #if defined(PNG_sCAL_SUPPORTED) || defined(PNG_pCAL_SUPPORTED)
-/* An internal API to validate the format of a floating point_i32 number.
+/* An internal API to validate the format of a floating point number.
  * The result is the index of the next character.  If the number is
  * not valid it will be the index of a character in the supposed number.
  *
@@ -1890,9 +1890,9 @@ PNG_INTERNAL_FUNCTION(void,png_ascii_from_fixed,(png_const_structrp png_ptr,
  * fraction is permitted to have no digits only if the integer is present.
  *
  * NOTE: The dangling E problem.
- *   There is a PNG valid floating point_i32 number in the following:
+ *   There is a PNG valid floating point number in the following:
  *
- *       PNG floating point_i32 numbers are not greedy.
+ *       PNG floating point numbers are not greedy.
  *
  *   Working this out requires *TWO* character lookahead (because of the
  *   sign), the parser does not do this - it will fail at the 'r' - this
@@ -1946,7 +1946,7 @@ PNG_INTERNAL_FUNCTION(void,png_ascii_from_fixed,(png_const_structrp png_ptr,
 /* The actual parser.  This can be called repeatedly. It updates
  * the index into the string and the state variable (which must
  * be initialized to 0).  It returns a result code, as above.  There
- * is no point_i32 calling the parser any more if it fails to advance to
+ * is no point calling the parser any more if it fails to advance to
  * the end of the string - it is stuck on an invalid character (or
  * terminated by '\0').
  *
@@ -1955,14 +1955,14 @@ PNG_INTERNAL_FUNCTION(void,png_ascii_from_fixed,(png_const_structrp png_ptr,
  * The PNG_FP_WAS_VALID flag indicates that a preceding substring was
  * a valid number.  It's possible to recover from this by calling
  * the parser again (from the start, with state 0) but with a string
- * that omits the last character (i.e. set the size_i32 to the index of
+ * that omits the last character (i.e. set the size to the index of
  * the problem character.)  This has not been tested within libpng.
  */
 PNG_INTERNAL_FUNCTION(int,png_check_fp_number,(png_const_charp string,
    size_t size, int *statep, png_size_tp whereami),PNG_EMPTY);
 
 /* This is the same but it checks a complete string and returns true
- * only if it just contains a floating point_i32 number.  As of 1.5.4 this
+ * only if it just contains a floating point number.  As of 1.5.4 this
  * function also returns the state at the end of parsing the number if
  * it was valid (otherwise it returns 0.)  This can be used for testing
  * for negative or zero values using the sticky flag.
@@ -1999,7 +1999,7 @@ PNG_INTERNAL_FUNCTION(png_fixed_point,png_reciprocal,(png_fixed_point a),
    PNG_EMPTY);
 
 #ifdef PNG_READ_GAMMA_SUPPORTED
-/* The same but gives a reciprocal of the product of two fixed point_i32
+/* The same but gives a reciprocal of the product of two fixed point
  * values.  Accuracy is suitable for gamma calculations but this is
  * not exact - use png_muldiv for that.  Only required at present on read.
  */
@@ -2013,7 +2013,7 @@ PNG_INTERNAL_FUNCTION(int,png_gamma_significant,(png_fixed_point gamma_value),
 #endif
 
 #ifdef PNG_READ_GAMMA_SUPPORTED
-/* Internal fixed point_i32 gamma correction.  These APIs are called as
+/* Internal fixed point gamma correction.  These APIs are called as
  * required to convert single values - they don't need to be fast,
  * they are not used when processing image pixel values.
  *

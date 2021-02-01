@@ -312,11 +312,11 @@ _cairo_box_to_doubles (const cairo_box_t *box,
 
 cairo_private void
 _cairo_box_from_rectangle (cairo_box_t                 *box,
-			   const cairo_rectangle_int_t *rectangle_i32);
+			   const cairo_rectangle_int_t *rectangle);
 
 cairo_private void
 _cairo_box_round_to_rectangle (const cairo_box_t     *box,
-			       cairo_rectangle_int_t *rectangle_i32);
+			       cairo_rectangle_int_t *rectangle);
 
 cairo_private void
 _cairo_box_add_curve_to (cairo_box_t         *extents,
@@ -334,9 +334,9 @@ cairo_private extern const cairo_rectangle_int_t _cairo_empty_rectangle;
 cairo_private extern const cairo_rectangle_int_t _cairo_unbounded_rectangle;
 
 static inline void
-_cairo_unbounded_rectangle_init (cairo_rectangle_int_t *rectangle_i32)
+_cairo_unbounded_rectangle_init (cairo_rectangle_int_t *rect)
 {
-    *rectangle_i32 = _cairo_unbounded_rectangle;
+    *rect = _cairo_unbounded_rectangle;
 }
 
 cairo_private_no_warn cairo_bool_t
@@ -365,9 +365,9 @@ _cairo_rectangle_contains_rectangle (const cairo_rectangle_int_t *a,
 
 cairo_private void
 _cairo_rectangle_int_from_double (cairo_rectangle_int_t *recti,
-				  const cairo_rectangle_t *rectangle_f32);
+				  const cairo_rectangle_t *rectf);
 
-/* Extends the dst rectangle_i32 to also contain src.
+/* Extends the dst rectangle to also contain src.
  * If one of the rectangles is empty, the result is undefined
  */
 cairo_private void
@@ -542,8 +542,8 @@ struct _cairo_scaled_font_backend {
      * @tag: 4 byte table name specifying the table to read.
      * @offset: offset into the table
      * @buffer: buffer to write data into. Caller must ensure there is sufficient space.
-     *          If NULL, return the size_i32 of the table in @length.
-     * @length: If @buffer is NULL, the size_i32 of the table will be returned in @length.
+     *          If NULL, return the size of the table in @length.
+     * @length: If @buffer is NULL, the size of the table will be returned in @length.
      *          If @buffer is not null, @length specifies the number of bytes to read.
      *
      * If less than @length bytes are available to read this function
@@ -599,8 +599,8 @@ struct _cairo_scaled_font_backend {
      * @scaled_font: font
      * @offset: offset into the table
      * @buffer: buffer to write data into. Caller must ensure there is sufficient space.
-     *          If NULL, return the size_i32 of the table in @length.
-     * @length: If @buffer is NULL, the size_i32 of the table will be returned in @length.
+     *          If NULL, return the size of the table in @length.
+     * @length: If @buffer is NULL, the size of the table will be returned in @length.
      *          If @buffer is not null, @length specifies the number of bytes to read.
      *
      * If less than @length bytes are available to read this function
@@ -729,7 +729,7 @@ struct _cairo_surface_attributes {
 
 typedef struct _cairo_stroke_face {
     cairo_point_t ccw;
-    cairo_point_t point_i32;
+    cairo_point_t point;
     cairo_point_t cw;
     cairo_slope_t dev_vector;
     cairo_point_double_t dev_slope;
@@ -992,11 +992,11 @@ _cairo_path_fixed_get_current_point (cairo_path_fixed_t *path,
 
 typedef cairo_status_t
 (cairo_path_fixed_move_to_func_t) (void		 *closure,
-				   const cairo_point_t *point_i32);
+				   const cairo_point_t *point);
 
 typedef cairo_status_t
 (cairo_path_fixed_line_to_func_t) (void		 *closure,
-				   const cairo_point_t *point_i32);
+				   const cairo_point_t *point);
 
 typedef cairo_status_t
 (cairo_path_fixed_curve_to_func_t) (void	  *closure,
@@ -1085,12 +1085,12 @@ _cairo_path_fixed_in_fill (const cairo_path_fixed_t	*path,
 cairo_private cairo_status_t
 _cairo_path_fixed_fill_to_polygon (const cairo_path_fixed_t *path,
 				   double              tolerance,
-				   cairo_polygon_t      *polygon_i32);
+				   cairo_polygon_t      *polygon);
 
 cairo_private cairo_status_t
 _cairo_path_fixed_fill_rectilinear_to_polygon (const cairo_path_fixed_t *path,
 					       cairo_antialias_t antialias,
-					       cairo_polygon_t *polygon_i32);
+					       cairo_polygon_t *polygon);
 
 cairo_private cairo_status_t
 _cairo_path_fixed_fill_rectilinear_to_boxes (const cairo_path_fixed_t *path,
@@ -1116,7 +1116,7 @@ _cairo_path_fixed_stroke_to_polygon (const cairo_path_fixed_t	*path,
 				     const cairo_matrix_t	*ctm,
 				     const cairo_matrix_t	*ctm_inverse,
 				     double		 tolerance,
-				     cairo_polygon_t	*polygon_i32);
+				     cairo_polygon_t	*polygon);
 
 cairo_private cairo_int_status_t
 _cairo_path_fixed_stroke_to_tristrip (const cairo_path_fixed_t	*path,
@@ -1132,7 +1132,7 @@ _cairo_path_fixed_stroke_dashed_to_polygon (const cairo_path_fixed_t	*path,
 					    const cairo_matrix_t	*ctm,
 					    const cairo_matrix_t	*ctm_inverse,
 					    double		 tolerance,
-					    cairo_polygon_t	*polygon_i32);
+					    cairo_polygon_t	*polygon);
 
 cairo_private cairo_int_status_t
 _cairo_path_fixed_stroke_rectilinear_to_boxes (const cairo_path_fixed_t	*path,
@@ -1639,7 +1639,7 @@ cairo_private void
 _cairo_pen_fini (cairo_pen_t *pen);
 
 cairo_private cairo_status_t
-_cairo_pen_add_points (cairo_pen_t *pen, cairo_point_t *point_i32, int num_points);
+_cairo_pen_add_points (cairo_pen_t *pen, cairo_point_t *point, int num_points);
 
 cairo_private int
 _cairo_pen_find_active_cw_vertex_index (const cairo_pen_t *pen,
@@ -1661,57 +1661,57 @@ _cairo_pen_find_active_ccw_vertices (const cairo_pen_t *pen,
 				     const cairo_slope_t *out,
 				     int *start, int *stop);
 
-/* cairo-polygon_i32.c */
+/* cairo-polygon.c */
 cairo_private void
-_cairo_polygon_init (cairo_polygon_t   *polygon_i32,
+_cairo_polygon_init (cairo_polygon_t   *polygon,
 		     const cairo_box_t *boxes,
 		     int		num_boxes);
 
 cairo_private void
-_cairo_polygon_init_with_clip (cairo_polygon_t *polygon_i32,
+_cairo_polygon_init_with_clip (cairo_polygon_t *polygon,
 			       const cairo_clip_t *clip);
 
 cairo_private cairo_status_t
-_cairo_polygon_init_boxes (cairo_polygon_t *polygon_i32,
+_cairo_polygon_init_boxes (cairo_polygon_t *polygon,
 			   const cairo_boxes_t *boxes);
 
 cairo_private cairo_status_t
-_cairo_polygon_init_box_array (cairo_polygon_t *polygon_i32,
+_cairo_polygon_init_box_array (cairo_polygon_t *polygon,
 			       cairo_box_t *boxes,
 			       int num_boxes);
 
 cairo_private void
-_cairo_polygon_limit (cairo_polygon_t *polygon_i32,
+_cairo_polygon_limit (cairo_polygon_t *polygon,
 		     const cairo_box_t *limits,
 		     int num_limits);
 
 cairo_private void
-_cairo_polygon_limit_to_clip (cairo_polygon_t *polygon_i32,
+_cairo_polygon_limit_to_clip (cairo_polygon_t *polygon,
 			      const cairo_clip_t *clip);
 
 cairo_private void
-_cairo_polygon_fini (cairo_polygon_t *polygon_i32);
+_cairo_polygon_fini (cairo_polygon_t *polygon);
 
 cairo_private_no_warn cairo_status_t
-_cairo_polygon_add_line (cairo_polygon_t *polygon_i32,
+_cairo_polygon_add_line (cairo_polygon_t *polygon,
 			 const cairo_line_t *line,
 			 int top, int bottom,
 			 int dir);
 
 cairo_private_no_warn cairo_status_t
-_cairo_polygon_add_external_edge (void *polygon_i32,
+_cairo_polygon_add_external_edge (void *polygon,
 				  const cairo_point_t *p1,
 				  const cairo_point_t *p2);
 
 cairo_private_no_warn cairo_status_t
-_cairo_polygon_add_contour (cairo_polygon_t *polygon_i32,
+_cairo_polygon_add_contour (cairo_polygon_t *polygon,
 			    const cairo_contour_t *contour);
 
 cairo_private void
-_cairo_polygon_translate (cairo_polygon_t *polygon_i32, int dx, int dy);
+_cairo_polygon_translate (cairo_polygon_t *polygon, int dx, int dy);
 
 cairo_private cairo_status_t
-_cairo_polygon_reduce (cairo_polygon_t *polygon_i32,
+_cairo_polygon_reduce (cairo_polygon_t *polygon,
 		       cairo_fill_rule_t fill_rule);
 
 cairo_private cairo_status_t
@@ -1719,17 +1719,17 @@ _cairo_polygon_intersect (cairo_polygon_t *a, int winding_a,
 			  cairo_polygon_t *b, int winding_b);
 
 cairo_private cairo_status_t
-_cairo_polygon_intersect_with_boxes (cairo_polygon_t *polygon_i32,
+_cairo_polygon_intersect_with_boxes (cairo_polygon_t *polygon,
 				     cairo_fill_rule_t *winding,
 				     cairo_box_t *boxes,
 				     int num_boxes);
 
 static inline cairo_bool_t
-_cairo_polygon_is_empty (const cairo_polygon_t *polygon_i32)
+_cairo_polygon_is_empty (const cairo_polygon_t *polygon)
 {
     return
-	polygon_i32->num_edges == 0 ||
-	polygon_i32->extents.p2.x <= polygon_i32->extents.p1.x;
+	polygon->num_edges == 0 ||
+	polygon->extents.p2.x <= polygon->extents.p1.x;
 }
 
 #define _cairo_polygon_status(P) ((cairo_polygon_t *) (P))->status
@@ -1836,16 +1836,16 @@ cairo_private void
 _cairo_debug_print_matrix (FILE *file, const cairo_matrix_t *matrix);
 
 cairo_private void
-_cairo_debug_print_rect (FILE *file, const cairo_rectangle_int_t *rectangle_i32);
+_cairo_debug_print_rect (FILE *file, const cairo_rectangle_int_t *rect);
 
 cairo_private cairo_status_t
 _cairo_bentley_ottmann_tessellate_rectilinear_polygon (cairo_traps_t	 *traps,
-						       const cairo_polygon_t *polygon_i32,
+						       const cairo_polygon_t *polygon,
 						       cairo_fill_rule_t	  fill_rule);
 
 cairo_private cairo_status_t
 _cairo_bentley_ottmann_tessellate_polygon (cairo_traps_t         *traps,
-					   const cairo_polygon_t *polygon_i32,
+					   const cairo_polygon_t *polygon,
 					   cairo_fill_rule_t      fill_rule);
 
 cairo_private cairo_status_t
@@ -1866,7 +1866,7 @@ _cairo_bentley_ottmann_tessellate_rectilinear_traps (cairo_traps_t *traps,
 						     cairo_fill_rule_t fill_rule);
 
 cairo_private cairo_status_t
-_cairo_bentley_ottmann_tessellate_rectilinear_polygon_to_boxes (const cairo_polygon_t *polygon_i32,
+_cairo_bentley_ottmann_tessellate_rectilinear_polygon_to_boxes (const cairo_polygon_t *polygon,
 								cairo_fill_rule_t fill_rule,
 								cairo_boxes_t *boxes);
 
@@ -2105,7 +2105,7 @@ slim_hidden_proto (cairo_surface_write_to_png_stream);
 
 CAIRO_END_DECLS
 
-#include "cairo-::mutex-private.h"
+#include "cairo-mutex-private.h"
 #include "cairo-fixed-private.h"
 #include "cairo-wideint-private.h"
 #include "cairo-malloc-private.h"
@@ -2130,7 +2130,7 @@ cairo_private void
 _cairo_debug_print_path (FILE *stream, const cairo_path_fixed_t *path);
 
 cairo_private void
-_cairo_debug_print_polygon (FILE *stream, cairo_polygon_t *polygon_i32);
+_cairo_debug_print_polygon (FILE *stream, cairo_polygon_t *polygon);
 
 cairo_private void
 _cairo_debug_print_traps (FILE *file, const cairo_traps_t *traps);

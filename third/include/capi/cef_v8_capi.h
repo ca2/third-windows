@@ -796,7 +796,7 @@ CEF_EXPORT cef_v8value_t* cef_v8value_create_array(int length);
 
 ///
 // Create a new cef_v8value_t object of type ArrayBuffer which wraps the
-// provided |buffer| of size_i32 |length| bytes. The ArrayBuffer is externalized,
+// provided |buffer| of size |length| bytes. The ArrayBuffer is externalized,
 // meaning that it does not own |buffer|. The caller is responsible for freeing
 // |buffer| when requested via a call to cef_v8array_buffer_release_callback_t::
 // ReleaseBuffer. This function should only be called from within the scope of a

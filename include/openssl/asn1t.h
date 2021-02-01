@@ -585,7 +585,7 @@ struct ASN1_ITEM_st {
                                      * the contents */
     long tcount;                /* Number of templates if SEQUENCE or CHOICE */
     const void *funcs;          /* functions that handle this type */
-    long size;                  /* Structure size_i32 (usually) */
+    long size;                  /* Structure size (usually) */
     const char *sname;          /* Structure name */
 };
 
@@ -601,12 +601,12 @@ struct ASN1_ITEM_st {
  * same way as the type specified in the template.
  *
  * For SEQUENCE types the templates field points
- * to the members, the size_i32 field is the
+ * to the members, the size field is the
  * structure size.
  *
  * For CHOICE types the templates field points
  * to each possible member (typically a union)
- * and the 'size_i32' field is the offset of the
+ * and the 'size' field is the offset of the
  * selector.
  *
  * The 'funcs' field is used for application
@@ -918,7 +918,7 @@ DECLARE_ASN1_ITEM(ZUINT64)
 # if OPENSSL_API_COMPAT < 0x10200000L
 /*
  * LONG and ZLONG are strongly discouraged for use as stored data, as the
- * underlying C type (long) differs in size_i32 depending on the architecture.
+ * underlying C type (long) differs in size depending on the architecture.
  * They are designed with 32-bit longs in mind.
  */
 DECLARE_ASN1_ITEM(LONG)

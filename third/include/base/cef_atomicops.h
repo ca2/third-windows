@@ -96,7 +96,7 @@ typedef intptr_t Atomic64;
 #endif
 #endif
 
-// Use AtomicWord for a machine-size_f64 pointer.  It will use the Atomic32 or
+// Use AtomicWord for a machine-sized pointer.  It will use the Atomic32 or
 // Atomic64 routines below, depending on your architecture.
 typedef intptr_t AtomicWord;
 

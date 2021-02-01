@@ -30,7 +30,7 @@ extern "C"
 {
 #endif
 
-	FREERDP_API BYTE* freerdp_assistance_hex_string_to_bin(const void* str, size_t* size_i32);
+	FREERDP_API BYTE* freerdp_assistance_hex_string_to_bin(const void* str, size_t* size);
 	FREERDP_API char* freerdp_assistance_bin_to_hex_string(const void* data, size_t size);
 
 	FREERDP_API char* freerdp_assistance_generate_pass_stub(DWORD flags);
@@ -52,7 +52,7 @@ extern "C"
 	FREERDP_API BOOL freerdp_assistance_populate_settings_from_assistance_file(
 	    rdpAssistanceFile* file, rdpSettings* settings);
 	FREERDP_API BOOL freerdp_assistance_get_encrypted_pass_stub(rdpAssistanceFile* file,
-	                                                            const char** pwd, size_t* size_i32);
+	                                                            const char** pwd, size_t* size);
 
 	FREERDP_API rdpAssistanceFile* freerdp_assistance_file_new(void);
 	FREERDP_API void freerdp_assistance_file_free(rdpAssistanceFile* file);

@@ -76,7 +76,7 @@ extern "C"
 	 *
 	 * @param rb the ringbuffer
 	 * @param ptr a pointer on the data to add
-	 * @param sz the size_i32 of the data to add
+	 * @param sz the size of the data to add
 	 * @return if the operation was successful, it could fail in case of OOM during realloc()
 	 */
 	FREERDP_API BOOL ringbuffer_write(RingBuffer* rb, const BYTE* ptr, size_t sz);
@@ -85,15 +85,15 @@ extern "C"
 	 * on the write head
 	 *
 	 * @param rb the ring buffer
-	 * @param sz the size_i32 to ensure
+	 * @param sz the size to ensure
 	 * @return a pointer on the write head, or NULL in case of OOM
 	 */
 	FREERDP_API BYTE* ringbuffer_ensure_linear_write(RingBuffer* rb, size_t sz);
 
 	/** move ahead the write head in case some byte were written directly by using
 	 * a pointer retrieved via ringbuffer_ensure_linear_write(). This function is
-	 * used to commit the written bytes. The provided size_i32 should not exceed the
-	 * size_i32 ensured by ringbuffer_ensure_linear_write()
+	 * used to commit the written bytes. The provided size should not exceed the
+	 * size ensured by ringbuffer_ensure_linear_write()
 	 *
 	 * @param rb the ring buffer
 	 * @param sz the number of bytes that have been written
@@ -105,8 +105,8 @@ extern "C"
 	 * Note that the sum of the resulting chunks may be smaller than sz.
 	 *
 	 * @param rb the ringbuffer
-	 * @param chunks an array of data chunks that will contain data / size_i32 of chunks
-	 * @param sz the requested size_i32
+	 * @param chunks an array of data chunks that will contain data / size of chunks
+	 * @param sz the requested size
 	 * @return the number of chunks used for reading sz bytes
 	 */
 	FREERDP_API int ringbuffer_peek(const RingBuffer* rb, DataChunk chunks[2], size_t sz);

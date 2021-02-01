@@ -94,7 +94,7 @@
  * Random number that is hopefully big enough to not cause many cache evictions. */
 #define CAIRO_GL_MAX_SHADERS_PER_CONTEXT 64
 
-/* VBO size_i32 that we allocate, smaller size_i32 means we gotta flush more often,
+/* VBO size that we allocate, smaller size means we gotta flush more often,
  * but larger means hogging more memory and can cause trouble for drivers
  * (especially on embedded devices). Use the CAIRO_GL_VBO_SIZE environment
  * variable to set this to a different size. */

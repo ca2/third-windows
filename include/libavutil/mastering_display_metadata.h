@@ -33,7 +33,7 @@
  * appropriate type.
  *
  * @note The struct should be allocated with av_mastering_display_metadata_alloc()
- *       and its size_i32 is not a part of the public ABI.
+ *       and its size is not a part of the public ABI.
  */
 typedef struct AVMasteringDisplayMetadata {
     /**
@@ -57,7 +57,7 @@ typedef struct AVMasteringDisplayMetadata {
     AVRational max_luminance;
 
     /**
-     * Flag indicating whether the display primaries (and white point_i32) are set.
+     * Flag indicating whether the display primaries (and white point) are set.
      */
     int has_primaries;
 
@@ -93,7 +93,7 @@ AVMasteringDisplayMetadata *av_mastering_display_metadata_create_side_data(AVFra
  * appropriate type.
  *
  * @note The struct should be allocated with av_content_light_metadata_alloc()
- *       and its size_i32 is not a part of the public ABI.
+ *       and its size is not a part of the public ABI.
  */
 typedef struct AVContentLightMetadata {
     /**
@@ -114,7 +114,7 @@ typedef struct AVContentLightMetadata {
  * @return An AVContentLightMetadata filled with default values or NULL
  *         on failure.
  */
-AVContentLightMetadata *av_content_light_metadata_alloc(size_t *size_i32);
+AVContentLightMetadata *av_content_light_metadata_alloc(size_t *size);
 
 /**
  * Allocate a complete AVContentLightMetadata and add it to the frame.

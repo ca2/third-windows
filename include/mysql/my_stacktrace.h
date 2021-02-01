@@ -53,7 +53,7 @@ void my_write_core(int sig);
   Converts a longlong value to string.
   @param   base 10 for decimal, 16 for hex values (0..9a..f)
   @param   val  The value to convert
-  @param   buf  Assumed to point_i32 to the *end* of the buffer.
+  @param   buf  Assumed to point to the *end* of the buffer.
   @returns Pointer to the first character of the converted string.
            Negative values:
            for base-10 the return string will be prepended with '-'
@@ -66,7 +66,7 @@ char *my_safe_itoa(int base, longlong val, char *buf);
   Converts a ulonglong value to string.
   @param   base 10 for decimal, 16 for hex values (0..9a..f)
   @param   val  The value to convert
-  @param   buf  Assumed to point_i32 to the *end* of the buffer.
+  @param   buf  Assumed to point to the *end* of the buffer.
   @returns Pointer to the first character of the converted string.
   Implemented with simplicity, and async-signal-safety in mind.
 */

@@ -59,28 +59,28 @@ _cairo_box_from_integers (cairo_box_t *box, int x, int y, int w, int h)
 
 static inline void
 _cairo_box_from_rectangle_int (cairo_box_t *box,
-			       const cairo_rectangle_int_t *rectangle_i32)
+			       const cairo_rectangle_int_t *rect)
 {
-    box->p1.x = _cairo_fixed_from_int (rectangle_i32->x);
-    box->p1.y = _cairo_fixed_from_int (rectangle_i32->y);
-    box->p2.x = _cairo_fixed_from_int (rectangle_i32->x + rectangle_i32->width);
-    box->p2.y = _cairo_fixed_from_int (rectangle_i32->y + rectangle_i32->height);
+    box->p1.x = _cairo_fixed_from_int (rect->x);
+    box->p1.y = _cairo_fixed_from_int (rect->y);
+    box->p2.x = _cairo_fixed_from_int (rect->x + rect->width);
+    box->p2.y = _cairo_fixed_from_int (rect->y + rect->height);
 }
 
 /* assumes box->p1 is top-left, p2 bottom-right */
 static inline void
 _cairo_box_add_point (cairo_box_t *box,
-		      const cairo_point_t *point_i32)
+		      const cairo_point_t *point)
 {
-    if (point_i32->x < box->p1.x)
-	box->p1.x = point_i32->x;
-    else if (point_i32->x > box->p2.x)
-	box->p2.x = point_i32->x;
+    if (point->x < box->p1.x)
+	box->p1.x = point->x;
+    else if (point->x > box->p2.x)
+	box->p2.x = point->x;
 
-    if (point_i32->y < box->p1.y)
-	box->p1.y = point_i32->y;
-    else if (point_i32->y > box->p2.y)
-	box->p2.y = point_i32->y;
+    if (point->y < box->p1.y)
+	box->p1.y = point->y;
+    else if (point->y > box->p2.y)
+	box->p2.y = point->y;
 }
 
 static inline void
@@ -101,10 +101,10 @@ _cairo_box_add_box (cairo_box_t *box,
 /* assumes box->p1 is top-left, p2 bottom-right */
 static inline cairo_bool_t
 _cairo_box_contains_point (const cairo_box_t *box,
-			   const cairo_point_t *point_i32)
+			   const cairo_point_t *point)
 {
-    return box->p1.x <= point_i32->x  && point->x <= box->p2.x &&
-	box->p1.y <= point_i32->y  && point->y <= box->p2.y;
+    return box->p1.x <= point->x  && point->x <= box->p2.x &&
+	box->p1.y <= point->y  && point->y <= box->p2.y;
 }
 
 static inline cairo_bool_t

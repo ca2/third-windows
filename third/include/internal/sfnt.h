@@ -298,12 +298,12 @@ FT_BEGIN_HEADER
   /*    TT_Set_SBit_Strike_Func                                            */
   /*                                                                       */
   /* <Description>                                                         */
-  /*    Select an sbit strike for a given size_i32 request.                    */
+  /*    Select an sbit strike for a given size request.                    */
   /*                                                                       */
   /* <Input>                                                               */
   /*    face          :: The target face object.                           */
   /*                                                                       */
-  /*    req           :: The size_i32 request.                                 */
+  /*    req           :: The size request.                                 */
   /*                                                                       */
   /* <Output>                                                              */
   /*    astrike_index :: The index of the sbit strike.                     */

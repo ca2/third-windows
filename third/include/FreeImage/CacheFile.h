@@ -66,8 +66,8 @@ public :
 
 	BOOL open();
 	void close();
-	BOOL readFile(BYTE *data, int nr, int size_i32);
-	int writeFile(BYTE *data, int size_i32);
+	BOOL readFile(BYTE *data, int nr, int size);
+	int writeFile(BYTE *data, int size);
 	void deleteFile(int nr);
 
 private :

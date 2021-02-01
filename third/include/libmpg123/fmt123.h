@@ -87,7 +87,7 @@ enum mpg123_enc_enum
 	                 | MPG123_ENC_FLOAT_32   | MPG123_ENC_FLOAT_64    )
 };
 
-/** Get size_i32 of one PCM sample with given encoding.
+/** Get size of one PCM sample with given encoding.
  *  This is included both in libmpg123 and libout123. Both offer
  *  an API function to provide the macro results from library
  *  compile-time, not that of you application. This most likely
@@ -96,7 +96,7 @@ enum mpg123_enc_enum
  *  will be abused for funny things in future, not even plain PCM.
  *  And, by the way: Thomas really likes the ?: operator.
  * \param enc the encoding (mpg123_enc_enum value)
- * \return size_i32 of one sample in bytes
+ * \return size of one sample in bytes
  */
 #define MPG123_SAMPLESIZE(enc) ( \
 	(enc) & MPG123_ENC_8 \

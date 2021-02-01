@@ -182,7 +182,7 @@ extern int32_t      ogg_sync_reset(ogg_sync_state *oy);
 extern int32_t      ogg_sync_destroy(ogg_sync_state *oy);
 extern int32_t      ogg_sync_check(ogg_sync_state *oy);
 
-extern char    *ogg_sync_buffer(ogg_sync_state *oy, long size_i32);
+extern char    *ogg_sync_buffer(ogg_sync_state *oy, long size);
 extern int32_t      ogg_sync_wrote(ogg_sync_state *oy, long bytes);
 extern long     ogg_sync_pageseek(ogg_sync_state *oy,ogg_page *og);
 extern int32_t      ogg_sync_pageout(ogg_sync_state *oy, ogg_page *og);

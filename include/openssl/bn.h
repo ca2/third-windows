@@ -104,14 +104,14 @@ void BN_GENCB_set(BN_GENCB *gencb, int (*callback) (int, int, BN_GENCB *),
 void *BN_GENCB_get_arg(BN_GENCB *cb);
 
 # define BN_prime_checks 0      /* default: select number of iterations based
-                                 * on the size_i32 of the number */
+                                 * on the size of the number */
 
 /*
  * BN_prime_checks_for_size() returns the number of Miller-Rabin iterations
  * that will be done for checking that a random number is probably prime. The
- * error rate for accepting a composite number as prime depends on the size_i32 of
+ * error rate for accepting a composite number as prime depends on the size of
  * the prime |b|. The error rates used are for calculating an RSA key with 2 primes,
- * and so the level is what you would expect for a key of double the size_i32 of the
+ * and so the level is what you would expect for a key of double the size of the
  * prime.
  *
  * This table is generated using the algorithm of FIPS PUB 186-4
@@ -154,7 +154,7 @@ void *BN_GENCB_get_arg(BN_GENCB *cb);
  * k is the number of bits of the prime, securitybits is the level we want to
  * reach.
  *
- * prime length | RSA key size_i32 | # MR tests | security level
+ * prime length | RSA key size | # MR tests | security level
  * -------------+--------------|------------+---------------
  *  (b) >= 6394 |     >= 12788 |          3 |        256 bit
  *  (b) >= 3747 |     >=  7494 |          3 |        192 bit
@@ -419,7 +419,7 @@ int BN_div_recp(BIGNUM *dv, BIGNUM *rem, const BIGNUM *m,
  * Functions for arithmetic over binary polynomials represented by BIGNUMs.
  * The BIGNUM::neg property of BIGNUMs representing binary polynomials is
  * ignored. Note that input arguments are not const so that their bit arrays
- * can be expanded to the appropriate size_i32 if needed.
+ * can be expanded to the appropriate size if needed.
  */
 
 /*

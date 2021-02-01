@@ -17,7 +17,7 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 */
 
-#define SHA1_HASH_SIZE 20 /* Hash size_i32 in bytes */
+#define SHA1_HASH_SIZE 20 /* Hash size in bytes */
 
 C_MODE_START
 

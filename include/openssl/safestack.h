@@ -133,7 +133,7 @@ extern "C" {
 # define DEFINE_STACK_OF_CONST(t) SKM_DEFINE_STACK_OF(t, const t, t)
 
 /*-
- * Strings are special: normally an lhash entry will point_i32 to a single
+ * Strings are special: normally an lhash entry will point to a single
  * (somewhat) mutable object. In the case of strings:
  *
  * a) Instead of a single char, there is an array of chars, NUL-terminated.

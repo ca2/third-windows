@@ -73,12 +73,12 @@ typedef struct png_compression_buffer
  *
  * PNG_COLORSPACE_SUPPORTED is only required if the application will perform
  * colorspace corrections, otherwise all the colorspace information can be
- * skipped and the size_i32 of libpng can be reduced (significantly) by compiling
+ * skipped and the size of libpng can be reduced (significantly) by compiling
  * out the colorspace support.
  */
 #ifdef PNG_COLORSPACE_SUPPORTED
 /* The chromaticities of the red, green and blue colorants and the chromaticity
- * of the corresponding white point_i32 (i.e. of rgb(1.0,1.0,1.0)).
+ * of the corresponding white point (i.e. of rgb(1.0,1.0,1.0)).
  */
 typedef struct png_xy
 {
@@ -146,7 +146,7 @@ struct png_struct_def
    jmp_buf jmp_buf_local;     /* New name in 1.6.0 for jmp_buf in png_struct */
    png_longjmp_ptr longjmp_fn;/* setjmp non-local goto function. */
    jmp_buf *jmp_buf_ptr;      /* passed to longjmp_fn */
-   size_t jmp_buf_size;       /* size_i32 of the above, if allocated */
+   size_t jmp_buf_size;       /* size of the above, if allocated */
 #endif
    png_error_ptr error_fn;    /* function for printing errors and aborting */
 #ifdef PNG_WARNINGS_SUPPORTED
@@ -184,7 +184,7 @@ struct png_struct_def
 
 #ifdef PNG_WRITE_SUPPORTED
    png_compression_bufferp zbuffer_list; /* Created on demand during write */
-   uInt                    zbuffer_size; /* size_i32 of the actual buffer */
+   uInt                    zbuffer_size; /* size of the actual buffer */
 
    int zlib_level;            /* holds zlib compression level */
    int zlib_method;           /* holds zlib compression method */
@@ -214,7 +214,7 @@ struct png_struct_def
    png_uint_32 height;        /* height of image in pixels */
    png_uint_32 num_rows;      /* number of rows in current pass */
    png_uint_32 usr_width;     /* width of row at start of write */
-   size_t rowbytes;           /* size_i32 of row in bytes */
+   size_t rowbytes;           /* size of row in bytes */
    png_uint_32 iwidth;        /* width of current interlaced row in pixels */
    png_uint_32 row_number;    /* current row in interlace pass */
    png_uint_32 chunk_name;    /* PNG_CHUNK() id of current chunk */
@@ -234,7 +234,7 @@ struct png_struct_def
 #endif
    size_t info_rowbytes;      /* Added in 1.5.4: cache of updated row bytes */
 
-   png_uint_32 idat_size;     /* current IDAT size_i32 for read */
+   png_uint_32 idat_size;     /* current IDAT size for read */
    png_uint_32 crc;           /* current chunk CRC value */
    png_colorp palette;        /* palette from the input file */
    png_uint_16 num_palette;   /* number of color entries in palette */
@@ -326,10 +326,10 @@ struct png_struct_def
    png_bytep save_buffer;            /* buffer for previously read data */
    png_bytep current_buffer_ptr;     /* current location in current_buffer */
    png_bytep current_buffer;         /* buffer for recently used data */
-   png_uint_32 push_length;          /* size_i32 of current input chunk */
+   png_uint_32 push_length;          /* size of current input chunk */
    png_uint_32 skip_length;          /* bytes to skip in input data */
    size_t save_buffer_size;          /* amount of data now in save_buffer */
-   size_t save_buffer_max;           /* total size_i32 of save_buffer */
+   size_t save_buffer_max;           /* total size of save_buffer */
    size_t buffer_size;               /* total amount of available input data */
    size_t current_buffer_size;       /* amount of data now in current_buffer */
    int process_mode;                 /* what push library is currently doing */
@@ -462,10 +462,10 @@ struct png_struct_def
 #ifdef PNG_READ_SUPPORTED
 /* New member added in libpng-1.2.30 */
   png_bytep        read_buffer;      /* buffer for reading chunk data */
-  png_alloc_size_t read_buffer_size; /* current size_i32 of the buffer */
+  png_alloc_size_t read_buffer_size; /* current size of the buffer */
 #endif
 #ifdef PNG_SEQUENTIAL_READ_SUPPORTED
-  uInt             IDAT_read_size;   /* limit on read buffer size_i32 for IDAT */
+  uInt             IDAT_read_size;   /* limit on read buffer size for IDAT */
 #endif
 
 #ifdef PNG_IO_STATE_SUPPORTED

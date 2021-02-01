@@ -48,8 +48,8 @@ class CefTextfield;
 class CefWindow;
 
 ///
-// A View is a rectangle_i32 within the views View hierarchy. It is the base class
-// for all Views. All size_i32 and position values are in density independent pixels
+// A View is a rectangle within the views View hierarchy. It is the base class
+// for all Views. All size and position values are in density independent pixels
 // (DIP) unless otherwise indicated. Methods must be called on the browser
 // process UI thread unless otherwise indicated.
 ///
@@ -195,13 +195,13 @@ class CefView : public CefBaseRefCounted {
   virtual CefRect GetBoundsInScreen() = 0;
 
   ///
-  // Sets the size_i32 of this View without changing the position.
+  // Sets the size of this View without changing the position.
   ///
   /*--cef()--*/
   virtual void SetSize(const CefSize& size) = 0;
 
   ///
-  // Returns the size_i32 of this View.
+  // Returns the size of this View.
   ///
   /*--cef()--*/
   virtual CefSize GetSize() = 0;
@@ -220,7 +220,7 @@ class CefView : public CefBaseRefCounted {
   virtual CefPoint GetPosition() = 0;
 
   ///
-  // Returns the size_i32 this View would like to be if enough space is available.
+  // Returns the size this View would like to be if enough space is available.
   ///
   /*--cef()--*/
   virtual CefSize GetPreferredSize() = 0;
@@ -232,13 +232,13 @@ class CefView : public CefBaseRefCounted {
   virtual void SizeToPreferredSize() = 0;
 
   ///
-  // Returns the minimum size_i32 for this View.
+  // Returns the minimum size for this View.
   ///
   /*--cef()--*/
   virtual CefSize GetMinimumSize() = 0;
 
   ///
-  // Returns the maximum size_i32 for this View.
+  // Returns the maximum size for this View.
   ///
   /*--cef()--*/
   virtual CefSize GetMaximumSize() = 0;
@@ -345,7 +345,7 @@ class CefView : public CefBaseRefCounted {
   virtual cef_color_t GetBackgroundColor() = 0;
 
   ///
-  // Convert |point_i32| from this View's coordinate system to that of the screen.
+  // Convert |point| from this View's coordinate system to that of the screen.
   // This View must belong to a Window when calling this method. Returns true
   // if the conversion is successful or false otherwise. Use
   // CefDisplay::ConvertPointToPixels() after calling this method if further
@@ -355,7 +355,7 @@ class CefView : public CefBaseRefCounted {
   virtual bool ConvertPointToScreen(CefPoint& point) = 0;
 
   ///
-  // Convert |point_i32| to this View's coordinate system from that of the screen.
+  // Convert |point| to this View's coordinate system from that of the screen.
   // This View must belong to a Window when calling this method. Returns true if
   // the conversion is successful or false otherwise. Use
   // CefDisplay::ConvertPointFromPixels() before calling this method if
@@ -365,7 +365,7 @@ class CefView : public CefBaseRefCounted {
   virtual bool ConvertPointFromScreen(CefPoint& point) = 0;
 
   ///
-  // Convert |point_i32| from this View's coordinate system to that of the Window.
+  // Convert |point| from this View's coordinate system to that of the Window.
   // This View must belong to a Window when calling this method. Returns true if
   // the conversion is successful or false otherwise.
   ///
@@ -373,7 +373,7 @@ class CefView : public CefBaseRefCounted {
   virtual bool ConvertPointToWindow(CefPoint& point) = 0;
 
   ///
-  // Convert |point_i32| to this View's coordinate system from that of the Window.
+  // Convert |point| to this View's coordinate system from that of the Window.
   // This View must belong to a Window when calling this method. Returns true if
   // the conversion is successful or false otherwise.
   ///
@@ -381,7 +381,7 @@ class CefView : public CefBaseRefCounted {
   virtual bool ConvertPointFromWindow(CefPoint& point) = 0;
 
   ///
-  // Convert |point_i32| from this View's coordinate system to that of |view|.
+  // Convert |point| from this View's coordinate system to that of |view|.
   // |view| needs to be in the same Window but not necessarily the same view
   // hierarchy. Returns true if the conversion is successful or false otherwise.
   ///
@@ -389,7 +389,7 @@ class CefView : public CefBaseRefCounted {
   virtual bool ConvertPointToView(CefRefPtr<CefView> view, CefPoint& point) = 0;
 
   ///
-  // Convert |point_i32| to this View's coordinate system from that |view|. |view|
+  // Convert |point| to this View's coordinate system from that |view|. |view|
   // needs to be in the same Window but not necessarily the same view hierarchy.
   // Returns true if the conversion is successful or false otherwise.
   ///

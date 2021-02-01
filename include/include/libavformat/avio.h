@@ -88,7 +88,7 @@ typedef struct AVIODirEntry {
     int type;                             /**< Type of the entry */
     int utf8;                             /**< Set to 1 when name is encoded with UTF-8, 0 otherwise.
                                                Name can be encoded with UTF-8 even though 0 is set. */
-    int64_t size;                         /**< File size_i32 in bytes, -1 if unknown. */
+    int64_t size;                         /**< File size in bytes, -1 if unknown. */
     int64_t modification_timestamp;       /**< Time of last modification in microseconds since unix
                                                epoch, -1 if unknown. */
     int64_t access_timestamp;             /**< Time of last access in microseconds since unix epoch,
@@ -114,21 +114,21 @@ enum AVIODataMarkerType {
      */
     AVIO_DATA_MARKER_HEADER,
     /**
-     * A point_i32 in the output bytestream where a decoder can start decoding
+     * A point in the output bytestream where a decoder can start decoding
      * (i.e. a keyframe). A demuxer/decoder given the data flagged with
      * AVIO_DATA_MARKER_HEADER, followed by any AVIO_DATA_MARKER_SYNC_POINT,
      * should give decodeable results.
      */
     AVIO_DATA_MARKER_SYNC_POINT,
     /**
-     * A point_i32 in the output bytestream where a demuxer can start parsing
+     * A point in the output bytestream where a demuxer can start parsing
      * (for non self synchronizing bytestream formats). That is, any
      * non-keyframe packet start point.
      */
     AVIO_DATA_MARKER_BOUNDARY_POINT,
     /**
      * This is any, unlabelled data. It can either be a muxer not marking
-     * any positions at all, it can be an actual boundary/sync point_i32
+     * any positions at all, it can be an actual boundary/sync point
      * that the muxer chooses not to mark, or a later part of a packet/fragment
      * that is cut into multiple write callbacks due to limited IO buffer size.
      */
@@ -139,7 +139,7 @@ enum AVIODataMarkerType {
      */
     AVIO_DATA_MARKER_TRAILER,
     /**
-     * A point_i32 in the output bytestream where the underlying AVIOContext might
+     * A point in the output bytestream where the underlying AVIOContext might
      * flush the buffer depending on latency or buffering requirements. Typically
      * means the end of a packet.
      */
@@ -224,7 +224,7 @@ typedef struct AVIOContext {
      *
      */
     unsigned char *buffer;  /**< Start of the buffer. */
-    int buffer_size;        /**< Maximum buffer size_i32 */
+    int buffer_size;        /**< Maximum buffer size */
     unsigned char *buf_ptr; /**< Current position in the buffer */
     unsigned char *buf_end; /**< End of the data, may be less than
                                  buffer+buffer_size if the read function returned
@@ -241,7 +241,7 @@ typedef struct AVIOContext {
     int max_packet_size;
     unsigned long checksum;
     unsigned char *checksum_ptr;
-    unsigned long (*update_checksum)(unsigned long checksum, const uint8_t *buf, unsigned int size_i32);
+    unsigned long (*update_checksum)(unsigned long checksum, const uint8_t *buf, unsigned int size);
     int error;              /**< contains the error code or 0 if no error happened */
     /**
      * Pause or resume playback for network streaming protocols - e.g. MMS.
@@ -291,8 +291,8 @@ typedef struct AVIOContext {
     int writeout_count;
 
     /**
-     * Original buffer size_i32
-     * used internally after probing and ensure seekback to reset the buffer size_i32
+     * Original buffer size
+     * used internally after probing and ensure seekback to reset the buffer size
      * This field is internal to libavformat and access from outside is not allowed.
      */
     int orig_buffer_size;
@@ -445,9 +445,9 @@ void avio_free_directory_entry(AVIODirEntry **entry);
  *        It may be freed and replaced with a new buffer by libavformat.
  *        AVIOContext.buffer holds the buffer currently in use,
  *        which must be later freed with av_free().
- * @param buffer_size The buffer size_i32 is very important for performance.
+ * @param buffer_size The buffer size is very important for performance.
  *        For protocols with fixed blocksize it should be set to this blocksize.
- *        For others a typical size_i32 is a cache page, e.g. 4kb.
+ *        For others a typical size is a cache page, e.g. 4kb.
  * @param write_flag Set to 1 if the buffer should be writable, 0 otherwise.
  * @param opaque An opaque pointer to user-specific data.
  * @param read_packet  A function for refilling the buffer, may be NULL.
@@ -477,7 +477,7 @@ AVIOContext *avio_alloc_context(
 void avio_context_free(AVIOContext **s);
 
 void avio_w8(AVIOContext *s, int b);
-void avio_write(AVIOContext *s, const unsigned char *buf, int size_i32);
+void avio_write(AVIOContext *s, const unsigned char *buf, int size);
 void avio_wl64(AVIOContext *s, uint64_t val);
 void avio_wb64(AVIOContext *s, uint64_t val);
 void avio_wl32(AVIOContext *s, unsigned int val);
@@ -587,19 +587,19 @@ int avio_printf(AVIOContext *s, const char *fmt, ...) av_printf_format(2, 3);
 void avio_flush(AVIOContext *s);
 
 /**
- * Read size_i32 bytes from AVIOContext into buf.
+ * Read size bytes from AVIOContext into buf.
  * @return number of bytes read or AVERROR
  */
-int avio_read(AVIOContext *s, unsigned char *buf, int size_i32);
+int avio_read(AVIOContext *s, unsigned char *buf, int size);
 
 /**
- * Read size_i32 bytes from AVIOContext into buf. Unlike avio_read(), this is allowed
+ * Read size bytes from AVIOContext into buf. Unlike avio_read(), this is allowed
  * to read fewer bytes than requested. The missing bytes can be read in the next
  * call. This always tries to read at least 1 byte.
  * Useful to reduce latency in certain cases.
  * @return number of bytes read or AVERROR
  */
-int avio_read_partial(AVIOContext *s, unsigned char *buf, int size_i32);
+int avio_read_partial(AVIOContext *s, unsigned char *buf, int size);
 
 /**
  * @name Functions for reading from AVIOContext
@@ -752,7 +752,7 @@ int avio_closep(AVIOContext **s);
 int avio_open_dyn_buf(AVIOContext **s);
 
 /**
- * Return the written size_i32 and a pointer to the buffer.
+ * Return the written size and a pointer to the buffer.
  * The AVIOContext stream is left intact.
  * The buffer must NOT be freed.
  * No padding is added to the buffer.
@@ -764,7 +764,7 @@ int avio_open_dyn_buf(AVIOContext **s);
 int avio_get_dyn_buf(AVIOContext *s, uint8_t **pbuffer);
 
 /**
- * Return the written size_i32 and a pointer to the buffer. The buffer
+ * Return the written size and a pointer to the buffer. The buffer
  * must be freed with av_free().
  * Padding of AV_INPUT_BUFFER_PADDING_SIZE is added to the buffer.
  *

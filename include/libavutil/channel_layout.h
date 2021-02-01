@@ -160,7 +160,7 @@ int av_get_extended_channel_layout(const char *name, uint64_t* channel_layout, i
  * If nb_channels is <= 0, it is guessed from the channel_layout.
  *
  * @param buf put here the string containing the channel layout
- * @param buf_size size_i32 in bytes of the buffer
+ * @param buf_size size in bytes of the buffer
  */
 void av_get_channel_layout_string(char *buf, int buf_size, int nb_channels, uint64_t channel_layout);
 

@@ -212,31 +212,31 @@ typedef struct _cef_translator_test_t {
   // STRUCT VALUES
 
   ///
-  // Return a point_i32 value.
+  // Return a point value.
   ///
   cef_point_t(CEF_CALLBACK* get_point)(struct _cef_translator_test_t* self);
 
   ///
-  // Set a point_i32 value.
+  // Set a point value.
   ///
   int(CEF_CALLBACK* set_point)(struct _cef_translator_test_t* self,
                                const cef_point_t* val);
 
   ///
-  // Return a point_i32 value by out-param.
+  // Return a point value by out-param.
   ///
   void(CEF_CALLBACK* get_point_by_ref)(struct _cef_translator_test_t* self,
                                        cef_point_t* val);
 
   ///
-  // Set a point_i32 list vlaue.
+  // Set a point list vlaue.
   ///
   int(CEF_CALLBACK* set_point_list)(struct _cef_translator_test_t* self,
                                     size_t valCount,
                                     cef_point_t const* val);
 
   ///
-  // Return a point_i32 list value by out-param.
+  // Return a point list value by out-param.
   ///
   int(CEF_CALLBACK* get_point_list_by_ref)(struct _cef_translator_test_t* self,
                                            size_t* valCount,

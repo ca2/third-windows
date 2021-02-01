@@ -141,7 +141,7 @@ FT_BEGIN_HEADER
                const void*  P );
 
 
-#define FT_MEM_ALLOC( ptr, size_i32 )                               \
+#define FT_MEM_ALLOC( ptr, size )                               \
           FT_ASSIGNP_INNER( ptr, ft_mem_alloc( memory,          \
                                                (FT_Long)(size), \
                                                &error ) )
@@ -163,7 +163,7 @@ FT_BEGIN_HEADER
                                                  (ptr),            \
                                                  &error ) )
 
-#define FT_MEM_QALLOC( ptr, size_i32 )                               \
+#define FT_MEM_QALLOC( ptr, size )                               \
           FT_ASSIGNP_INNER( ptr, ft_mem_qalloc( memory,          \
                                                 (FT_Long)(size), \
                                                 &error ) )
@@ -285,8 +285,8 @@ FT_BEGIN_HEADER
                                                   (ptr),             \
                                                   &error ) )
 
-#define FT_ALLOC( ptr, size_i32 )                           \
-          FT_MEM_SET_ERROR( FT_MEM_ALLOC( ptr, size_i32 ) )
+#define FT_ALLOC( ptr, size )                           \
+          FT_MEM_SET_ERROR( FT_MEM_ALLOC( ptr, size ) )
 
 #define FT_REALLOC( ptr, cursz, newsz )                           \
           FT_MEM_SET_ERROR( FT_MEM_REALLOC( ptr, cursz, newsz ) )
@@ -298,8 +298,8 @@ FT_BEGIN_HEADER
           FT_MEM_SET_ERROR( FT_MEM_REALLOC_MULT( ptr, oldcnt,      \
                                                  newcnt, itmsz ) )
 
-#define FT_QALLOC( ptr, size_i32 )                           \
-          FT_MEM_SET_ERROR( FT_MEM_QALLOC( ptr, size_i32 ) )
+#define FT_QALLOC( ptr, size )                           \
+          FT_MEM_SET_ERROR( FT_MEM_QALLOC( ptr, size ) )
 
 #define FT_QREALLOC( ptr, cursz, newsz )                           \
           FT_MEM_SET_ERROR( FT_MEM_QREALLOC( ptr, cursz, newsz ) )
@@ -349,11 +349,11 @@ FT_BEGIN_HEADER
 #define FT_STRDUP( dst, str )                           \
           FT_MEM_SET_ERROR( FT_MEM_STRDUP( dst, str ) )
 
-#define FT_MEM_DUP( dst, address, size_i32 )                                    \
+#define FT_MEM_DUP( dst, address, size )                                    \
           (dst) = ft_mem_dup( memory, (address), (FT_ULong)(size), &error )
 
-#define FT_DUP( dst, address, size_i32 )                           \
-          FT_MEM_SET_ERROR( FT_MEM_DUP( dst, address, size_i32 ) )
+#define FT_DUP( dst, address, size )                           \
+          FT_MEM_SET_ERROR( FT_MEM_DUP( dst, address, size ) )
 
 
   /* Return >= 1 if a truncation occurs.            */
@@ -362,9 +362,9 @@ FT_BEGIN_HEADER
   FT_BASE( FT_Int )
   ft_mem_strcpyn( char*        dst,
                   const char*  src,
-                  FT_ULong     size_i32 );
+                  FT_ULong     size );
 
-#define FT_STRCPYN( dst, src, size_i32 )                                         \
+#define FT_STRCPYN( dst, src, size )                                         \
           ft_mem_strcpyn( (char*)dst, (const char*)(src), (FT_ULong)(size) )
 
  /* */

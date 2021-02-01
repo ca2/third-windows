@@ -46,7 +46,7 @@
 CAIRO_BEGIN_DECLS
 
 /* A contour is simply a closed chain of points that divide the infinite plane
- * into inside and outside. Each contour is a simple polygon_i32, that is it
+ * into inside and outside. Each contour is a simple polygon, that is it
  * contains no holes or self-intersections, but maybe either concave or convex.
  */
 
@@ -57,7 +57,7 @@ struct _cairo_contour_chain {
 };
 
 struct _cairo_contour_iter {
-    cairo_point_t *point_i32;
+    cairo_point_t *point;
     cairo_contour_chain_t *chain;
 };
 
@@ -79,7 +79,7 @@ typedef struct _cairo_shape cairo_shape_t;
 #if 0
 cairo_private cairo_status_t
 _cairo_shape_init_from_polygon (cairo_shape_t *shape,
-				const cairo_polygon_t *polygon_i32);
+				const cairo_polygon_t *polygon);
 
 cairo_private cairo_status_t
 _cairo_shape_reduce (cairo_shape_t *shape, double tolerance);
@@ -91,7 +91,7 @@ _cairo_contour_init (cairo_contour_t *contour,
 
 cairo_private cairo_int_status_t
 __cairo_contour_add_point (cairo_contour_t *contour,
-			   const cairo_point_t *point_i32);
+			   const cairo_point_t *point);
 
 cairo_private void
 _cairo_contour_simplify (cairo_contour_t *contour, double tolerance);

@@ -29,9 +29,9 @@
 	or you define OPT_MULTI and give a combination which makes sense (do not include i486, do not mix altivec and x86).
 
 	I still have to examine the dynamics of this here together with REAL_IS_FIXED.
-	Basic point_i32 is: Don't use REAL_IS_FIXED with something else than generic or i386.
+	Basic point is: Don't use REAL_IS_FIXED with something else than generic or i386.
 
-	Also, one should minimize code size_i32 by really ensuring that only functions that are really needed are included.
+	Also, one should minimize code size by really ensuring that only functions that are really needed are included.
 	Currently, all generic functions will be always there (to be safe for fallbacks for advanced decoders).
 	Strictly, at least the synth_1to1 should not be necessary for single-decoder mode.
 */
@@ -196,7 +196,7 @@ enum optcla decclass(const enum optdec);
  || (defined OPT_SSE_VINTAGE) \
  || (defined OPT_NEON) || (defined OPT_NEON64) || (defined OPT_AVX) \
  || (defined OPT_GENERIC_DITHER)
-#error "Bad decoder choice together with fixed point_i32 math!"
+#error "Bad decoder choice together with fixed point math!"
 #endif
 #endif
 

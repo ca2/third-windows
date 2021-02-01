@@ -22,11 +22,11 @@ extern "C" {
 # define CAMELLIA_DECRYPT        0
 
 /*
- * Because array size_i32 can't be a const in C, the following two are macros.
+ * Because array size can't be a const in C, the following two are macros.
  * Both sizes are in bytes.
  */
 
-/* This should be a hidden type, but EVP requires that the size_i32 be known */
+/* This should be a hidden type, but EVP requires that the size be known */
 
 # define CAMELLIA_BLOCK_SIZE 16
 # define CAMELLIA_TABLE_BYTE_LEN 272

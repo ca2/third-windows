@@ -39,7 +39,7 @@
 typedef struct AVDVProfile {
     int              dsf;                   /* value of the dsf in the DV header */
     int              video_stype;           /* stype for VAUX source pack */
-    int              frame_size;            /* total size_i32 of one frame in bytes */
+    int              frame_size;            /* total size of one frame in bytes */
     int              difseg_size;           /* number of DIF segments per DIF channel */
     int              n_difchan;             /* number of DIF channels per frame */
     AVRational       time_base;             /* 1/framerate */
@@ -50,7 +50,7 @@ typedef struct AVDVProfile {
     enum AVPixelFormat pix_fmt;             /* picture pixel format */
     int              bpm;                   /* blocks per macroblock */
     const uint8_t   *block_sizes;           /* AC block sizes, in bits */
-    int              audio_stride;          /* size_i32 of audio_shuffle table */
+    int              audio_stride;          /* size of audio_shuffle table */
     int              audio_min_samples[3];  /* min amount of audio samples */
                                             /* for 48kHz, 44.1kHz and 32kHz */
     int              audio_samples_dist[5]; /* how many samples are supposed to be */
@@ -63,7 +63,7 @@ typedef struct AVDVProfile {
  *
  * @param sys the profile used for the previous frame, may be NULL
  * @param frame the compressed data buffer
- * @param buf_size size_i32 of the buffer in bytes
+ * @param buf_size size of the buffer in bytes
  * @return the DV profile for the supplied data or NULL on failure
  */
 const AVDVProfile *av_dv_frame_profile(const AVDVProfile *sys,

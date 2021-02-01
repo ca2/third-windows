@@ -88,12 +88,12 @@
 */
 
 /**
-  An instrumented ::mutex structure.
+  An instrumented mutex structure.
   @sa mysql_mutex_t
 */
 struct st_mysql_mutex
 {
-  /** The real ::mutex. */
+  /** The real mutex. */
   my_mutex_t m_mutex;
   /**
     The instrumentation hook.
@@ -104,7 +104,7 @@ struct st_mysql_mutex
 };
 
 /**
-  Type of an instrumented ::mutex.
+  Type of an instrumented mutex.
   @c mysql_mutex_t is a drop-in replacement for @c my_mutex_t.
   @sa mysql_mutex_assert_owner
   @sa mysql_mutex_assert_not_owner
@@ -273,8 +273,8 @@ typedef struct st_mysql_cond mysql_cond_t;
   @def mysql_mutex_init(K, M, A)
   Instrumented mutex_init.
   @c mysql_mutex_init is a replacement for @c pthread_mutex_init.
-  @param K The PSI_mutex_key for this instrumented ::mutex
-  @param M The ::mutex to initialize
+  @param K The PSI_mutex_key for this instrumented mutex
+  @param M The mutex to initialize
   @param A Mutex attributes
 */
 
@@ -314,7 +314,7 @@ typedef struct st_mysql_cond mysql_cond_t;
   @def mysql_mutex_lock(M)
   Instrumented mutex_lock.
   @c mysql_mutex_lock is a drop-in replacement for @c pthread_mutex_lock.
-  @param M The ::mutex to lock
+  @param M The mutex to lock
 */
 
 #if defined(SAFE_MUTEX) || defined (HAVE_PSI_MUTEX_INTERFACE)
@@ -1159,7 +1159,7 @@ static inline int inline_mysql_cond_destroy(
 
 static inline int inline_mysql_cond_wait(
   mysql_cond_t *that,
-  mysql_mutex_t *::mutex
+  mysql_mutex_t *mutex
 #if defined(SAFE_MUTEX) || defined(HAVE_PSI_COND_INTERFACE)
   , const char *src_file, uint src_line
 #endif
@@ -1173,11 +1173,11 @@ static inline int inline_mysql_cond_wait(
     /* Instrumentation start */
     PSI_cond_locker *locker;
     PSI_cond_locker_state state;
-    locker= PSI_COND_CALL(start_cond_wait)(&state, that->m_psi, ::mutex->m_psi,
+    locker= PSI_COND_CALL(start_cond_wait)(&state, that->m_psi, mutex->m_psi,
                                       PSI_COND_WAIT, src_file, src_line);
 
     /* Instrumented code */
-    result= my_cond_wait(&that->m_cond, &::mutex->m_mutex
+    result= my_cond_wait(&that->m_cond, &mutex->m_mutex
 #ifdef SAFE_MUTEX
                          , src_file, src_line
 #endif
@@ -1192,7 +1192,7 @@ static inline int inline_mysql_cond_wait(
 #endif
 
   /* Non instrumented code */
-  result= my_cond_wait(&that->m_cond, &::mutex->m_mutex
+  result= my_cond_wait(&that->m_cond, &mutex->m_mutex
 #ifdef SAFE_MUTEX
                        , src_file, src_line
 #endif
@@ -1203,7 +1203,7 @@ static inline int inline_mysql_cond_wait(
 
 static inline int inline_mysql_cond_timedwait(
   mysql_cond_t *that,
-  mysql_mutex_t *::mutex,
+  mysql_mutex_t *mutex,
   const struct timespec *abstime
 #if defined(SAFE_MUTEX) || defined(HAVE_PSI_COND_INTERFACE)
   , const char *src_file, uint src_line
@@ -1218,11 +1218,11 @@ static inline int inline_mysql_cond_timedwait(
     /* Instrumentation start */
     PSI_cond_locker *locker;
     PSI_cond_locker_state state;
-    locker= PSI_COND_CALL(start_cond_wait)(&state, that->m_psi, ::mutex->m_psi,
+    locker= PSI_COND_CALL(start_cond_wait)(&state, that->m_psi, mutex->m_psi,
                                       PSI_COND_TIMEDWAIT, src_file, src_line);
 
     /* Instrumented code */
-    result= my_cond_timedwait(&that->m_cond, &::mutex->m_mutex, abstime
+    result= my_cond_timedwait(&that->m_cond, &mutex->m_mutex, abstime
 #ifdef SAFE_MUTEX
                               , src_file, src_line
 #endif
@@ -1237,7 +1237,7 @@ static inline int inline_mysql_cond_timedwait(
 #endif
 
   /* Non instrumented code */
-  result= my_cond_timedwait(&that->m_cond, &::mutex->m_mutex, abstime
+  result= my_cond_timedwait(&that->m_cond, &mutex->m_mutex, abstime
 #ifdef SAFE_MUTEX
                             , src_file, src_line
 #endif

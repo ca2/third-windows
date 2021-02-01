@@ -37,7 +37,7 @@ typedef enum AVThreadMessageFlags {
  *
  * @param mq      pointer to the message queue
  * @param nelem   maximum number of elements in the queue
- * @param elsize  size_i32 of each element in the queue
+ * @param elsize  size of each element in the queue
  * @return  >=0 for success; <0 for error, in particular AVERROR(ENOSYS) if
  *          lavu was built without thread support
  */

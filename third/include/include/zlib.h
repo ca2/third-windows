@@ -78,7 +78,7 @@ extern "C" {
   even in the case of corrupted input.
 */
 
-typedef voidpf (*alloc_func) OF((voidpf opaque, uInt items, uInt size_i32));
+typedef voidpf (*alloc_func) OF((voidpf opaque, uInt items, uInt size));
 typedef void   (*free_func)  OF((voidpf opaque, voidpf address));
 
 struct internal_state;
@@ -158,7 +158,7 @@ typedef gz_header FAR *gz_headerp;
    the library with -DMAX_WBITS=14 (see zconf.h).
 
      The fields total_in and total_out can be used for statistics or progress
-   reports.  After compression, total_in holds the total size_i32 of the
+   reports.  After compression, total_in holds the total size of the
    uncompressed data and may be saved for use by the decompressor (particularly
    if the decompressor wants to decompress everything in a single step).
 */
@@ -260,7 +260,7 @@ ZEXTERN int ZEXPORT deflate OF((z_streamp strm, int flush));
   - Compress more input starting at next_in and update next_in and avail_in
     accordingly.  If not all input can be processed (because there is not
     enough room in the output buffer), next_in and avail_in are updated and
-    processing will resume at this point_i32 for the next call of deflate().
+    processing will resume at this point for the next call of deflate().
 
   - Generate more output starting at next_out and update next_out and avail_out
     accordingly.  This action is forced if the parameter flush is non zero.
@@ -305,14 +305,14 @@ ZEXTERN int ZEXPORT deflate OF((z_streamp strm, int flush));
   for Z_SYNC_FLUSH, but the output is not aligned on a byte boundary, and up to
   seven bits of the current block are held to be written as the next byte after
   the next deflate block is completed.  In this case, the decompressor may not
-  be provided enough bits at this point_i32 in order to complete decompression of
+  be provided enough bits at this point in order to complete decompression of
   the data provided so far to the compressor.  It may need to wait for the next
   block to be emitted.  This is for advanced applications that need to control
   the emission of deflate blocks.
 
     If flush is set to Z_FULL_FLUSH, all output is flushed as with
   Z_SYNC_FLUSH, and the compression state is reset so that decompression can
-  restart from this point_i32 if previous compressed data has been damaged or if
+  restart from this point if previous compressed data has been damaged or if
   random access is desired.  Using Z_FULL_FLUSH too often can seriously degrade
   compression.
 
@@ -410,7 +410,7 @@ ZEXTERN int ZEXPORT inflate OF((z_streamp strm, int flush));
   - Decompress more input starting at next_in and update next_in and avail_in
     accordingly.  If not all input can be processed (because there is not
     enough room in the output buffer), then next_in and avail_in are updated
-    accordingly, and processing will resume at this point_i32 for the next call of
+    accordingly, and processing will resume at this point for the next call of
     inflate().
 
   - Generate more output starting at next_out and update next_out and avail_out
@@ -464,7 +464,7 @@ ZEXTERN int ZEXPORT inflate OF((z_streamp strm, int flush));
   single call of inflate), the parameter flush should be set to Z_FINISH.  In
   this case all pending input is processed and all pending output is flushed;
   avail_out must be large enough to hold all of the uncompressed data for the
-  operation to complete.  (The size_i32 of the uncompressed data may have been
+  operation to complete.  (The size of the uncompressed data may have been
   saved by the compressor for this purpose.)  The use of Z_FINISH is not
   required to perform an inflation in one step.  However it may be used to
   inform inflate that a faster approach can be used for the single inflate()
@@ -502,7 +502,7 @@ ZEXTERN int ZEXPORT inflate OF((z_streamp strm, int flush));
     inflate() returns Z_OK if some progress has been made (more input processed
   or more output produced), Z_STREAM_END if the end of the compressed data has
   been reached and all uncompressed output has been produced, Z_NEED_DICT if a
-  preset dictionary is needed at this point_i32, Z_DATA_ERROR if the input data was
+  preset dictionary is needed at this point, Z_DATA_ERROR if the input data was
   corrupted (input stream not conforming to the zlib format or incorrect check
   value, in which case strm->msg points to a string with a more specific
   error), Z_STREAM_ERROR if the stream structure was inconsistent (for example
@@ -549,14 +549,14 @@ ZEXTERN int ZEXPORT deflateInit2 OF((z_streamp strm,
      The method parameter is the compression method.  It must be Z_DEFLATED in
    this version of the library.
 
-     The windowBits parameter is the base two logarithm of the window size_i32
-   (the size_i32 of the history buffer).  It should be in the range 8..15 for this
+     The windowBits parameter is the base two logarithm of the window size
+   (the size of the history buffer).  It should be in the range 8..15 for this
    version of the library.  Larger values of this parameter result in better
    compression at the expense of memory usage.  The default value is 15 if
    deflateInit is used instead.
 
      For the current implementation of deflate(), a windowBits value of 8 (a
-   window size_i32 of 256 bytes) is not supported.  As a result, a request for 8
+   window size of 256 bytes) is not supported.  As a result, a request for 8
    will result in 9 (a 512-byte window).  In that case, providing 8 to
    inflateInit2() will result in an error when the zlib header with 9 is
    checked against the initialization of inflate().  The remedy is to not use 8
@@ -577,7 +577,7 @@ ZEXTERN int ZEXPORT deflateInit2 OF((z_streamp strm,
 
      For raw deflate or gzip encoding, a request for a 256-byte window is
    rejected as invalid, since only the zlib header provides a means of
-   transmitting the window size_i32 to the decompressor.
+   transmitting the window size to the decompressor.
 
      The memLevel parameter specifies how much memory should be allocated
    for the internal compression state.  memLevel=1 uses minimum memory but is
@@ -630,13 +630,13 @@ ZEXTERN int ZEXPORT deflateSetDictionary OF((z_streamp strm,
    predicted with good accuracy; the data can then be compressed better than
    with the default empty dictionary.
 
-     Depending on the size_i32 of the compression data structures selected by
+     Depending on the size of the compression data structures selected by
    deflateInit or deflateInit2, a part of the dictionary may in effect be
-   discarded, for example if the dictionary is larger than the window size_i32
+   discarded, for example if the dictionary is larger than the window size
    provided in deflateInit or deflateInit2.  Thus the strings most likely to be
    useful should be put at the end of the dictionary, not at the front.  In
    addition, the current implementation of deflate will use at most the window
-   size_i32 minus 262 bytes of the provided dictionary.
+   size minus 262 bytes of the provided dictionary.
 
      Upon return of this function, strm->adler is set to the Adler-32 value
    of the dictionary; the decompressor may later use this value to determine
@@ -664,10 +664,10 @@ ZEXTERN int ZEXPORT deflateGetDictionary OF((z_streamp strm,
    Similary, if dictLength is Z_NULL, then it is not set.
 
      deflateGetDictionary() may return a length less than the window size, even
-   when more than the window size_i32 in input has been provided. It may return up
+   when more than the window size in input has been provided. It may return up
    to 258 bytes less in that case, due to how zlib's implementation of deflate
    manages the sliding window and lookahead for matches, where matches can be
-   up to 258 bytes long. If the application needs the last window-size_i32 bytes of
+   up to 258 bytes long. If the application needs the last window-size bytes of
    input, then that would need to be saved by the application outside of zlib.
 
      deflateGetDictionary returns Z_OK on success, or Z_STREAM_ERROR if the
@@ -760,14 +760,14 @@ ZEXTERN int ZEXPORT deflateTune OF((z_streamp strm,
 ZEXTERN uLong ZEXPORT deflateBound OF((z_streamp strm,
                                        uLong sourceLen));
 /*
-     deflateBound() returns an upper bound on the compressed size_i32 after
+     deflateBound() returns an upper bound on the compressed size after
    deflation of sourceLen bytes.  It must be called after deflateInit() or
    deflateInit2(), and after deflateSetHeader(), if used.  This would be used
    to allocate an output buffer for deflation in a single pass, and so would be
    called before deflate().  If that first deflate() call is provided the
-   sourceLen input bytes, an output buffer allocated to the size_i32 returned by
+   sourceLen input bytes, an output buffer allocated to the size returned by
    deflateBound(), and the flush value Z_FINISH, then deflate() is guaranteed
-   to return Z_STREAM_END.  Note that it is possible for the compressed size_i32 to
+   to return Z_STREAM_END.  Note that it is possible for the compressed size to
    be larger than the value returned by deflateBound() if flush options other
    than Z_FINISH or Z_NO_FLUSH are used.
 */
@@ -837,15 +837,15 @@ ZEXTERN int ZEXPORT inflateInit2 OF((z_streamp strm,
    before by the caller.
 
      The windowBits parameter is the base two logarithm of the maximum window
-   size_i32 (the size_i32 of the history buffer).  It should be in the range 8..15 for
+   size (the size of the history buffer).  It should be in the range 8..15 for
    this version of the library.  The default value is 15 if inflateInit is used
    instead.  windowBits must be greater than or equal to the windowBits value
    provided to deflateInit2() while compressing, or it must be equal to 15 if
    deflateInit2() was not used.  If a compressed stream with a larger window
-   size_i32 is given as input, inflate() will return with the error code
+   size is given as input, inflate() will return with the error code
    Z_DATA_ERROR instead of trying to allocate a larger window.
 
-     windowBits can also be zero to request that inflate use the window size_i32 in
+     windowBits can also be zero to request that inflate use the window size in
    the zlib header of the compressed stream.
 
      windowBits can also be -8..-15 for raw inflate.  In this case, -windowBits
@@ -921,7 +921,7 @@ ZEXTERN int ZEXPORT inflateGetDictionary OF((z_streamp strm,
 
 ZEXTERN int ZEXPORT inflateSync OF((z_streamp strm));
 /*
-     Skips invalid compressed data until a possible full flush point_i32 (see above
+     Skips invalid compressed data until a possible full flush point (see above
    for the description of deflate with Z_FULL_FLUSH) can be found, or until all
    available input is skipped.  No output is provided.
 
@@ -929,8 +929,8 @@ ZEXTERN int ZEXPORT inflateSync OF((z_streamp strm));
    All full flush points have this pattern, but not all occurrences of this
    pattern are full flush points.
 
-     inflateSync returns Z_OK if a possible full flush point_i32 has been found,
-   Z_BUF_ERROR if no more input was provided, Z_DATA_ERROR if no flush point_i32
+     inflateSync returns Z_OK if a possible full flush point has been found,
+   Z_BUF_ERROR if no more input was provided, Z_DATA_ERROR if no flush point
    has been found, or Z_STREAM_ERROR if the stream structure was inconsistent.
    In the success case, the application may save the current current value of
    total_in which indicates where valid compressed data was found.  In the
@@ -968,8 +968,8 @@ ZEXTERN int ZEXPORT inflateReset2 OF((z_streamp strm,
                                       int windowBits));
 /*
      This function is the same as inflateReset, but it also permits changing
-   the wrap and window size_i32 requests.  The windowBits parameter is interpreted
-   the same as it is for inflateInit2.  If the window size_i32 is changed, then the
+   the wrap and window size requests.  The windowBits parameter is interpreted
+   the same as it is for inflateInit2.  If the window size is changed, then the
    memory allocated for the window is freed, and the window will be reallocated
    by inflate() if needed.
 
@@ -1175,10 +1175,10 @@ ZEXTERN uLong ZEXPORT zlibCompileFlags OF((void));
 /* Return flags indicating compile-time options.
 
     Type sizes, two bits each, 00 = 16 bits, 01 = 32, 10 = 64, 11 = other:
-     1.0: size_i32 of uInt
-     3.2: size_i32 of uLong
-     5.4: size_i32 of voidpf (pointer)
-     7.6: size_i32 of z_off_t
+     1.0: size of uInt
+     3.2: size of uLong
+     5.4: size of voidpf (pointer)
+     7.6: size of z_off_t
 
     Compiler, assembler, and debug options:
      8: ZLIB_DEBUG
@@ -1228,9 +1228,9 @@ ZEXTERN int ZEXPORT compress OF((Bytef *dest,   uLongf *destLen,
                                  const Bytef *source, uLong sourceLen));
 /*
      Compresses the source buffer into the destination buffer.  sourceLen is
-   the byte length of the source buffer.  Upon entry, destLen is the total size_i32
+   the byte length of the source buffer.  Upon entry, destLen is the total size
    of the destination buffer, which must be at least the value returned by
-   compressBound(sourceLen).  Upon exit, destLen is the actual size_i32 of the
+   compressBound(sourceLen).  Upon exit, destLen is the actual size of the
    compressed data.  compress() is equivalent to compress2() with a level
    parameter of Z_DEFAULT_COMPRESSION.
 
@@ -1245,9 +1245,9 @@ ZEXTERN int ZEXPORT compress2 OF((Bytef *dest,   uLongf *destLen,
 /*
      Compresses the source buffer into the destination buffer.  The level
    parameter has the same meaning as in deflateInit.  sourceLen is the byte
-   length of the source buffer.  Upon entry, destLen is the total size_i32 of the
+   length of the source buffer.  Upon entry, destLen is the total size of the
    destination buffer, which must be at least the value returned by
-   compressBound(sourceLen).  Upon exit, destLen is the actual size_i32 of the
+   compressBound(sourceLen).  Upon exit, destLen is the actual size of the
    compressed data.
 
      compress2 returns Z_OK if success, Z_MEM_ERROR if there was not enough
@@ -1257,7 +1257,7 @@ ZEXTERN int ZEXPORT compress2 OF((Bytef *dest,   uLongf *destLen,
 
 ZEXTERN uLong ZEXPORT compressBound OF((uLong sourceLen));
 /*
-     compressBound() returns an upper bound on the compressed size_i32 after
+     compressBound() returns an upper bound on the compressed size after
    compress() or compress2() on sourceLen bytes.  It would be used before a
    compress() or compress2() call to allocate the destination buffer.
 */
@@ -1266,12 +1266,12 @@ ZEXTERN int ZEXPORT uncompress OF((Bytef *dest,   uLongf *destLen,
                                    const Bytef *source, uLong sourceLen));
 /*
      Decompresses the source buffer into the destination buffer.  sourceLen is
-   the byte length of the source buffer.  Upon entry, destLen is the total size_i32
+   the byte length of the source buffer.  Upon entry, destLen is the total size
    of the destination buffer, which must be large enough to hold the entire
-   uncompressed data.  (The size_i32 of the uncompressed data must have been saved
+   uncompressed data.  (The size of the uncompressed data must have been saved
    previously by the compressor and transmitted to the decompressor by some
    mechanism outside the scope of this compression library.) Upon exit, destLen
-   is the actual size_i32 of the uncompressed data.
+   is the actual size of the uncompressed data.
 
      uncompress returns Z_OK if success, Z_MEM_ERROR if there was not
    enough memory, Z_BUF_ERROR if there was not enough room in the output
@@ -1360,17 +1360,17 @@ ZEXTERN gzFile ZEXPORT gzdopen OF((int fd, const char *mode));
    will not detect if fd is invalid (unless fd is -1).
 */
 
-ZEXTERN int ZEXPORT gzbuffer OF((gzFile file, unsigned size_i32));
+ZEXTERN int ZEXPORT gzbuffer OF((gzFile file, unsigned size));
 /*
-     Set the internal buffer size_i32 used by this library's functions.  The
-   default buffer size_i32 is 8192 bytes.  This function must be called after
+     Set the internal buffer size used by this library's functions.  The
+   default buffer size is 8192 bytes.  This function must be called after
    gzopen() or gzdopen(), and before any other calls that read or write the
    file.  The buffer memory allocation is always deferred to the first read or
-   write.  Three times that size_i32 in buffer space is allocated.  A larger buffer
-   size_i32 of, for example, 64K or 128K bytes will noticeably increase the speed
+   write.  Three times that size in buffer space is allocated.  A larger buffer
+   size of, for example, 64K or 128K bytes will noticeably increase the speed
    of decompression (reading).
 
-     The new buffer size_i32 also affects the maximum length for gzprintf().
+     The new buffer size also affects the maximum length for gzprintf().
 
      gzbuffer() returns 0 on success, or -1 on failure, such as being called
    too late.
@@ -1420,16 +1420,16 @@ ZEXTERN int ZEXPORT gzread OF((gzFile file, voidp buf, unsigned len));
 ZEXTERN z_size_t ZEXPORT gzfread OF((voidp buf, z_size_t size, z_size_t nitems,
                                      gzFile file));
 /*
-     Read up to nitems items of size_i32 size_i32 from file to buf, otherwise operating
+     Read up to nitems items of size size from file to buf, otherwise operating
    as gzread() does.  This duplicates the interface of stdio's fread(), with
    size_t request and return types.  If the library defines size_t, then
    z_size_t is identical to size_t.  If not, then z_size_t is an unsigned
    integer type that can contain a pointer.
 
-     gzfread() returns the number of full items read of size_i32 size, or zero if
+     gzfread() returns the number of full items read of size size, or zero if
    the end of the file was reached and a full item could not be read, or if
    there was an error.  gzerror() must be consulted if zero is returned in
-   order to determine if there was an error.  If the multiplication of size_i32 and
+   order to determine if there was an error.  If the multiplication of size and
    nitems overflows, i.e. the product does not fit in a z_size_t, then nothing
    is read, zero is returned, and the error state is set to Z_STREAM_ERROR.
 
@@ -1440,7 +1440,7 @@ ZEXTERN z_size_t ZEXPORT gzfread OF((voidp buf, z_size_t size, z_size_t nitems,
    provided, but could be inferred from the result of gztell().  This behavior
    is the same as the behavior of fread() implementations in common libraries,
    but it prevents the direct use of gzfread() to read a concurrently written
-   file, reseting and retrying on end-of-file, when size_i32 is not 1.
+   file, reseting and retrying on end-of-file, when size is not 1.
 */
 
 ZEXTERN int ZEXPORT gzwrite OF((gzFile file,
@@ -1454,13 +1454,13 @@ ZEXTERN int ZEXPORT gzwrite OF((gzFile file,
 ZEXTERN z_size_t ZEXPORT gzfwrite OF((voidpc buf, z_size_t size,
                                       z_size_t nitems, gzFile file));
 /*
-     gzfwrite() writes nitems items of size_i32 size_i32 from buf to file, duplicating
+     gzfwrite() writes nitems items of size size from buf to file, duplicating
    the interface of stdio's fwrite(), with size_t request and return types.  If
    the library defines size_t, then z_size_t is identical to size_t.  If not,
    then z_size_t is an unsigned integer type that can contain a pointer.
 
-     gzfwrite() returns the number of full items written of size_i32 size, or zero
-   if there was an error.  If the multiplication of size_i32 and nitems overflows,
+     gzfwrite() returns the number of full items written of size size, or zero
+   if there was an error.  If the multiplication of size and nitems overflows,
    i.e. the product does not fit in a z_size_t, then nothing is written, zero
    is returned, and the error state is set to Z_STREAM_ERROR.
 */
@@ -1471,7 +1471,7 @@ ZEXTERN int ZEXPORTVA gzprintf Z_ARG((gzFile file, const char *format, ...));
    control of the format string, as in fprintf.  gzprintf returns the number of
    uncompressed bytes actually written, or a negative zlib error code in case
    of error.  The number of uncompressed bytes written is limited to 8191, or
-   one less than the buffer size_i32 given to gzbuffer().  The caller should assure
+   one less than the buffer size given to gzbuffer().  The caller should assure
    that this limit is not exceeded.  If it is exceeded, then gzprintf() will
    return an error (0) with nothing written.  In this case, there may also be a
    buffer overflow with unpredictable consequences, which is possible only if
@@ -1523,7 +1523,7 @@ ZEXTERN int ZEXPORT gzungetc OF((int c, gzFile file));
    gzungetc() returns the character pushed, or -1 on failure.  gzungetc() will
    fail if c is -1, and may fail if a character has been pushed but not read
    yet.  If gzungetc is used immediately after gzopen or gzdopen, at least the
-   output buffer size_i32 of pushed characters is allowed.  (See gzbuffer above.)
+   output buffer size of pushed characters is allowed.  (See gzbuffer above.)
    The pushed character will be discarded if the stream is repositioned with
    gzseek() or gzrewind().
 */
@@ -1598,7 +1598,7 @@ ZEXTERN int ZEXPORT gzeof OF((gzFile file));
    read tried to go past the end of the input, but came up short.  Therefore,
    just like feof(), gzeof() may return false even if there is no more data to
    read, in the event that the last read request was for the exact number of
-   bytes remaining in the input file.  This will happen if the input file size_i32
+   bytes remaining in the input file.  This will happen if the input file size
    is an exact multiple of the buffer size.
 
      If gzeof() returns true, then the read functions will return no more data,

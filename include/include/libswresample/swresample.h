@@ -472,7 +472,7 @@ int64_t swr_get_delay(struct SwrContext *s, int64_t base);
  * @param in_samples    number of input samples.
  * @note any call to swr_inject_silence(), swr_convert(), swr_next_pts()
  *       or swr_set_compensation() invalidates this limit
- * @note it is recommended to pass the correct available buffer size_i32
+ * @note it is recommended to pass the correct available buffer size
  *       to all functions like swr_convert() even if swr_get_out_samples()
  *       indicates that less would be used.
  * @returns an upper bound on the number of samples that the next swr_convert

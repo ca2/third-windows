@@ -176,7 +176,7 @@ __owur int SCT_set_log_entry_type(SCT *sct, ct_log_entry_type_t entry_type);
 size_t SCT_get0_log_id(const SCT *sct, unsigned char **log_id);
 
 /*
- * Set the log ID of an SCT to point_i32 directly to the *log_id specified.
+ * Set the log ID of an SCT to point directly to the *log_id specified.
  * The SCT takes ownership of the specified pointer.
  * Returns 1 on success, 0 otherwise.
  */
@@ -216,14 +216,14 @@ int SCT_get_signature_nid(const SCT *sct);
 __owur int SCT_set_signature_nid(SCT *sct, int nid);
 
 /*
- * Set *ext to point_i32 to the extension data for the SCT. ext must not be NULL.
+ * Set *ext to point to the extension data for the SCT. ext must not be NULL.
  * The SCT retains ownership of this pointer.
  * Returns length of the data pointed to.
  */
 size_t SCT_get0_extensions(const SCT *sct, unsigned char **ext);
 
 /*
- * Set the extensions of an SCT to point_i32 directly to the *ext specified.
+ * Set the extensions of an SCT to point directly to the *ext specified.
  * The SCT takes ownership of the specified pointer.
  */
 void SCT_set0_extensions(SCT *sct, unsigned char *ext, size_t ext_len);
@@ -237,14 +237,14 @@ __owur int SCT_set1_extensions(SCT *sct, const unsigned char *ext,
                                size_t ext_len);
 
 /*
- * Set *sig to point_i32 to the signature for the SCT. sig must not be NULL.
+ * Set *sig to point to the signature for the SCT. sig must not be NULL.
  * The SCT retains ownership of this pointer.
  * Returns length of the data pointed to.
  */
 size_t SCT_get0_signature(const SCT *sct, unsigned char **sig);
 
 /*
- * Set the signature of an SCT to point_i32 directly to the *sig specified.
+ * Set the signature of an SCT to point directly to the *sig specified.
  * The SCT takes ownership of the specified pointer.
  */
 void SCT_set0_signature(SCT *sct, unsigned char *sig, size_t sig_len);
@@ -339,7 +339,7 @@ __owur int i2o_SCT_LIST(const STACK_OF(SCT) *a, unsigned char **pp);
  * If "a" or "*a" is NULL, a new stack will be created that the caller is
  * responsible for freeing (by calling SCT_LIST_free).
  * "**pp" and "*pp" must not be NULL.
- * Upon success, "*pp" will point_i32 to after the last bytes read, and a stack
+ * Upon success, "*pp" will point to after the last bytes read, and a stack
  * will be returned.
  * Upon failure, a NULL pointer will be returned, and the position of "*pp" is
  * not defined.
@@ -366,7 +366,7 @@ __owur int i2d_SCT_LIST(const STACK_OF(SCT) *a, unsigned char **pp);
  * If "a" or "*a" is NULL, a new stack will be created that the caller is
  * responsible for freeing (by calling SCT_LIST_free).
  * "**pp" and "*pp" must not be NULL.
- * Upon success, "*pp" will point_i32 to after the last bytes read, and a stack
+ * Upon success, "*pp" will point to after the last bytes read, and a stack
  * will be returned.
  * Upon failure, a NULL pointer will be returned, and the position of "*pp" is
  * not defined.

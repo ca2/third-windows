@@ -67,20 +67,20 @@ typedef struct _cef_render_handler_t {
       struct _cef_render_handler_t* self);
 
   ///
-  // Called to retrieve the root window rectangle_i32 in screen coordinates. Return
-  // true (1) if the rectangle_i32 was provided.
+  // Called to retrieve the root window rectangle in screen coordinates. Return
+  // true (1) if the rectangle was provided.
   ///
   int(CEF_CALLBACK* get_root_screen_rect)(struct _cef_render_handler_t* self,
                                           struct _cef_browser_t* browser,
-                                          cef_rect_t* rectangle_i32);
+                                          cef_rect_t* rect);
 
   ///
-  // Called to retrieve the view rectangle_i32 which is relative to screen
-  // coordinates. Return true (1) if the rectangle_i32 was provided.
+  // Called to retrieve the view rectangle which is relative to screen
+  // coordinates. Return true (1) if the rectangle was provided.
   ///
   int(CEF_CALLBACK* get_view_rect)(struct _cef_render_handler_t* self,
                                    struct _cef_browser_t* browser,
-                                   cef_rect_t* rectangle_i32);
+                                   cef_rect_t* rect);
 
   ///
   // Called to retrieve the translation from view coordinates to actual screen
@@ -98,8 +98,8 @@ typedef struct _cef_render_handler_t {
   // appropriate values. Return true (1) if the |screen_info| structure has been
   // modified.
   //
-  // If the screen info rectangle_i32 is left NULL the rectangle_i32 from GetViewRect
-  // will be used. If the rectangle_i32 is still NULL or invalid popups may not be
+  // If the screen info rectangle is left NULL the rectangle from GetViewRect
+  // will be used. If the rectangle is still NULL or invalid popups may not be
   // drawn correctly.
   ///
   int(CEF_CALLBACK* get_screen_info)(struct _cef_render_handler_t* self,
@@ -115,12 +115,12 @@ typedef struct _cef_render_handler_t {
                                     int show);
 
   ///
-  // Called when the browser wants to move or resize the popup widget. |rectangle_i32|
-  // contains the new location and size_i32 in view coordinates.
+  // Called when the browser wants to move or resize the popup widget. |rect|
+  // contains the new location and size in view coordinates.
   ///
   void(CEF_CALLBACK* on_popup_size)(struct _cef_render_handler_t* self,
                                     struct _cef_browser_t* browser,
-                                    const cef_rect_t* rectangle_i32);
+                                    const cef_rect_t* rect);
 
   ///
   // Called when an element should be painted. Pixel values passed to this
@@ -129,7 +129,7 @@ typedef struct _cef_render_handler_t {
   // indicates whether the element is the view or the popup widget. |buffer|
   // contains the pixel data for the whole image. |dirtyRects| contains the set
   // of rectangles in pixel coordinates that need to be repainted. |buffer| will
-  // be |width|*|height|*4 bytes in size_i32 and represents a BGRA image with an
+  // be |width|*|height|*4 bytes in size and represents a BGRA image with an
   // upper-left origin.
   ///
   void(CEF_CALLBACK* on_paint)(struct _cef_render_handler_t* self,

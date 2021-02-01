@@ -190,7 +190,7 @@ FT_BEGIN_HEADER
    *     The current iteration list node.
    *
    *   user ::
-   *     A typeless pointer passed to @FT_List_Iterate.  Can be used to point_i32
+   *     A typeless pointer passed to @FT_List_Iterate.  Can be used to point
    *     to the iteration's state.
    */
   typedef FT_Error
@@ -245,7 +245,7 @@ FT_BEGIN_HEADER
    *
    *   user ::
    *     A typeless pointer passed to @FT_List_Iterate.  It can be used to
-   *     point_i32 to the iteration's state.
+   *     point to the iteration's state.
    */
   typedef void
   (*FT_List_Destructor)( FT_Memory  memory,

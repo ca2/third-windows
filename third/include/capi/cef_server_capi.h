@@ -107,7 +107,7 @@ typedef struct _cef_server_t {
   ///
   // Send an HTTP 200 "OK" response to the connection identified by
   // |connection_id|. |content_type| is the response content type (e.g.
-  // "text/html"), |data| is the response content, and |data_size| is the size_i32
+  // "text/html"), |data| is the response content, and |data_size| is the size
   // of |data| in bytes. The contents of |data| will be copied. The connection
   // will be closed automatically after the response is sent.
   ///
@@ -158,7 +158,7 @@ typedef struct _cef_server_t {
 
   ///
   // Send raw data directly to the connection identified by |connection_id|.
-  // |data| is the raw data and |data_size| is the size_i32 of |data| in bytes. The
+  // |data| is the raw data and |data_size| is the size of |data| in bytes. The
   // contents of |data| will be copied. No validation of |data| is performed
   // internally so the client should be careful to send the amount indicated by
   // the "Content-Length" header, if specified. See SendHttpResponse
@@ -178,7 +178,7 @@ typedef struct _cef_server_t {
 
   ///
   // Send a WebSocket message to the connection identified by |connection_id|.
-  // |data| is the response content and |data_size| is the size_i32 of |data| in
+  // |data| is the response content and |data_size| is the size of |data| in
   // bytes. The contents of |data| will be copied. See
   // cef_server_handler_t::OnWebSocketRequest documentation for intended usage.
   ///
@@ -309,7 +309,7 @@ typedef struct _cef_server_handler_t {
   ///
   // Called when |server| receives an WebSocket message. |connection_id|
   // uniquely identifies the connection, |data| is the message content and
-  // |data_size| is the size_i32 of |data| in bytes. Do not keep a reference to
+  // |data_size| is the size of |data| in bytes. Do not keep a reference to
   // |data| outside of this function. See OnWebSocketRequest documentation for
   // intended usage.
   ///

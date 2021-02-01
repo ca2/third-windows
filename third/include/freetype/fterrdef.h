@@ -77,7 +77,7 @@
   FT_ERRORDEF_( Invalid_Offset,                              0x09,
                 "broken offset within table" )
   FT_ERRORDEF_( Array_Too_Large,                             0x0A,
-                "array allocation size_i32 too large" )
+                "array allocation size too large" )
   FT_ERRORDEF_( Missing_Module,                              0x0B,
                 "missing module" )
   FT_ERRORDEF_( Missing_Property,                            0x0C,
@@ -100,7 +100,7 @@
   FT_ERRORDEF_( Too_Many_Hints,                              0x16,
                 "too many hints" )
   FT_ERRORDEF_( Invalid_Pixel_Size,                          0x17,
-                "invalid pixel size_i32" )
+                "invalid pixel size" )
 
   /* handle errors */
 
@@ -113,7 +113,7 @@
   FT_ERRORDEF_( Invalid_Face_Handle,                         0x23,
                 "invalid face handle" )
   FT_ERRORDEF_( Invalid_Size_Handle,                         0x24,
-                "invalid size_i32 handle" )
+                "invalid size handle" )
   FT_ERRORDEF_( Invalid_Slot_Handle,                         0x25,
                 "invalid glyph slot handle" )
   FT_ERRORDEF_( Invalid_CharMap_Handle,                      0x26,

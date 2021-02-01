@@ -36,14 +36,14 @@ FI_STRUCT (FIMEMORYHEADER) {
 	*/
 	BOOL delete_me;
 	/**
-	file_length is equal to the input buffer size_i32 when the buffer is a wrapped buffer, i.e. file_length == data_length. 
+	file_length is equal to the input buffer size when the buffer is a wrapped buffer, i.e. file_length == data_length. 
 	file_length is the amount of the written bytes when the buffer is a read/write buffer.
 	*/
 	long file_length;
 	/**
 	When using read-only input buffers, data_length is equal to the input buffer size, i.e. the file_length.
-	When using read/write buffers, data_length is the size_i32 of the allocated buffer, 
-	whose size_i32 is greater than or equal to file_length.
+	When using read/write buffers, data_length is the size of the allocated buffer, 
+	whose size is greater than or equal to file_length.
 	*/
 	long data_length;
 	/**

@@ -40,7 +40,7 @@
 /**
  * This struct holds all the information that needs to be passed
  * between the caller and libavcodec for initializing Videotoolbox decoding.
- * Its size_i32 is not a part of the public ABI, it must be allocated with
+ * Its size is not a part of the public ABI, it must be allocated with
  * av_videotoolbox_alloc_context() and freed with av_free().
  */
 typedef struct AVVideotoolboxContext {

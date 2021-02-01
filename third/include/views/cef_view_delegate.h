@@ -50,7 +50,7 @@ class CefView;
 class CefViewDelegate : public virtual CefBaseRefCounted {
  public:
   ///
-  // Return the preferred size_i32 for |view|. The Layout will use this information
+  // Return the preferred size for |view|. The Layout will use this information
   // to determine the display size.
   ///
   /*--cef()--*/
@@ -59,13 +59,13 @@ class CefViewDelegate : public virtual CefBaseRefCounted {
   }
 
   ///
-  // Return the minimum size_i32 for |view|.
+  // Return the minimum size for |view|.
   ///
   /*--cef()--*/
   virtual CefSize GetMinimumSize(CefRefPtr<CefView> view) { return CefSize(); }
 
   ///
-  // Return the maximum size_i32 for |view|.
+  // Return the maximum size for |view|.
   ///
   /*--cef()--*/
   virtual CefSize GetMaximumSize(CefRefPtr<CefView> view) { return CefSize(); }

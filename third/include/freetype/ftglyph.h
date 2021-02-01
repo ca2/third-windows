@@ -95,7 +95,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   The root glyph structure contains a given glyph image plus its advance
-   *   width in 16.16 fixed-point_i32 format.
+   *   width in 16.16 fixed-point format.
    *
    * @fields:
    *   library ::
@@ -277,8 +277,8 @@ FT_BEGIN_HEADER
    *
    * @note:
    *   Because `*aglyph->advance.x` and `*aglyph->advance.y` are 16.16
-   *   fixed-point_i32 numbers, `slot->advance.x` and `slot->advance.y` (which
-   *   are in 26.6 fixed-point_i32 format) must be in the range ]-32768;32768[.
+   *   fixed-point numbers, `slot->advance.x` and `slot->advance.y` (which
+   *   are in 26.6 fixed-point format) must be in the range ]-32768;32768[.
    */
   FT_EXPORT( FT_Error )
   FT_Get_Glyph( FT_GlyphSlot  slot,

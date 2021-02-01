@@ -117,27 +117,27 @@ static inline int native_cond_destroy(native_cond_t *cond)
 }
 
 static inline int native_cond_timedwait(native_cond_t *cond,
-                                        native_mutex_t *::mutex,
+                                        native_mutex_t *mutex,
                                         const struct timespec *abstime)
 {
 #ifdef _WIN32
   DWORD timeout= get_milliseconds(abstime);
-  if (!SleepConditionVariableCS(cond, ::mutex, timeout))
+  if (!SleepConditionVariableCS(cond, mutex, timeout))
     return ETIMEDOUT;
   return 0;
 #else
-  return pthread_cond_timedwait(cond, ::mutex, abstime);
+  return pthread_cond_timedwait(cond, mutex, abstime);
 #endif
 }
 
-static inline int native_cond_wait(native_cond_t *cond, native_mutex_t *::mutex)
+static inline int native_cond_wait(native_cond_t *cond, native_mutex_t *mutex)
 {
 #ifdef _WIN32
-  if (!SleepConditionVariableCS(cond, ::mutex, INFINITE))
+  if (!SleepConditionVariableCS(cond, mutex, INFINITE))
     return ETIMEDOUT;
   return 0;
 #else
-  return pthread_cond_wait(cond, ::mutex);
+  return pthread_cond_wait(cond, mutex);
 #endif
 }
 

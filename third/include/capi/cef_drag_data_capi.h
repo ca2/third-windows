@@ -136,7 +136,7 @@ typedef struct _cef_drag_data_t {
   ///
   // Write the contents of the file being dragged out of the web view into
   // |writer|. Returns the number of bytes sent to |writer|. If |writer| is NULL
-  // this function will return the size_i32 of the file contents in bytes. Call
+  // this function will return the size of the file contents in bytes. Call
   // get_file_name() to get a suggested name for the file.
   ///
   size_t(CEF_CALLBACK* get_file_contents)(struct _cef_drag_data_t* self,

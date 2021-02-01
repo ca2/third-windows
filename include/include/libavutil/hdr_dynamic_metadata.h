@@ -189,14 +189,14 @@ typedef struct AVHDRPlusColorTransformParams {
     uint8_t tone_mapping_flag;
 
     /**
-     * The x coordinate of the separation point_i32 between the linear part and the
+     * The x coordinate of the separation point between the linear part and the
      * curved part of the tone mapping function. The value shall be in the range
      * of 0 to 1, excluding 0 and in multiples of 1/4095.
      */
     AVRational knee_point_x;
 
     /**
-     * The y coordinate of the separation point_i32 between the linear part and the
+     * The y coordinate of the separation point between the linear part and the
      * curved part of the tone mapping function. The value shall be in the range
      * of 0 to 1, excluding 0 and in multiples of 1/4095.
      */
@@ -237,7 +237,7 @@ typedef struct AVHDRPlusColorTransformParams {
  * appropriate type.
  *
  * @note The struct should be allocated with
- * av_dynamic_hdr_plus_alloc() and its size_i32 is not a part of
+ * av_dynamic_hdr_plus_alloc() and its size is not a part of
  * the public ABI.
  */
 typedef struct AVDynamicHDRPlus {
@@ -329,7 +329,7 @@ typedef struct AVDynamicHDRPlus {
  * @return An AVDynamicHDRPlus filled with default values or NULL
  *         on failure.
  */
-AVDynamicHDRPlus *av_dynamic_hdr_plus_alloc(size_t *size_i32);
+AVDynamicHDRPlus *av_dynamic_hdr_plus_alloc(size_t *size);
 
 /**
  * Allocate a complete AVDynamicHDRPlus and add it to the frame.

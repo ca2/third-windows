@@ -130,7 +130,7 @@ enum ha_extra_function {
   HA_EXTRA_NO_IGNORE_DUP_KEY,
   HA_EXTRA_PREPARE_FOR_DROP,
   HA_EXTRA_PREPARE_FOR_UPDATE,		/* Remove read cache if problems */
-  HA_EXTRA_PRELOAD_BUFFER_SIZE,         /* Set buffer size_i32 for preloading */
+  HA_EXTRA_PRELOAD_BUFFER_SIZE,         /* Set buffer size for preloading */
   /*
     On-the-fly switching between unique and non-unique key inserting.
   */
@@ -272,7 +272,7 @@ enum ha_base_keytype {
   Used by in-place ALTER TABLE implementation.
 
   @note This flag can be set for keys which have other changes than
-        simple renaming as well. So from the point_i32 of view of storage
+        simple renaming as well. So from the point of view of storage
         engine such key might have to be dropped and re-created with
         new definition.
 */
@@ -436,7 +436,7 @@ is the global server default. */
 #define HA_ERR_NO_REFERENCED_ROW 151     /* Cannot add a child row */
 #define HA_ERR_ROW_IS_REFERENCED 152     /* Cannot delete a parent row */
 #define HA_ERR_NO_SAVEPOINT	 153     /* No savepoint with that name */
-#define HA_ERR_NON_UNIQUE_BLOCK_SIZE 154 /* Non unique key block size_i32 */
+#define HA_ERR_NON_UNIQUE_BLOCK_SIZE 154 /* Non unique key block size */
 #define HA_ERR_NO_SUCH_TABLE     155     /* The table does not exist in engine */
 #define HA_ERR_TABLE_EXIST       156     /* The table existed in storage engine */
 #define HA_ERR_NO_CONNECTION     157     /* Could not connect to storage engine */

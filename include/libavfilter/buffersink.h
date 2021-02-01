@@ -92,7 +92,7 @@ typedef struct AVABufferSinkParams {
 AVABufferSinkParams *av_abuffersink_params_alloc(void);
 
 /**
- * Set the frame size_i32 for an audio buffer sink.
+ * Set the frame size for an audio buffer sink.
  *
  * All calls to av_buffersink_get_buffer_ref will return a buffer with
  * exactly the specified number of samples, or AVERROR(EAGAIN) if there is
@@ -132,7 +132,7 @@ AVBufferRef *    av_buffersink_get_hw_frames_ctx       (const AVFilterContext *c
  *
  * @return
  *         - >= 0 if a frame was successfully returned.
- *         - AVERROR(EAGAIN) if no frames are available at this point_i32; more
+ *         - AVERROR(EAGAIN) if no frames are available at this point; more
  *           input frames must be added to the filtergraph to get more output.
  *         - AVERROR_EOF if there will be no more output frames on this sink.
  *         - A different negative AVERROR code in other failure cases.

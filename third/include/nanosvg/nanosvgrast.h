@@ -17,7 +17,7 @@
  * misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  *
- * The polygon_i32 rasterization is heavily based on stb_truetype rasterizer
+ * The polygon rasterization is heavily based on stb_truetype rasterizer
  * by Sean Barrett - http://nothings.org/
  *
  */
@@ -226,7 +226,7 @@ static void nsvg__resetPool(NSVGrasterizer* r)
    r->curpage = r->pages;
 }
 
-static unsigned char* nsvg__alloc(NSVGrasterizer* r, int size_i32)
+static unsigned char* nsvg__alloc(NSVGrasterizer* r, int size)
 {
    unsigned char* buf;
    if (size > NSVG__MEMPAGE_SIZE) return NULL;
@@ -234,7 +234,7 @@ static unsigned char* nsvg__alloc(NSVGrasterizer* r, int size_i32)
    {
       r->curpage = nsvg__nextPage(r, r->curpage);
    }
-   buf = &r->curpage->mem[r->curpage->size_i32];
+   buf = &r->curpage->mem[r->curpage->size];
    r->curpage->size += size;
    return buf;
 }
@@ -861,7 +861,7 @@ static void nsvg__flattenShapeStroke(NSVGrasterizer* r, NSVGshape* shape, float 
 
             if ((totalDist + dist) > dashLen)
             {
-               // Calculate intermediate point_i32
+               // Calculate intermediate point
                float d = (dashLen - totalDist) / dist;
                float x = cur.x + dx * d;
                float y = cur.y + dy * d;
@@ -1001,7 +1001,7 @@ static void nsvg__fillActiveEdges(unsigned char* scanline, int len, NSVGactiveEd
       {
          if (w == 0)
          {
-            // if we're currently at zero, we need to record the edge start point_i32
+            // if we're currently at zero, we need to record the edge start point
             x0 = e->x; w += e->dir;
          }
          else
@@ -1021,7 +1021,7 @@ static void nsvg__fillActiveEdges(unsigned char* scanline, int len, NSVGactiveEd
       {
          if (w == 0)
          {
-            // if we're currently at zero, we need to record the edge start point_i32
+            // if we're currently at zero, we need to record the edge start point
             x0 = e->x; w = 1;
          }
          else
@@ -1291,7 +1291,7 @@ static void nsvg__rasterizeSortedEdges(NSVGrasterizer *r, float tx, float ty, fl
             {
                NSVGactiveEdge* z = nsvg__addActive(r, &r->edges[e], scany);
                if (z == NULL) break;
-               // find insertion point_i32
+               // find insertion point
                if (active == NULL)
                {
                   active = z;
@@ -1308,7 +1308,7 @@ static void nsvg__rasterizeSortedEdges(NSVGrasterizer *r, float tx, float ty, fl
                   NSVGactiveEdge* p = active;
                   while (p->next && p->next->x < z->x)
                      p = p->next;
-                  // at this point_i32, p->next->x is NOT < z->x
+                  // at this point, p->next->x is NOT < z->x
                   z->next = p->next;
                   p->next = z;
                }

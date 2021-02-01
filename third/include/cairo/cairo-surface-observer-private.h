@@ -70,7 +70,7 @@ struct path {
 };
 
 struct clip {
-    unsigned int type[6]; /* none, region, boxes, single path, polygon_i32, general */
+    unsigned int type[6]; /* none, region, boxes, single path, polygon, general */
 };
 
 typedef struct _cairo_observation cairo_observation_t;

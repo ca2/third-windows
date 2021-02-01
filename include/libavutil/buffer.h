@@ -62,7 +62,7 @@
  * may be done from multiple threads simultaneously without any need for
  * additional locking.
  *
- * @note Two different references to the same buffer can point_i32 to different
+ * @note Two different references to the same buffer can point to different
  * parts of the buffer (i.e. their AVBufferRef.data will not be equal).
  */
 
@@ -75,7 +75,7 @@ typedef struct AVBuffer AVBuffer;
 /**
  * A reference to a data buffer.
  *
- * The size_i32 of this struct is not a part of the public ABI and it is not meant
+ * The size of this struct is not a part of the public ABI and it is not meant
  * to be allocated directly.
  */
 typedef struct AVBufferRef {
@@ -94,17 +94,17 @@ typedef struct AVBufferRef {
 } AVBufferRef;
 
 /**
- * Allocate an AVBuffer of the given size_i32 using av_malloc().
+ * Allocate an AVBuffer of the given size using av_malloc().
  *
- * @return an AVBufferRef of given size_i32 or NULL when out of memory
+ * @return an AVBufferRef of given size or NULL when out of memory
  */
-AVBufferRef *av_buffer_alloc(int size_i32);
+AVBufferRef *av_buffer_alloc(int size);
 
 /**
  * Same as av_buffer_alloc(), except the returned buffer will be initialized
  * to zero.
  */
-AVBufferRef *av_buffer_allocz(int size_i32);
+AVBufferRef *av_buffer_allocz(int size);
 
 /**
  * Always treat the buffer as read-only, even when it has only one
@@ -120,7 +120,7 @@ AVBufferRef *av_buffer_allocz(int size_i32);
  * it.
  * If this function fails, data is left untouched.
  * @param data   data array
- * @param size_i32   size_i32 of data in bytes
+ * @param size   size of data in bytes
  * @param free   a callback for freeing this buffer's data
  * @param opaque parameter to be got for processing or passed to free
  * @param flags  a combination of AV_BUFFER_FLAG_*
@@ -184,10 +184,10 @@ int av_buffer_make_writable(AVBufferRef **buf);
  * Reallocate a given buffer.
  *
  * @param buf  a buffer reference to reallocate. On success, buf will be
- *             unreferenced and a new reference with the required size_i32 will be
+ *             unreferenced and a new reference with the required size will be
  *             written in its place. On failure buf will be left untouched. *buf
  *             may be NULL, then a new buffer is allocated.
- * @param size_i32 required new buffer size.
+ * @param size required new buffer size.
  * @return 0 on success, a negative AVERROR on failure.
  *
  * @note the buffer is actually reallocated with av_realloc() only if it was
@@ -195,7 +195,7 @@ int av_buffer_make_writable(AVBufferRef **buf);
  * reference to it (i.e. the one passed to this function). In all other cases
  * a new buffer is allocated and the data is copied.
  */
-int av_buffer_realloc(AVBufferRef **buf, int size_i32);
+int av_buffer_realloc(AVBufferRef **buf, int size);
 
 /**
  * @}
@@ -210,7 +210,7 @@ int av_buffer_realloc(AVBufferRef **buf, int size_i32);
  *
  * Frequently allocating and freeing large buffers may be slow. AVBufferPool is
  * meant to solve this in cases when the caller needs a set of buffers of the
- * same size_i32 (the most obvious use case being buffers for raw video or audio
+ * same size (the most obvious use case being buffers for raw video or audio
  * frames).
  *
  * At the beginning, the user must call av_buffer_pool_init() to create the
@@ -240,18 +240,18 @@ typedef struct AVBufferPool AVBufferPool;
 /**
  * Allocate and initialize a buffer pool.
  *
- * @param size_i32 size_i32 of each buffer in this pool
+ * @param size size of each buffer in this pool
  * @param alloc a function that will be used to allocate new buffers when the
  * pool is empty. May be NULL, then the default allocator will be used
  * (av_buffer_alloc()).
  * @return newly created buffer pool on success, NULL on error.
  */
-AVBufferPool *av_buffer_pool_init(int size, AVBufferRef* (*alloc)(int size_i32));
+AVBufferPool *av_buffer_pool_init(int size, AVBufferRef* (*alloc)(int size));
 
 /**
  * Allocate and initialize a buffer pool with a more complex allocator.
  *
- * @param size_i32 size_i32 of each buffer in this pool
+ * @param size size of each buffer in this pool
  * @param opaque arbitrary user data used by the allocator
  * @param alloc a function that will be used to allocate new buffers when the
  *              pool is empty.
@@ -263,7 +263,7 @@ AVBufferPool *av_buffer_pool_init(int size, AVBufferRef* (*alloc)(int size_i32))
  * @return newly created buffer pool on success, NULL on error.
  */
 AVBufferPool *av_buffer_pool_init2(int size, void *opaque,
-                                   AVBufferRef* (*alloc)(void *opaque, int size_i32),
+                                   AVBufferRef* (*alloc)(void *opaque, int size),
                                    void (*pool_free)(void *opaque));
 
 /**

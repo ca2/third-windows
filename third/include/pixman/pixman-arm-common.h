@@ -42,7 +42,7 @@
  * omitted when doing a function call.
  *
  * Arguments 'src' and 'mask' contain either a pointer to the top left
- * pixel of the composited rectangle_i32 or a pixel color value depending
+ * pixel of the composited rectangle or a pixel color value depending
  * on the function type. In the case of just a color value (solid source
  * or mask), the corresponding stride argument is unused.
  */

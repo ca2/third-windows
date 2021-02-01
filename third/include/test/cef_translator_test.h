@@ -264,19 +264,19 @@ class CefTranslatorTest : public CefBaseRefCounted {
   // STRUCT VALUES
 
   ///
-  // Return a point_i32 value.
+  // Return a point value.
   ///
   /*--cef()--*/
   virtual CefPoint GetPoint() = 0;
 
   ///
-  // Set a point_i32 value.
+  // Set a point value.
   ///
   /*--cef()--*/
   virtual bool SetPoint(const CefPoint& val) = 0;
 
   ///
-  // Return a point_i32 value by out-param.
+  // Return a point value by out-param.
   ///
   /*--cef()--*/
   virtual void GetPointByRef(CefPoint& val) = 0;
@@ -287,13 +287,13 @@ class CefTranslatorTest : public CefBaseRefCounted {
   typedef std::vector<CefPoint> PointList;
 
   ///
-  // Set a point_i32 list vlaue.
+  // Set a point list vlaue.
   ///
   /*--cef()--*/
   virtual bool SetPointList(const std::vector<CefPoint>& val) = 0;
 
   ///
-  // Return a point_i32 list value by out-param.
+  // Return a point list value by out-param.
   ///
   /*--cef(count_func=val:GetPointListSize)--*/
   virtual bool GetPointListByRef(PointList& val) = 0;

@@ -41,7 +41,7 @@
  *
  * A basic DVC plugin implementation:
  * 1. DVCPluginEntry:
- *    The plugin entry point_i32, which creates and initializes a new IWTSPlugin
+ *    The plugin entry point, which creates and initializes a new IWTSPlugin
  *    instance
  * 2. IWTSPlugin.Initialize:
  *    Call IWTSVirtualChannelManager.CreateListener with a newly created

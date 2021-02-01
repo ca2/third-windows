@@ -111,7 +111,7 @@ extern "C" {
  * This allows the application to process the section immediately, while it is
  *  still in cache.
  * Note that the frame is decoded bottom to top, so \a _yfrag0 will steadily
- *  decrease with each call until it reaches 0, at which point_i32 the full frame
+ *  decrease with each call until it reaches 0, at which point the full frame
  *  is decoded.
  * The number of fragment rows made available in each call depends on the pixel
  *  format and the number of post-processing filters enabled, and may not even
@@ -236,13 +236,13 @@ extern int32_t th_decode_headerin(th_info *_info,th_comment *_tc,
  *  potentially even larger than the address space of a 32-bit machine, and
  *  creating a decoder context allocates the space for several frames of data.
  * If the allocation fails here, your program will crash, possibly at some
- *  future point_i32 because the OS kernel returned a valid memory range and will
+ *  future point because the OS kernel returned a valid memory range and will
  *  only fail when it tries to map the pages in it the first time they are
  *  used.
  * Even if it succeeds, you may experience a denial of service if the frame
- *  size_i32 is large enough to cause excessive paging.
+ *  size is large enough to cause excessive paging.
  * If you are integrating libtheora in a larger application where such things
- *  are undesirable, it is highly recommended that you check the frame size_i32 in
+ *  are undesirable, it is highly recommended that you check the frame size in
  *  \a _info before calling this function and refuse to decode streams where it
  *  is larger than some reasonable maximum.
  * libtheora will not check this for you, because there may be machines that
@@ -267,7 +267,7 @@ extern void th_setup_free(th_setup_info *_setup);
  *                See \ref decctlcodes "the list of available control codes"
  *                 for details.
  * \param _buf    The parameters for this control code.
- * \param _buf_sz The size_i32 of the parameter buffer.*/
+ * \param _buf_sz The size of the parameter buffer.*/
 extern int32_t th_decode_ctl(th_dec_ctx *_dec,int32_t _req,void *_buf,
  size_t _buf_sz);
 /**Submits a packet containing encoded video data to the decoder.

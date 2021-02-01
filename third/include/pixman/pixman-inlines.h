@@ -54,16 +54,16 @@
 #define REPEAT_NORMAL_MIN_WIDTH			64
 
 static force_inline pixman_bool_t
-repeat (pixman_repeat_t repeat, int *c, int size_i32)
+repeat (pixman_repeat_t repeat, int *c, int size)
 {
     if (repeat == PIXMAN_REPEAT_NONE)
     {
-	if (*c < 0 || *c >= size_i32)
+	if (*c < 0 || *c >= size)
 	    return FALSE;
     }
     else if (repeat == PIXMAN_REPEAT_NORMAL)
     {
-	while (*c >= size_i32)
+	while (*c >= size)
 	    *c -= size;
 	while (*c < 0)
 	    *c += size;
@@ -74,9 +74,9 @@ repeat (pixman_repeat_t repeat, int *c, int size_i32)
     }
     else /* REFLECT */
     {
-	*c = MOD (*c, size_i32 * 2);
-	if (*c >= size_i32)
-	    *c = size_i32 * 2 - *c - 1;
+	*c = MOD (*c, size * 2);
+	if (*c >= size)
+	    *c = size * 2 - *c - 1;
     }
     return TRUE;
 }
@@ -476,7 +476,7 @@ fast_composite_scaled_nearest  ## scale_func_name (pixman_implementation_t *imp,
      * transformed from destination space to source space */					\
     PIXMAN_IMAGE_GET_LINE (src_image, 0, 0, src_type_t, src_stride, src_first_line, 1);		\
 												\
-    /* reference point_i32 is the center of the pixel */						\
+    /* reference point is the center of the pixel */						\
     v.vector[0] = pixman_int_to_fixed (src_x) + pixman_fixed_1 / 2;				\
     v.vector[1] = pixman_int_to_fixed (src_y) + pixman_fixed_1 / 2;				\
     v.vector[2] = pixman_fixed_1;								\
@@ -835,7 +835,7 @@ bilinear_pad_repeat_get_scanline_bounds (int32_t         source_image_width,
  *                        pixels from the source buffer
  *  unit_x              - position increment needed to move to the next pair
  *                        of pixels
- *  max_vx              - image size_i32 as a fixed point_i32 value, can be used for
+ *  max_vx              - image size as a fixed point value, can be used for
  *                        implementing NORMAL repeat (when it is supported)
  *  zero_src            - boolean hint variable, which is set to TRUE when
  *                        all source pixels are fetched from zero padding
@@ -893,7 +893,7 @@ fast_composite_scaled_bilinear ## scale_func_name (pixman_implementation_t *imp,
      * transformed from destination space to source space */					\
     PIXMAN_IMAGE_GET_LINE (src_image, 0, 0, src_type_t, src_stride, src_first_line, 1);		\
 												\
-    /* reference point_i32 is the center of the pixel */						\
+    /* reference point is the center of the pixel */						\
     v.vector[0] = pixman_int_to_fixed (src_x) + pixman_fixed_1 / 2;				\
     v.vector[1] = pixman_int_to_fixed (src_y) + pixman_fixed_1 / 2;				\
     v.vector[2] = pixman_fixed_1;								\

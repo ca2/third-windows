@@ -240,8 +240,8 @@ typedef struct AVFrame {
     uint8_t *data[AV_NUM_DATA_POINTERS];
 
     /**
-     * For video, size_i32 in bytes of each picture line.
-     * For audio, size_i32 in bytes of each plane.
+     * For video, size in bytes of each picture line.
+     * For audio, size in bytes of each plane.
      *
      * For audio, only linesize[0] may be set. For planar audio, each channel
      * plane must be the same size.
@@ -251,7 +251,7 @@ typedef struct AVFrame {
      * Some code requires such alignment other code can be slower without
      * correct alignment, for yet other it makes no difference.
      *
-     * @note The linesize may be larger than the size_i32 of usable data -- there
+     * @note The linesize may be larger than the size of usable data -- there
      * may be extra padding present for performance reasons.
      */
     int linesize[AV_NUM_DATA_POINTERS];
@@ -259,12 +259,12 @@ typedef struct AVFrame {
     /**
      * pointers to the data planes/channels.
      *
-     * For video, this should simply point_i32 to data[].
+     * For video, this should simply point to data[].
      *
      * For planar audio, each channel has a separate data pointer, and
-     * linesize[0] contains the size_i32 of each channel buffer.
+     * linesize[0] contains the size of each channel buffer.
      * For packed audio, there is just one data pointer, and linesize[0]
-     * contains the total size_i32 of the buffer for all channels.
+     * contains the total size of the buffer for all channels.
      *
      * Note: Both data and extended_data should always be set in a valid frame,
      * but for planar audio with more channels that can fit in data,
@@ -275,10 +275,10 @@ typedef struct AVFrame {
     /**
      * @name Video dimensions
      * Video frames only. The coded dimensions (in pixels) of the video frame,
-     * i.e. the size_i32 of the rectangle_i32 that contains some well-defined values.
+     * i.e. the size of the rectangle that contains some well-defined values.
      *
      * @note The part of the frame intended for display/presentation is further
-     * restricted by the @ref cropping "Cropping rectangle_i32".
+     * restricted by the @ref cropping "Cropping rectangle".
      * @{
      */
     int width, height;
@@ -531,7 +531,7 @@ typedef struct AVFrame {
     int channels;
 
     /**
-     * size_i32 of the corresponding packet containing the compressed
+     * size of the corresponding packet containing the compressed
      * frame.
      * It is set to a negative value if unknown.
      * - encoding: unused
@@ -578,7 +578,7 @@ typedef struct AVFrame {
      * @anchor cropping
      * @name Cropping
      * Video frames only. The number of pixels to discard from the the
-     * top/bottom/left/right border of the frame to obtain the sub-rectangle_i32 of
+     * top/bottom/left/right border of the frame to obtain the sub-rectangle of
      * the frame intended for presentation.
      * @{
      */
@@ -745,7 +745,7 @@ void av_frame_move_ref(AVFrame *dst, AVFrame *src);
  *           cases.
  *
  * @param frame frame in which to store the new buffers.
- * @param align Required buffer size_i32 alignment. If equal to 0, alignment will be
+ * @param align Required buffer size alignment. If equal to 0, alignment will be
  *              chosen automatically for the current CPU. It is highly
  *              recommended to pass 0 here unless you know what you are doing.
  *
@@ -818,13 +818,13 @@ AVBufferRef *av_frame_get_plane_buffer(AVFrame *frame, int plane);
  *
  * @param frame a frame to which the side data should be added
  * @param type type of the added side data
- * @param size_i32 size_i32 of the side data
+ * @param size size of the side data
  *
  * @return newly added side data on success, NULL on error
  */
 AVFrameSideData *av_frame_new_side_data(AVFrame *frame,
                                         enum AVFrameSideDataType type,
-                                        int size_i32);
+                                        int size);
 
 /**
  * Add a new side data to a frame from an existing AVBufferRef

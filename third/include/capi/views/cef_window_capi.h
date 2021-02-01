@@ -53,7 +53,7 @@ extern "C" {
 ///
 // A Window is a top-level Window/widget in the Views hierarchy. By default it
 // will have a non-client area with title bar, icon and buttons that supports
-// moving and resizing. All size_i32 and position values are in density independent
+// moving and resizing. All size and position values are in density independent
 // pixels (DIP) unless otherwise indicated. Methods must be called on the
 // browser process UI thread unless otherwise indicated.
 ///
@@ -74,10 +74,10 @@ typedef struct _cef_window_t {
   void(CEF_CALLBACK* hide)(struct _cef_window_t* self);
 
   ///
-  // Sizes the Window to |size_i32| and centers it in the current display.
+  // Sizes the Window to |size| and centers it in the current display.
   ///
   void(CEF_CALLBACK* center_window)(struct _cef_window_t* self,
-                                    const cef_size_t* size_i32);
+                                    const cef_size_t* size);
 
   ///
   // Close the Window.

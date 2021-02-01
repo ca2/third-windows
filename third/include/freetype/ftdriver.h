@@ -228,7 +228,7 @@ FT_BEGIN_HEADER
    *
    *   Monochromatic rendering, exclusively used in the early days of
    *   TrueType by both Apple and Microsoft.  Microsoft's GDI interface
-   *   supported hinting of the right-side bearing point_i32, such that the
+   *   supported hinting of the right-side bearing point, such that the
    *   advance width could be non-linear.  Most often this was done to
    *   achieve some level of glyph symmetry.  To enable reasonable
    *   performance (e.g., not having to run hinting on all glyphs just to get
@@ -436,7 +436,7 @@ FT_BEGIN_HEADER
    *   by default).  Total consistency with the CFF driver is not achieved
    *   right now because the emboldening method differs and glyphs must be
    *   scaled down on the Y-axis to keep outline points inside their
-   *   precomputed blue zones.  The smaller the size_i32 (especially 9ppem and
+   *   precomputed blue zones.  The smaller the size (especially 9ppem and
    *   down), the higher the loss of emboldening versus the CFF driver.
    *
    *   Note that stem darkening is never applied if @FT_LOAD_NO_SCALE is set.
@@ -587,7 +587,7 @@ FT_BEGIN_HEADER
    *   There are many PCF fonts just called 'Fixed' which look completely
    *   different, and which have nothing to do with each other.  When
    *   selecting 'Fixed' in KDE or Gnome one gets results that appear rather
-   *   random, the style changes often if one changes the size_i32 and one cannot
+   *   random, the style changes often if one changes the size and one cannot
    *   select some fonts at all.  The improve this situation, the PCF module
    *   prepends the foundry name (plus a space) to the family name.  It also
    *   checks whether there are 'wide' characters; all put together, family

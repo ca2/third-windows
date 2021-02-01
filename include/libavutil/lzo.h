@@ -49,9 +49,9 @@
 /**
  * @brief Decodes LZO 1x compressed data.
  * @param out output buffer
- * @param outlen size_i32 of output buffer, number of bytes left are returned here
+ * @param outlen size of output buffer, number of bytes left are returned here
  * @param in input buffer
- * @param inlen size_i32 of input buffer, number of bytes left are returned here
+ * @param inlen size of input buffer, number of bytes left are returned here
  * @return 0 on success, otherwise a combination of the error flags above
  *
  * Make sure all buffers are appropriately padded, in must provide

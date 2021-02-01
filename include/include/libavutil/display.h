@@ -51,11 +51,11 @@
  *                                  | x y w |
  * @endcode
  *
- * All numbers are stored in native endianness, as 16.16 fixed-point_i32 values,
- * except for u, v and w, which are stored as 2.30 fixed-point_i32 values.
+ * All numbers are stored in native endianness, as 16.16 fixed-point values,
+ * except for u, v and w, which are stored as 2.30 fixed-point values.
  *
- * The transformation maps a point_i32 (p, q) in the source (pre-transformation)
- * frame to the point_i32 (p', q') in the destination (post-transformation) frame as
+ * The transformation maps a point (p, q) in the source (pre-transformation)
+ * frame to the point (p', q') in the destination (post-transformation) frame as
  * follows:
  *
  * @code{.unparsed}
@@ -82,7 +82,7 @@
  *         counterclockwise. The angle will be in range [-180.0, 180.0],
  *         or NaN if the matrix is singular.
  *
- * @note floating point_i32 numbers are inherently inexact, so callers are
+ * @note floating point numbers are inherently inexact, so callers are
  *       recommended to round the return value to nearest integer before use.
  */
 double av_display_rotation_get(const int32_t matrix[9]);

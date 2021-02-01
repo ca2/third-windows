@@ -193,9 +193,9 @@ extern "C" {
  * \retval TH_EIMPL   Not supported by this implementation in the current
  *                    encoding mode.*/
 #define TH_ENCCTL_SET_RATE_FLAGS (20)
-/**Sets the size_i32 of the bitrate management bit reservoir as a function
+/**Sets the size of the bitrate management bit reservoir as a function
  *  of number of frames.
- * The reservoir size_i32 affects how quickly bitrate management reacts to
+ * The reservoir size affects how quickly bitrate management reacts to
  *  instantaneous changes in the video complexity.
  * Larger reservoirs react more slowly, and provide better overall quality, but
  *  require more buffering by a client, adding more latency to live streams.
@@ -203,18 +203,18 @@ extern "C" {
  *  keyframes, subject to a minimum and maximum limit.
  * This call may be used to increase or decrease the reservoir, increasing or
  *  decreasing the allowed temporary variance in bitrate.
- * An implementation may impose some limits on the size_i32 of a reservoir it can
- *  handle, in which case the actual reservoir size_i32 may not be exactly what was
+ * An implementation may impose some limits on the size of a reservoir it can
+ *  handle, in which case the actual reservoir size may not be exactly what was
  *  requested.
  * The actual value set will be returned.
  *
- * \param[in]  _buf <tt>int32_t</tt>: Requested size_i32 of the reservoir measured in
+ * \param[in]  _buf <tt>int32_t</tt>: Requested size of the reservoir measured in
  *                   frames.
- * \param[out] _buf <tt>int32_t</tt>: The actual size_i32 of the reservoir set.
+ * \param[out] _buf <tt>int32_t</tt>: The actual size of the reservoir set.
  * \retval TH_EFAULT \a _enc_ctx or \a _buf is <tt>NULL</tt>.
  * \retval TH_EINVAL \a _buf_sz is not <tt>sizeof(int32_t)</tt>, or rate control
  *                    is not enabled.  The buffer has an implementation
- *                    defined minimum and maximum size_i32 and the value in _buf
+ *                    defined minimum and maximum size and the value in _buf
  *                    will be adjusted to match the actual value set.
  * \retval TH_EIMPL   Not supported by this implementation in the current
  *                    encoding mode.*/
@@ -224,7 +224,7 @@ extern "C" {
  *  bitrate must have already been specified to the encoder.
  * Although this does not have to be the exact rate that will be used in the
  *  second pass, closer values may produce better results.
- * The first call returns the size_i32 of the two-pass header data, along with some
+ * The first call returns the size of the two-pass header data, along with some
  *  placeholder content, and sets the encoder into pass 1 mode implicitly.
  * This call sets the encoder to pass 1 mode implicitly.
  * Then, a subsequent call must be made after each call to
@@ -255,7 +255,7 @@ extern "C" {
  *  bitrate must have already been specified to the encoder.
  * It sets the encoder to pass 2 mode implicitly; this cannot be disabled.
  * The encoder may require reading data from some or all of the frames in
- *  advance, depending on, e.g., the reservoir size_i32 used in the second pass.
+ *  advance, depending on, e.g., the reservoir size used in the second pass.
  * You must call this function repeatedly before each frame to provide data
  *  until either a) it fails to consume all of the data presented or b) all of
  *  the pass 1 data has been consumed.
@@ -417,7 +417,7 @@ extern th_enc_ctx *th_encode_alloc(const th_info *_info);
  *                See \ref encctlcodes "the list of available control codes"
  *                 for details.
  * \param _buf    The parameters for this control code.
- * \param _buf_sz The size_i32 of the parameter buffer.*/
+ * \param _buf_sz The size of the parameter buffer.*/
 extern int32_t th_encode_ctl(th_enc_ctx *_enc,int32_t _req,void *_buf,size_t _buf_sz);
 /**Outputs the next header packet.
  * This should be called repeatedly after encoder initialization until it
@@ -443,7 +443,7 @@ extern int32_t th_encode_flushheader(th_enc_ctx *_enc,
  * \param _ycbcr A buffer of Y'CbCr data to encode.
  * \retval 0         Success.
  * \retval TH_EFAULT \a _enc or \a _ycbcr is <tt>NULL</tt>.
- * \retval TH_EINVAL The buffer size_i32 does not match the frame size_i32 the encoder
+ * \retval TH_EINVAL The buffer size does not match the frame size the encoder
  *                    was initialized with, or encoding has already
  *                    completed.*/
 extern int32_t th_encode_ycbcr_in(th_enc_ctx *_enc,th_ycbcr_buffer _ycbcr);

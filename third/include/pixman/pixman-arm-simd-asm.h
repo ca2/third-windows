@@ -135,7 +135,7 @@
  .elseif numbytes == 1
         op&r&cond&b  WK&reg0, [base], #1
  .else
-  .error "unsupported size_i32: numbytes"
+  .error "unsupported size: numbytes"
  .endif
 .endm
 
@@ -151,7 +151,7 @@
  .elseif numbytes == 1
         str&cond&b  WK&reg0, [base, #-1]
  .else
-  .error "unsupported size_i32: numbytes"
+  .error "unsupported size: numbytes"
  .endif
 .endm
 
@@ -514,7 +514,7 @@
 .endm
 
 .macro switch_on_alignment  action, process_head, process_tail, process_inner_loop, exit_label
- /* Note that if we're reading the destination, it's already guaranteed to be aligned at this point_i32 */
+ /* Note that if we're reading the destination, it's already guaranteed to be aligned at this point */
  .if mask_bpp == 8 || mask_bpp == 16
         tst     MASK, #3
         bne     141f

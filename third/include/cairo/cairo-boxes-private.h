@@ -108,7 +108,7 @@ _cairo_boxes_for_each_box (cairo_boxes_t *boxes,
 			   void *data);
 
 cairo_private cairo_status_t
-_cairo_rasterise_polygon_to_boxes (cairo_polygon_t			*polygon_i32,
+_cairo_rasterise_polygon_to_boxes (cairo_polygon_t			*polygon,
 				   cairo_fill_rule_t			 fill_rule,
 				   cairo_boxes_t *boxes);
 

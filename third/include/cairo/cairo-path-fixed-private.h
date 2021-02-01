@@ -190,7 +190,7 @@ _cairo_path_fixed_fill_maybe_region (const cairo_path_fixed_t *path)
 	return 1;
 
     /* check whether the implicit close preserves the rectilinear property
-     * (the integer point_i32 property is automatically preserved)
+     * (the integer point property is automatically preserved)
      */
     return path->current_point.x == path->last_move_point.x ||
 	   path->current_point.y == path->last_move_point.y;

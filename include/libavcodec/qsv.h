@@ -85,7 +85,7 @@ typedef struct AVQSVContext {
      * the callers should make their own reference with av_buffer_ref() and free
      * it with av_buffer_unref() when it is no longer needed.
      *
-     * The buffer data is an nb_opaque_surfaces-size_f64 array of mfxFrameSurface1.
+     * The buffer data is an nb_opaque_surfaces-sized array of mfxFrameSurface1.
      */
     AVBufferRef *opaque_surfaces;
 

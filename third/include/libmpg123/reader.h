@@ -26,13 +26,13 @@ struct bufferchain
 {
 	struct buffy* first; /* The beginning of the chain. */
 	struct buffy* last;  /* The end...    of the chain. */
-	ssize_t size;        /* Aggregated size_i32 of all buffies. */
+	ssize_t size;        /* Aggregated size of all buffies. */
 	/* These positions are relative to buffer chain beginning. */
 	ssize_t pos;         /* Position in whole chain. */
-	ssize_t firstpos;    /* The point_i32 of return on non-forget() */
+	ssize_t firstpos;    /* The point of return on non-forget() */
 	/* The "real" filepos is fileoff + pos. */
 	off_t fileoff;       /* Beginning of chain is at this file offset. */
-	size_t bufblock;     /* Default (minimal) size_i32 of buffers. */
+	size_t bufblock;     /* Default (minimal) size of buffers. */
 	size_t pool_size;    /* Keep that many buffers in storage. */
 	size_t pool_fill;    /* That many buffers are there. */
 	/* A pool of buffers to re-use, if activated. It's a linked list that is worked on from the front. */
@@ -52,7 +52,7 @@ size_t bc_fill(struct bufferchain *bc);
 
 struct reader_data
 {
-	off_t filelen; /* total file length or total buffer size_i32 */
+	off_t filelen; /* total file length or total buffer size */
 	off_t filepos; /* position in file or position in buffer chain */
 	int   filept;
 	/* Custom opaque I/O handle from the client. */
@@ -88,7 +88,7 @@ struct reader
 	int     (*head_read)      (mpg123_handle *, unsigned long *newhead);    /* succ: TRUE, else <= 0 (FALSE or READER_MORE) */
 	int     (*head_shift)     (mpg123_handle *, unsigned long *head);       /* succ: TRUE, else <= 0 (FALSE or READER_MORE) */
 	off_t   (*skip_bytes)     (mpg123_handle *, off_t len);                 /* succ: >=0, else error or READER_MORE         */
-	int     (*read_frame_body)(mpg123_handle *, unsigned char *, int size_i32);
+	int     (*read_frame_body)(mpg123_handle *, unsigned char *, int size);
 	int     (*back_bytes)     (mpg123_handle *, off_t bytes);
 	int     (*seek_frame)     (mpg123_handle *, off_t num);
 	off_t   (*tell)           (mpg123_handle *);

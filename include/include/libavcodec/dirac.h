@@ -120,7 +120,7 @@ typedef struct AVDiracSeqHeader {
  *            and write it into this pointer. The caller must free it with
  *            av_free().
  * @param buf the data buffer
- * @param buf_size the size_i32 of the data buffer in bytes
+ * @param buf_size the size of the data buffer in bytes
  * @param log_ctx if non-NULL, this function will log errors here
  * @return 0 on success, a negative AVERROR code on failure
  */

@@ -110,7 +110,7 @@ FT_BEGIN_HEADER
    *   FreeType error code.  0~means success.
    *
    * @note:
-   *   A contour that contains a single point_i32 only is represented by a 'move
+   *   A contour that contains a single point only is represented by a 'move
    *   to' operation followed by 'line to' to the same point.  In most cases,
    *   it is best to filter this out before using the outline for stroking
    *   purposes (otherwise it would result in a visible dot when round caps
@@ -209,7 +209,7 @@ FT_BEGIN_HEADER
    *   FreeType error code.  0~means success.
    *
    * @note:
-   *   An empty outline, or an outline with a single point_i32 only is also
+   *   An empty outline, or an outline with a single point only is also
    *   valid.
    */
   FT_EXPORT( FT_Error )

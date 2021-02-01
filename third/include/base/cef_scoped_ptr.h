@@ -340,9 +340,9 @@ class scoped_ptr_impl {
 // Also like T*, scoped_ptr<T> is thread-compatible, and once you
 // dereference it, you get the thread safety guarantees of T.
 //
-// The size_i32 of scoped_ptr is small. On most compilers, when using the
+// The size of scoped_ptr is small. On most compilers, when using the
 // DefaultDeleter, sizeof(scoped_ptr<T>) == sizeof(T*). Custom deleters will
-// increase the size_i32 proportional to whatever state they need to have. See
+// increase the size proportional to whatever state they need to have. See
 // comments inside scoped_ptr_impl<> for details.
 //
 // Current implementation targets having a strict subset of  C++11's

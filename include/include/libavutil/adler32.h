@@ -47,7 +47,7 @@
  *
  * @param adler initial checksum value
  * @param buf   pointer to input buffer
- * @param len   size_i32 of input buffer
+ * @param len   size of input buffer
  * @return      updated checksum
  */
 unsigned long av_adler32_update(unsigned long adler, const uint8_t *buf,

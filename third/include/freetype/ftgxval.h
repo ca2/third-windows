@@ -201,7 +201,7 @@ FT_BEGIN_HEADER
    *      @FT_VALIDATE_GXXXX for possible values.
    *
    *    table_length ::
-   *      The size_i32 of the `tables` array.  Normally, @FT_VALIDATE_GX_LENGTH
+   *      The size of the `tables` array.  Normally, @FT_VALIDATE_GX_LENGTH
    *      should be passed.
    *
    * @output:

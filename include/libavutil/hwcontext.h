@@ -183,13 +183,13 @@ typedef struct AVHWFramesContext {
      *
      * This field may be NULL, then libavutil will attempt to allocate a pool
      * internally. Note that certain device types enforce pools allocated at
-     * fixed size_i32 (frame count), which cannot be extended dynamically. In such a
+     * fixed size (frame count), which cannot be extended dynamically. In such a
      * case, initial_pool_size must be set appropriately.
      */
     AVBufferPool *pool;
 
     /**
-     * Initial size_i32 of the frame pool. If a device type does not support
+     * Initial size of the frame pool. If a device type does not support
      * dynamically resizing the pool, then this is also the maximum pool size.
      *
      * May be set by the caller before calling av_hwframe_ctx_init(). Must be
@@ -378,7 +378,7 @@ int av_hwframe_get_buffer(AVBufferRef *hwframe_ctx, AVFrame *frame, int flags);
  *
  * The two frames must have matching allocated dimensions (i.e. equal to
  * AVHWFramesContext.width/height), since not all device types support
- * transferring a sub-rectangle_i32 of the whole surface. The display dimensions
+ * transferring a sub-rectangle of the whole surface. The display dimensions
  * (i.e. AVFrame.width/height) may be smaller than the allocated dimensions, but
  * also have to be equal for both frames. When the display dimensions are
  * smaller than the allocated dimensions, the content of the padding in the
@@ -444,14 +444,14 @@ typedef struct AVHWFramesConstraints {
     enum AVPixelFormat *valid_sw_formats;
 
     /**
-     * The minimum size_i32 of frames in this hw_frames_ctx.
+     * The minimum size of frames in this hw_frames_ctx.
      * (Zero if not known.)
      */
     int min_width;
     int min_height;
 
     /**
-     * The maximum size_i32 of frames in this hw_frames_ctx.
+     * The maximum size of frames in this hw_frames_ctx.
      * (INT_MAX if not known / no limit.)
      */
     int max_width;

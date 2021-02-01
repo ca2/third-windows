@@ -13,7 +13,7 @@
 	the index is full, every second position is trown away to make
 	space. Next time it is full, the same happens. And so on.
 	In this manner we maintain a good resolution with the given
-	maximum index size_i32 while covering the whole stream.
+	maximum index size while covering the whole stream.
 
 	copyright 2007-8 by the mpg123 project - free software under the terms of the LGPL 2.1
 	see COPYING and AUTHORS files in distribution or http://mpg123.org
@@ -26,7 +26,7 @@
 struct frame_index
 {
 	off_t *data; /* actual data, the frame positions */
-	off_t  step; /* advancement in frame number per index point_i32 */
+	off_t  step; /* advancement in frame number per index point */
 	off_t  next; /* frame offset supposed to come next into the index */
 	size_t size; /* total number of possible entries */
 	size_t fill; /* number of used entries */
@@ -35,7 +35,7 @@ struct frame_index
 
 /* The condition for a framenum to be appended to the index. 
   if(FI_NEXT(fr->index, fr->num)) fi_add(offset); */
-#define FI_NEXT(fi, framenum) ((fi).size_i32 && framenum == (fi).next)
+#define FI_NEXT(fi, framenum) ((fi).size && framenum == (fi).next)
 
 /* Initialize stuff, set things to zero and NULL... */
 void fi_init(struct frame_index *fi);
@@ -43,7 +43,7 @@ void fi_init(struct frame_index *fi);
 void fi_exit(struct frame_index *fi);
 
 /* Prepare a given size, preserving current fill, if possible.
-   If the new size_i32 is smaller than fill, the entry density is reduced.
+   If the new size is smaller than fill, the entry density is reduced.
    Return 0 on success. */
 int fi_resize(struct frame_index *fi, size_t newsize);
 

@@ -46,9 +46,9 @@
 #include "cairo-error-private.h"
 #include "cairo-types-private.h"
 
-/* The glyph buffer size_i32 is based on the expected maximum glyphs in a
+/* The glyph buffer size is based on the expected maximum glyphs in a
  * line so that an entire line can be emitted in as one string. If the
- * glyphs in a line exceeds this size_i32 the only downside is the slight
+ * glyphs in a line exceeds this size the only downside is the slight
  * overhead of emitting two strings.
  */
 #define PDF_GLYPH_BUFFER_SIZE 200

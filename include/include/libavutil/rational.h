@@ -38,8 +38,8 @@
  * @ingroup lavu_math
  * Rational number calculation.
  *
- * While rational numbers can be expressed as floating-point_i32 numbers, the
- * conversion process is a lossy one, so are floating-point_i32 operations. On the
+ * While rational numbers can be expressed as floating-point numbers, the
+ * conversion process is a lossy one, so are floating-point operations. On the
  * other hand, the nature of FFmpeg demands highly accurate calculation of
  * timestamps. This set of rational number utilities serves as a generic
  * interface for manipulating rational numbers as pairs of numerators and
@@ -98,7 +98,7 @@ static inline int av_cmp_q(AVRational a, AVRational b){
 /**
  * Convert an AVRational to a `double`.
  * @param a AVRational to convert
- * @return `a` in floating-point_i32 form
+ * @return `a` in floating-point form
  * @see av_d2q()
  */
 static inline double av_q2d(AVRational a){
@@ -163,7 +163,7 @@ static av_always_inline AVRational av_inv_q(AVRational q)
 }
 
 /**
- * Convert a double precision floating point_i32 number to a rational.
+ * Convert a double precision floating point number to a rational.
  *
  * In case of infinity, the returned value is expressed as `{1, 0}` or
  * `{-1, 0}` depending on the sign.
@@ -197,11 +197,11 @@ int av_nearer_q(AVRational q, AVRational q1, AVRational q2);
 int av_find_nearest_q_idx(AVRational q, const AVRational* q_list);
 
 /**
- * Convert an AVRational to a IEEE 32-bit `float` expressed in fixed-point_i32
+ * Convert an AVRational to a IEEE 32-bit `float` expressed in fixed-point
  * format.
  *
  * @param q Rational to be converted
- * @return Equivalent floating-point_i32 value, expressed as an unsigned 32-bit
+ * @return Equivalent floating-point value, expressed as an unsigned 32-bit
  *         integer.
  * @note The returned value is platform-indepedant.
  */

@@ -154,7 +154,7 @@ typedef struct{
  * The chroma planes may be decimated by a factor of two in either
  *  direction, as indicated by th_info#pixel_fmt.
  * The width and height of the Y' plane must be multiples of 16.
- * They may need to be cropped for display, using the rectangle_i32
+ * They may need to be cropped for display, using the rectangle
  *  specified by th_info#pic_x, th_info#pic_y, th_info#pic_width,
  *  and th_info#pic_height.
  * All samples are 8 bits.
@@ -179,7 +179,7 @@ typedef th_img_plane th_ycbcr_buffer[3];
  *
  * Encoded Theora frames must be a multiple of 16 in size;
  *  this is what the #frame_width and #frame_height members represent.
- * To handle arbitrary picture sizes, a crop rectangle_i32 is specified in the
+ * To handle arbitrary picture sizes, a crop rectangle is specified in the
  *  #pic_x, #pic_y, #pic_width and #pic_height members.
  *
  * All frame buffers contain pointers to the full, padded frame.
@@ -302,7 +302,7 @@ typedef struct{
  *  the 'comment' header packet.
  * The comment header is meant to be used much like someone jotting a quick
  *  note on the label of a video.
- * It should be a int16_t, to the point_i32 text note that can be more than a couple
+ * It should be a int16_t, to the point text note that can be more than a couple
  *  words, but not more than a int16_t paragraph.
  *
  * The metadata is stored as a series of (tag, value) pairs, in
@@ -341,7 +341,7 @@ typedef uchar th_quant_base[64];
 typedef struct{
   /**The number of ranges in the set.*/
   int32_t                  nranges;
-  /**The size_i32 of each of the #nranges ranges.
+  /**The size of each of the #nranges ranges.
      These must sum to 63.*/
   const int32_t           *sizes;
   /**#nranges <tt>+1</tt> base matrices.
@@ -380,7 +380,7 @@ typedef struct{
        matrices are stored, and the rest are linearly interpolated.
       This is done as follows.
       For each \a qti and \a pli, a series of \a n \a qi ranges is defined.
-      The size_i32 of each \a qi range can vary arbitrarily, but they must sum to
+      The size of each \a qi range can vary arbitrarily, but they must sum to
        63.
       Then, <tt>n+1</tt> matrices are specified, one for each endpoint of the
        ranges.

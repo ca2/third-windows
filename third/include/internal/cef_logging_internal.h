@@ -48,7 +48,7 @@ CEF_EXPORT int cef_get_min_log_level();
 
 ///
 // Gets the current vlog level for the given file (usually taken from
-// __FILE__). Note that |N| is the size_i32 *with* the null terminator.
+// __FILE__). Note that |N| is the size *with* the null terminator.
 ///
 CEF_EXPORT int cef_get_vlog_level(const char* file_start, size_t N);
 

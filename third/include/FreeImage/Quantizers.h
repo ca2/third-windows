@@ -2,7 +2,7 @@
 // Quantizer objects and functions
 //
 // Design and implementation by:
-// - Hervï¿½ Drolon <drolon@infonie.fr>
+// - Hervé Drolon <drolon@infonie.fr>
 // - Carsten Klein (cklein05@users.sourceforge.net)
 //
 // This file is part of FreeImage 3
@@ -263,11 +263,11 @@ public:
    FIBITMAP* Quantize(FIBITMAP *dib, int ReserveSize, RGBQUAD *ReservePalette);
 
 protected:
-   /** The maximum size_i32 of a palette. */
+   /** The maximum size of a palette. */
    static const unsigned MAX_SIZE = 256;
 
    /**
-    * The size_i32 of the hash table. Must be a power of 2. By sizing it
+    * The size of the hash table. Must be a power of 2. By sizing it
     * MAX_SIZE * 2, we ensure the load factor not to exceed 0.5 at any
     * time, since we will have MAX_SIZE entries at most.
     */
@@ -294,7 +294,7 @@ protected:
    MapEntry *m_map;
 
    /**
-    * The current size_i32 of the newly created palette. Since the provided
+    * The current size of the newly created palette. Since the provided
     * reserve palette could contain duplicates, this is not necessarily
     * the number of entries in the hash table. Initialized to zero.
     */
@@ -342,9 +342,9 @@ protected:
     * Adds the specified number of entries of the specified reserve
     * palette to the newly created palette.
     * @param *palette a pointer to the reserve palette to copy from
-    * @param size_i32 the number of entries to copy
+    * @param size the number of entries to copy
     */
-   void AddReservePalette(const void *palette, unsigned size_i32);
+   void AddReservePalette(const void *palette, unsigned size);
 
    /**
     * Copies the newly created palette into the specified destination

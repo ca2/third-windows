@@ -20,14 +20,14 @@
 #include <mysql/psi/mysql_thread.h>
 
 /**
-  A simple wrapper around a ::mutex:
-  Grabs the ::mutex in the CTOR, releases it in the DTOR.
-  The ::mutex may be NULL, in which case this is a no-op.
+  A simple wrapper around a mutex:
+  Grabs the mutex in the CTOR, releases it in the DTOR.
+  The mutex may be NULL, in which case this is a no-op.
 */
 class Mutex_lock
 {
 public:
-  explicit Mutex_lock(mysql_mutex_t *::mutex) : m_mutex(::mutex)
+  explicit Mutex_lock(mysql_mutex_t *mutex) : m_mutex(mutex)
   {
     if (m_mutex)
       mysql_mutex_lock(m_mutex);

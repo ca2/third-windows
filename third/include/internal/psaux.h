@@ -98,7 +98,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    cursor    :: The current top of the grow heap within its block.    */
   /*                                                                       */
-  /*    capacity  :: The current size_i32 of the heap block.  Increments by    */
+  /*    capacity  :: The current size of the heap block.  Increments by    */
   /*                 1kByte chunks.                                        */
   /*                                                                       */
   /*    init      :: Set to 0xDEADBEEF if `elements' and `lengths' have    */
@@ -121,7 +121,7 @@ FT_BEGIN_HEADER
   {
     FT_Byte*           block;          /* current memory block           */
     FT_Offset          cursor;         /* current cursor in memory block */
-    FT_Offset          capacity;       /* current size_i32 of memory block   */
+    FT_Offset          capacity;       /* current size of memory block   */
     FT_Long            init;
 
     FT_Int             max_elems;
@@ -228,7 +228,7 @@ FT_BEGIN_HEADER
     T1_FieldType        type;         /* type of field                  */
     T1_Field_ParseFunc  reader;
     FT_UInt             offset;       /* offset of field in object      */
-    FT_Byte             size;         /* size_i32 of field in bytes         */
+    FT_Byte             size;         /* size of field in bytes         */
     FT_UInt             array_max;    /* maximum number of elements for */
                                       /* array                          */
     FT_UInt             count_offset; /* offset of element count for    */

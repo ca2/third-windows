@@ -226,14 +226,14 @@ enum AVOptionType{
     AV_OPT_TYPE_FLOAT,
     AV_OPT_TYPE_STRING,
     AV_OPT_TYPE_RATIONAL,
-    AV_OPT_TYPE_BINARY,  ///< offset must point_i32 to a pointer immediately followed by an int for the length
+    AV_OPT_TYPE_BINARY,  ///< offset must point to a pointer immediately followed by an int for the length
     AV_OPT_TYPE_DICT,
     AV_OPT_TYPE_UINT64,
     AV_OPT_TYPE_CONST,
-    AV_OPT_TYPE_IMAGE_SIZE, ///< offset must point_i32 to two consecutive integers
+    AV_OPT_TYPE_IMAGE_SIZE, ///< offset must point to two consecutive integers
     AV_OPT_TYPE_PIXEL_FMT,
     AV_OPT_TYPE_SAMPLE_FMT,
-    AV_OPT_TYPE_VIDEO_RATE, ///< offset must point_i32 to AVRational
+    AV_OPT_TYPE_VIDEO_RATE, ///< offset must point to AVRational
     AV_OPT_TYPE_DURATION,
     AV_OPT_TYPE_COLOR,
     AV_OPT_TYPE_CHANNEL_LAYOUT,
@@ -500,7 +500,7 @@ int av_opt_set_dict2(void *obj, struct AVDictionary **options, int search_flags)
  * Extract a key-value pair from the beginning of a string.
  *
  * @param ropts        pointer to the options string, will be updated to
- *                     point_i32 to the rest of the string (one of the pairs_sep
+ *                     point to the rest of the string (one of the pairs_sep
  *                     or the final NUL)
  * @param key_val_sep  a 0-terminated list of characters used to separate
  *                     key from value, for example '='

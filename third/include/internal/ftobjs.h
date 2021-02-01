@@ -264,7 +264,7 @@ FT_BEGIN_HEADER
   {                                                      \
     FT_UNUSED( library );                                \
                                                          \
-    clazz->size_i32             = size_;                     \
+    clazz->size             = size_;                     \
     clazz->init             = init_;                     \
     clazz->done             = done_;                     \
     clazz->char_index       = char_index_;               \
@@ -563,7 +563,7 @@ FT_BEGIN_HEADER
 #define FT_SLOT_FACE( x )     FT_SLOT( x )->face
 
 #define FT_FACE_SLOT( x )     FT_FACE( x )->glyph
-#define FT_FACE_SIZE( x )     FT_FACE( x )->size_i32
+#define FT_FACE_SIZE( x )     FT_FACE( x )->size
 
 
   /*************************************************************************/
@@ -626,13 +626,13 @@ FT_BEGIN_HEADER
                      FT_ULong  strike_index );
 
 
-  /* Set the metrics according to a size_i32 request. */
+  /* Set the metrics according to a size request. */
   FT_BASE( void )
   FT_Request_Metrics( FT_Face          face,
                       FT_Size_Request  req );
 
 
-  /* Match a size_i32 request against `available_sizes'. */
+  /* Match a size request against `available_sizes'. */
   FT_BASE( FT_Error )
   FT_Match_Size( FT_Face          face,
                  FT_Size_Request  req,
@@ -656,7 +656,7 @@ FT_BEGIN_HEADER
   /* Allocate a new bitmap buffer in a glyph slot. */
   FT_BASE( FT_Error )
   ft_glyphslot_alloc_bitmap( FT_GlyphSlot  slot,
-                             FT_ULong      size_i32 );
+                             FT_ULong      size );
 
 
   /* Set the bitmap buffer in a glyph slot to a given pointer.  The buffer */
@@ -825,7 +825,7 @@ FT_BEGIN_HEADER
   /*    raster_pool      :: The raster object's render pool.  This can     */
   /*                        ideally be changed dynamically at run-time.    */
   /*                                                                       */
-  /*    raster_pool_size :: The size_i32 of the render pool in bytes.          */
+  /*    raster_pool_size :: The size of the render pool in bytes.          */
   /*                                                                       */
   /*    debug_hooks      :: XXX                                            */
   /*                                                                       */
@@ -868,7 +868,7 @@ FT_BEGIN_HEADER
 
     FT_Byte*           raster_pool;      /* scan-line conversion */
                                          /* render pool          */
-    FT_ULong           raster_pool_size; /* size_i32 of render pool in bytes */
+    FT_ULong           raster_pool_size; /* size of render pool in bytes */
 
     FT_DebugHook_Func  debug_hooks[4];
 

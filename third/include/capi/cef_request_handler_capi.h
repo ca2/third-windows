@@ -275,9 +275,9 @@ typedef struct _cef_request_handler_t {
 
   ///
   // Called on the IO thread when JavaScript requests a specific storage quota
-  // size_i32 via the webkitStorageInfo.requestQuota function. |origin_url| is the
+  // size via the webkitStorageInfo.requestQuota function. |origin_url| is the
   // origin of the page making the request. |new_size| is the requested quota
-  // size_i32 in bytes. Return true (1) to continue the request and call
+  // size in bytes. Return true (1) to continue the request and call
   // cef_request_tCallback::cont() either in this function or at a later time to
   // grant or deny the request. Return false (0) to cancel the request
   // immediately.

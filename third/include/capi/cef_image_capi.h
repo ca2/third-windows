@@ -49,10 +49,10 @@ extern "C" {
 
 ///
 // Container for a single image represented at different scale factors. All
-// image representations should be the same size_i32 in density independent pixel
+// image representations should be the same size in density independent pixel
 // (DIP) units. For example, if the image at scale factor 1.0 is 100x100 pixels
 // then the image at scale factor 2.0 should be 200x200 pixels -- both images
-// will display with a DIP size_i32 of 100x100 units. The functions of this
+// will display with a DIP size of 100x100 units. The functions of this
 // structure must be called on the browser process UI thread.
 ///
 typedef struct _cef_image_t {
@@ -76,7 +76,7 @@ typedef struct _cef_image_t {
   ///
   // Add a bitmap image representation for |scale_factor|. Only 32-bit RGBA/BGRA
   // formats are supported. |pixel_width| and |pixel_height| are the bitmap
-  // representation size_i32 in pixel coordinates. |pixel_data| is the array of
+  // representation size in pixel coordinates. |pixel_data| is the array of
   // pixel data and should be |pixel_width| x |pixel_height| x 4 bytes in size.
   // |color_type| and |alpha_type| values specify the pixel format.
   ///
@@ -91,7 +91,7 @@ typedef struct _cef_image_t {
 
   ///
   // Add a PNG image representation for |scale_factor|. |png_data| is the image
-  // data of size_i32 |png_data_size|. Any alpha transparency in the PNG data will
+  // data of size |png_data_size|. Any alpha transparency in the PNG data will
   // be maintained.
   ///
   int(CEF_CALLBACK* add_png)(struct _cef_image_t* self,
@@ -101,7 +101,7 @@ typedef struct _cef_image_t {
 
   ///
   // Create a JPEG image representation for |scale_factor|. |jpeg_data| is the
-  // image data of size_i32 |jpeg_data_size|. The JPEG format does not support
+  // image data of size |jpeg_data_size|. The JPEG format does not support
   // transparency so the alpha byte will be set to 0xFF for all pixels.
   ///
   int(CEF_CALLBACK* add_jpeg)(struct _cef_image_t* self,
@@ -136,7 +136,7 @@ typedef struct _cef_image_t {
   // Returns information for the representation that most closely matches
   // |scale_factor|. |actual_scale_factor| is the actual scale factor for the
   // representation. |pixel_width| and |pixel_height| are the representation
-  // size_i32 in pixel coordinates. Returns true (1) on success.
+  // size in pixel coordinates. Returns true (1) on success.
   ///
   int(CEF_CALLBACK* get_representation_info)(struct _cef_image_t* self,
                                              float scale_factor,
@@ -148,7 +148,7 @@ typedef struct _cef_image_t {
   // Returns the bitmap representation that most closely matches |scale_factor|.
   // Only 32-bit RGBA/BGRA formats are supported. |color_type| and |alpha_type|
   // values specify the desired output pixel format. |pixel_width| and
-  // |pixel_height| are the output representation size_i32 in pixel coordinates.
+  // |pixel_height| are the output representation size in pixel coordinates.
   // Returns a cef_binary_value_t containing the pixel data on success or NULL
   // on failure.
   ///
@@ -164,7 +164,7 @@ typedef struct _cef_image_t {
   // Returns the PNG representation that most closely matches |scale_factor|. If
   // |with_transparency| is true (1) any alpha transparency in the image will be
   // represented in the resulting PNG data. |pixel_width| and |pixel_height| are
-  // the output representation size_i32 in pixel coordinates. Returns a
+  // the output representation size in pixel coordinates. Returns a
   // cef_binary_value_t containing the PNG image data on success or NULL on
   // failure.
   ///
@@ -180,7 +180,7 @@ typedef struct _cef_image_t {
   // |quality| determines the compression level with 0 == lowest and 100 ==
   // highest. The JPEG format does not support alpha transparency and the alpha
   // channel, if any, will be discarded. |pixel_width| and |pixel_height| are
-  // the output representation size_i32 in pixel coordinates. Returns a
+  // the output representation size in pixel coordinates. Returns a
   // cef_binary_value_t containing the JPEG image data on success or NULL on
   // failure.
   ///

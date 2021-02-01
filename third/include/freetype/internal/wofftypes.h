@@ -148,7 +148,7 @@ FT_BEGIN_HEADER
    * @note:
    *   We don't care about the fields `reserved`, `majorVersion` and
    *   `minorVersion`, so they are not included.  The `totalSfntSize` field
-   *   does not necessarily represent the actual size_i32 of the uncompressed
+   *   does not necessarily represent the actual size of the uncompressed
    *   SFNT font stream, so that is used as a reference value instead.
    */
   typedef struct  WOFF2_HeaderRec_
@@ -165,11 +165,11 @@ FT_BEGIN_HEADER
     FT_ULong   privOffset;
     FT_ULong   privLength;
 
-    FT_ULong   uncompressed_size;    /* uncompressed brotli stream size_i32 */
+    FT_ULong   uncompressed_size;    /* uncompressed brotli stream size */
     FT_ULong   compressed_offset;    /* compressed stream offset        */
     FT_ULong   header_version;       /* version of original TTC Header  */
     FT_UShort  num_fonts;            /* number of fonts in TTC          */
-    FT_ULong   actual_sfnt_size;     /* actual size_i32 of sfnt stream      */
+    FT_ULong   actual_sfnt_size;     /* actual size of sfnt stream      */
 
     WOFF2_TtcFont  ttc_fonts;        /* metadata for fonts in a TTC     */
 
@@ -265,7 +265,7 @@ FT_BEGIN_HEADER
    *   offset ::
    *     Offset of the substream relative to uncompressed table stream.
    *
-   *   size_i32 ::
+   *   size ::
    *     Size of the substream.
    */
   typedef struct  WOFF2_SubstreamRec_
@@ -283,7 +283,7 @@ FT_BEGIN_HEADER
    *   WOFF2_PointRec
    *
    * @description:
-   *   This structure stores information about a point_i32 in the transformed
+   *   This structure stores information about a point in the transformed
    *   'glyf' table in a WOFF2 stream.
    *
    * @fields:
@@ -294,7 +294,7 @@ FT_BEGIN_HEADER
    *     y-coordinate of point.
    *
    *   on_curve ::
-   *     Set if point_i32 is on-curve.
+   *     Set if point is on-curve.
    */
   typedef struct  WOFF2_PointRec_
   {

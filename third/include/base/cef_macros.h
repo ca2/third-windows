@@ -103,12 +103,12 @@ char (&ArraySizeHelper(const T (&array)[N]))[N];
 
 // The COMPILE_ASSERT macro can be used to verify that a compile time
 // expression is true. For example, you could use it to verify the
-// size_i32 of a static array:
+// size of a static array:
 //
 //   COMPILE_ASSERT(ARRAYSIZE_UNSAFE(content_type_names) == CONTENT_NUM_TYPES,
 //                  content_type_names_incorrect_size);
 //
-// or to make sure a struct is smaller than a certain size_i32:
+// or to make sure a struct is smaller than a certain size:
 //
 //   COMPILE_ASSERT(sizeof(foo) < 128, foo_too_large);
 //
@@ -168,7 +168,7 @@ struct CompileAssert {};
 //   (They seem to think the ">" in "5 > 0" marks the end of the
 //   template argument list.)
 //
-// - The array size_i32 is (bool(expr) ? 1 : -1), instead of simply
+// - The array size is (bool(expr) ? 1 : -1), instead of simply
 //
 //     ((expr) ? 1 : -1).
 //

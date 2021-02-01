@@ -201,7 +201,7 @@ void set_max_hhmmss(MYSQL_TIME *tm);
   Required buffer length for my_time_to_str, my_date_to_str,
   my_datetime_to_str and TIME_to_string functions. Note, that the
   caller is still responsible to check that given TIME structure
-  has values in valid ranges, otherwise size_i32 of the buffer could
+  has values in valid ranges, otherwise size of the buffer could
   be not enough. We also rely on the fact that even wrong values
   sent using binary protocol fit in this buffer.
 */
@@ -219,7 +219,7 @@ int my_timeval_to_str(const struct timeval *tm, char *to, uint dec);
 
   'interval_type' must be sorted so that simple intervals comes first,
   ie year, quarter, month, week, day, hour, etc. The order based on
-  interval size_i32 is also important and the intervals should be kept in a
+  interval size is also important and the intervals should be kept in a
   large to smaller order. (get_interval_value() depends on this)
  
   Note: If you change the order of elements in this enum you should fix 

@@ -35,7 +35,7 @@ FT_BEGIN_HEADER
   /*    FT_SqrtFixed                                                       */
   /*                                                                       */
   /* <Description>                                                         */
-  /*    Computes the square root of a 16.16 fixed-point_i32 value.             */
+  /*    Computes the square root of a 16.16 fixed-point value.             */
   /*                                                                       */
   /* <Input>                                                               */
   /*    x :: The value to compute the root for.                            */
@@ -145,7 +145,7 @@ FT_BEGIN_HEADER
 
   /*
    *  Return sqrt(x*x+y*y), which is the same as `FT_Vector_Length' but uses
-   *  two fixed-point_i32 arguments instead.
+   *  two fixed-point arguments instead.
    */
   FT_BASE( FT_Fixed )
   FT_Hypot( FT_Fixed  x,

@@ -51,10 +51,10 @@ void av_image_fill_max_pixsteps(int max_pixsteps[4], int max_pixstep_comps[4],
                                 const AVPixFmtDescriptor *pixdesc);
 
 /**
- * Compute the size_i32 of an image line with format pix_fmt and width
+ * Compute the size of an image line with format pix_fmt and width
  * width for the plane plane.
  *
- * @return the computed size_i32 in bytes
+ * @return the computed size in bytes
  */
 int av_image_get_linesize(enum AVPixelFormat pix_fmt, int width, int plane);
 
@@ -75,20 +75,20 @@ int av_image_fill_linesizes(int linesizes[4], enum AVPixelFormat pix_fmt, int wi
  * @param ptr the pointer to a buffer which will contain the image
  * @param linesizes the array containing the linesize for each
  * plane, should be filled by av_image_fill_linesizes()
- * @return the size_i32 in bytes required for the image buffer, a negative
+ * @return the size in bytes required for the image buffer, a negative
  * error code in case of failure
  */
 int av_image_fill_pointers(uint8_t *data[4], enum AVPixelFormat pix_fmt, int height,
                            uint8_t *ptr, const int linesizes[4]);
 
 /**
- * Allocate an image with size_i32 w and h and pixel format pix_fmt, and
+ * Allocate an image with size w and h and pixel format pix_fmt, and
  * fill pointers and linesizes accordingly.
  * The allocated image buffer has to be freed by using
  * av_freep(&pointers[0]).
  *
- * @param align the value to use for buffer size_i32 alignment
- * @return the size_i32 in bytes required for the image buffer, a negative
+ * @param align the value to use for buffer size alignment
+ * @return the size in bytes required for the image buffer, a negative
  * error code in case of failure
  */
 int av_image_alloc(uint8_t *pointers[4], int linesizes[4],
@@ -132,7 +132,7 @@ void av_image_copy(uint8_t *dst_data[4], int dst_linesizes[4],
  * @note The linesize parameters have the type ptrdiff_t here, while they are
  *       int for av_image_copy().
  * @note On x86, the linesizes currently need to be aligned to the cacheline
- *       size_i32 (i.e. 64) to get improved performance.
+ *       size (i.e. 64) to get improved performance.
  */
 void av_image_copy_uc_from(uint8_t *dst_data[4],       const ptrdiff_t dst_linesizes[4],
                            const uint8_t *src_data[4], const ptrdiff_t src_linesizes[4],
@@ -149,7 +149,7 @@ void av_image_copy_uc_from(uint8_t *dst_data[4],       const ptrdiff_t dst_lines
  * pointers will be set pointing to the different picture planes and
  * the line sizes of the different planes will be stored in the
  * lines_sizes array. Call with src == NULL to get the required
- * size_i32 for the src buffer.
+ * size for the src buffer.
  *
  * To allocate the buffer and fill in the dst_data and dst_linesize in
  * one call, use av_image_alloc().
@@ -161,7 +161,7 @@ void av_image_copy_uc_from(uint8_t *dst_data[4],       const ptrdiff_t dst_lines
  * @param width         the width of the image in pixels
  * @param height        the height of the image in pixels
  * @param align         the value used in src for linesize alignment
- * @return the size_i32 in bytes required for src, a negative error code
+ * @return the size in bytes required for src, a negative error code
  * in case of failure
  */
 int av_image_fill_arrays(uint8_t *dst_data[4], int dst_linesize[4],
@@ -169,25 +169,25 @@ int av_image_fill_arrays(uint8_t *dst_data[4], int dst_linesize[4],
                          enum AVPixelFormat pix_fmt, int width, int height, int align);
 
 /**
- * Return the size_i32 in bytes of the amount of data required to store an
+ * Return the size in bytes of the amount of data required to store an
  * image with the given parameters.
  *
  * @param pix_fmt  the pixel format of the image
  * @param width    the width of the image in pixels
  * @param height   the height of the image in pixels
  * @param align    the assumed linesize alignment
- * @return the buffer size_i32 in bytes, a negative error code in case of failure
+ * @return the buffer size in bytes, a negative error code in case of failure
  */
 int av_image_get_buffer_size(enum AVPixelFormat pix_fmt, int width, int height, int align);
 
 /**
  * Copy image data from an image into a buffer.
  *
- * av_image_get_buffer_size() can be used to compute the required size_i32
+ * av_image_get_buffer_size() can be used to compute the required size
  * for the buffer to fill.
  *
  * @param dst           a buffer into which picture data will be copied
- * @param dst_size      the size_i32 in bytes of dst
+ * @param dst_size      the size in bytes of dst
  * @param src_data      pointers containing the source image data
  * @param src_linesize  linesizes for the image in src_data
  * @param pix_fmt       the pixel format of the source image
@@ -232,7 +232,7 @@ int av_image_check_size2(unsigned int w, unsigned int h, int64_t max_pixels, enu
  * Check if the given sample aspect ratio of an image is valid.
  *
  * It is considered invalid if the denominator is 0 or if applying the ratio
- * to the image size_i32 would make the smaller dimension less than 1. If the
+ * to the image size would make the smaller dimension less than 1. If the
  * sar numerator is 0, it is considered unknown and will return as valid.
  *
  * @param w width of the image
@@ -244,9 +244,9 @@ int av_image_check_sar(unsigned int w, unsigned int h, AVRational sar);
 
 /**
  * Overwrite the image data with black. This is suitable for filling a
- * sub-rectangle_i32 of an image, meaning the padding between the right most pixel
+ * sub-rectangle of an image, meaning the padding between the right most pixel
  * and the left most pixel on the next line will not be overwritten. For some
- * formats, the image size_i32 might be rounded up due to inherent alignment.
+ * formats, the image size might be rounded up due to inherent alignment.
  *
  * If the pixel format has alpha, the alpha is cleared to opaque.
  *

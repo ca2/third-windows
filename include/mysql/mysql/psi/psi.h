@@ -87,7 +87,7 @@ struct sql_digest_storage;
 */
 
 /**
-  Interface for an instrumented ::mutex.
+  Interface for an instrumented mutex.
   This is an opaque structure.
 */
 struct PSI_mutex;
@@ -268,7 +268,7 @@ struct PSI_table_locker_state
 };
 typedef struct PSI_table_locker_state PSI_table_locker_state;
 
-/** Entry point_i32 for the performance schema interface. */
+/** Entry point for the performance schema interface. */
 struct PSI_bootstrap
 {
   /**
@@ -364,7 +364,7 @@ typedef struct PSI_bootstrap PSI_bootstrap;
 
 /**
   @def DISABLE_PSI_MUTEX
-  Compiling option to disable the ::mutex instrumentation.
+  Compiling option to disable the mutex instrumentation.
   This option is mostly intended to be used during development,
   when doing special builds with only a subset of the performance schema instrumentation,
   for code analysis / profiling / performance tuning of a specific instrumentation alone.
@@ -566,7 +566,7 @@ typedef struct PSI_bootstrap PSI_bootstrap;
 #endif
 
 /**
-  Interface for an instrumented ::mutex operation.
+  Interface for an instrumented mutex operation.
   This is an opaque structure.
 */
 struct PSI_mutex_locker;
@@ -607,7 +607,7 @@ typedef struct PSI_socket_locker PSI_socket_locker;
 struct PSI_metadata_locker;
 typedef struct PSI_metadata_locker PSI_metadata_locker;
 
-/** Operation performed on an instrumented ::mutex. */
+/** Operation performed on an instrumented mutex. */
 enum PSI_mutex_operation
 {
   /** Lock. */
@@ -763,8 +763,8 @@ enum PSI_socket_operation
 typedef enum PSI_socket_operation PSI_socket_operation;
 
 /**
-  Instrumented ::mutex key.
-  To instrument a ::mutex, a ::mutex key must be obtained using @c register_mutex.
+  Instrumented mutex key.
+  To instrument a mutex, a mutex key must be obtained using @c register_mutex.
   Using a zero key always disable the instrumentation.
 */
 typedef unsigned int PSI_mutex_key;
@@ -835,20 +835,20 @@ typedef unsigned int PSI_socket_key;
 /**
   Mutex information.
   @since PSI_VERSION_1
-  This structure is used to register an instrumented ::mutex.
+  This structure is used to register an instrumented mutex.
 */
 struct PSI_mutex_info_v1
 {
   /**
-    Pointer to the key assigned to the registered ::mutex.
+    Pointer to the key assigned to the registered mutex.
   */
   PSI_mutex_key *m_key;
   /**
-    The name of the ::mutex to register.
+    The name of the mutex to register.
   */
   const char *m_name;
   /**
-    The flags of the ::mutex to register.
+    The flags of the mutex to register.
     @sa PSI_FLAG_GLOBAL
   */
   int m_flags;
@@ -1028,7 +1028,7 @@ typedef struct PSI_idle_locker_state_v1 PSI_idle_locker_state_v1;
 
 /**
   State data storage for @c start_mutex_wait_v1_t.
-  This structure provide temporary storage to a ::mutex locker.
+  This structure provide temporary storage to a mutex locker.
   The content of this structure is considered opaque,
   the fields are only hints of what an implementation
   of the psi interface can use.
@@ -1041,7 +1041,7 @@ struct PSI_mutex_locker_state_v1
   uint m_flags;
   /** Current operation. */
   enum PSI_mutex_operation m_operation;
-  /** Current ::mutex. */
+  /** Current mutex. */
   struct PSI_mutex *m_mutex;
   /** Current thread. */
   struct PSI_thread *m_thread;
@@ -1100,7 +1100,7 @@ struct PSI_cond_locker_state_v1
   enum PSI_cond_operation m_operation;
   /** Current condition. */
   struct PSI_cond *m_cond;
-  /** Current ::mutex. */
+  /** Current mutex. */
   struct PSI_mutex *m_mutex;
   /** Current thread. */
   struct PSI_thread *m_thread;
@@ -1345,8 +1345,8 @@ typedef struct PSI_sp_locker_state_v1 PSI_sp_locker_state_v1;
 /**
   Mutex registration API.
   @param category a category name (typically a plugin name)
-  @param info an array of ::mutex info to register
-  @param count the size_i32 of the info array
+  @param info an array of mutex info to register
+  @param count the size of the info array
 */
 typedef void (*register_mutex_v1_t)
   (const char *category, struct PSI_mutex_info_v1 *info, int count);
@@ -1355,7 +1355,7 @@ typedef void (*register_mutex_v1_t)
   Rwlock registration API.
   @param category a category name (typically a plugin name)
   @param info an array of rwlock info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_rwlock_v1_t)
   (const char *category, struct PSI_rwlock_info_v1 *info, int count);
@@ -1364,7 +1364,7 @@ typedef void (*register_rwlock_v1_t)
   Cond registration API.
   @param category a category name (typically a plugin name)
   @param info an array of cond info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_cond_v1_t)
   (const char *category, struct PSI_cond_info_v1 *info, int count);
@@ -1373,7 +1373,7 @@ typedef void (*register_cond_v1_t)
   Thread registration API.
   @param category a category name (typically a plugin name)
   @param info an array of thread info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_thread_v1_t)
   (const char *category, struct PSI_thread_info_v1 *info, int count);
@@ -1382,7 +1382,7 @@ typedef void (*register_thread_v1_t)
   File registration API.
   @param category a category name (typically a plugin name)
   @param info an array of file info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_file_v1_t)
   (const char *category, struct PSI_file_info_v1 *info, int count);
@@ -1391,7 +1391,7 @@ typedef void (*register_file_v1_t)
   Stage registration API.
   @param category a category name
   @param info an array of stage info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_stage_v1_t)
   (const char *category, struct PSI_stage_info_v1 **info, int count);
@@ -1400,7 +1400,7 @@ typedef void (*register_stage_v1_t)
   Statement registration API.
   @param category a category name
   @param info an array of stage info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_statement_v1_t)
   (const char *category, struct PSI_statement_info_v1 *info, int count);
@@ -1409,25 +1409,25 @@ typedef void (*register_statement_v1_t)
   Socket registration API.
   @param category a category name (typically a plugin name)
   @param info an array of socket info to register
-  @param count the size_i32 of the info array
+  @param count the size of the info array
 */
 typedef void (*register_socket_v1_t)
   (const char *category, struct PSI_socket_info_v1 *info, int count);
 
 /**
   Mutex instrumentation initialisation API.
-  @param key the registered ::mutex key
-  @param identity the address of the ::mutex itself
-  @return an instrumented ::mutex
+  @param key the registered mutex key
+  @param identity the address of the mutex itself
+  @return an instrumented mutex
 */
 typedef struct PSI_mutex* (*init_mutex_v1_t)
   (PSI_mutex_key key, const void *identity);
 
 /**
   Mutex instrumentation destruction API.
-  @param ::mutex the ::mutex to destroy
+  @param mutex the mutex to destroy
 */
-typedef void (*destroy_mutex_v1_t)(struct PSI_mutex *::mutex);
+typedef void (*destroy_mutex_v1_t)(struct PSI_mutex *mutex);
 
 /**
   Rwlock instrumentation initialisation API.
@@ -1461,7 +1461,7 @@ typedef void (*destroy_cond_v1_t)(struct PSI_cond *cond);
 
 /**
   Socket instrumentation initialisation API.
-  @param key the registered ::mutex key
+  @param key the registered mutex key
   @param socket descriptor
   @param addr the socket ip address
   @param addr_len length of socket ip address
@@ -1714,11 +1714,11 @@ typedef struct PSI_file_locker* (*get_thread_file_descriptor_locker_v1_t)
    File file, enum PSI_file_operation op);
 
 /**
-  Record a ::mutex instrumentation unlock event.
-  @param ::mutex the ::mutex instrumentation
+  Record a mutex instrumentation unlock event.
+  @param mutex the mutex instrumentation
 */
 typedef void (*unlock_mutex_v1_t)
-  (struct PSI_mutex *::mutex);
+  (struct PSI_mutex *mutex);
 
 /**
   Record a rwlock instrumentation unlock event.
@@ -1759,22 +1759,22 @@ typedef void (*end_idle_wait_v1_t)
   (struct PSI_idle_locker *locker);
 
 /**
-  Record a ::mutex instrumentation wait start event.
+  Record a mutex instrumentation wait start event.
   @param state data storage for the locker
-  @param ::mutex the instrumented ::mutex to lock
+  @param mutex the instrumented mutex to lock
   @param op the operation to perform
   @param file the source file name
   @param line the source line number
-  @return a ::mutex locker, or NULL
+  @return a mutex locker, or NULL
 */
 typedef struct PSI_mutex_locker* (*start_mutex_wait_v1_t)
   (struct PSI_mutex_locker_state_v1 *state,
-   struct PSI_mutex *::mutex,
+   struct PSI_mutex *mutex,
    enum PSI_mutex_operation op,
    const char *src_file, uint src_line);
 
 /**
-  Record a ::mutex instrumentation wait end event.
+  Record a mutex instrumentation wait end event.
   @param locker a thread locker for the running thread
   @param rc the wait operation return code
 */
@@ -1827,7 +1827,7 @@ typedef void (*end_rwlock_wrwait_v1_t)
 typedef struct PSI_cond_locker* (*start_cond_wait_v1_t)
   (struct PSI_cond_locker_state_v1 *state,
    struct PSI_cond *cond,
-   struct PSI_mutex *::mutex,
+   struct PSI_mutex *mutex,
    enum PSI_cond_operation op,
    const char *src_file, uint src_line);
 
@@ -2852,7 +2852,7 @@ struct PSI_metadata_locker_state_v2
 
 /**
   @typedef PSI_mutex_info
-  The ::mutex information structure for the current version.
+  The mutex information structure for the current version.
 */
 
 /**

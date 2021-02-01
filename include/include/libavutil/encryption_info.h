@@ -38,7 +38,7 @@ typedef struct AVSubsampleEncryptionInfo {
  * This describes encryption info for a packet.  This contains frame-specific
  * info for how to decrypt the packet before passing it to the decoder.
  *
- * The size_i32 of this struct is not part of the public ABI.
+ * The size of this struct is not part of the public ABI.
  */
 typedef struct AVEncryptionInfo {
     /** The fourcc encryption scheme, in big-endian byte order. */
@@ -83,7 +83,7 @@ typedef struct AVEncryptionInfo {
 /**
  * This describes info used to initialize an encryption key system.
  *
- * The size_i32 of this struct is not part of the public ABI.
+ * The size of this struct is not part of the public ABI.
  */
 typedef struct AVEncryptionInitInfo {
     /**
@@ -125,7 +125,7 @@ typedef struct AVEncryptionInitInfo {
 /**
  * Allocates an AVEncryptionInfo structure and sub-pointers to hold the given
  * number of subsamples.  This will allocate pointers for the key ID, IV,
- * and subsample entries, set the size_i32 members, and zero-initialize the rest.
+ * and subsample entries, set the size members, and zero-initialize the rest.
  *
  * @param subsample_count The number of subsamples.
  * @param key_id_size The number of bytes in the key ID, should be 16.

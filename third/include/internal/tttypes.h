@@ -517,7 +517,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*                                 vertBearingX - width                  */
   /*                                                                       */
-  /*    pads                    :: Unused (to make the size_i32 of the record  */
+  /*    pads                    :: Unused (to make the size of the record  */
   /*                               a multiple of 32 bits.                  */
   /*                                                                       */
   typedef struct  TT_SBit_LineMetricsRec_
@@ -558,7 +558,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*    image_offset  :: The offset to image data in `EBDT'.               */
   /*                                                                       */
-  /*    image_size    :: For index formats 2 and 5.  This is the size_i32 in   */
+  /*    image_size    :: For index formats 2 and 5.  This is the size in   */
   /*                     bytes of each glyph bitmap.                       */
   /*                                                                       */
   /*    big_metrics   :: For index formats 2 and 5.  This is the big       */
@@ -996,7 +996,7 @@ FT_BEGIN_HEADER
   /*    offset      :: The offset of the glyph according to the            */
   /*                   `locations' table.                                  */
   /*                                                                       */
-  /*    byte_count  :: The size_i32 of the frame in bytes.                     */
+  /*    byte_count  :: The size of the frame in bytes.                     */
   /*                                                                       */
   /* <Return>                                                              */
   /*    FreeType error code.  0 means success.                             */
@@ -1071,7 +1071,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /* <Description>                                                         */
   /*    The TrueType face class.  These objects model the resolution and   */
-  /*    point_i32-size_i32 independent data found in a TrueType font file.         */
+  /*    point-size independent data found in a TrueType font file.         */
   /*                                                                       */
   /* <Fields>                                                              */
   /*    root                 :: The base FT_Face structure, managed by the */
@@ -1131,7 +1131,7 @@ FT_BEGIN_HEADER
   /*    cmap_table           :: Address of the face's `cmap' SFNT table    */
   /*                            in memory (it's an extracted frame).       */
   /*                                                                       */
-  /*    cmap_size            :: The size_i32 in bytes of the `cmap_table'      */
+  /*    cmap_size            :: The size in bytes of the `cmap_table'      */
   /*                            described above.                           */
   /*                                                                       */
   /*    goto_table           :: A function called by each TrueType table   */
@@ -1205,11 +1205,11 @@ FT_BEGIN_HEADER
   /*                            glyph rendering.  Comes from the `fpgm'    */
   /*                            table.  Ignored for Type 2 font fonts.     */
   /*                                                                       */
-  /*    cvt_program_size     :: The size_i32 in bytecodes of the face's cvt    */
+  /*    cvt_program_size     :: The size in bytecodes of the face's cvt    */
   /*                            program.  Ignored for Type 2 fonts.        */
   /*                                                                       */
   /*    cvt_program          :: The face's cvt program (bytecode stream)   */
-  /*                            executed each time an instance/size_i32 is     */
+  /*                            executed each time an instance/size is     */
   /*                            changed/reset.  Comes from the `prep'      */
   /*                            table.  Ignored for Type 2 fonts.          */
   /*                                                                       */
@@ -1417,9 +1417,9 @@ FT_BEGIN_HEADER
   /*  <Fields>                                                             */
   /*     memory       :: A handle to the memory manager.                   */
   /*                                                                       */
-  /*     max_points   :: The maximum size_i32 in points of the zone.           */
+  /*     max_points   :: The maximum size in points of the zone.           */
   /*                                                                       */
-  /*     max_contours :: Max size_i32 in links contours of the zone.           */
+  /*     max_contours :: Max size in links contours of the zone.           */
   /*                                                                       */
   /*     n_points     :: The current number of points in the zone.         */
   /*                                                                       */
@@ -1430,7 +1430,7 @@ FT_BEGIN_HEADER
   /*                                                                       */
   /*     cur          :: The current glyph coordinates (scaled/hinted).    */
   /*                                                                       */
-  /*     tags         :: The point_i32 control tags.                           */
+  /*     tags         :: The point control tags.                           */
   /*                                                                       */
   /*     contours     :: The contours end points.                          */
   /*                                                                       */
@@ -1444,14 +1444,14 @@ FT_BEGIN_HEADER
     FT_UShort   n_points;    /* number of points in zone    */
     FT_Short    n_contours;  /* number of contours          */
 
-    FT_Vector*  org;         /* original point_i32 coordinates  */
-    FT_Vector*  cur;         /* current point_i32 coordinates   */
-    FT_Vector*  orus;        /* original (unscaled) point_i32 coordinates */
+    FT_Vector*  org;         /* original point coordinates  */
+    FT_Vector*  cur;         /* current point coordinates   */
+    FT_Vector*  orus;        /* original (unscaled) point coordinates */
 
     FT_Byte*    tags;        /* current touch flags         */
     FT_UShort*  contours;    /* contour end points          */
 
-    FT_UShort   first_point; /* offset of first (#0) point_i32  */
+    FT_UShort   first_point; /* offset of first (#0) point  */
 
   } TT_GlyphZoneRec, *TT_GlyphZone;
 

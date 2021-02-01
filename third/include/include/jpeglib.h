@@ -141,7 +141,7 @@ typedef struct {
   /* Remaining fields should be treated as private by applications. */
   
   /* These values are computed during compression or decompression startup: */
-  /* Component's size_i32 in DCT blocks.
+  /* Component's size in DCT blocks.
    * Any dummy blocks added to complete an MCU are not counted; therefore
    * these values do not depend on whether a scan is interleaved or not.
    */
@@ -240,7 +240,7 @@ typedef enum {
 typedef enum {
 	JDCT_ISLOW,		/* slow but accurate integer algorithm */
 	JDCT_IFAST,		/* faster, less accurate integer method */
-	JDCT_FLOAT		/* floating-point_i32: accurate, fast on fast HW */
+	JDCT_FLOAT		/* floating-point: accurate, fast on fast HW */
 } J_DCT_METHOD;
 
 #ifndef JDCT_DEFAULT		/* may be overridden in jconfig.h */
@@ -351,7 +351,7 @@ struct jpeg_compress_struct {
   const jpeg_scan_info * scan_info; /* script for multi-scan file, or NULL */
   /* The default value of scan_info is NULL, which causes a single-scan
    * sequential JPEG file to be emitted.  To create a multi-scan file,
-   * set num_scans and scan_info to point_i32 to an array of scan definitions.
+   * set num_scans and scan_info to point to an array of scan definitions.
    */
 
   boolean raw_data_in;		/* TRUE=caller supplies downsampled data */
@@ -379,7 +379,7 @@ struct jpeg_compress_struct {
   /* into the JFIF APP0 marker.  density_unit can be 0 for unknown, */
   /* 1 for dots/inch, or 2 for dots/cm.  Note that the pixel aspect */
   /* ratio is defined by X_density/Y_density even when density_unit=0. */
-  UINT8 density_unit;		/* JFIF code for pixel size_i32 units */
+  UINT8 density_unit;		/* JFIF code for pixel size units */
   UINT16 X_density;		/* Horizontal pixel density */
   UINT16 Y_density;		/* Vertical pixel density */
   boolean write_Adobe_marker;	/* should an Adobe marker be written? */
@@ -433,7 +433,7 @@ struct jpeg_compress_struct {
 
   int Ss, Se, Ah, Al;		/* progressive JPEG parameters for scan */
 
-  int block_size;		/* the basic DCT block size_i32: 1..16 */
+  int block_size;		/* the basic DCT block size: 1..16 */
   const int * natural_order;	/* natural-order position array */
   int lim_Se;			/* MIN( Se, DCTSIZE2-1 ) */
 
@@ -551,7 +551,7 @@ struct jpeg_decompress_struct {
 
   /* Current progression status.  coef_bits[c][i] indicates the precision
    * with which component c's DCT coefficient i (in zigzag order) is known.
-   * It is -1 when no data has yet been received, otherwise it is the point_i32
+   * It is -1 when no data has yet been received, otherwise it is the point
    * transform (shift) value for the most recent scan of the coefficient
    * (thus, 0 at completion of the progression).
    * This pointer is NULL when reading a non-progressive file.
@@ -600,7 +600,7 @@ struct jpeg_decompress_struct {
   /* Data copied from JFIF marker; only valid if saw_JFIF_marker is TRUE: */
   UINT8 JFIF_major_version;	/* JFIF version number */
   UINT8 JFIF_minor_version;
-  UINT8 density_unit;		/* JFIF code for pixel size_i32 units */
+  UINT8 density_unit;		/* JFIF code for pixel size units */
   UINT16 X_density;		/* Horizontal pixel density */
   UINT16 Y_density;		/* Vertical pixel density */
   boolean saw_Adobe_marker;	/* TRUE iff an Adobe APP14 marker was found */
@@ -662,7 +662,7 @@ struct jpeg_decompress_struct {
 
   /* These fields are derived from Se of first SOS marker.
    */
-  int block_size;		/* the basic DCT block size_i32: 1..16 */
+  int block_size;		/* the basic DCT block size: 1..16 */
   const int * natural_order; /* natural-order position array for entropy decode */
   int lim_Se;			/* MIN( Se, DCTSIZE2-1 ) for entropy decode */
 
@@ -708,7 +708,7 @@ struct jpeg_error_mgr {
   JMETHOD(void, output_message, (j_common_ptr cinfo));
   /* Format a message string for the most recent JPEG error or message */
   JMETHOD(void, format_message, (j_common_ptr cinfo, char * buffer));
-#define JMSG_LENGTH_MAX  200	/* recommended size_i32 of format_message buffer */
+#define JMSG_LENGTH_MAX  200	/* recommended size of format_message buffer */
   /* Reset error state variables at start of a new image */
   JMETHOD(void, reset_error_mgr, (j_common_ptr cinfo));
   
@@ -734,7 +734,7 @@ struct jpeg_error_mgr {
    */
   long num_warnings;		/* number of corrupt-data warnings */
 
-  /* These fields point_i32 to the table(s) of error message strings.
+  /* These fields point to the table(s) of error message strings.
    * An application can change the table pointer to switch to a different
    * message list (typically, to change the language in which errors are
    * reported).  Some applications may wish to add additional error codes

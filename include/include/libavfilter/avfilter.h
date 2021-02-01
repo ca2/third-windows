@@ -281,7 +281,7 @@ typedef struct AVFilter {
      */
     int (*query_formats)(AVFilterContext *);
 
-    int priv_size;      ///< size_i32 of private data to allocate for the filter
+    int priv_size;      ///< size of private data to allocate for the filter
 
     int flags_internal; ///< Additional flags for avfilter internal use only.
 
@@ -296,7 +296,7 @@ typedef struct AVFilter {
      *
      * @param cmd    the command to process, for handling simplicity all commands must be alphanumeric only
      * @param arg    the argument for the command
-     * @param res    a buffer with size_i32 res_size where the filter(s) can return a response. This must not change when the command is not supported.
+     * @param res    a buffer with size res_size where the filter(s) can return a response. This must not change when the command is not supported.
      * @param flags  if AVFILTER_CMD_FLAG_FAST is set and the command would be
      *               time consuming then a filter should treat it like an unsupported command
      *
@@ -701,7 +701,7 @@ int avfilter_process_command(AVFilterContext *filter, const char *cmd, const cha
  * Iterate over all registered filters.
  *
  * @param opaque a pointer where libavfilter will store the iteration state. Must
- *               point_i32 to NULL to start the iteration.
+ *               point to NULL to start the iteration.
  *
  * @return the next registered filter or NULL when the iteration is
  *         finished
@@ -828,7 +828,7 @@ typedef int (avfilter_action_func)(AVFilterContext *ctx, void *arg, int jobnr, i
  * @param ctx the filter context to which the jobs belong
  * @param func the function to be called multiple times
  * @param arg the argument to be passed to func
- * @param ret a nb_jobs-size_f64 array to be filled with return values from each
+ * @param ret a nb_jobs-sized array to be filled with return values from each
  *            invocation of func
  * @param nb_jobs the number of jobs to execute
  *
@@ -851,7 +851,7 @@ typedef struct AVFilterGraph {
      * Type of multithreading allowed for filters in this graph. A combination
      * of AVFILTER_THREAD_* flags.
      *
-     * May be set by the caller at any point_i32, the setting will apply to all
+     * May be set by the caller at any point, the setting will apply to all
      * filters initialized after that. The default is allowing everything.
      *
      * When a filter in this graph is initialized, this field is combined using
@@ -1034,7 +1034,7 @@ void avfilter_inout_free(AVFilterInOut **inout);
  * which therefore must be known before calling the function.
  *
  * @note The inputs parameter describes inputs of the already existing
- * part of the graph; i.e. from the point_i32 of view of the newly created
+ * part of the graph; i.e. from the point of view of the newly created
  * part, they are outputs. Similarly the outputs parameter describes
  * outputs of the already existing filters, which are provided as
  * inputs to the parsed filters.
@@ -1106,7 +1106,7 @@ int avfilter_graph_parse2(AVFilterGraph *graph, const char *filters,
  *               which will send the command to all matching filters.
  * @param cmd    the command to send, for handling simplicity all commands must be alphanumeric only
  * @param arg    the argument for the command
- * @param res    a buffer with size_i32 res_size where the filter(s) can return a response.
+ * @param res    a buffer with size res_size where the filter(s) can return a response.
  *
  * @returns >=0 on success otherwise an error code.
  *              AVERROR(ENOSYS) on unsupported commands

@@ -54,15 +54,15 @@ namespace dami
       explicit WindowedReader(ID3_Reader& reader)
         : _reader(reader), _beg(reader.getBeg()), _end(reader.getEnd()) { ; }
   
-      WindowedReader(ID3_Reader& reader, size_type size_i32) 
+      WindowedReader(ID3_Reader& reader, size_type size) 
         : _reader(reader), _beg(reader.getBeg()), _end(reader.getEnd())
       { this->setWindow(this->getCur(), size); }
   
-      WindowedReader(ID3_Reader& reader, pos_type beg, size_type size_i32) 
+      WindowedReader(ID3_Reader& reader, pos_type beg, size_type size) 
         : _reader(reader), _beg(reader.getBeg()), _end(reader.getEnd())
       { this->setWindow(beg, size); }
 
-      void setWindow(pos_type beg, size_type size_i32);
+      void setWindow(pos_type beg, size_type size);
 
       pos_type setBeg(pos_type);
       pos_type setCur(pos_type cur) 

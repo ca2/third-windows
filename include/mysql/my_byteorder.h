@@ -20,7 +20,7 @@
 /*
   Functions for reading and storing in machine independent
   format (low byte first). There are 'korr' (assume 'corrector') variants
-  for integer types, but 'get' (assume 'getter') for floating point_i32 types.
+  for integer types, but 'get' (assume 'getter') for floating point types.
 */
 #if defined(__i386__) || defined(_WIN32) || defined(__x86_64__)
 #include "byte_order_generic_x86.h"

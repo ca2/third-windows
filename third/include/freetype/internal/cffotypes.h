@@ -39,7 +39,7 @@ FT_BEGIN_HEADER
    *   CFF_Size
    *
    * @description:
-   *   A handle to an OpenType size_i32 object.
+   *   A handle to an OpenType size object.
    */
   typedef struct  CFF_SizeRec_
   {

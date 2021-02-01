@@ -83,7 +83,7 @@ struct st_level_info
 
 /*
   Heap table records and hash index entries are stored in HP_BLOCKs.
-  HP_BLOCK is used as a 'growable array' of fixed-size_i32 records. Size of record
+  HP_BLOCK is used as a 'growable array' of fixed-size records. Size of record
   is recbuffer bytes.
   The internal representation is as follows:
   HP_BLOCK is a hierarchical structure of 'blocks'.

@@ -259,7 +259,7 @@ FT_BEGIN_HEADER
    *   FT_F2Dot14
    *
    * @description:
-   *   A signed 2.14 fixed-point_i32 type used for unit vectors.
+   *   A signed 2.14 fixed-point type used for unit vectors.
    */
   typedef signed short  FT_F2Dot14;
 
@@ -270,7 +270,7 @@ FT_BEGIN_HEADER
    *   FT_F26Dot6
    *
    * @description:
-   *   A signed 26.6 fixed-point_i32 type used for vectorial pixel coordinates.
+   *   A signed 26.6 fixed-point type used for vectorial pixel coordinates.
    */
   typedef signed long  FT_F26Dot6;
 
@@ -281,7 +281,7 @@ FT_BEGIN_HEADER
    *   FT_Fixed
    *
    * @description:
-   *   This type is used to store 16.16 fixed-point_i32 values, like scaling
+   *   This type is used to store 16.16 fixed-point values, like scaling
    *   values or matrix coefficients.
    */
   typedef signed long  FT_Fixed;
@@ -317,7 +317,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   This is equivalent to the ANSI~C `size_t` type, i.e., the largest
-   *   _unsigned_ integer type used to express a file size_i32 or position, or a
+   *   _unsigned_ integer type used to express a file size or position, or a
    *   memory block size.
    */
   typedef size_t  FT_Offset;
@@ -367,7 +367,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   A simple structure used to store a 2x2 matrix.  Coefficients are in
-   *   16.16 fixed-point_i32 format.  The computation performed is:
+   *   16.16 fixed-point format.  The computation performed is:
    *
    *   ```
    *     x' = x*xx + y*xy
@@ -443,7 +443,7 @@ FT_BEGIN_HEADER
    * @description:
    *   Client applications often need to associate their own data to a
    *   variety of FreeType core objects.  For example, a text layout API
-   *   might want to associate a glyph cache to a given size_i32 object.
+   *   might want to associate a glyph cache to a given size object.
    *
    *   Some FreeType object contains a `generic` field, of type `FT_Generic`,
    *   which usage is left to client applications and font servers.

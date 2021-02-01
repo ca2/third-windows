@@ -108,7 +108,7 @@ _cairo_clip_equal (const cairo_clip_t *clip_a,
 
 cairo_private cairo_clip_t *
 _cairo_clip_intersect_rectangle (cairo_clip_t       *clip,
-				 const cairo_rectangle_int_t *rectangle_i32);
+				 const cairo_rectangle_int_t *rectangle);
 
 cairo_private cairo_clip_t *
 _cairo_clip_intersect_clip (cairo_clip_t *clip,
@@ -170,7 +170,7 @@ _cairo_clip_reduce_for_composite (const cairo_clip_t *clip,
 
 cairo_private cairo_bool_t
 _cairo_clip_contains_rectangle (const cairo_clip_t *clip,
-				const cairo_rectangle_int_t *rectangle_i32);
+				const cairo_rectangle_int_t *rect);
 
 cairo_private cairo_bool_t
 _cairo_clip_contains_box (const cairo_clip_t *clip,
@@ -191,7 +191,7 @@ _cairo_clip_is_polygon (const cairo_clip_t *clip);
 
 cairo_private cairo_int_status_t
 _cairo_clip_get_polygon (const cairo_clip_t *clip,
-			 cairo_polygon_t *polygon_i32,
+			 cairo_polygon_t *polygon,
 			 cairo_fill_rule_t *fill_rule,
 			 cairo_antialias_t *antialias);
 

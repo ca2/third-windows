@@ -31,11 +31,11 @@ typedef struct st_bitmap
   my_bitmap_map last_word_mask;
   my_bitmap_map *last_word_ptr;
   /*
-     ::mutex will be acquired for the duration of each bitmap operation if
+     mutex will be acquired for the duration of each bitmap operation if
      thread_safe flag in bitmap_init was set.  Otherwise, we optimize by not
-     acquiring the ::mutex
+     acquiring the mutex
    */
-  mysql_mutex_t *::mutex;
+  mysql_mutex_t *mutex;
 } MY_BITMAP;
 
 #ifdef	__cplusplus
@@ -122,7 +122,7 @@ static inline my_bool bitmap_cmp(const MY_BITMAP *map1, const MY_BITMAP *map2)
 }
 
 /*
-  Clears all bits. This is allowed even for a zero-size_i32 bitmap.
+  Clears all bits. This is allowed even for a zero-size bitmap.
  */
 static inline void bitmap_clear_all(MY_BITMAP *map)
 {
@@ -130,7 +130,7 @@ static inline void bitmap_clear_all(MY_BITMAP *map)
 }
 
 /*
-  Sets all bits. This is allowed even for a zero-size_i32 bitmap.
+  Sets all bits. This is allowed even for a zero-size bitmap.
  */
 static inline void bitmap_set_all(MY_BITMAP *map)
 {

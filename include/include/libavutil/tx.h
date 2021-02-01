@@ -36,7 +36,7 @@ enum AVTXType {
     AV_TX_FLOAT_FFT = 0,
     /**
      * Standard MDCT with sample data type of float and a scale type of
-     * float. Length is the frame size, not the window size_i32 (which is 2x frame)
+     * float. Length is the frame size, not the window size (which is 2x frame)
      */
     AV_TX_FLOAT_MDCT = 1,
 };
@@ -64,7 +64,7 @@ typedef void (*av_tx_fn)(AVTXContext *s, void *out, void *in, ptrdiff_t stride);
  * @param tx pointer to the transform function pointer to set
  * @param type type the type of transform
  * @param inv whether to do an inverse or a forward transform
- * @param len the size_i32 of the transform in samples
+ * @param len the size of the transform in samples
  * @param scale pointer to the value to scale the output if supported by type
  * @param flags currently unused
  *

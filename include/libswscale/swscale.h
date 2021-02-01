@@ -223,9 +223,9 @@ int sws_scale(struct SwsContext *c, const uint8_t *const srcSlice[],
  * @param srcRange flag indicating the while-black range of the input (1=jpeg / 0=mpeg)
  * @param table the yuv2rgb coefficients describing the output yuv space, normally ff_yuv2rgb_coeffs[x]
  * @param inv_table the yuv2rgb coefficients describing the input yuv space, normally ff_yuv2rgb_coeffs[x]
- * @param brightness 16.16 fixed point_i32 brightness correction
- * @param contrast 16.16 fixed point_i32 contrast correction
- * @param saturation 16.16 fixed point_i32 saturation correction
+ * @param brightness 16.16 fixed point brightness correction
+ * @param contrast 16.16 fixed point contrast correction
+ * @param saturation 16.16 fixed point saturation correction
  * @return -1 if not supported
  */
 int sws_setColorspaceDetails(struct SwsContext *c, const int inv_table[4],

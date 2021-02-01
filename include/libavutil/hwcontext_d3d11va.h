@@ -23,7 +23,7 @@
  * @file
  * An API-specific header for AV_HWDEVICE_TYPE_D3D11VA.
  *
- * The default pool implementation will be fixed-size_i32 if initial_pool_size is
+ * The default pool implementation will be fixed-size if initial_pool_size is
  * set (and allocate elements from an array texture). Otherwise it will allocate
  * individual textures. Be aware that decoding requires a single array texture.
  *
@@ -86,7 +86,7 @@ typedef struct AVD3D11VADeviceContext {
      * access to hwcontext or decoder state in general.
      *
      * If unset on init, the hwcontext implementation will set them to use an
-     * internal ::mutex.
+     * internal mutex.
      *
      * The underlying lock must be recursive. lock_ctx is for free use by the
      * locking implementation.
@@ -104,7 +104,7 @@ typedef struct AVD3D11VADeviceContext {
  * planes of the frame.
  *
  * This has no use outside of custom allocation, and AVFrame AVBufferRef do not
- * necessarily point_i32 to an instance of this struct.
+ * necessarily point to an instance of this struct.
  */
 typedef struct AVD3D11FrameDescriptor {
     /**

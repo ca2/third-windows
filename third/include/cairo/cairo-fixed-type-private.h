@@ -40,7 +40,7 @@
 #include "cairo-wideint-type-private.h"
 
 /*
- * Fixed-point_i32 configuration
+ * Fixed-point configuration
  */
 
 typedef int32_t		cairo_fixed_16_16_t;
@@ -51,7 +51,7 @@ typedef cairo_int128_t	cairo_fixed_96_32_t;
 
 /* Eventually, we should allow changing this, but I think
  * there are some assumptions in the tessellator about the
- * size_i32 of a fixed type.  For now, it must be 32.
+ * size of a fixed type.  For now, it must be 32.
  */
 #define CAIRO_FIXED_BITS	32
 
@@ -61,10 +61,10 @@ typedef cairo_int128_t	cairo_fixed_96_32_t;
  */
 #define CAIRO_FIXED_FRAC_BITS	8
 
-/* A signed type %CAIRO_FIXED_BITS in size; the main fixed point_i32 type */
+/* A signed type %CAIRO_FIXED_BITS in size; the main fixed point type */
 typedef int32_t cairo_fixed_t;
 
-/* An unsigned type of the same size_i32 as #cairo_fixed_t */
+/* An unsigned type of the same size as #cairo_fixed_t */
 typedef uint32_t cairo_fixed_unsigned_t;
 
 typedef struct _cairo_point {

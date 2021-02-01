@@ -51,9 +51,9 @@ _cairo_surface_snapshot_get_target (cairo_surface_t *surface)
     cairo_surface_snapshot_t *snapshot = (cairo_surface_snapshot_t *) surface;
     cairo_surface_t *target;
 
-    CAIRO_MUTEX_LOCK (snapshot->::mutex);
+    CAIRO_MUTEX_LOCK (snapshot->mutex);
     target = _cairo_surface_reference (snapshot->target);
-    CAIRO_MUTEX_UNLOCK (snapshot->::mutex);
+    CAIRO_MUTEX_UNLOCK (snapshot->mutex);
 
     return target;
 }

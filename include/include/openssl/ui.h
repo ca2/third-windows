@@ -69,8 +69,8 @@ void UI_free(UI *ui);
 
    All of the functions in this group take a UI and a prompt string.
    The string input and verify addition functions also take a flag argument,
-   a buffer for the result to end up with, a minimum input size_i32 and a maximum
-   input size_i32 (the result buffer MUST be large enough to be able to contain
+   a buffer for the result to end up with, a minimum input size and a maximum
+   input size (the result buffer MUST be large enough to be able to contain
    the maximum number of characters).  Additionally, the verify addition
    functions takes another buffer to compare the result against.
    The boolean input functions take an action description string (which should
@@ -346,9 +346,9 @@ int UI_get_result_string_length(UI_STRING *uis);
  * Return the string to test the result against.  Only useful with verifies.
  */
 const char *UI_get0_test_string(UI_STRING *uis);
-/* Return the required minimum size_i32 of the result */
+/* Return the required minimum size of the result */
 int UI_get_result_minsize(UI_STRING *uis);
-/* Return the required maximum size_i32 of the result */
+/* Return the required maximum size of the result */
 int UI_get_result_maxsize(UI_STRING *uis);
 /* Set the result of a UI_STRING. */
 int UI_set_result(UI *ui, UI_STRING *uis, const char *result);

@@ -36,7 +36,7 @@
 #endif
 
 /* Initialise a freelist that will be responsible for allocating
- * nodes of size_i32 nodesize. */
+ * nodes of size nodesize. */
 cairo_private void
 _cairo_freelist_init (cairo_freelist_t *freelist, unsigned nodesize);
 

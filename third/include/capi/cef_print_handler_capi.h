@@ -143,7 +143,7 @@ typedef struct _cef_print_handler_t {
                                      struct _cef_browser_t* browser);
 
   ///
-  // Return the PDF paper size_i32 in device units. Used in combination with
+  // Return the PDF paper size in device units. Used in combination with
   // cef_browser_host_t::print_to_pdf().
   ///
   cef_size_t(CEF_CALLBACK* get_pdf_paper_size)(

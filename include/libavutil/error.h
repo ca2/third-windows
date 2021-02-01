@@ -90,7 +90,7 @@
  *
  * @param errnum      error code to describe
  * @param errbuf      buffer to which description is written
- * @param errbuf_size the size_i32 in bytes of errbuf
+ * @param errbuf_size the size in bytes of errbuf
  * @return 0 on success, a negative value if a description for errnum
  * cannot be found
  */
@@ -101,7 +101,7 @@ int av_strerror(int errnum, char *errbuf, size_t errbuf_size);
  * corresponding to the AVERROR code errnum.
  *
  * @param errbuf         a buffer
- * @param errbuf_size    size_i32 in bytes of errbuf
+ * @param errbuf_size    size in bytes of errbuf
  * @param errnum         error code to describe
  * @return the buffer in input, filled with the error description
  * @see av_strerror()

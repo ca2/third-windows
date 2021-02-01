@@ -21,13 +21,13 @@ extern "C" {
 # define AES_DECRYPT     0
 
 /*
- * Because array size_i32 can't be a const in C, the following two are macros.
+ * Because array size can't be a const in C, the following two are macros.
  * Both sizes are in bytes.
  */
 # define AES_MAXNR 14
 # define AES_BLOCK_SIZE 16
 
-/* This should be a hidden type, but EVP requires that the size_i32 be known */
+/* This should be a hidden type, but EVP requires that the size be known */
 struct aes_key_st {
 # ifdef AES_LONG
     unsigned long rd_key[4 * (AES_MAXNR + 1)];

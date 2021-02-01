@@ -61,7 +61,7 @@ struct _wClipboardDelegate
 
 	UINT (*ClientRequestFileRange)(wClipboardDelegate*, const wClipboardFileRangeRequest*);
 	UINT(*ClipboardFileRangeSuccess)
-	(wClipboardDelegate*, const wClipboardFileRangeRequest*, const BYTE* data, UINT32 size_i32);
+	(wClipboardDelegate*, const wClipboardFileRangeRequest*, const BYTE* data, UINT32 size);
 	UINT(*ClipboardFileRangeFailure)
 	(wClipboardDelegate*, const wClipboardFileRangeRequest*, UINT errorCode);
 };
@@ -90,7 +90,7 @@ extern "C"
 	WINPR_API const char* ClipboardGetFormatName(wClipboard* clipboard, UINT32 formatId);
 	WINPR_API void* ClipboardGetData(wClipboard* clipboard, UINT32 formatId, UINT32* pSize);
 	WINPR_API BOOL ClipboardSetData(wClipboard* clipboard, UINT32 formatId, const void* data,
-	                                UINT32 size_i32);
+	                                UINT32 size);
 
 	WINPR_API UINT64 ClipboardGetOwner(wClipboard* clipboard);
 	WINPR_API void ClipboardSetOwner(wClipboard* clipboard, UINT64 ownerId);

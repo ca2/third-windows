@@ -47,7 +47,7 @@
 ///
 // A Window is a top-level Window/widget in the Views hierarchy. By default it
 // will have a non-client area with title bar, icon and buttons that supports
-// moving and resizing. All size_i32 and position values are in density independent
+// moving and resizing. All size and position values are in density independent
 // pixels (DIP) unless otherwise indicated. Methods must be called on the
 // browser process UI thread unless otherwise indicated.
 ///
@@ -74,7 +74,7 @@ class CefWindow : public CefPanel {
   virtual void Hide() = 0;
 
   ///
-  // Sizes the Window to |size_i32| and centers it in the current display.
+  // Sizes the Window to |size| and centers it in the current display.
   ///
   /*--cef()--*/
   virtual void CenterWindow(const CefSize& size) = 0;

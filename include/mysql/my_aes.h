@@ -22,10 +22,10 @@
 
 C_MODE_START
 
-/** AES IV size_i32 is 16 bytes for all supported ciphers except ECB */
+/** AES IV size is 16 bytes for all supported ciphers except ECB */
 #define MY_AES_IV_SIZE 16
 
-/** AES block size_i32 is fixed to be 128 bits for CBC and ECB */
+/** AES block size is fixed to be 128 bits for CBC and ECB */
 #define MY_AES_BLOCK_SIZE 16
 
 
@@ -78,7 +78,7 @@ extern const char *my_aes_opmode_names[];
   @param mode           [in]  encryption mode
   @param iv             [in]  16 bytes initialization vector if needed. Otherwise NULL
   @param padding        [in]  if padding needed.
-  @return              size_i32 of encrypted data, or negative in case of error
+  @return              size of encrypted data, or negative in case of error
 */
 
 int my_aes_encrypt(const unsigned char *source, uint32 source_length,
@@ -91,14 +91,14 @@ int my_aes_encrypt(const unsigned char *source, uint32 source_length,
   Decrypt an AES encrypted buffer
 
   @param source         Pointer to data for decryption
-  @param source_length  size_i32 of encrypted data
+  @param source_length  size of encrypted data
   @param dest           buffer to place decrypted data (must be large enough)
   @param key            Key to be used for decryption
   @param key_length     Length of the key. Will handle keys of any length
   @param mode           encryption mode
   @param iv             16 bytes initialization vector if needed. Otherwise NULL
   @param padding        if padding needed.
-  @return size_i32 of original data.
+  @return size of original data.
 */
 
 
@@ -109,11 +109,11 @@ int my_aes_decrypt(const unsigned char *source, uint32 source_length,
                    bool padding = true);
 
 /**
-  Calculate the size_i32 of a buffer large enough for encrypted data
+  Calculate the size of a buffer large enough for encrypted data
 
   @param source_length  length of data to be encrypted
   @param mode           encryption mode
-  @return               size_i32 of buffer required to store encrypted data
+  @return               size of buffer required to store encrypted data
 */
 
 int my_aes_get_size(uint32 source_length, enum my_aes_opmode mode);

@@ -47,7 +47,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   This section contains functions for handling @FT_Bitmap objects,
-   *   automatically adjusting the target's bitmap buffer size_i32 as needed.
+   *   automatically adjusting the target's bitmap buffer size as needed.
    *
    *   Note that none of the functions changes the bitmap's 'flow' (as
    *   indicated by the sign of the `pitch` field in @FT_Bitmap).

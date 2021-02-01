@@ -20,8 +20,8 @@
 
 #define OUT_16 0
 #define OUT_8  1
-/* Those are defined but not supported for fixed point_i32 decoding! */
-#define OUT_REAL 2 /* Write a floating point_i32 sample (that is, one matching the internal real type). */
+/* Those are defined but not supported for fixed point decoding! */
+#define OUT_REAL 2 /* Write a floating point sample (that is, one matching the internal real type). */
 #define OUT_S32 3
 
 #ifdef NO_NTOM

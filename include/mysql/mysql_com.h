@@ -549,8 +549,8 @@ typedef struct st_udf_init
 */
 
   /* Constants when using compression */
-#define NET_HEADER_SIZE 4		/* standard header size_i32 */
-#define COMP_HEADER_SIZE 3		/* compression header extra size_i32 */
+#define NET_HEADER_SIZE 4		/* standard header size */
+#define COMP_HEADER_SIZE 3		/* compression header extra size */
 
   /* Prototypes to password functions */
 

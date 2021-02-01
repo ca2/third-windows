@@ -126,7 +126,7 @@ extern "C"
  * subsampled and have their own separate dimensions and row stride
  * offsets. Note that the strides may be negative in some 
  * configurations. For theora the width and height of the largest plane
- * must be a multiple of 16. The actual meaningful picture size_i32 and 
+ * must be a multiple of 16. The actual meaningful picture size and 
  * offset are stored in the theora_info structure; frames returned by
  * the decoder may need to be cropped for display.
  *
@@ -188,9 +188,9 @@ typedef enum {
  * corresponding to the initial 'info' header packet.
  * 
  * Encoded theora frames must be a multiple of 16 in width and height.
- * To handle other frame sizes, a crop rectangle_i32 is specified in
+ * To handle other frame sizes, a crop rectangle is specified in
  * frame_height and frame_width, offset_x and * offset_y. The offset
- * and size_i32 should still be a multiple of 2 to avoid chroma sampling
+ * and size should still be a multiple of 2 to avoid chroma sampling
  * shifts. Offset values in this structure are measured from the
  * upper left of the image.
  *
@@ -456,7 +456,7 @@ extern int32_t theora_encode_init(theora_state *th, theora_info *ti);
  *            struct and the luma/chroma buffers within should be allocated by
  *            the user.
  * \retval OC_EINVAL Encoder is not ready, or is finished.
- * \retval -1 The size_i32 of the given frame differs from those previously input
+ * \retval -1 The size of the given frame differs from those previously input
  * \retval 0 Success
  */
 extern int32_t theora_encode_YUVin(theora_state *t, yuv_buffer *yuv);
@@ -672,7 +672,7 @@ extern int64_t theora_granule_frame(theora_state *th,int64_t granulepos);
  *          It is not the presentation time.
  * \retval -1. The given granulepos is undefined (i.e. negative), or
  * \retval -1. The function has been disabled because floating 
- *              point_i32 support is not available.
+ *              point support is not available.
  */
 extern double theora_granule_time(theora_state *th,int64_t granulepos);
 
@@ -772,7 +772,7 @@ extern void  theora_comment_clear(theora_comment *tc);
  *                See \ref encctlcodes_old "the list of available 
  *			control codes" for details.
  * \param buf    The parameters for this control code.
- * \param buf_sz The size_i32 of the parameter buffer.*/
+ * \param buf_sz The size of the parameter buffer.*/
 extern int32_t theora_control(theora_state *th,int32_t req,void *buf,size_t buf_sz);
 
 /* @} */ /* end oldfuncs doxygen group */

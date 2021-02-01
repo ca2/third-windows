@@ -35,7 +35,7 @@
 #endif
 
 #ifdef SUNOS
-#define memmove(dst,src, size) bcopy(src,dst, size)
+#define memmove(dst,src,size) bcopy(src,dst,size)
 #endif
 
 /* We don't really do long double... there are 3 options for REAL:
@@ -49,7 +49,7 @@
 # define dreal int64_t
 
 /*
-  for fixed-point_i32 decoders, use pre-calculated tables to avoid expensive floating-point_i32 maths
+  for fixed-point decoders, use pre-calculated tables to avoid expensive floating-point maths
   undef this macro for run-time calculation
 */
 #define PRECALC_TABLES
@@ -110,7 +110,7 @@ static inline int32_t scale_rounded(int32_t x, int shift)
 		"mulhw %1, %2, %3 \n\t" \
 		"srwi %0, %0, %4 \n\t" \
 		"rlwimi %0, %1, %5, 0, %6 \n\t" \
-		: "=rectangle_i32" (_mull), "=rectangle_i32" (_mulh) \
+		: "=rect" (_mull), "=rect" (_mulh) \
 		: "r" (_x), "r" (_y), "i" (radix), "i" (32-(radix)), "i" ((radix)-1) \
 	); \
 	_mull; \
@@ -126,7 +126,7 @@ static inline int32_t scale_rounded(int32_t x, int shift)
 		"srw %0, %0, %5 \n\t" \
 		"slw %1, %1, %2 \n\t" \
 		"or %0, %0, %1 \n\t" \
-		: "=rectangle_i32" (_mull), "=rectangle_i32" (_mulh), "=rectangle_i32" (_radix2) \
+		: "=rect" (_mull), "=rect" (_mulh), "=rect" (_radix2) \
 		: "r" (_x), "r" (_y), "r" (_radix) \
 		: "cc" \
 	); \
@@ -141,7 +141,7 @@ static inline int32_t scale_rounded(int32_t x, int shift)
 		"smull %0, %1, %2, %3 \n\t" \
 		"mov %0, %0, lsr %4 \n\t" \
 		"orr %0, %0, %1, lsl %5 \n\t" \
-		: "=rectangle_i32" (_mull), "=rectangle_i32" (_mulh) \
+		: "=rect" (_mull), "=rect" (_mulh) \
 		: "r" (_x), "r" (_y), "M" (radix), "M" (32-(radix)) \
 	); \
 	_mull; \
@@ -156,7 +156,7 @@ static inline int32_t scale_rounded(int32_t x, int shift)
 		"rsb %2, %5, #32 \n\t" \
 		"mov %1, %1, lsl %2 \n\t" \
 		"orr %0, %0, %1 \n\t" \
-		: "=rectangle_i32" (_mull), "=rectangle_i32" (_mulh), "=rectangle_i32" (_radix2) \
+		: "=rect" (_mull), "=rect" (_mulh), "=rect" (_radix2) \
 		: "r" (_x), "r" (_y), "r" (_radix) \
 	); \
 	_mull; \
@@ -255,7 +255,7 @@ static inline int32_t scale_rounded(int32_t x, int shift)
 #endif
 
 /* used to be: AUDIOBUFSIZE = n*64 with n=1,2,3 ...
-   now: factor on minimum frame buffer size_i32 (which takes upsampling into account) */
+   now: factor on minimum frame buffer size (which takes upsampling into account) */
 #define		AUDIOBUFSIZE		2
 
 #include "true.h"

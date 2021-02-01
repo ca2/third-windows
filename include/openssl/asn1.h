@@ -193,7 +193,7 @@ typedef struct asn1_string_table_st {
 
 DEFINE_STACK_OF(ASN1_STRING_TABLE)
 
-/* size_i32 limits: this stuff is taken straight from RFC2459 */
+/* size limits: this stuff is taken straight from RFC2459 */
 
 # define ub_name                         32768
 # define ub_common_name                  64
@@ -637,11 +637,11 @@ int ASN1_TIME_cmp_time_t(const ASN1_TIME *s, time_t t);
 int ASN1_TIME_compare(const ASN1_TIME *a, const ASN1_TIME *b);
 
 int i2a_ASN1_INTEGER(BIO *bp, const ASN1_INTEGER *a);
-int a2i_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *bs, char *buf, int size_i32);
+int a2i_ASN1_INTEGER(BIO *bp, ASN1_INTEGER *bs, char *buf, int size);
 int i2a_ASN1_ENUMERATED(BIO *bp, const ASN1_ENUMERATED *a);
-int a2i_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *bs, char *buf, int size_i32);
+int a2i_ASN1_ENUMERATED(BIO *bp, ASN1_ENUMERATED *bs, char *buf, int size);
 int i2a_ASN1_OBJECT(BIO *bp, const ASN1_OBJECT *a);
-int a2i_ASN1_STRING(BIO *bp, ASN1_STRING *bs, char *buf, int size_i32);
+int a2i_ASN1_STRING(BIO *bp, ASN1_STRING *bs, char *buf, int size);
 int i2a_ASN1_STRING(BIO *bp, const ASN1_STRING *a, int type);
 int i2t_ASN1_OBJECT(char *buf, int buf_len, const ASN1_OBJECT *a);
 

@@ -332,7 +332,7 @@ typedef struct _cairo_polygon {
 
 typedef cairo_warn cairo_status_t
 (*cairo_spline_add_point_func_t) (void *closure,
-				  const cairo_point_t *point_i32,
+				  const cairo_point_t *point,
 				  const cairo_slope_t *tangent);
 
 typedef struct _cairo_spline_knots {
@@ -353,7 +353,7 @@ typedef struct _cairo_spline {
 } cairo_spline_t;
 
 typedef struct _cairo_pen_vertex {
-    cairo_point_t point_i32;
+    cairo_point_t point;
 
     cairo_slope_t slope_ccw;
     cairo_slope_t slope_cw;

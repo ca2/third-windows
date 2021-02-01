@@ -313,8 +313,8 @@ extern "C"
 
 		ALIGN64 size_t
 		    ContextSize; /* (offset 32)
-		             Specifies the size_i32 of the 'context' field. freerdp_context_new() will use this
-		             size_i32 to allocate the context buffer. freerdp_new() sets it to
+		             Specifies the size of the 'context' field. freerdp_context_new() will use this
+		             size to allocate the context buffer. freerdp_new() sets it to
 		             sizeof(rdpContext). If modifying it, there should always be a minimum of
 		             sizeof(rdpContext), as the freerdp library will assume it can use the 'context'
 		             field to set the required informations in it. Clients will typically make it

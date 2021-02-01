@@ -182,8 +182,8 @@ typedef struct AVPixFmtDescriptor {
 #define AV_PIX_FMT_FLAG_BAYER        (1 << 8)
 
 /**
- * The pixel format contains IEEE-754 floating point_i32 values. Precision (double,
- * single, or half) should be determined by the pixel size_i32 (64, 32, or 16 bits).
+ * The pixel format contains IEEE-754 floating point values. Precision (double,
+ * single, or half) should be determined by the pixel size (64, 32, or 16 bits).
  */
 #define AV_PIX_FMT_FLAG_FLOAT        (1 << 9)
 
@@ -320,7 +320,7 @@ const char *av_get_pix_fmt_name(enum AVPixelFormat pix_fmt);
  * number pix_fmt, or a header if pix_fmt is negative.
  *
  * @param buf the buffer where to write the string
- * @param buf_size the size_i32 of buf
+ * @param buf_size the size of buf
  * @param pix_fmt the number of the pixel format to print the
  * corresponding info string, or a negative value to print the
  * corresponding header.
@@ -343,7 +343,7 @@ char *av_get_pix_fmt_string(char *buf, int buf_size,
  * format writes the values corresponding to the palette
  * component c in data[1] to dst, rather than the palette indexes in
  * data[0]. The behavior is undefined if the format is not paletted.
- * @param dst_element_size size_i32 of elements in dst array (2 or 4 byte)
+ * @param dst_element_size size of elements in dst array (2 or 4 byte)
  */
 void av_read_image_line2(void *dst, const uint8_t *data[4],
                         const int linesize[4], const AVPixFmtDescriptor *desc,
@@ -367,7 +367,7 @@ void av_read_image_line(uint16_t *dst, const uint8_t *data[4],
  * @param y the vertical coordinate of the first pixel to write
  * @param w the width of the line to write, that is the number of
  * values to write to the image line
- * @param src_element_size size_i32 of elements in src array (2 or 4 byte)
+ * @param src_element_size size of elements in src array (2 or 4 byte)
  */
 void av_write_image_line2(const void *src, uint8_t *data[4],
                          const int linesize[4], const AVPixFmtDescriptor *desc,

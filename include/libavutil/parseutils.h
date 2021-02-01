@@ -60,7 +60,7 @@ int av_parse_ratio(AVRational *q, const char *str, int max,
  * @param[in,out] height_ptr pointer to the variable which will contain the detected
  * height value
  * @param[in] str the string to parse: it has to be a string in the format
- * width x height or a valid video size_i32 abbreviation.
+ * width x height or a valid video size abbreviation.
  * @return >= 0 on success, a negative error code otherwise
  */
 int av_parse_video_size(int *width_ptr, int *height_ptr, const char *str);
@@ -106,7 +106,7 @@ int av_parse_color(uint8_t *rgba_color, const char *color_string, int slen,
  * av_parse_color().
  *
  * @param color_idx index of the requested color, starting from 0
- * @param rgbp      if not NULL, will point_i32 to a 3-elements array with the color value in RGB
+ * @param rgbp      if not NULL, will point to a 3-elements array with the color value in RGB
  * @return the color name string or NULL if color_idx is not in the array
  */
 const char *av_get_known_color_name(int color_idx, const uint8_t **rgb);

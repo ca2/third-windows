@@ -338,13 +338,13 @@ AssignPixel(BYTE* dst, const BYTE* src, unsigned bytesperpixel) {
 			*(reinterpret_cast<DWORD*>(dst + 4)) = *(reinterpret_cast<const DWORD*> (src + 4));	
 			break;
 		
-		case 12: // FIT_RGBF (3 x 32-bit IEEE floating point_i32)
+		case 12: // FIT_RGBF (3 x 32-bit IEEE floating point)
 			*(reinterpret_cast<float*>(dst)) = *(reinterpret_cast<const float*> (src));
 			*(reinterpret_cast<float*>(dst + 4)) = *(reinterpret_cast<const float*> (src + 4));
 			*(reinterpret_cast<float*>(dst + 8)) = *(reinterpret_cast<const float*> (src + 8));
 			break;
 		
-		case 16: // FIT_RGBAF (4 x 32-bit IEEE floating point_i32)
+		case 16: // FIT_RGBAF (4 x 32-bit IEEE floating point)
 			*(reinterpret_cast<float*>(dst)) = *(reinterpret_cast<const float*> (src));
 			*(reinterpret_cast<float*>(dst + 4)) = *(reinterpret_cast<const float*> (src + 4));
 			*(reinterpret_cast<float*>(dst + 8)) = *(reinterpret_cast<const float*> (src + 8));
@@ -469,7 +469,7 @@ SwapLong(DWORD *lp) {
 
 /**
 Extract the luminance channel L from a RGBF image. 
-Luminance is calculated from the sRGB model using a D65 white point_i32, using the Rec.709 formula : 
+Luminance is calculated from the sRGB model using a D65 white point, using the Rec.709 formula : 
 L = ( 0.2126 * r ) + ( 0.7152 * g ) + ( 0.0722 * b )
 Reference : 
 A Standard Default Color Space for the Internet - sRGB. 
@@ -506,7 +506,7 @@ A Standard Default Color Space for the Internet - sRGB.
 // ==========================================================
 
 static const char *FI_MSG_ERROR_MEMORY = "Memory allocation failed";
-static const char *FI_MSG_ERROR_DIB_MEMORY = "DIB allocation failed, maybe caused by an invalid image size_i32 or by a lack of memory";
+static const char *FI_MSG_ERROR_DIB_MEMORY = "DIB allocation failed, maybe caused by an invalid image size or by a lack of memory";
 static const char *FI_MSG_ERROR_PARSING = "Parsing error";
 static const char *FI_MSG_ERROR_MAGIC_NUMBER = "Invalid magic number";
 static const char *FI_MSG_ERROR_UNSUPPORTED_FORMAT = "Unsupported format";

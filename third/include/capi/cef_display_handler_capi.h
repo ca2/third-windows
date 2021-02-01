@@ -82,9 +82,9 @@ typedef struct _cef_display_handler_t {
 
   ///
   // Called when web content in the page has toggled fullscreen mode. If
-  // |fullscreen| is true (1) the content will automatically be size_f64 to fill
+  // |fullscreen| is true (1) the content will automatically be sized to fill
   // the browser content area. If |fullscreen| is false (0) the content will
-  // automatically return to its original size_i32 and position. The client is
+  // automatically return to its original size and position. The client is
   // responsible for resizing the browser if desired.
   ///
   void(CEF_CALLBACK* on_fullscreen_mode_change)(
@@ -126,7 +126,7 @@ typedef struct _cef_display_handler_t {
   ///
   // Called when auto-resize is enabled via
   // cef_browser_host_t::SetAutoResizeEnabled and the contents have auto-
-  // resized. |new_size| will be the desired size_i32 in view coordinates. Return
+  // resized. |new_size| will be the desired size in view coordinates. Return
   // true (1) if the resize was handled or false (0) for default handling.
   ///
   int(CEF_CALLBACK* on_auto_resize)(struct _cef_display_handler_t* self,

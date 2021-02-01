@@ -56,7 +56,7 @@ struct _cairo_mempool {
     unsigned char *map;
 
     unsigned int num_blocks;
-    int min_bits;     /* Minimum block size_i32 is 1 << min_bits */
+    int min_bits;     /* Minimum block size is 1 << min_bits */
     int num_sizes;
     int max_free_bits;
 

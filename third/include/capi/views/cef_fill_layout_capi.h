@@ -47,7 +47,7 @@ extern "C" {
 #endif
 
 ///
-// A simple Layout that causes the associated Panel's one child to be size_f64 to
+// A simple Layout that causes the associated Panel's one child to be sized to
 // match the bounds of its parent. Methods must be called on the browser process
 // UI thread unless otherwise indicated.
 ///

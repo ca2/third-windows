@@ -60,7 +60,7 @@ typedef struct _cef_view_delegate_t {
   cef_base_ref_counted_t base;
 
   ///
-  // Return the preferred size_i32 for |view|. The Layout will use this information
+  // Return the preferred size for |view|. The Layout will use this information
   // to determine the display size.
   ///
   cef_size_t(CEF_CALLBACK* get_preferred_size)(
@@ -68,13 +68,13 @@ typedef struct _cef_view_delegate_t {
       struct _cef_view_t* view);
 
   ///
-  // Return the minimum size_i32 for |view|.
+  // Return the minimum size for |view|.
   ///
   cef_size_t(CEF_CALLBACK* get_minimum_size)(struct _cef_view_delegate_t* self,
                                              struct _cef_view_t* view);
 
   ///
-  // Return the maximum size_i32 for |view|.
+  // Return the maximum size for |view|.
   ///
   cef_size_t(CEF_CALLBACK* get_maximum_size)(struct _cef_view_delegate_t* self,
                                              struct _cef_view_t* view);

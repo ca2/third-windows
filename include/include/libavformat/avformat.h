@@ -48,7 +48,7 @@
  *
  * Main lavf structure used for both muxing and demuxing is AVFormatContext,
  * which exports all information about the file being read or written. As with
- * most Libavformat structures, its size_i32 is not part of public ABI, so it cannot be
+ * most Libavformat structures, its size is not part of public ABI, so it cannot be
  * allocated on stack or directly with av_malloc(). To create an
  * AVFormatContext, use avformat_alloc_context() (some functions, like
  * avformat_open_input() might do that for you).
@@ -413,15 +413,15 @@ struct AVDeviceCapabilitiesQuery;
  *
  * @param s    associated IO context
  * @param pkt packet
- * @param size_i32 desired ::payload size_i32
- * @return >0 (read size_i32) if OK, AVERROR_xxx otherwise
+ * @param size desired ::payload size
+ * @return >0 (read size) if OK, AVERROR_xxx otherwise
  */
-int av_get_packet(AVIOContext *s, AVPacket *pkt, int size_i32);
+int av_get_packet(AVIOContext *s, AVPacket *pkt, int size);
 
 
 /**
  * Read data and append it to the current content of the AVPacket.
- * If pkt->size_i32 is 0 this is identical to av_get_packet.
+ * If pkt->size is 0 this is identical to av_get_packet.
  * Note that this uses av_grow_packet and thus involves a realloc
  * which is inefficient. Thus this function should only be used
  * when there is no reasonable way to know (an upper bound of)
@@ -429,11 +429,11 @@ int av_get_packet(AVIOContext *s, AVPacket *pkt, int size_i32);
  *
  * @param s    associated IO context
  * @param pkt packet
- * @param size_i32 amount of data to read
- * @return >0 (read size_i32) if OK, AVERROR_xxx otherwise, previous data
+ * @param size amount of data to read
+ * @return >0 (read size) if OK, AVERROR_xxx otherwise, previous data
  *         will not be lost even if an error occurs.
  */
-int av_append_packet(AVIOContext *s, AVPacket *pkt, int size_i32);
+int av_append_packet(AVIOContext *s, AVPacket *pkt, int size);
 
 /*************************************************/
 /* input/output formats */
@@ -541,7 +541,7 @@ typedef struct AVOutputFormat {
 #endif
     ff_const59 struct AVOutputFormat *next;
     /**
-     * size_i32 of private data so that it can be allocated in the wrapper
+     * size of private data so that it can be allocated in the wrapper
      */
     int priv_data_size;
 
@@ -758,7 +758,7 @@ typedef struct AVInputFormat {
 
     /**
      * Seek to timestamp ts.
-     * Seeking will be done so that the point_i32 from which all active streams
+     * Seeking will be done so that the point from which all active streams
      * can be presented successfully will be closest to ts and within min/max_ts.
      * Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.
      */
@@ -810,7 +810,7 @@ typedef struct AVIndexEntry {
                                           * Flag is used to indicate which frame should be discarded after decoding.
                                           */
     int flags:2;
-    int size_i32:30; //Yeah, trying to keep the size_i32 of this small to reduce memory requirements (it is 24 vs. 32 bytes due to possible 8-byte alignment).
+    int size:30; //Yeah, trying to keep the size of this small to reduce memory requirements (it is 24 vs. 32 bytes due to possible 8-byte alignment).
     int min_distance;         /**< Minimum distance between this and the previous keyframe, used to avoid unneeded searching. */
 } AVIndexEntry;
 
@@ -1186,7 +1186,7 @@ typedef struct AVStream {
      * Defined by AV_PTS_WRAP_ values.
      *
      * If correction is enabled, there are two possibilities:
-     * If the first time stamp is near the wrap point_i32, the wrap offset
+     * If the first time stamp is near the wrap point, the wrap offset
      * will be subtracted, which will create negative time stamps.
      * Otherwise the offset will be added.
      */
@@ -1503,7 +1503,7 @@ typedef struct AVFormatContext {
 #define AVFMT_FLAG_AUTO_BSF   0x200000 ///< Add bitstream filters as requested by the muxer
 
     /**
-     * Maximum size_i32 of the data read from input for determining
+     * Maximum size of the data read from input for determining
      * the input container format.
      * Demuxing only, set by the caller before avformat_open_input().
      */
@@ -1700,7 +1700,7 @@ typedef struct AVFormatContext {
     int max_chunk_duration;
 
     /**
-     * Max chunk size_i32 in bytes
+     * Max chunk size in bytes
      * Note, not all formats support this and unpredictable things may happen if it is used when not supported.
      * - encoding: Set by user
      * - decoding: unused
@@ -2099,7 +2099,7 @@ AVOutputFormat *av_oformat_next(const AVOutputFormat *f);
  * Iterate over all registered muxers.
  *
  * @param opaque a pointer where libavformat will store the iteration state. Must
- *               point_i32 to NULL to start the iteration.
+ *               point to NULL to start the iteration.
  *
  * @return the next registered muxer or NULL when the iteration is
  *         finished
@@ -2110,7 +2110,7 @@ const AVOutputFormat *av_muxer_iterate(void **opaque);
  * Iterate over all registered demuxers.
  *
  * @param opaque a pointer where libavformat will store the iteration state. Must
- *               point_i32 to NULL to start the iteration.
+ *               point to NULL to start the iteration.
  *
  * @return the next registered demuxer or NULL when the iteration is
  *         finished
@@ -2167,7 +2167,7 @@ AVStream *avformat_new_stream(AVFormatContext *s, const AVCodec *c);
  * @param data the side data array. It must be allocated with the av_malloc()
  *             family of functions. The ownership of the data is transferred to
  *             st.
- * @param size_i32 side information size_i32
+ * @param size side information size
  * @return zero on success, a negative AVERROR code on failure. On failure,
  *         the stream is unchanged and the data remains owned by the caller.
  */
@@ -2179,21 +2179,21 @@ int av_stream_add_side_data(AVStream *st, enum AVPacketSideDataType type,
  *
  * @param stream stream
  * @param type desired side information type
- * @param size_i32 side information size_i32
+ * @param size side information size
  * @return pointer to fresh allocated data or NULL otherwise
  */
 uint8_t *av_stream_new_side_data(AVStream *stream,
-                                 enum AVPacketSideDataType type, int size_i32);
+                                 enum AVPacketSideDataType type, int size);
 /**
  * Get side information from stream.
  *
  * @param stream stream
  * @param type desired side information type
- * @param size_i32 pointer for side information size_i32 to store (optional)
+ * @param size pointer for side information size to store (optional)
  * @return pointer to data if present or NULL otherwise
  */
 uint8_t *av_stream_get_side_data(const AVStream *stream,
-                                 enum AVPacketSideDataType type, int *size_i32);
+                                 enum AVPacketSideDataType type, int *size);
 
 AVProgram *av_new_program(AVFormatContext *s, int id);
 
@@ -2265,8 +2265,8 @@ ff_const59 AVInputFormat *av_probe_input_format3(ff_const59 AVProbeData *pd, int
 
 /**
  * Probe a bytestream to determine the input format. Each time a probe returns
- * with a score that is too low, the probe buffer size_i32 is increased and another
- * attempt is made. When the maximum probe size_i32 is reached, the input format
+ * with a score that is too low, the probe buffer size is increased and another
+ * attempt is made. When the maximum probe size is reached, the input format
  * with the highest score is returned.
  *
  * @param pb the bytestream to probe
@@ -2274,7 +2274,7 @@ ff_const59 AVInputFormat *av_probe_input_format3(ff_const59 AVProbeData *pd, int
  * @param url the url of the stream
  * @param logctx the log context
  * @param offset the offset within the bytestream to probe from
- * @param max_probe_size the maximum probe buffer size_i32 (zero for default)
+ * @param max_probe_size the maximum probe buffer size (zero for default)
  * @return the score in case of success, a negative value corresponding to an
  *         the maximal score is AVPROBE_SCORE_MAX
  * AVERROR code otherwise
@@ -2395,8 +2395,8 @@ int av_find_best_stream(AVFormatContext *ic,
  * is valid indefinitely. In both cases the packet must be freed with
  * av_packet_unref when it is no longer needed. For video, the packet contains
  * exactly one frame. For audio, it contains an integer number of frames if each
- * frame has a known fixed size_i32 (e.g. PCM or ADPCM data). If the audio frames
- * have a variable size_i32 (e.g. MPEG audio), then it contains one frame.
+ * frame has a known fixed size (e.g. PCM or ADPCM data). If the audio frames
+ * have a variable size (e.g. MPEG audio), then it contains one frame.
  *
  * pkt->pts, pkt->dts and pkt->duration are always set to correct
  * values in AVStream.time_base units (and guessed if the format cannot
@@ -2426,7 +2426,7 @@ int av_seek_frame(AVFormatContext *s, int stream_index, int64_t timestamp,
 
 /**
  * Seek to timestamp ts.
- * Seeking will be done so that the point_i32 from which all active streams
+ * Seeking will be done so that the point from which all active streams
  * can be presented successfully will be closest to ts and within min/max_ts.
  * Active streams are all streams that have AVStream.discard < AVDISCARD_ALL.
  *
@@ -2743,11 +2743,11 @@ int av_get_output_timestamp(struct AVFormatContext *s, int stream,
  *
  * @param f The file stream pointer where the dump should be sent to.
  * @param buf buffer
- * @param size_i32 buffer size_i32
+ * @param size buffer size
  *
  * @see av_hex_dump_log, av_pkt_dump2, av_pkt_dump_log2
  */
-void av_hex_dump(FILE *f, const uint8_t *buf, int size_i32);
+void av_hex_dump(FILE *f, const uint8_t *buf, int size);
 
 /**
  * Send a nice hexadecimal dump of a buffer to the log.
@@ -2757,11 +2757,11 @@ void av_hex_dump(FILE *f, const uint8_t *buf, int size_i32);
  * @param level The importance level of the message, lower values signifying
  * higher importance.
  * @param buf buffer
- * @param size_i32 buffer size_i32
+ * @param size buffer size
  *
  * @see av_hex_dump, av_pkt_dump2, av_pkt_dump_log2
  */
-void av_hex_dump_log(void *avcl, int level, const uint8_t *buf, int size_i32);
+void av_hex_dump_log(void *avcl, int level, const uint8_t *buf, int size);
 
 /**
  * Send a nice dump of a packet to the specified file stream.
@@ -2854,14 +2854,14 @@ int av_add_index_entry(AVStream *st, int64_t pos, int64_t timestamp,
  * value.
  *
  * @param proto the buffer for the protocol
- * @param proto_size the size_i32 of the proto buffer
+ * @param proto_size the size of the proto buffer
  * @param authorization the buffer for the authorization
- * @param authorization_size the size_i32 of the authorization buffer
+ * @param authorization_size the size of the authorization buffer
  * @param hostname the buffer for the host name
- * @param hostname_size the size_i32 of the hostname buffer
+ * @param hostname_size the size of the hostname buffer
  * @param port_ptr a pointer to store the port number in
  * @param path the buffer for the path
- * @param path_size the size_i32 of the path buffer
+ * @param path_size the size of the path buffer
  * @param url the URL to split
  */
 void av_url_split(char *proto,         int proto_size,
@@ -2897,7 +2897,7 @@ void av_dump_format(AVFormatContext *ic,
  * of digits and '%%'.
  *
  * @param buf destination buffer
- * @param buf_size destination buffer size_i32
+ * @param buf_size destination buffer size
  * @param path numbered sequence string
  * @param number frame number
  * @param flags AV_FRAME_FILENAME_FLAGS_*
@@ -2931,10 +2931,10 @@ int av_filename_number_test(const char *filename);
  * @param n_files number of AVCodecContexts contained in ac
  * @param buf buffer where the SDP will be stored (must be allocated by
  *            the caller)
- * @param size_i32 the size_i32 of the buffer
+ * @param size the size of the buffer
  * @return 0 if OK, AVERROR_xxx on error
  */
-int av_sdp_create(AVFormatContext *ac[], int n_files, char *buf, int size_i32);
+int av_sdp_create(AVFormatContext *ac[], int n_files, char *buf, int size);
 
 /**
  * Return a positive value if the given filename has one of the given

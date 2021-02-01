@@ -536,7 +536,7 @@ FT_BEGIN_HEADER
    *     vertBearingX - width
    *
    *   pads ::
-   *     Unused (to make the size_i32 of the record a multiple of 32 bits.
+   *     Unused (to make the size of the record a multiple of 32 bits.
    */
   typedef struct  TT_SBit_LineMetricsRec_
   {
@@ -581,7 +581,7 @@ FT_BEGIN_HEADER
    *     The offset to image data in 'EBDT'.
    *
    *   image_size ::
-   *     For index formats 2 and 5.  This is the size_i32 in bytes of each glyph
+   *     For index formats 2 and 5.  This is the size in bytes of each glyph
    *     bitmap.
    *
    *   big_metrics ::
@@ -1051,7 +1051,7 @@ FT_BEGIN_HEADER
    *     The offset of the glyph according to the 'locations' table.
    *
    *   byte_count ::
-   *     The size_i32 of the frame in bytes.
+   *     The size of the frame in bytes.
    *
    * @return:
    *   FreeType error code.  0 means success.
@@ -1156,7 +1156,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   The TrueType face class.  These objects model the resolution and
-   *   point_i32-size_i32 independent data found in a TrueType font file.
+   *   point-size independent data found in a TrueType font file.
    *
    * @fields:
    *   root ::
@@ -1217,7 +1217,7 @@ FT_BEGIN_HEADER
    *     frame).
    *
    *   cmap_size ::
-   *     The size_i32 in bytes of the `cmap_table` described above.
+   *     The size in bytes of the `cmap_table` described above.
    *
    *   goto_table ::
    *     A function called by each TrueType table loader to position a
@@ -1306,12 +1306,12 @@ FT_BEGIN_HEADER
    *     Ignored for Type 2 font fonts.
    *
    *   cvt_program_size ::
-   *     The size_i32 in bytecodes of the face's cvt program.  Ignored for Type 2
+   *     The size in bytecodes of the face's cvt program.  Ignored for Type 2
    *     fonts.
    *
    *   cvt_program ::
    *     The face's cvt program (bytecode stream) executed each time an
-   *     instance/size_i32 is changed/reset.  Comes from the 'prep' table.
+   *     instance/size is changed/reset.  Comes from the 'prep' table.
    *     Ignored for Type 2 fonts.
    *
    *   cvt_size ::
@@ -1366,10 +1366,10 @@ FT_BEGIN_HEADER
    *     The length of the `var_postscript_prefix` string.
    *
    *   horz_metrics_size ::
-   *     The size_i32 of the 'hmtx' table.
+   *     The size of the 'hmtx' table.
    *
    *   vert_metrics_size ::
-   *     The size_i32 of the 'vmtx' table.
+   *     The size of the 'vmtx' table.
    *
    *   num_locations ::
    *     The number of glyph locations in this TrueType file.  This should be
@@ -1383,13 +1383,13 @@ FT_BEGIN_HEADER
    *     A pointer to the 'hdmx' table.
    *
    *   hdmx_table_size ::
-   *     The size_i32 of the 'hdmx' table.
+   *     The size of the 'hdmx' table.
    *
    *   hdmx_record_count ::
    *     The number of hdmx records.
    *
    *   hdmx_record_size ::
-   *     The size_i32 of a single hdmx record.
+   *     The size of a single hdmx record.
    *
    *   hdmx_record_sizes ::
    *     An array holding the ppem sizes available in the 'hdmx' table.
@@ -1398,7 +1398,7 @@ FT_BEGIN_HEADER
    *     A pointer to the font's embedded bitmap location table.
    *
    *   sbit_table_size ::
-   *     The size_i32 of `sbit_table`.
+   *     The size of `sbit_table`.
    *
    *   sbit_table_type ::
    *     The sbit table type (CBLC, sbix, etc.).
@@ -1423,7 +1423,7 @@ FT_BEGIN_HEADER
    *     A pointer to the 'kern' table.
    *
    *   kern_table_size ::
-   *     The size_i32 of the 'kern' table.
+   *     The size of the 'kern' table.
    *
    *   num_kern_tables ::
    *     The number of supported kern subtables (up to 32; FreeType
@@ -1458,7 +1458,7 @@ FT_BEGIN_HEADER
    *     The file offset of the sbit data table (CBDT, bdat, etc.).
    *
    *   ebdt_size ::
-   *     The size_i32 of the sbit data table.
+   *     The size of the sbit data table.
    */
   typedef struct  TT_FaceRec_
   {
@@ -1662,10 +1662,10 @@ FT_BEGIN_HEADER
    *     A handle to the memory manager.
    *
    *   max_points ::
-   *     The maximum size_i32 in points of the zone.
+   *     The maximum size in points of the zone.
    *
    *   max_contours ::
-   *     Max size_i32 in links contours of the zone.
+   *     Max size in links contours of the zone.
    *
    *   n_points ::
    *     The current number of points in the zone.
@@ -1680,7 +1680,7 @@ FT_BEGIN_HEADER
    *     The current glyph coordinates (scaled/hinted).
    *
    *   tags ::
-   *     The point_i32 control tags.
+   *     The point control tags.
    *
    *   contours ::
    *     The contours end points.
@@ -1696,14 +1696,14 @@ FT_BEGIN_HEADER
     FT_UShort   n_points;    /* number of points in zone    */
     FT_Short    n_contours;  /* number of contours          */
 
-    FT_Vector*  org;         /* original point_i32 coordinates  */
-    FT_Vector*  cur;         /* current point_i32 coordinates   */
-    FT_Vector*  orus;        /* original (unscaled) point_i32 coordinates */
+    FT_Vector*  org;         /* original point coordinates  */
+    FT_Vector*  cur;         /* current point coordinates   */
+    FT_Vector*  orus;        /* original (unscaled) point coordinates */
 
     FT_Byte*    tags;        /* current touch flags         */
     FT_UShort*  contours;    /* contour end points          */
 
-    FT_UShort   first_point; /* offset of first (#0) point_i32  */
+    FT_UShort   first_point; /* offset of first (#0) point  */
 
   } TT_GlyphZoneRec, *TT_GlyphZone;
 
@@ -1718,7 +1718,7 @@ FT_BEGIN_HEADER
    *   TT_Size
    *
    * @description:
-   *   A handle to a TrueType size_i32 object.
+   *   A handle to a TrueType size object.
    */
   typedef struct TT_SizeRec_*  TT_Size;
 
