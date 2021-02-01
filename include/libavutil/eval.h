@@ -95,7 +95,7 @@ void av_expr_free(AVExpr *e);
  * Parse the string in numstr and return its value as a double. If
  * the string is empty, contains only whitespaces, or does not contain
  * an initial substring that has the expected syntax for a
- * floating-point number, no conversion is performed. In this case,
+ * floating-point_i32 number, no conversion is performed. In this case,
  * returns a value of zero and the value returned in tail is the value
  * of numstr.
  *

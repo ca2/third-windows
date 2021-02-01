@@ -82,7 +82,7 @@ typedef struct _cef_download_item_t {
   int64(CEF_CALLBACK* get_current_speed)(struct _cef_download_item_t* self);
 
   ///
-  // Returns the rough percent complete or -1 if the receive total size is
+  // Returns the rough percent complete or -1 if the receive total size_i32 is
   // unknown.
   ///
   int(CEF_CALLBACK* get_percent_complete)(struct _cef_download_item_t* self);

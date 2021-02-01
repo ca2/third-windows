@@ -68,7 +68,7 @@ _cairo_damage_add_box (cairo_damage_t *damage,
 
 cairo_private cairo_damage_t *
 _cairo_damage_add_rectangle (cairo_damage_t *damage,
-			     const cairo_rectangle_int_t *rect);
+			     const cairo_rectangle_int_t *rectangle_i32);
 
 cairo_private cairo_damage_t *
 _cairo_damage_add_region (cairo_damage_t *damage,

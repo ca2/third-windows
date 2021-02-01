@@ -53,7 +53,7 @@ void av_vorbis_parse_free(AVVorbisParseContext **s);
  *
  * @param s        Vorbis parser context
  * @param buf      buffer containing a Vorbis frame
- * @param buf_size size of the buffer
+ * @param buf_size size_i32 of the buffer
  * @param flags    flags for special frames
  */
 int av_vorbis_parse_frame_flags(AVVorbisParseContext *s, const uint8_t *buf,
@@ -64,7 +64,7 @@ int av_vorbis_parse_frame_flags(AVVorbisParseContext *s, const uint8_t *buf,
  *
  * @param s        Vorbis parser context
  * @param buf      buffer containing a Vorbis frame
- * @param buf_size size of the buffer
+ * @param buf_size size_i32 of the buffer
  */
 int av_vorbis_parse_frame(AVVorbisParseContext *s, const uint8_t *buf,
                           int buf_size);

@@ -27,7 +27,7 @@
 #include "avstring.h"
 
 /**
- * Define a structure with extra padding to a fixed size
+ * Define a structure with extra padding to a fixed size_i32
  * This helps ensuring binary compatibility with future versions.
  */
 
@@ -50,11 +50,11 @@ typedef struct name { \
  * after the structure goes out of scope). This is almost as lightweight as
  * declaring a local "char buf[512]".
  *
- * The length of the string can go beyond the allocated size: the buffer is
+ * The length of the string can go beyond the allocated size_i32: the buffer is
  * then truncated, but the functions still keep account of the actual total
  * length.
  *
- * In other words, buf->len can be greater than buf->size and records the
+ * In other words, buf->len can be greater than buf->size_i32 and records the
  * total length of what would have been to the buffer if there had been
  * enough memory.
  *
@@ -70,10 +70,10 @@ typedef struct name { \
  *
  * size_max = 0 prevents writing anything to the buffer: only the total
  * length is computed. The write operations can then possibly be repeated in
- * a buffer with exactly the necessary size
+ * a buffer with exactly the necessary size_i32
  * (using size_init = size_max = len + 1).
  *
- * size_max = 1 is automatically replaced by the exact size available in the
+ * size_max = 1 is automatically replaced by the exact size_i32 available in the
  * structure itself, thus ensuring no dynamic memory allocation. The
  * internal buffer is large enough to hold a reasonable paragraph of text,
  * such as the current paragraph.
@@ -99,7 +99,7 @@ FF_PAD_STRUCTURE(AVBPrint, 1024,
  * Init a print buffer.
  *
  * @param buf        buffer to init
- * @param size_init  initial size (including the final 0)
+ * @param size_init  initial size_i32 (including the final 0)
  * @param size_max   maximum size;
  *                   0 means do not write anything, just count the length;
  *                   1 is replaced by the maximum value for automatic storage;
@@ -117,9 +117,9 @@ void av_bprint_init(AVBPrint *buf, unsigned size_init, unsigned size_max);
  *
  * @param buf     buffer structure to init
  * @param buffer  byte buffer to use for the string data
- * @param size    size of buffer
+ * @param size_i32    size_i32 of buffer
  */
-void av_bprint_init_for_buffer(AVBPrint *buf, char *buffer, unsigned size);
+void av_bprint_init_for_buffer(AVBPrint *buf, char *buffer, unsigned size_i32);
 
 /**
  * Append a formatted string to a print buffer.
@@ -141,9 +141,9 @@ void av_bprint_chars(AVBPrint *buf, char c, unsigned n);
  *
  * param buf  bprint buffer to use
  * param data pointer to data
- * param size size of data
+ * param size_i32 size_i32 of data
  */
-void av_bprint_append_data(AVBPrint *buf, const char *data, unsigned size);
+void av_bprint_append_data(AVBPrint *buf, const char *data, unsigned size_i32);
 
 struct tm;
 /**
@@ -163,10 +163,10 @@ void av_bprint_strftime(AVBPrint *buf, const char *fmt, const struct tm *tm);
  * Allocate bytes in the buffer for external use.
  *
  * @param[in]  buf          buffer structure
- * @param[in]  size         required size
+ * @param[in]  size_i32         required size_i32
  * @param[out] mem          pointer to the memory area
- * @param[out] actual_size  size of the memory area after allocation;
- *                          can be larger or smaller than size
+ * @param[out] actual_size  size_i32 of the memory area after allocation;
+ *                          can be larger or smaller than size_i32
  */
 void av_bprint_get_buffer(AVBPrint *buf, unsigned size,
                           unsigned char **mem, unsigned *actual_size);
@@ -180,18 +180,18 @@ void av_bprint_clear(AVBPrint *buf);
  * Test if the print buffer is complete (not truncated).
  *
  * It may have been truncated due to a memory allocation failure
- * or the size_max limit (compare size and size_max if necessary).
+ * or the size_max limit (compare size_i32 and size_max if necessary).
  */
 static inline int av_bprint_is_complete(const AVBPrint *buf)
 {
-    return buf->len < buf->size;
+    return buf->len < buf->size_i32;
 }
 
 /**
  * Finalize a print buffer.
  *
  * The print buffer can no longer be used afterwards,
- * but the len and size fields are still valid.
+ * but the len and size_i32 fields are still valid.
  *
  * @arg[out] ret_str  if not NULL, used to return a permanent copy of the
  *                    buffer contents, or NULL if memory allocation fails;

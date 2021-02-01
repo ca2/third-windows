@@ -105,7 +105,7 @@
 // needed.
 //
 //   VLOG_IF(1, (size > 1024))
-//      << "I'm printed when size is more than 1024 and when you run the "
+//      << "I'm printed when size_i32 is more than 1024 and when you run the "
 //         "program with --v=1 or more";
 //
 // We also override the standard 'assert' to use 'DLOG_ASSERT'.
@@ -175,7 +175,7 @@ inline int GetMinLogLevel() {
 }
 
 // Gets the current vlog level for the given file (usually taken from
-// __FILE__). Note that |N| is the size *with* the null terminator.
+// __FILE__). Note that |N| is the size_i32 *with* the null terminator.
 template <size_t N>
 int GetVlogLevel(const char (&file)[N]) {
   return cef_get_vlog_level(file, N);

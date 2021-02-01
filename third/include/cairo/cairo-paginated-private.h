@@ -80,7 +80,7 @@ struct _cairo_paginated_surface_backend {
     (*supports_fine_grained_fallbacks) (void	    *surface);
 
     /* Optional. Indicates whether the page requires a thumbnail image to be
-     * supplied. If a thumbnail is required, set width, heigh to size required
+     * supplied. If a thumbnail is required, set width, heigh to size_i32 required
      * and return TRUE.
      */
     cairo_bool_t
@@ -119,7 +119,7 @@ struct _cairo_paginated_surface_backend {
  * sequence of operations (using the backend functions passed to
  * cairo_paginated_surface_create()):
  *
- * 1. Calls start_page() (if not %NULL). At this point, it is appropriate
+ * 1. Calls start_page() (if not %NULL). At this point_i32, it is appropriate
  *    for the target to emit any page-specific header information into
  *    its output.
  *

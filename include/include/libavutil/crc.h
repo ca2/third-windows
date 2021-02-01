@@ -60,7 +60,7 @@ typedef enum {
 
 /**
  * Initialize a CRC table.
- * @param ctx must be an array of size sizeof(AVCRC)*257 or sizeof(AVCRC)*1024
+ * @param ctx must be an array of size_i32 sizeof(AVCRC)*257 or sizeof(AVCRC)*1024
  * @param le If 1, the lowest bit represents the coefficient for the highest
  *           exponent of the corresponding polynomial (both for poly and
  *           actual CRC).
@@ -71,7 +71,7 @@ typedef enum {
  * @param bits number of bits for the CRC
  * @param poly generator polynomial without the x**bits coefficient, in the
  *             representation as specified by le
- * @param ctx_size size of ctx in bytes
+ * @param ctx_size size_i32 of ctx in bytes
  * @return <0 on failure
  */
 int av_crc_init(AVCRC *ctx, int le, int bits, uint32_t poly, int ctx_size);

@@ -662,9 +662,9 @@ __owur int SRP_Calc_A_param(SSL *s);
  * otherwise the SSL handshake will fail with an error - callbacks can do
  * this using the 'ssl' value they're passed by;
  * SSL_has_matching_session_id(ssl, id, *id_len) The length value passed in
- * is set at the maximum size the session ID can be. In SSLv3/TLSv1 it is 32
+ * is set at the maximum size_i32 the session ID can be. In SSLv3/TLSv1 it is 32
  * bytes. The callback can alter this length to be less if desired. It is
- * also an error for the callback to set the size to zero.
+ * also an error for the callback to set the size_i32 to zero.
  */
 typedef int (*GEN_SESSION_CB) (SSL *ssl, unsigned char *id,
                                unsigned int *id_len);
@@ -1531,7 +1531,7 @@ __owur int SSL_get_fd(const SSL *s);
 __owur int SSL_get_rfd(const SSL *s);
 __owur int SSL_get_wfd(const SSL *s);
 __owur const char *SSL_get_cipher_list(const SSL *s, int n);
-__owur char *SSL_get_shared_ciphers(const SSL *s, char *buf, int size);
+__owur char *SSL_get_shared_ciphers(const SSL *s, char *buf, int size_i32);
 __owur int SSL_get_read_ahead(const SSL *s);
 __owur int SSL_pending(const SSL *s);
 __owur int SSL_has_pending(const SSL *s);
@@ -1958,7 +1958,7 @@ __owur long SSL_get_default_timeout(const SSL *s);
 #  define SSL_library_init() OPENSSL_init_ssl(0, NULL)
 # endif
 
-__owur char *SSL_CIPHER_description(const SSL_CIPHER *, char *buf, int size);
+__owur char *SSL_CIPHER_description(const SSL_CIPHER *, char *buf, int size_i32);
 __owur STACK_OF(X509_NAME) *SSL_dup_CA_list(const STACK_OF(X509_NAME) *sk);
 
 __owur SSL *SSL_dup(SSL *ssl);

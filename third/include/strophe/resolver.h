@@ -29,7 +29,7 @@ int resolver_srv_lookup_buf(const unsigned char *buf, size_t len,
  *  @param proto protocol of the SRV record
  *  @param domain resolving domain
  *  @param target pre-allocated string where result is stored
- *  @param target_len maximum size of the target
+ *  @param target_len maximum size_i32 of the target
  *  @param port pointer where resulting port is stored
  *
  *  @return 1 on success or 0 on fail

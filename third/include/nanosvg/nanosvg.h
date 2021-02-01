@@ -57,7 +57,7 @@ extern "C" {
    // Load SVG
    NSVGimage* image;
    image = nsvgParseFromFile("test.svg", "px", 96);
-   printf("size: %f x %f\n", image->width, image->height);
+   printf("size_i32: %f x %f\n", image->width, image->height);
    // Use...
    for (NSVGshape *shape = image->shapes; shape != NULL; shape = shape->next) {
       for (NSVGpath *path = shape->paths; path != NULL; path = path->next) {
@@ -1234,7 +1234,7 @@ static double nsvg__atof(const char* s)
 }
 
 
-static const char* nsvg__parseNumber(const char* s, char* it, const int size)
+static const char* nsvg__parseNumber(const char* s, char* it, const int size_i32)
 {
    const int last = size - 1;
    int i = 0;
@@ -1253,7 +1253,7 @@ static const char* nsvg__parseNumber(const char* s, char* it, const int size)
    }
    if (*s == '.')
    {
-      // decimal point
+      // decimal point_i32
       if (i < last) it[i++] = *s;
       s++;
       // fraction part
@@ -1925,7 +1925,7 @@ static int nsvg__parseAttr(NSVGparser* p, const char* name, const char* value)
    {
       attr->fillRule = nsvg__parseFillRule(value);
    }
-   else if (strcmp(name, "font-size") == 0)
+   else if (strcmp(name, "font-size_i32") == 0)
    {
       attr->fontSize = nsvg__parseCoordinate(p, value, 0.0f, nsvg__actualLength(p));
    }
@@ -2275,9 +2275,9 @@ static void nsvg__pathArcTo(NSVGparser* p, float* cpx, float* cpy, float* args, 
    rotx = args[2] / 180.0f * NSVG_PI;		// x rotation angle
    fa = fabsf(args[3]) > 1e-6 ? 1 : 0;	// Large arc
    fs = fabsf(args[4]) > 1e-6 ? 1 : 0;	// Sweep direction
-   x1 = *cpx;							// start point
+   x1 = *cpx;							// start point_i32
    y1 = *cpy;
-   if (rel)  							// end point
+   if (rel)  							// end point_i32
    {
       x2 = *cpx + args[5];
       y2 = *cpy + args[6];
@@ -2303,7 +2303,7 @@ static void nsvg__pathArcTo(NSVGparser* p, float* cpx, float* cpy, float* args, 
    sinrx = sinf(rotx);
    cosrx = cosf(rotx);
 
-   // Convert to center point parameterization.
+   // Convert to center point_i32 parameterization.
    // http://www.w3.org/TR/SVG11/implnote.html#ArcImplementationNotes
    // 1) Compute x1', y1'
    x1p = cosrx * dx / 2.0f + sinrx * dy / 2.0f;
@@ -2353,7 +2353,7 @@ static void nsvg__pathArcTo(NSVGparser* p, float* cpx, float* cpy, float* args, 
    t[4] = cx; t[5] = cy;
 
    // Split arc into max 90 degree segments.
-   // The loop assumes an iteration per end point (including start and end), this +1.
+   // The loop assumes an iteration per end point_i32 (including start and end), this +1.
    ndivs = (int)(fabsf(da) / (NSVG_PI*0.5f) + 1.0f);
    hda = (da / (float)ndivs) / 2.0f;
    kappa = fabsf(4.0f / 3.0f * (1.0f - cosf(hda)) / sinf(hda));
@@ -2505,7 +2505,7 @@ static void nsvg__parsePath(NSVGparser* p, const char** attr)
                // Commit path.
                if (p->npts > 0)
                {
-                  // Move current point to first point
+                  // Move current point_i32 to first point_i32
                   cpx = p->pts[0];
                   cpy = p->pts[1];
                   cpx2 = cpx; cpy2 = cpy;
@@ -2570,7 +2570,7 @@ static void nsvg__parseRect(NSVGparser* p, const char** attr)
       }
       else
       {
-         // Rounded rectangle
+         // Rounded rectangle_i32
          nsvg__moveTo(p, x + rx, y);
          nsvg__lineTo(p, x + w - rx, y);
          nsvg__cubicBezTo(p, x + w - rx * (1 - NSVG_KAPPA90), y, x + w, y + ry * (1 - NSVG_KAPPA90), x + w, y + ry);
@@ -2977,7 +2977,7 @@ static void nsvg__startElement(void* ud, const char* el, const char** attr)
       nsvg__parsePath(p, attr);
       nsvg__popAttr(p);
    }
-   else if (strcmp(el, "rect") == 0)
+   else if (strcmp(el, "rectangle_i32") == 0)
    {
       nsvg__pushAttr(p);
       nsvg__parseRect(p, attr);
@@ -3007,7 +3007,7 @@ static void nsvg__startElement(void* ud, const char* el, const char** attr)
       nsvg__parsePoly(p, attr, 0);
       nsvg__popAttr(p);
    }
-   else if (strcmp(el, "polygon") == 0)
+   else if (strcmp(el, "polygon_i32") == 0)
    {
       nsvg__pushAttr(p);
       nsvg__parsePoly(p, attr, 1);
@@ -3110,7 +3110,7 @@ static void nsvg__scaleToViewbox(NSVGparser* p, const char* units)
    int i;
    float* pt;
 
-   // Guess image size if not set completely.
+   // Guess image size_i32 if not set completely.
    nsvg__imageBounds(p, bounds);
 
    if (p->viewWidth == 0)
@@ -3248,8 +3248,8 @@ NSVGimage* nsvgParseFromFile(const char* filename, const char* units, float dpi)
    fseek(fp, 0, SEEK_SET);
    data = (char*)malloc(size + 1);
    if (data == NULL) goto error;
-   if (fread(data, 1, size, fp) != size) goto error;
-   data[size] = '\0';	// Must be null terminated.
+   if (fread(data, 1, size, fp) != size_i32) goto error;
+   data[size_i32] = '\0';	// Must be null terminated.
    fclose(fp);
    image = nsvgParse(data, units, dpi);
    free(data);

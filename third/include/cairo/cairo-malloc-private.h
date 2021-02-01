@@ -49,14 +49,14 @@
 
 /**
  * _cairo_malloc:
- * @size: size in bytes
+ * @size_i32: size_i32 in bytes
  *
- * Allocate @size memory using malloc().
+ * Allocate @size_i32 memory using malloc().
  * The memory should be freed using free().
  * malloc is skipped, if 0 bytes are requested, and %NULL will be returned.
  *
  * Return value: A pointer to the newly allocated memory, or %NULL in
- * case of malloc() failure or size is 0.
+ * case of malloc() failure or size_i32 is 0.
  **/
 
 #define _cairo_malloc(size) \
@@ -65,14 +65,14 @@
 /**
  * _cairo_malloc_ab:
  * @a: number of elements to allocate
- * @size: size of each element
+ * @size_i32: size_i32 of each element
  *
- * Allocates @a*@size memory using _cairo_malloc(), taking care to not
+ * Allocates @a*@size_i32 memory using _cairo_malloc(), taking care to not
  * overflow when doing the multiplication.  Behaves much like
  * calloc(), except that the returned memory is not set to zero.
  * The memory should be freed using free().
  *
- * @size should be a constant so that the compiler can optimize
+ * @size_i32 should be a constant so that the compiler can optimize
  * out a constant division.
  *
  * Return value: A pointer to the newly allocated memory, or %NULL in
@@ -87,13 +87,13 @@
  * _cairo_realloc_ab:
  * @ptr: original pointer to block of memory to be resized
  * @a: number of elements to allocate
- * @size: size of each element
+ * @size_i32: size_i32 of each element
  *
- * Reallocates @ptr a block of @a*@size memory using realloc(), taking
+ * Reallocates @ptr a block of @a*@size_i32 memory using realloc(), taking
  * care to not overflow when doing the multiplication.  The memory
  * should be freed using free().
  *
- * @size should be a constant so that the compiler can optimize
+ * @size_i32 should be a constant so that the compiler can optimize
  * out a constant division.
  *
  * Return value: A pointer to the newly allocated memory, or %NULL in
@@ -109,13 +109,13 @@
  * _cairo_malloc_abc:
  * @a: first factor of number of elements to allocate
  * @b: second factor of number of elements to allocate
- * @size: size of each element
+ * @size_i32: size_i32 of each element
  *
- * Allocates @a*@b*@size memory using _cairo_malloc(), taking care to not
+ * Allocates @a*@b*@size_i32 memory using _cairo_malloc(), taking care to not
  * overflow when doing the multiplication.  Behaves like
  * _cairo_malloc_ab().  The memory should be freed using free().
  *
- * @size should be a constant so that the compiler can optimize
+ * @size_i32 should be a constant so that the compiler can optimize
  * out a constant division.
  *
  * Return value: A pointer to the newly allocated memory, or %NULL in
@@ -130,10 +130,10 @@
 /**
  * _cairo_malloc_ab_plus_c:
  * @a: number of elements to allocate
- * @size: size of each element
- * @c: additional size to allocate
+ * @size_i32: size_i32 of each element
+ * @c: additional size_i32 to allocate
  *
- * Allocates @a*@size+@c memory using _cairo_malloc(), taking care to not
+ * Allocates @a*@size_i32+@c memory using _cairo_malloc(), taking care to not
  * overflow when doing the arithmetic.  Behaves similar to
  * _cairo_malloc_ab().  The memory should be freed using free().
  *

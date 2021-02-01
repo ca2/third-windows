@@ -12,7 +12,7 @@
 
 /* mpg123lib_intern.h is included already, right? */
 
-/* Special case is fixed point math... which does work, but not that nice yet.  */
+/* Special case is fixed point_i32 math... which does work, but not that nice yet.  */
 #ifdef REAL_IS_FIXED
 static inline int16_t idiv_signed_rounded(int32_t x, int shift)
 {
@@ -108,7 +108,7 @@ static inline int16_t ftoi16(float x)
 
 #else
 /* Macro to produce a short (signed 16bit) output sample from internal representation,
-   which may be float, double or indeed some integer for fixed point handling. */
+   which may be float, double or indeed some integer for fixed point_i32 handling. */
 #define WRITE_SHORT_SAMPLE(samples,sum,clip) \
   if( (sum) > REAL_PLUS_32767) { *(samples) = 0x7fff; (clip)++; } \
   else if( (sum) < REAL_MINUS_32768) { *(samples) = -0x8000; (clip)++; } \

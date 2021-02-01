@@ -234,7 +234,7 @@ extern "C" {
          */
 # define ENGINE_CTRL_CHIL_NO_LOCKING             101
         /*
-         * This prevents the initialisation function from providing mutex
+         * This prevents the initialisation function from providing ::mutex
          * callbacks to the nCipher library.
          */
 
@@ -285,7 +285,7 @@ typedef int (*ENGINE_SSL_CLIENT_CERT_PTR) (ENGINE *, SSL *ssl,
  */
 /*
  * Returns to a pointer to the array of supported cipher 'nid's. If the
- * second parameter is non-NULL it is set to the size of the returned array.
+ * second parameter is non-NULL it is set to the size_i32 of the returned array.
  */
 typedef int (*ENGINE_CIPHERS_PTR) (ENGINE *, const EVP_CIPHER **,
                                    const int **, int);

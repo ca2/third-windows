@@ -43,7 +43,7 @@
  * change these members go through the corresponding png_set_*
  * functions.  A function to clear these members is available: see
  * png_free_data().  The png_set_* functions do not depend on being
- * able to point info structure members to any of the storage they are
+ * able to point_i32 info structure members to any of the storage they are
  * passed (they make their own copies), EXCEPT that the png_set_text
  * functions use the same storage passed to them in the text_ptr or
  * itxt_ptr structure argument, and the png_set_rows and png_set_unknowns
@@ -118,7 +118,7 @@ struct png_info_def
     * be in an image.
     */
    int num_text; /* number of comments read or comments to write */
-   int max_text; /* current size of text array */
+   int max_text; /* current size_i32 of text array */
    png_textp text; /* array of comments read or comments to write */
 #endif /* TEXT */
 
@@ -206,7 +206,7 @@ defined(PNG_READ_BACKGROUND_SUPPORTED)
 #ifdef PNG_pCAL_SUPPORTED
    /* The pCAL chunk describes a transformation between the stored pixel
     * values and original physical data values used to create the image.
-    * The integer range [0, 2^bit_depth - 1] maps to the floating-point
+    * The integer range [0, 2^bit_depth - 1] maps to the floating-point_i32
     * range given by [pcal_X0, pcal_X1], and are further transformed by a
     * (possibly non-linear) transformation function given by "pcal_type"
     * and "pcal_params" into "pcal_units".  Please see the PNG_EQUATION_
@@ -246,7 +246,7 @@ defined(PNG_READ_BACKGROUND_SUPPORTED)
 #ifdef PNG_sCAL_SUPPORTED
    /* The sCAL chunk describes the actual physical dimensions of the
     * subject matter of the graphic.  The chunk contains a unit specification
-    * a byte value, and two ASCII strings representing floating-point
+    * a byte value, and two ASCII strings representing floating-point_i32
     * values.  The values are width and height corresponding to one pixel
     * in the image.  Data values are valid if (valid & PNG_INFO_sCAL) is
     * non-zero.

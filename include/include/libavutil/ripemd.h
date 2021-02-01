@@ -53,7 +53,7 @@ struct AVRIPEMD *av_ripemd_alloc(void);
 /**
  * Initialize RIPEMD hashing.
  *
- * @param context pointer to the function context (of size av_ripemd_size)
+ * @param context pointer to the function context (of size_i32 av_ripemd_size)
  * @param bits    number of bits in digest (128, 160, 256 or 320 bits)
  * @return        zero if initialization succeeded, -1 otherwise
  */

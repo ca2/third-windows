@@ -78,7 +78,7 @@ public:
     : m_size(0), m_capacity(Prealloc), m_array_ptr(cast_rawbuff()),
       m_psi_key(psi_key)
   {
-    // We do not want a zero-size array.
+    // We do not want a zero-size_i32 array.
     compile_time_assert(Prealloc != 0);
   }
 
@@ -229,7 +229,7 @@ public:
 
   /**
     Removes the last element in the array, effectively reducing the
-    container size by one. This destroys the removed element.
+    container size_i32 by one. This destroys the removed element.
    */
   void pop_back()
   {
@@ -293,7 +293,7 @@ public:
     Similar to std::set<>::erase()
     Removes a single element from the array by value.
     The removed element is destroyed.
-    This effectively reduces the container size by one.
+    This effectively reduces the container size_i32 by one.
 
     This is generally an inefficient operation, since we need to copy
     elements to fill the "hole" in the array.
@@ -326,7 +326,7 @@ public:
   /**
     Removes a single element from the array.
     The removed element is destroyed.
-    This effectively reduces the container size by one.
+    This effectively reduces the container size_i32 by one.
 
     This is generally an inefficient operation, since we need to copy
     elements to fill the "hole" in the array.
@@ -354,7 +354,7 @@ public:
   /**
     Removes tail elements from the array.
     The removed elements are destroyed.
-    This effectively reduces the containers size by 'end() - first'.
+    This effectively reduces the containers size_i32 by 'end() - first'.
    */
   void erase_at_end(iterator first)
   {
@@ -371,7 +371,7 @@ public:
   /**
     Removes a range of elements from the array.
     The removed elements are destroyed.
-    This effectively reduces the containers size by 'last - first'.
+    This effectively reduces the containers size_i32 by 'last - first'.
 
     This is generally an inefficient operation, since we need to copy
     elements to fill the "hole" in the array.
@@ -414,7 +414,7 @@ public:
     // Cannot shrink the pre-allocated array.
     if (m_array_ptr == cast_rawbuff())
       return;
-    // No point in swapping.
+    // No point_i32 in swapping.
     if (size() == capacity())
       return;
     Prealloced_array(m_psi_key, begin(), end()).swap(*this);
@@ -429,7 +429,7 @@ public:
 
     If n is greater than the current container size, the content is
     expanded by inserting at the end as many elements as needed to
-    reach a size of n. If val is specified, the new elements are
+    reach a size_i32 of n. If val is specified, the new elements are
     initialized as copies of val, otherwise, they are
     value-initialized.
 

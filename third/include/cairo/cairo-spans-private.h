@@ -92,7 +92,7 @@ _cairo_tor_scan_converter_create (int			xmin,
 				  cairo_antialias_t	antialias);
 cairo_private cairo_status_t
 _cairo_tor_scan_converter_add_polygon (void		*converter,
-				       const cairo_polygon_t *polygon);
+				       const cairo_polygon_t *polygon_i32);
 
 cairo_private cairo_scan_converter_t *
 _cairo_tor22_scan_converter_create (int			xmin,
@@ -103,7 +103,7 @@ _cairo_tor22_scan_converter_create (int			xmin,
 				    cairo_antialias_t	antialias);
 cairo_private cairo_status_t
 _cairo_tor22_scan_converter_add_polygon (void		*converter,
-					 const cairo_polygon_t *polygon);
+					 const cairo_polygon_t *polygon_i32);
 
 cairo_private cairo_scan_converter_t *
 _cairo_mono_scan_converter_create (int			xmin,
@@ -113,11 +113,11 @@ _cairo_mono_scan_converter_create (int			xmin,
 				   cairo_fill_rule_t	fill_rule);
 cairo_private cairo_status_t
 _cairo_mono_scan_converter_add_polygon (void		*converter,
-					const cairo_polygon_t *polygon);
+					const cairo_polygon_t *polygon_i32);
 
 cairo_private cairo_scan_converter_t *
 _cairo_clip_tor_scan_converter_create (cairo_clip_t *clip,
-				       cairo_polygon_t *polygon,
+				       cairo_polygon_t *polygon_i32,
 				       cairo_fill_rule_t fill_rule,
 				       cairo_antialias_t antialias);
 
@@ -170,7 +170,7 @@ _cairo_botor_scan_converter_init (cairo_botor_scan_converter_t *self,
 
 cairo_private cairo_status_t
 _cairo_botor_scan_converter_add_polygon (cairo_botor_scan_converter_t *converter,
-					const cairo_polygon_t *polygon);
+					const cairo_polygon_t *polygon_i32);
 
 /* cairo-spans.c: */
 
@@ -204,7 +204,7 @@ _cairo_surface_composite_polygon (cairo_surface_t	*surface,
 				  cairo_fill_rule_t	fill_rule,
 				  cairo_antialias_t	antialias,
 				  const cairo_composite_rectangles_t *rects,
-				  cairo_polygon_t	*polygon,
+				  cairo_polygon_t	*polygon_i32,
 				  cairo_region_t	*clip_region);
 
 #endif /* CAIRO_SPANS_PRIVATE_H */

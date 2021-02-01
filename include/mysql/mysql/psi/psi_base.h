@@ -35,14 +35,14 @@ extern "C" {
 
 /**
   Global flag.
-  This flag indicate that an instrumentation point is a global variable,
+  This flag indicate that an instrumentation point_i32 is a global variable,
   or a singleton.
 */
 #define PSI_FLAG_GLOBAL (1 << 0)
 
 /**
   Mutable flag.
-  This flag indicate that an instrumentation point is a general placeholder,
+  This flag indicate that an instrumentation point_i32 is a general placeholder,
   that can mutate into a more specific instrumentation point.
 */
 #define PSI_FLAG_MUTABLE (1 << 1)

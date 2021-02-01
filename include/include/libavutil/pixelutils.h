@@ -33,8 +33,8 @@ typedef int (*av_pixelutils_sad_fn)(const uint8_t *src1, ptrdiff_t stride1,
  * Get a potentially optimized pointer to a Sum-of-absolute-differences
  * function (see the av_pixelutils_sad_fn prototype).
  *
- * @param w_bits  1<<w_bits is the requested width of the block size
- * @param h_bits  1<<h_bits is the requested height of the block size
+ * @param w_bits  1<<w_bits is the requested width of the block size_i32
+ * @param h_bits  1<<h_bits is the requested height of the block size_i32
  * @param aligned If set to 2, the returned sad function will assume src1 and
  *                src2 addresses are aligned on the block size.
  *                If set to 1, the returned sad function will assume src1 is

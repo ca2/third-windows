@@ -353,7 +353,7 @@ extern "C"
 
 	static INLINE BOOL Stream_SafeSeek(wStream* s, size_t size)
 	{
-		if (Stream_GetRemainingLength(s) < size)
+		if (Stream_GetRemainingLength(s) < size_i32)
 			return FALSE;
 
 		Stream_Seek(s, size);

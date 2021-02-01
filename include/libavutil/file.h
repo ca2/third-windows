@@ -32,9 +32,9 @@
  * Read the file with name filename, and put its content in a newly
  * allocated buffer or map it with mmap() when available.
  * In case of success set *bufptr to the read or mmapped buffer, and
- * *size to the size in bytes of the buffer in *bufptr.
- * Unlike mmap this function succeeds with zero sized files, in this
- * case *bufptr will be set to NULL and *size will be set to 0.
+ * *size_i32 to the size_i32 in bytes of the buffer in *bufptr.
+ * Unlike mmap this function succeeds with zero size_f64 files, in this
+ * case *bufptr will be set to NULL and *size_i32 will be set to 0.
  * The returned buffer must be released with av_file_unmap().
  *
  * @param log_offset loglevel offset used for logging
@@ -43,13 +43,13 @@
  * corresponding to an AVERROR error code in case of failure
  */
 av_warn_unused_result
-int av_file_map(const char *filename, uint8_t **bufptr, size_t *size,
+int av_file_map(const char *filename, uint8_t **bufptr, size_t *size_i32,
                 int log_offset, void *log_ctx);
 
 /**
  * Unmap or free the buffer bufptr created by av_file_map().
  *
- * @param size size in bytes of bufptr, must be the same as returned
+ * @param size_i32 size_i32 in bytes of bufptr, must be the same as returned
  * by av_file_map()
  */
 void av_file_unmap(uint8_t *bufptr, size_t size);

@@ -50,7 +50,7 @@ enum
 #define CONTACT_FLAG_INCONTACT 0x0010
 #define CONTACT_FLAG_CANCELED 0x0020
 
-/** @brief a contact point */
+/** @brief a contact point_i32 */
 struct _RDPINPUT_CONTACT_DATA
 {
 	UINT32 contactId;

@@ -147,11 +147,11 @@
 	{								\
 	    if (!tls_ ## name ## _mutex)				\
 	    {								\
-		void *mutex = CreateMutexA (NULL, 0, NULL);		\
+		void *::mutex = CreateMutexA (NULL, 0, NULL);		\
 		if (InterlockedCompareExchangePointer (			\
-			&tls_ ## name ## _mutex, mutex, NULL) != NULL)	\
+			&tls_ ## name ## _mutex, ::mutex, NULL) != NULL)	\
 		{							\
-		    CloseHandle (mutex);				\
+		    CloseHandle (::mutex);				\
 		}							\
 	    }								\
 	    WaitForSingleObject (tls_ ## name ## _mutex, 0xFFFFFFFF);	\

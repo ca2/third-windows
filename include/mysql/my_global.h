@@ -307,14 +307,14 @@ typedef socket_len_t SOCKET_SIZE_TYPE; /* Used by NDB */
 #endif
 
 /* 
-  MY_NFILE is the default size of my_file_info array.
+  MY_NFILE is the default size_i32 of my_file_info array.
 
   It is larger on Windows, because it all file handles are stored in my_file_info
-  Default size is 16384 and this should be enough for most cases.If it is not 
+  Default size_i32 is 16384 and this should be enough for most cases.If it is not 
   enough, --max-open-files with larger value can be used.
 
   For Posix , my_file_info array is only used to store filenames for
-  error reporting and its size is not a limitation for number of open files.
+  error reporting and its size_i32 is not a limitation for number of open files.
 */ 
 #ifdef _WIN32
 #define MY_NFILE (16384 + MY_FILE_MIN)
@@ -342,7 +342,7 @@ typedef socket_len_t SOCKET_SIZE_TYPE; /* Used by NDB */
 #define RECORD_CACHE_SIZE	(uint) (64*1024-MALLOC_OVERHEAD)
 	/* Typical key cash */
 #define KEY_CACHE_SIZE		(uint) (8*1024*1024)
-	/* Default size of a key cache block  */
+	/* Default size_i32 of a key cache block  */
 #define KEY_CACHE_BLOCK_SIZE	(uint) 1024
 
 
@@ -427,7 +427,7 @@ inline unsigned long long my_double2ulonglong(double d)
 #endif /* __cplusplus >= 201103L */
 
 /*
-  Max size that must be added to a so that we know Size to make
+  Max size_i32 that must be added to a so that we know Size to make
   adressable obj.
 */
 #if SIZEOF_CHARP == 4
@@ -439,7 +439,7 @@ typedef long long	my_ptrdiff_t;
 #define MY_ALIGN(A,L)	(((A) + (L) - 1) & ~((L) - 1))
 #define ALIGN_SIZE(A)	MY_ALIGN((A),sizeof(double))
 /* Size to make adressable obj. */
-#define ADD_TO_PTR(ptr,size,type) (type) ((uchar*) (ptr)+size)
+#define ADD_TO_PTR(ptr, size,type) (type) ((uchar*) (ptr)+size_i32)
 #define PTR_BYTE_DIFF(A,B) (my_ptrdiff_t) ((uchar*) (A) - (uchar*) (B))
 
 /*

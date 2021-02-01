@@ -204,7 +204,7 @@ FT_BEGIN_HEADER
    *     Bit flags describing the module.
    *
    *   module_size ::
-   *     The size of one module object/instance in bytes.
+   *     The size_i32 of one module object/instance in bytes.
    *
    *   module_name ::
    *     The name of the module.

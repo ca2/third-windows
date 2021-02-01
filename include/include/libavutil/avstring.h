@@ -90,7 +90,7 @@ char *av_strnstr(const char *haystack, const char *needle, size_t hay_length);
  *
  * @param dst destination buffer
  * @param src source string
- * @param size size of destination buffer
+ * @param size_i32 size_i32 of destination buffer
  * @return the length of src
  *
  * @warning since the return value is the length of src, src absolutely
@@ -104,11 +104,11 @@ size_t av_strlcpy(char *dst, const char *src, size_t size);
  * no more than size - 1 bytes, and null-terminate dst.
  *
  * This function is similar to BSD strlcat(), but differs when
- * size <= strlen(dst).
+ * size_i32 <= strlen(dst).
  *
  * @param dst destination buffer
  * @param src source string
- * @param size size of destination buffer
+ * @param size_i32 size_i32 of destination buffer
  * @return the total length of src and dst
  *
  * @warning since the return value use the length of src and dst, these
@@ -123,7 +123,7 @@ size_t av_strlcat(char *dst, const char *src, size_t size);
  * the buffer.
  * @param dst destination buffer (string to which the output is
  *  appended)
- * @param size total size of the destination buffer
+ * @param size_i32 total size_i32 of the destination buffer
  * @param fmt printf-compatible format string, specifying how the
  *  following parameters are used
  * @return the length of the string that would have been generated
@@ -168,7 +168,7 @@ char *av_d2str(double d);
  * whitespaces are removed, unless they are escaped with '\' or are
  * enclosed between ''.
  *
- * @param buf the buffer to parse, buf will be updated to point to the
+ * @param buf the buffer to parse, buf will be updated to point_i32 to the
  * terminating char
  * @param term a 0-terminated list of terminating chars
  * @return the malloced unescaped string, which must be av_freed by
@@ -183,7 +183,7 @@ char *av_get_token(const char **buf, const char *term);
  * A token is defined as a sequence of characters not belonging to the
  * set specified in delim.
  *
- * On the first call to av_strtok(), s should point to the string to
+ * On the first call to av_strtok(), s should point_i32 to the string to
  * parse, and the value of saveptr is ignored. In subsequent calls, s
  * should be NULL, and saveptr should be unchanged since the previous
  * call.
@@ -194,7 +194,7 @@ char *av_get_token(const char **buf, const char *term);
  * @param delim 0-terminated list of token delimiters, must be non-NULL
  * @param saveptr user-provided pointer which points to stored
  * information necessary for av_strtok() to continue scanning the same
- * string. saveptr is updated to point to the next character after the
+ * string. saveptr is updated to point_i32 to the next character after the
  * first delimiter found, or to NULL if the string was terminated
  * @return the found token, or NULL when no token is found
  */
@@ -362,8 +362,8 @@ int av_escape(char **dst, const char *src, const char *special_chars,
     AV_UTF8_FLAG_ACCEPT_INVALID_BIG_CODES|AV_UTF8_FLAG_ACCEPT_NON_CHARACTERS|AV_UTF8_FLAG_ACCEPT_SURROGATES
 
 /**
- * Read and decode a single UTF-8 code point (character) from the
- * buffer in *buf, and update *buf to point to the next byte to
+ * Read and decode a single UTF-8 code point_i32 (character) from the
+ * buffer in *buf, and update *buf to point_i32 to the next byte to
  * decode.
  *
  * In case of an invalid byte sequence, the pointer will be updated to
@@ -371,7 +371,7 @@ int av_escape(char **dst, const char *src, const char *special_chars,
  * return an error code.
  *
  * Depending on the specified flags, the function will also fail in
- * case the decoded code point does not belong to a valid range.
+ * case the decoded code point_i32 does not belong to a valid range.
  *
  * @note For speed-relevant code a carefully implemented use of
  * GET_UTF8() may be preferred.
@@ -379,7 +379,7 @@ int av_escape(char **dst, const char *src, const char *special_chars,
  * @param codep   pointer used to return the parsed code in case of success.
  *                The value in *codep is set even in case the range check fails.
  * @param bufp    pointer to the address the first byte of the sequence
- *                to decode, updated by the function to point to the
+ *                to decode, updated by the function to point_i32 to the
  *                byte next after the decoded sequence
  * @param buf_end pointer to the end of the buffer, points to the next
  *                byte past the last in the buffer. This is used to

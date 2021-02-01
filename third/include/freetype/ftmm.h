@@ -625,10 +625,10 @@ FT_BEGIN_HEADER
    *     A handle to the source face.
    *
    *   len ::
-   *     A pointer to the size of the array to be filled.  If the size of the
+   *     A pointer to the size_i32 of the array to be filled.  If the size_i32 of the
    *     array is less than the number of designs, `FT_Err_Invalid_Argument`
-   *     is returned, and `len` is set to the required size (the number of
-   *     designs).  If the size of the array is greater than the number of
+   *     is returned, and `len` is set to the required size_i32 (the number of
+   *     designs).  If the size_i32 of the array is greater than the number of
    *     designs, the remaining entries are set to~0.  On successful
    *     completion, `len` is set to the number of designs (i.e., the number
    *     of values written to the array).

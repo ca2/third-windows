@@ -114,7 +114,7 @@ typedef struct _cef_app_t {
 } cef_app_t;
 
 ///
-// This function should be called from the application entry point function to
+// This function should be called from the application entry point_i32 function to
 // execute a secondary process. It can be used to run secondary processes from
 // the browser client executable (default behavior) or from a separate
 // executable specified by the CefSettings.browser_subprocess_path value. If

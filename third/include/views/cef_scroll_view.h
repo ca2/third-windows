@@ -42,7 +42,7 @@
 
 ///
 // A ScrollView will show horizontal and/or vertical scrollbars when necessary
-// based on the size of the attached content view. Methods must be called on the
+// based on the size_i32 of the attached content view. Methods must be called on the
 // browser process UI thread unless otherwise indicated.
 ///
 /*--cef(source=library)--*/
@@ -56,7 +56,7 @@ class CefScrollView : public CefView {
       CefRefPtr<CefViewDelegate> delegate);
 
   ///
-  // Set the content View. The content View must have a specified size (e.g.
+  // Set the content View. The content View must have a specified size_i32 (e.g.
   // via CefView::SetBounds or CefViewDelegate::GetPreferredSize).
   ///
   /*--cef()--*/

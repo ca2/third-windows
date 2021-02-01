@@ -23,8 +23,8 @@ typedef int32 decimal_digit_t;
 
 /**
     intg is the number of *decimal* digits (NOT number of decimal_digit_t's !)
-         before the point
-    frac is the number of decimal digits after the point
+         before the point_i32
+    frac is the number of decimal digits after the point_i32
     len  is the length of buf (length of allocated space) in decimal_digit_t's,
          not in bytes
     sign false means positive, true means negative

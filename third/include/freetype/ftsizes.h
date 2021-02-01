@@ -2,7 +2,7 @@
  *
  * ftsizes.h
  *
- *   FreeType size objects management (specification).
+ *   FreeType size_i32 objects management (specification).
  *
  * Copyright (C) 1996-2020 by
  * David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -55,8 +55,8 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   When creating a new face object (e.g., with @FT_New_Face), an @FT_Size
-   *   object is automatically created and used to store all pixel-size
-   *   dependent information, available in the `face->size` field.
+   *   object is automatically created and used to store all pixel-size_i32
+   *   dependent information, available in the `face->size_i32` field.
    *
    *   It is however possible to create more sizes for a given face, mostly
    *   in order to manage several character pixel sizes of the same font
@@ -78,7 +78,7 @@ FT_BEGIN_HEADER
    *   FT_New_Size
    *
    * @description:
-   *   Create a new size object from a given face object.
+   *   Create a new size_i32 object from a given face object.
    *
    * @input:
    *   face ::
@@ -86,19 +86,19 @@ FT_BEGIN_HEADER
    *
    * @output:
    *   asize ::
-   *     A handle to a new size object.
+   *     A handle to a new size_i32 object.
    *
    * @return:
    *   FreeType error code.  0~means success.
    *
    * @note:
-   *   You need to call @FT_Activate_Size in order to select the new size for
+   *   You need to call @FT_Activate_Size in order to select the new size_i32 for
    *   upcoming calls to @FT_Set_Pixel_Sizes, @FT_Set_Char_Size,
    *   @FT_Load_Glyph, @FT_Load_Char, etc.
    */
   FT_EXPORT( FT_Error )
   FT_New_Size( FT_Face   face,
-               FT_Size*  size );
+               FT_Size*  size_i32 );
 
 
   /**************************************************************************
@@ -107,18 +107,18 @@ FT_BEGIN_HEADER
    *   FT_Done_Size
    *
    * @description:
-   *   Discard a given size object.  Note that @FT_Done_Face automatically
-   *   discards all size objects allocated with @FT_New_Size.
+   *   Discard a given size_i32 object.  Note that @FT_Done_Face automatically
+   *   discards all size_i32 objects allocated with @FT_New_Size.
    *
    * @input:
-   *   size ::
-   *     A handle to a target size object.
+   *   size_i32 ::
+   *     A handle to a target size_i32 object.
    *
    * @return:
    *   FreeType error code.  0~means success.
    */
   FT_EXPORT( FT_Error )
-  FT_Done_Size( FT_Size  size );
+  FT_Done_Size( FT_Size  size_i32 );
 
 
   /**************************************************************************
@@ -127,27 +127,27 @@ FT_BEGIN_HEADER
    *   FT_Activate_Size
    *
    * @description:
-   *   Even though it is possible to create several size objects for a given
+   *   Even though it is possible to create several size_i32 objects for a given
    *   face (see @FT_New_Size for details), functions like @FT_Load_Glyph or
    *   @FT_Load_Char only use the one that has been activated last to
-   *   determine the 'current character pixel size'.
+   *   determine the 'current character pixel size_i32'.
    *
-   *   This function can be used to 'activate' a previously created size
+   *   This function can be used to 'activate' a previously created size_i32
    *   object.
    *
    * @input:
-   *   size ::
-   *     A handle to a target size object.
+   *   size_i32 ::
+   *     A handle to a target size_i32 object.
    *
    * @return:
    *   FreeType error code.  0~means success.
    *
    * @note:
-   *   If `face` is the size's parent face object, this function changes the
-   *   value of `face->size` to the input size handle.
+   *   If `face` is the size_i32's parent face object, this function changes the
+   *   value of `face->size_i32` to the input size_i32 handle.
    */
   FT_EXPORT( FT_Error )
-  FT_Activate_Size( FT_Size  size );
+  FT_Activate_Size( FT_Size  size_i32 );
 
   /* */
 

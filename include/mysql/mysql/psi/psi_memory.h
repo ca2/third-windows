@@ -79,7 +79,7 @@ typedef struct PSI_memory_info_v1 PSI_memory_info_v1;
   Memory registration API.
   @param category a category name (typically a plugin name)
   @param info an array of memory info to register
-  @param count the size of the info array
+  @param count the size_i32 of the info array
 */
 typedef void (*register_memory_v1_t)
   (const char *category, struct PSI_memory_info_v1 *info, int count);
@@ -87,7 +87,7 @@ typedef void (*register_memory_v1_t)
 /**
   Instrument memory allocation.
   @param key the memory instrument key
-  @param size the size of memory allocated
+  @param size_i32 the size_i32 of memory allocated
   @param[out] owner the memory owner
   @return the effective memory instrument key
 */
@@ -97,8 +97,8 @@ typedef PSI_memory_key (*memory_alloc_v1_t)
 /**
   Instrument memory re allocation.
   @param key the memory instrument key
-  @param old_size the size of memory previously allocated
-  @param new_size the size of memory re allocated
+  @param old_size the size_i32 of memory previously allocated
+  @param new_size the size_i32 of memory re allocated
   @param[in, out] owner the memory owner
   @return the effective memory instrument key
 */
@@ -108,7 +108,7 @@ typedef PSI_memory_key (*memory_realloc_v1_t)
 /**
   Instrument memory claim.
   @param key the memory instrument key
-  @param size the size of memory allocated
+  @param size_i32 the size_i32 of memory allocated
   @param[in, out] owner the memory owner
   @return the effective memory instrument key
 */
@@ -118,7 +118,7 @@ typedef PSI_memory_key (*memory_claim_v1_t)
 /**
   Instrument memory free.
   @param key the memory instrument key
-  @param size the size of memory allocated
+  @param size_i32 the size_i32 of memory allocated
   @param owner the memory owner
 */
 typedef void (*memory_free_v1_t)

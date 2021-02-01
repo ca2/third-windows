@@ -606,7 +606,7 @@ DECLARE_ASN1_FUNCTIONS(NETSCAPE_CERT_SEQUENCE)
 
 X509_INFO *X509_INFO_new(void);
 void X509_INFO_free(X509_INFO *a);
-char *X509_NAME_oneline(const X509_NAME *a, char *buf, int size);
+char *X509_NAME_oneline(const X509_NAME *a, char *buf, int size_i32);
 
 int ASN1_verify(i2d_of_void *i2d, X509_ALGOR *algor1,
                 ASN1_BIT_STRING *signature, char *data, EVP_PKEY *pkey);

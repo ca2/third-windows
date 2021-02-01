@@ -44,7 +44,7 @@
 
 ///
 // MenuButton is a button with optional text, icon and/or menu marker that shows
-// a menu when clicked with the left mouse button. All size and position values
+// a menu when clicked with the left mouse button. All size_i32 and position values
 // are in density independent pixels (DIP) unless otherwise indicated. Methods
 // must be called on the browser process UI thread unless otherwise indicated.
 ///
@@ -56,7 +56,7 @@ class CefMenuButton : public CefLabelButton {
   // when the button is clicked. |text| will be shown on the MenuButton and used
   // as the default accessible name. If |with_frame| is true the button will
   // have a visible frame at all times, center alignment, additional padding and
-  // a default minimum size of 70x33 DIP. If |with_frame| is false the button
+  // a default minimum size_i32 of 70x33 DIP. If |with_frame| is false the button
   // will only have a visible frame on hover/press, left alignment, less padding
   // and no default minimum size. If |with_menu_marker| is true a menu marker
   // will be added to the button.

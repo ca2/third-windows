@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // Contributors:
 // - see changes log named 'Whatsnew.txt', see header of each .h and .cpp file
@@ -384,7 +384,7 @@ typedef struct tagFICOMPLEX {
 
 FI_STRUCT (FIICCPROFILE) { 
 	WORD    flags;	//! info flag
-	DWORD	size;	//! profile's size measured in bytes
+	DWORD	size_i32;	//! profile's size_i32 measured in bytes
 	void   *data;	//! points to a block of contiguous memory containing the profile
 };
 
@@ -443,13 +443,13 @@ FI_ENUM(FREE_IMAGE_TYPE) {
 	FIT_INT16	= 3,	//! array of short			: signed 16-bit
 	FIT_UINT32	= 4,	//! array of unsigned long	: unsigned 32-bit
 	FIT_INT32	= 5,	//! array of long			: signed 32-bit
-	FIT_FLOAT	= 6,	//! array of float			: 32-bit IEEE floating point
-	FIT_DOUBLE	= 7,	//! array of double			: 64-bit IEEE floating point
-	FIT_COMPLEX	= 8,	//! array of FICOMPLEX		: 2 x 64-bit IEEE floating point
+	FIT_FLOAT	= 6,	//! array of float			: 32-bit IEEE floating point_i32
+	FIT_DOUBLE	= 7,	//! array of double			: 64-bit IEEE floating point_i32
+	FIT_COMPLEX	= 8,	//! array of FICOMPLEX		: 2 x 64-bit IEEE floating point_i32
 	FIT_RGB16	= 9,	//! 48-bit RGB image			: 3 x 16-bit
 	FIT_RGBA16	= 10,	//! 64-bit RGBA image		: 4 x 16-bit
-	FIT_RGBF	= 11,	//! 96-bit RGB float image	: 3 x 32-bit IEEE floating point
-	FIT_RGBAF	= 12	//! 128-bit RGBA float image	: 4 x 32-bit IEEE floating point
+	FIT_RGBF	= 11,	//! 96-bit RGB float image	: 3 x 32-bit IEEE floating point_i32
+	FIT_RGBAF	= 12	//! 128-bit RGBA float image	: 4 x 32-bit IEEE floating point_i32
 };
 
 /** Image color type used in FreeImage.
@@ -555,8 +555,8 @@ FI_ENUM(FREE_IMAGE_MDTYPE) {
 	FIDT_SSHORT		= 8,	//! 16-bit signed integer 
 	FIDT_SLONG		= 9,	//! 32-bit signed integer 
 	FIDT_SRATIONAL	= 10,	//! 64-bit signed fraction 
-	FIDT_FLOAT		= 11,	//! 32-bit IEEE floating point 
-	FIDT_DOUBLE		= 12,	//! 64-bit IEEE floating point 
+	FIDT_FLOAT		= 11,	//! 32-bit IEEE floating point_i32 
+	FIDT_DOUBLE		= 12,	//! 64-bit IEEE floating point_i32 
 	FIDT_IFD		= 13,	//! 32-bit unsigned integer (offset) 
 	FIDT_PALETTE	= 14,	//! 32-bit RGBQUAD 
 	FIDT_LONG8		= 16,	//! 64-bit unsigned integer 
@@ -718,15 +718,15 @@ typedef void (DLL_CALLCONV *FI_InitProc)(Plugin *plugin, int format_id);
 #define JPEG_SUBSAMPLING_420 0x4000		//! save with medium 2x2 medium chroma subsampling (4:2:0) - default value
 #define JPEG_SUBSAMPLING_422 0x8000		//! save with low 2x1 chroma subsampling (4:2:2) 
 #define JPEG_SUBSAMPLING_444 0x10000	//! save with no chroma subsampling (4:4:4)
-#define JPEG_OPTIMIZE		0x20000		//! on saving, compute optimal Huffman coding tables (can reduce a few percent of file size)
+#define JPEG_OPTIMIZE		0x20000		//! on saving, compute optimal Huffman coding tables (can reduce a few percent of file size_i32)
 #define JPEG_BASELINE		0x40000		//! save basic JPEG, without metadata or any markers
 #define KOALA_DEFAULT       0
 #define LBM_DEFAULT         0
 #define MNG_DEFAULT         0
 #define PCD_DEFAULT         0
-#define PCD_BASE            1		//! load the bitmap sized 768 x 512
-#define PCD_BASEDIV4        2		//! load the bitmap sized 384 x 256
-#define PCD_BASEDIV16       3		//! load the bitmap sized 192 x 128
+#define PCD_BASE            1		//! load the bitmap size_f64 768 x 512
+#define PCD_BASEDIV4        2		//! load the bitmap size_f64 384 x 256
+#define PCD_BASEDIV16       3		//! load the bitmap size_f64 192 x 128
 #define PCX_DEFAULT         0
 #define PFM_DEFAULT         0
 #define PICT_DEFAULT        0
@@ -747,7 +747,7 @@ typedef void (DLL_CALLCONV *FI_InitProc)(Plugin *plugin, int format_id);
 #define RAW_DEFAULT         0		//! load the file as linear RGB 48-bit
 #define RAW_PREVIEW			1		//! try to load the embedded JPEG preview with included Exif Data or default to RGB 24-bit
 #define RAW_DISPLAY			2		//! load the file as RGB 24-bit
-#define RAW_HALFSIZE		4		//! output a half-size color image
+#define RAW_HALFSIZE		4		//! output a half-size_i32 color image
 #define RAW_UNPROCESSED		8		//! output a FIT_UINT16 raw Bayer image
 #define SGI_DEFAULT			0
 #define TARGA_DEFAULT       0
@@ -887,10 +887,10 @@ DLL_API BOOL DLL_CALLCONV FreeImage_GetLockedPageNumbers(FIMULTIBITMAP *bitmap, 
 
 // Filetype request routines ------------------------------------------------
 
-DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileType(const char *filename, int size FI_DEFAULT(0));
-DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileTypeU(const wchar_t *filename, int size FI_DEFAULT(0));
-DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileTypeFromHandle(FreeImageIO *io, fi_handle handle, int size FI_DEFAULT(0));
-DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileTypeFromMemory(FIMEMORY *stream, int size FI_DEFAULT(0));
+DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileType(const char *filename, int size_i32 FI_DEFAULT(0));
+DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileTypeU(const wchar_t *filename, int size_i32 FI_DEFAULT(0));
+DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileTypeFromHandle(FreeImageIO *io, fi_handle handle, int size_i32 FI_DEFAULT(0));
+DLL_API FREE_IMAGE_FORMAT DLL_CALLCONV FreeImage_GetFileTypeFromMemory(FIMEMORY *stream, int size_i32 FI_DEFAULT(0));
 
 // Image type request routine -----------------------------------------------
 
@@ -955,7 +955,7 @@ DLL_API BOOL DLL_CALLCONV FreeImage_SetThumbnail(FIBITMAP *dib, FIBITMAP *thumbn
 // ICC profile routines -----------------------------------------------------
 
 DLL_API FIICCPROFILE *DLL_CALLCONV FreeImage_GetICCProfile(FIBITMAP *dib);
-DLL_API FIICCPROFILE *DLL_CALLCONV FreeImage_CreateICCProfile(FIBITMAP *dib, void *data, long size);
+DLL_API FIICCPROFILE *DLL_CALLCONV FreeImage_CreateICCProfile(FIBITMAP *dib, void *data, long size_i32);
 DLL_API void DLL_CALLCONV FreeImage_DestroyICCProfile(FIBITMAP *dib);
 
 // Line conversion routines -------------------------------------------------
@@ -1116,7 +1116,7 @@ DLL_API FIBITMAP *DLL_CALLCONV FreeImage_Rescale(FIBITMAP *dib, int dst_width, i
 DLL_API FIBITMAP *DLL_CALLCONV FreeImage_MakeThumbnail(FIBITMAP *dib, int max_pixel_size, BOOL convert FI_DEFAULT(TRUE));
 DLL_API FIBITMAP *DLL_CALLCONV FreeImage_RescaleRect(FIBITMAP *dib, int dst_width, int dst_height, int left, int top, int right, int bottom, FREE_IMAGE_FILTER filter FI_DEFAULT(FILTER_CATMULLROM), unsigned flags FI_DEFAULT(0));
 
-// color manipulation routines (point operations)
+// color manipulation routines (point_i32 operations)
 DLL_API BOOL DLL_CALLCONV FreeImage_AdjustCurve(FIBITMAP *dib, BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel);
 DLL_API BOOL DLL_CALLCONV FreeImage_AdjustGamma(FIBITMAP *dib, double gamma);
 DLL_API BOOL DLL_CALLCONV FreeImage_AdjustBrightness(FIBITMAP *dib, double percentage);
@@ -1153,7 +1153,7 @@ DLL_API FIBITMAP *DLL_CALLCONV FreeImage_AllocateExT(FREE_IMAGE_TYPE type, int w
 // miscellaneous algorithms
 DLL_API FIBITMAP *DLL_CALLCONV FreeImage_MultigridPoissonSolver(FIBITMAP *Laplacian, int ncycle FI_DEFAULT(3));
 
-// restore the borland-specific enum size option
+// restore the borland-specific enum size_i32 option
 #if defined(__BORLANDC__)
 #pragma option pop
 #endif

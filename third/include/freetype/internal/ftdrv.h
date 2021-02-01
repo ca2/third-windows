@@ -39,10 +39,10 @@ FT_BEGIN_HEADER
 
 
   typedef FT_Error
-  (*FT_Size_InitFunc)( FT_Size  size );
+  (*FT_Size_InitFunc)( FT_Size  size_i32 );
 
   typedef void
-  (*FT_Size_DoneFunc)( FT_Size  size );
+  (*FT_Size_DoneFunc)( FT_Size  size_i32 );
 
 
   typedef FT_Error
@@ -101,13 +101,13 @@ FT_BEGIN_HEADER
    *     The parent module.
    *
    *   face_object_size ::
-   *     The size of a face object in bytes.
+   *     The size_i32 of a face object in bytes.
    *
    *   size_object_size ::
-   *     The size of a size object in bytes.
+   *     The size_i32 of a size_i32 object in bytes.
    *
    *   slot_object_size ::
-   *     The size of a glyph object in bytes.
+   *     The size_i32 of a glyph object in bytes.
    *
    *   init_face ::
    *     The format-specific face constructor.
@@ -116,10 +116,10 @@ FT_BEGIN_HEADER
    *     The format-specific face destructor.
    *
    *   init_size ::
-   *     The format-specific size constructor.
+   *     The format-specific size_i32 constructor.
    *
    *   done_size ::
-   *     The format-specific size destructor.
+   *     The format-specific size_i32 destructor.
    *
    *   init_slot ::
    *     The format-specific slot constructor.

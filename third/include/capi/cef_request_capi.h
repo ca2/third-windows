@@ -312,7 +312,7 @@ typedef struct _cef_post_data_element_t {
   size_t(CEF_CALLBACK* get_bytes_count)(struct _cef_post_data_element_t* self);
 
   ///
-  // Read up to |size| bytes into |bytes| and return the number of bytes
+  // Read up to |size_i32| bytes into |bytes| and return the number of bytes
   // actually read.
   ///
   size_t(CEF_CALLBACK* get_bytes)(struct _cef_post_data_element_t* self,

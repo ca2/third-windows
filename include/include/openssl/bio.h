@@ -468,9 +468,9 @@ int BIO_read_filename(BIO *b, const char *name);
 
 /* For the BIO_f_buffer() type */
 # define BIO_get_buffer_num_lines(b)     BIO_ctrl(b,BIO_C_GET_BUFF_NUM_LINES,0,NULL)
-# define BIO_set_buffer_size(b,size)     BIO_ctrl(b,BIO_C_SET_BUFF_SIZE,size,NULL)
-# define BIO_set_read_buffer_size(b,size) BIO_int_ctrl(b,BIO_C_SET_BUFF_SIZE,size,0)
-# define BIO_set_write_buffer_size(b,size) BIO_int_ctrl(b,BIO_C_SET_BUFF_SIZE,size,1)
+# define BIO_set_buffer_size(b, size)     BIO_ctrl(b,BIO_C_SET_BUFF_SIZE, size,NULL)
+# define BIO_set_read_buffer_size(b, size) BIO_int_ctrl(b,BIO_C_SET_BUFF_SIZE, size,0)
+# define BIO_set_write_buffer_size(b, size) BIO_int_ctrl(b,BIO_C_SET_BUFF_SIZE, size,1)
 # define BIO_set_buffer_read_data(b,buf,num) BIO_ctrl(b,BIO_C_SET_BUFF_READ_DATA,num,buf)
 
 /* Don't use the next one unless you know what you are doing :-) */
@@ -495,8 +495,8 @@ size_t BIO_ctrl_wpending(BIO *b);
 # define BIO_buffer_peek(b,s,l) BIO_ctrl(b,BIO_CTRL_PEEK,(l),(s))
 
 /* For BIO_s_bio() */
-# define BIO_set_write_buf_size(b,size) (int)BIO_ctrl(b,BIO_C_SET_WRITE_BUF_SIZE,size,NULL)
-# define BIO_get_write_buf_size(b,size) (size_t)BIO_ctrl(b,BIO_C_GET_WRITE_BUF_SIZE,size,NULL)
+# define BIO_set_write_buf_size(b, size) (int)BIO_ctrl(b,BIO_C_SET_WRITE_BUF_SIZE, size,NULL)
+# define BIO_get_write_buf_size(b, size) (size_t)BIO_ctrl(b,BIO_C_GET_WRITE_BUF_SIZE, size,NULL)
 # define BIO_make_bio_pair(b1,b2)   (int)BIO_ctrl(b1,BIO_C_MAKE_BIO_PAIR,0,b2)
 # define BIO_destroy_bio_pair(b)    (int)BIO_ctrl(b,BIO_C_DESTROY_BIO_PAIR,0,NULL)
 # define BIO_shutdown_wr(b) (int)BIO_ctrl(b, BIO_C_SHUTDOWN_WR, 0, NULL)
@@ -557,7 +557,7 @@ void BIO_vfree(BIO *a);
 int BIO_up_ref(BIO *a);
 int BIO_read(BIO *b, void *data, int dlen);
 int BIO_read_ex(BIO *b, void *data, size_t dlen, size_t *readbytes);
-int BIO_gets(BIO *bp, char *buf, int size);
+int BIO_gets(BIO *bp, char *buf, int size_i32);
 int BIO_write(BIO *b, const void *data, int dlen);
 int BIO_write_ex(BIO *b, const void *data, size_t dlen, size_t *written);
 int BIO_puts(BIO *bp, const char *buf);

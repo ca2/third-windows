@@ -118,7 +118,7 @@ enum XML_Content_Quant {
    XML_CQUANT_NONE, and the other fields will be zero or NULL.
    If type == XML_CTYPE_MIXED, then quant will be NONE or REP and
    numchildren will contain number of elements that may be mixed in
-   and children point to an array of XML_Content cells that will be
+   and children point_i32 to an array of XML_Content cells that will be
    all of XML_CTYPE_NAME type with no quantification.
 
    If type == XML_CTYPE_NAME, then the name points to the name, and
@@ -126,7 +126,7 @@ enum XML_Content_Quant {
    quant fields indicates any quantifiers placed on the name.
 
    CHOICE and SEQ will have name NULL, the number of children in
-   numchildren and children will point, recursively, to an array
+   numchildren and children will point_i32, recursively, to an array
    of XML_Content cells.
 
    The EMPTY, ANY, and MIXED types will only occur at top level.
@@ -470,7 +470,7 @@ typedef void (XMLCALL *XML_SkippedEntityHandler) (
    function.
 
    The convert function is used to convert multibyte sequences; s will
-   point to a n-byte sequence where map[(unsigned char)*s] == -n.  The
+   point_i32 to a n-byte sequence where map[(unsigned char)*s] == -n.  The
    convert function must return the Unicode scalar value represented
    by this byte sequence or -1 if the byte sequence is malformed.
 
@@ -861,7 +861,7 @@ XML_GetParsingStatus(XML_Parser parser, XML_ParsingStatus *status);
    of a name specifies that the general entity of the name is open; a
    token of the form prefix=uri specifies the namespace for a
    particular prefix; a token of the form =uri specifies the default
-   namespace.  This can be called at any point after the first call to
+   namespace.  This can be called at any point_i32 after the first call to
    an ExternalEntityRefHandler so longer as the parser has not yet
    been freed.  The new parser is completely independent and may
    safely be used in a separate thread.  The handlers and userData are
@@ -949,8 +949,8 @@ XML_GetCurrentByteCount(XML_Parser parser);
 
 /* If XML_CONTEXT_BYTES is defined, returns the input buffer, sets
    the integer pointed to by offset to the offset within this buffer
-   of the current parse position, and sets the integer pointed to by size
-   to the size of this buffer (the number of input bytes). Otherwise
+   of the current parse position, and sets the integer pointed to by size_i32
+   to the size_i32 of this buffer (the number of input bytes). Otherwise
    returns a NULL pointer. Also returns a NULL pointer if a parse isn't
    active.
 
@@ -960,7 +960,7 @@ XML_GetCurrentByteCount(XML_Parser parser);
 XMLPARSEAPI(const char *)
 XML_GetInputContext(XML_Parser parser,
                     int *offset,
-                    int *size);
+                    int *size_i32);
 
 /* For backwards compatibility with previous versions. */
 #define XML_GetErrorLineNumber   XML_GetCurrentLineNumber

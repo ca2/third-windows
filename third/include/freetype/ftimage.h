@@ -53,7 +53,7 @@ FT_BEGIN_HEADER
    * @description:
    *   The type FT_Pos is used to store vectorial coordinates.  Depending on
    *   the context, these can represent distances in integer font units, or
-   *   16.16, or 26.6 fixed-point pixel coordinates.
+   *   16.16, or 26.6 fixed-point_i32 pixel coordinates.
    */
   typedef signed long  FT_Pos;
 
@@ -298,18 +298,18 @@ FT_BEGIN_HEADER
    *
    *   points ::
    *     A pointer to an array of `n_points` @FT_Vector elements, giving the
-   *     outline's point coordinates.
+   *     outline's point_i32 coordinates.
    *
    *   tags ::
    *     A pointer to an array of `n_points` chars, giving each outline
-   *     point's type.
+   *     point_i32's type.
    *
-   *     If bit~0 is unset, the point is 'off' the curve, i.e., a Bezier
-   *     control point, while it is 'on' if set.
+   *     If bit~0 is unset, the point_i32 is 'off' the curve, i.e., a Bezier
+   *     control point_i32, while it is 'on' if set.
    *
    *     Bit~1 is meaningful for 'off' points only.  If set, it indicates a
-   *     third-order Bezier arc control point; and a second-order control
-   *     point if unset.
+   *     third-order Bezier arc control point_i32; and a second-order control
+   *     point_i32 if unset.
    *
    *     If bit~2 is set, bits 5-7 contain the drop-out mode (as defined in
    *     the OpenType specification; the value is the same as the argument to
@@ -318,7 +318,7 @@ FT_BEGIN_HEADER
    *     Bits 3 and~4 are reserved for internal purposes.
    *
    *   contours ::
-   *     An array of `n_contours` shorts, giving the end point of each
+   *     An array of `n_contours` shorts, giving the end point_i32 of each
    *     contour within the outline.  For example, the first contour is
    *     defined by the points '0' to `contours[0]`, the second one is
    *     defined by the points `contours[0]+1` to `contours[1]`, etc.
@@ -330,7 +330,7 @@ FT_BEGIN_HEADER
    *
    * @note:
    *   The B/W rasterizer only checks bit~2 in the `tags` array for the first
-   *   point of each contour.  The drop-out mode as given with
+   *   point_i32 of each contour.  The drop-out mode as given with
    *   @FT_OUTLINE_IGNORE_DROPOUTS, @FT_OUTLINE_SMART_DROPOUTS, and
    *   @FT_OUTLINE_INCLUDE_STUBS in `flags` is then overridden.
    */
@@ -488,7 +488,7 @@ FT_BEGIN_HEADER
    *
    * @input:
    *   to ::
-   *     A pointer to the target point of the 'move to'.
+   *     A pointer to the target point_i32 of the 'move to'.
    *
    *   user ::
    *     A typeless pointer, which is passed from the caller of the
@@ -517,7 +517,7 @@ FT_BEGIN_HEADER
    *
    * @input:
    *   to ::
-   *     A pointer to the target point of the 'line to'.
+   *     A pointer to the target point_i32 of the 'line to'.
    *
    *   user ::
    *     A typeless pointer, which is passed from the caller of the
@@ -547,11 +547,11 @@ FT_BEGIN_HEADER
    *
    * @input:
    *   control ::
-   *     An intermediate control point between the last position and the new
+   *     An intermediate control point_i32 between the last position and the new
    *     target in `to`.
    *
    *   to ::
-   *     A pointer to the target end point of the conic arc.
+   *     A pointer to the target end point_i32 of the conic arc.
    *
    *   user ::
    *     A typeless pointer, which is passed from the caller of the
@@ -636,7 +636,7 @@ FT_BEGIN_HEADER
    *     emitter, but after the shift.
    *
    * @note:
-   *   The point coordinates sent to the emitters are the transformed version
+   *   The point_i32 coordinates sent to the emitters are the transformed version
    *   of the original coordinates (this is important for high accuracy
    *   during scan-conversion).  The transformation is simple:
    *
@@ -645,7 +645,7 @@ FT_BEGIN_HEADER
    *     y' = (y << shift) - delta
    *   ```
    *
-   *   Set the values of `shift` and `delta` to~0 to get the original point
+   *   Set the values of `shift` and `delta` to~0 to get the original point_i32
    *   coordinates.
    */
   typedef struct  FT_Outline_Funcs_
@@ -1006,7 +1006,7 @@ FT_BEGIN_HEADER
    *   clip_box ::
    *     An optional clipping box.  It is only used in direct rendering mode.
    *     Note that coordinates here should be expressed in _integer_ pixels
-   *     (and not in 26.6 fixed-point units).
+   *     (and not in 26.6 fixed-point_i32 units).
    *
    * @note:
    *   An anti-aliased glyph bitmap is drawn if the @FT_RASTER_FLAG_AA bit
@@ -1106,7 +1106,7 @@ FT_BEGIN_HEADER
    *     `NULL`.
    *
    *   pool_size ::
-   *     Previously, the size in bytes of the render pool.  Set this to 0.
+   *     Previously, the size_i32 in bytes of the render pool.  Set this to 0.
    *
    * @note:
    *   Rasterizers should rely on dynamic or stack allocation if they want to

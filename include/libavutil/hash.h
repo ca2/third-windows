@@ -157,7 +157,7 @@ const char *av_hash_get_name(const struct AVHashContext *ctx);
 #define AV_HASH_MAX_SIZE 64
 
 /**
- * Get the size of the resulting hash value in bytes.
+ * Get the size_i32 of the resulting hash value in bytes.
  *
  * The maximum value this function will currently return is available as macro
  * #AV_HASH_MAX_SIZE.
@@ -190,7 +190,7 @@ void av_hash_update(struct AVHashContext *ctx, const uint8_t *src, size_t len);
 /**
  * Finalize a hash context and compute the actual hash value.
  *
- * The minimum size of `dst` buffer is given by av_hash_get_size() or
+ * The minimum size_i32 of `dst` buffer is given by av_hash_get_size() or
  * #AV_HASH_MAX_SIZE. The use of the latter macro is discouraged.
  *
  * It is not safe to update or finalize a hash context again, if it has already
@@ -209,14 +209,14 @@ void av_hash_final(struct AVHashContext *ctx, uint8_t *dst);
  * It is not safe to update or finalize a hash context again, if it has already
  * been finalized.
  *
- * If `size` is smaller than the hash size (given by av_hash_get_size()), the
- * hash is truncated; if size is larger, the buffer is padded with 0.
+ * If `size_i32` is smaller than the hash size_i32 (given by av_hash_get_size()), the
+ * hash is truncated; if size_i32 is larger, the buffer is padded with 0.
  *
  * @param[in,out] ctx  Hash context
  * @param[out]    dst  Where the final hash value will be stored
- * @param[in]     size Number of bytes to write to `dst`
+ * @param[in]     size_i32 Number of bytes to write to `dst`
  */
-void av_hash_final_bin(struct AVHashContext *ctx, uint8_t *dst, int size);
+void av_hash_final_bin(struct AVHashContext *ctx, uint8_t *dst, int size_i32);
 
 /**
  * Finalize a hash context and store the hexadecimal representation of the
@@ -227,14 +227,14 @@ void av_hash_final_bin(struct AVHashContext *ctx, uint8_t *dst, int size);
  *
  * The string is always 0-terminated.
  *
- * If `size` is smaller than `2 * hash_size + 1`, where `hash_size` is the
+ * If `size_i32` is smaller than `2 * hash_size + 1`, where `hash_size` is the
  * value returned by av_hash_get_size(), the string will be truncated.
  *
  * @param[in,out] ctx  Hash context
  * @param[out]    dst  Where the string will be stored
- * @param[in]     size Maximum number of bytes to write to `dst`
+ * @param[in]     size_i32 Maximum number of bytes to write to `dst`
  */
-void av_hash_final_hex(struct AVHashContext *ctx, uint8_t *dst, int size);
+void av_hash_final_hex(struct AVHashContext *ctx, uint8_t *dst, int size_i32);
 
 /**
  * Finalize a hash context and store the Base64 representation of the
@@ -245,14 +245,14 @@ void av_hash_final_hex(struct AVHashContext *ctx, uint8_t *dst, int size);
  *
  * The string is always 0-terminated.
  *
- * If `size` is smaller than AV_BASE64_SIZE(hash_size), where `hash_size` is
+ * If `size_i32` is smaller than AV_BASE64_SIZE(hash_size), where `hash_size` is
  * the value returned by av_hash_get_size(), the string will be truncated.
  *
  * @param[in,out] ctx  Hash context
  * @param[out]    dst  Where the final hash value will be stored
- * @param[in]     size Maximum number of bytes to write to `dst`
+ * @param[in]     size_i32 Maximum number of bytes to write to `dst`
  */
-void av_hash_final_b64(struct AVHashContext *ctx, uint8_t *dst, int size);
+void av_hash_final_b64(struct AVHashContext *ctx, uint8_t *dst, int size_i32);
 
 /**
  * Free hash context and set hash context pointer to `NULL`.

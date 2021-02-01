@@ -70,7 +70,7 @@ class CefZipArchive : public base::RefCountedThreadSafe<CefZipArchive> {
     virtual const unsigned char* GetData() const = 0;
 
     ///
-    // Returns the size of the data in the file.
+    // Returns the size_i32 of the data in the file.
     ///
     virtual size_t GetDataSize() const = 0;
 

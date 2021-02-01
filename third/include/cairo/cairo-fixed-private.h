@@ -65,23 +65,23 @@ _cairo_fixed_from_int (int i)
 }
 
 /* This is the "magic number" approach to converting a double into fixed
- * point as described here:
+ * point_i32 as described here:
  *
  * http://www.stereopsis.com/sree/fpu2006.html (an overview)
  * http://www.d6.com/users/checker/pdfs/gdmfp.pdf (in detail)
  *
  * The basic idea is to add a large enough number to the double that the
- * literal floating point is moved up to the extent that it forces the
+ * literal floating point_i32 is moved up to the extent that it forces the
  * double's value to be shifted down to the bottom of the mantissa (to make
  * room for the large number being added in). Since the mantissa is, at a
- * given moment in time, a fixed point integer itself, one can convert a
- * float to various fixed point representations by moving around the point
- * of a floating point number through arithmetic operations. This behavior
+ * given moment in time, a fixed point_i32 integer itself, one can convert a
+ * float to various fixed point_i32 representations by moving around the point_i32
+ * of a floating point_i32 number through arithmetic operations. This behavior
  * is reliable on most modern platforms as it is mandated by the IEEE-754
- * standard for floating point arithmetic.
+ * standard for floating point_i32 arithmetic.
  *
  * For our purposes, a "magic number" must be carefully selected that is
- * both large enough to produce the desired point-shifting effect, and also
+ * both large enough to produce the desired point_i32-shifting effect, and also
  * has no lower bits in its representation that would interfere with our
  * value at the bottom of the mantissa. The magic number is calculated as
  * follows:
@@ -90,7 +90,7 @@ _cairo_fixed_from_int (int i)
  *
  * where in our case:
  *  - MANTISSA_SIZE for 64-bit doubles is 52
- *  - FRACTIONAL_SIZE for 16.16 fixed point is 16
+ *  - FRACTIONAL_SIZE for 16.16 fixed point_i32 is 16
  *
  * Although this approach provides a very large speedup of this function
  * on a wide-array of systems, it does come with two caveats:
@@ -106,7 +106,7 @@ _cairo_fixed_from_int (int i)
 #if CAIRO_FIXED_BITS <= 32
 #define CAIRO_MAGIC_NUMBER_FIXED ((1LL << (52 - CAIRO_FIXED_FRAC_BITS)) * 1.5)
 
-/* For 32-bit fixed point numbers */
+/* For 32-bit fixed point_i32 numbers */
 static inline cairo_fixed_t
 _cairo_fixed_from_double (double d)
 {
@@ -124,7 +124,7 @@ _cairo_fixed_from_double (double d)
 }
 
 #else
-# error Please define a magic number for your fixed point type!
+# error Please define a magic number for your fixed point_i32 type!
 # error See cairo-fixed-private.h for details.
 #endif
 
@@ -228,7 +228,7 @@ _cairo_fixed_integer_ceil (cairo_fixed_t f)
 
 /* A bunch of explicit 16.16 operators; we need these
  * to interface with pixman and other backends that require
- * 16.16 fixed point types.
+ * 16.16 fixed point_i32 types.
  */
 static inline cairo_fixed_16_16_t
 _cairo_fixed_to_16_16 (cairo_fixed_t f)
@@ -356,7 +356,7 @@ _cairo_edge_compute_intersection_x_for_y (const cairo_point_t *p1,
 
 /* Intersect two segments based on the algorithm described at
  * http://paulbourke.net/geometry/pointlineplane/. This implementation
- * uses floating point math. */
+ * uses floating point_i32 math. */
 static inline cairo_bool_t
 _slow_segment_intersection (const cairo_point_t *seg1_p1,
 			    const cairo_point_t *seg1_p2,
@@ -389,7 +389,7 @@ _slow_segment_intersection (const cairo_point_t *seg1_p1,
 }
 
 #else
-# error Please define multiplication and other operands for your fixed-point type size
+# error Please define multiplication and other operands for your fixed-point_i32 type size_i32
 #endif
 
 #endif /* CAIRO_FIXED_PRIVATE_H */

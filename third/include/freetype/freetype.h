@@ -336,7 +336,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   This structure models the metrics of a bitmap strike (i.e., a set of
-   *   glyphs for a given point size and resolution) in a bitmap font.  It is
+   *   glyphs for a given point_i32 size_i32 and resolution) in a bitmap font.  It is
    *   used for the `available_sizes` field of @FT_Face.
    *
    * @fields:
@@ -347,8 +347,8 @@ FT_BEGIN_HEADER
    *   width ::
    *     The average width, in pixels, of all glyphs in the strike.
    *
-   *   size ::
-   *     The nominal size of the strike in 26.6 fractional points.  This
+   *   size_i32 ::
+   *     The nominal size_i32 of the strike in 26.6 fractional points.  This
    *     field is not very useful.
    *
    *   x_ppem ::
@@ -359,13 +359,13 @@ FT_BEGIN_HEADER
    *
    * @note:
    *   Windows FNT:
-   *     The nominal size given in a FNT font is not reliable.  If the driver
-   *     finds it incorrect, it sets `size` to some calculated values, and
+   *     The nominal size_i32 given in a FNT font is not reliable.  If the driver
+   *     finds it incorrect, it sets `size_i32` to some calculated values, and
    *     `x_ppem` and `y_ppem` to the pixel width and height given in the
    *     font, respectively.
    *
    *   TrueType embedded bitmaps:
-   *     `size`, `width`, and `height` values are not contained in the bitmap
+   *     `size_i32`, `width`, and `height` values are not contained in the bitmap
    *     strike itself.  They are computed from the global font parameters.
    */
   typedef struct  FT_Bitmap_Size_
@@ -405,7 +405,7 @@ FT_BEGIN_HEADER
    *   [Since 2.5.6] In multi-threaded applications it is easiest to use one
    *   `FT_Library` object per thread.  In case this is too cumbersome, a
    *   single `FT_Library` object across threads is possible also, as long as
-   *   a mutex lock is used around @FT_New_Face and @FT_Done_Face.
+   *   a ::mutex lock is used around @FT_New_Face and @FT_Done_Face.
    *
    * @note:
    *   Library objects are normally created by @FT_Init_FreeType, and
@@ -517,13 +517,13 @@ FT_BEGIN_HEADER
    *   or even @FT_Select_Size to change the content (i.e., the scaling
    *   values) of the active @FT_Size.
    *
-   *   You can use @FT_New_Size to create additional size objects for a given
+   *   You can use @FT_New_Size to create additional size_i32 objects for a given
    *   @FT_Face, but they won't be used by other functions until you activate
-   *   it through @FT_Activate_Size.  Only one size can be activated at any
+   *   it through @FT_Activate_Size.  Only one size_i32 can be activated at any
    *   given time per face.
    *
    * @also:
-   *   See @FT_SizeRec for the publicly accessible fields of a given size
+   *   See @FT_SizeRec for the publicly accessible fields of a given size_i32
    *   object.
    */
   typedef struct FT_SizeRec_*  FT_Size;
@@ -1020,8 +1020,8 @@ FT_BEGIN_HEADER
    *   glyph ::
    *     The face's associated glyph slot(s).
    *
-   *   size ::
-   *     The current active size for this face.
+   *   size_i32 ::
+   *     The current active size_i32 for this face.
    *
    *   charmap ::
    *     The current active charmap for this face.
@@ -1507,7 +1507,7 @@ FT_BEGIN_HEADER
    *   FT_Size_Metrics
    *
    * @description:
-   *   The size metrics structure gives the metrics of a size object.
+   *   The size_i32 metrics structure gives the metrics of a size_i32 object.
    *
    * @fields:
    *   x_ppem ::
@@ -1545,7 +1545,7 @@ FT_BEGIN_HEADER
    *     integer value.  See @FT_FaceRec for the details.
    *
    * @note:
-   *   The scaling values, if relevant, are determined first during a size
+   *   The scaling values, if relevant, are determined first during a size_i32
    *   changing operation.  The remaining fields are then set by the driver.
    *   For scalable formats, they are usually set to scaled values of the
    *   corresponding fields in @FT_FaceRec.  Some values like ascender or
@@ -1627,7 +1627,7 @@ FT_BEGIN_HEADER
    *   FT_SizeRec
    *
    * @description:
-   *   FreeType root size class structure.  A size object models a face
+   *   FreeType root size_i32 class structure.  A size_i32 object models a face
    *   object at a given size.
    *
    * @fields:
@@ -1637,16 +1637,16 @@ FT_BEGIN_HEADER
    *   generic ::
    *     A typeless pointer, unused by the FreeType library or any of its
    *     drivers.  It can be used by client applications to link their own
-   *     data to each size object.
+   *     data to each size_i32 object.
    *
    *   metrics ::
-   *     Metrics for this size object.  This field is read-only.
+   *     Metrics for this size_i32 object.  This field is read-only.
    */
   typedef struct  FT_SizeRec_
   {
     FT_Face           face;      /* parent face object              */
     FT_Generic        generic;   /* generic pointer for client uses */
-    FT_Size_Metrics   metrics;   /* size metrics                    */
+    FT_Size_Metrics   metrics;   /* size_i32 metrics                    */
     FT_Size_Internal  internal;
 
   } FT_SizeRec;
@@ -2075,7 +2075,7 @@ FT_BEGIN_HEADER
    *     The first byte of the file in memory.
    *
    *   memory_size ::
-   *     The size in bytes of the file in memory.
+   *     The size_i32 in bytes of the file in memory.
    *
    *   pathname ::
    *     A pointer to an 8-bit file pathname.  The pointer is not owned by
@@ -2190,7 +2190,7 @@ FT_BEGIN_HEADER
    *     A pointer to the beginning of the font data.
    *
    *   file_size ::
-   *     The size of the memory chunk used by the font data.
+   *     The size_i32 of the memory chunk used by the font data.
    *
    *   face_index ::
    *     See @FT_Open_Face for a detailed description of this parameter.
@@ -2274,7 +2274,7 @@ FT_BEGIN_HEADER
    *   `face->glyph`.
    *
    *   Each new face object created with this function also owns a default
-   *   @FT_Size object, accessible as `face->size`.
+   *   @FT_Size object, accessible as `face->size_i32`.
    *
    *   One @FT_Library instance can have multiple face objects, this is,
    *   @FT_Open_Face and its siblings can be called multiple times using the
@@ -2517,8 +2517,8 @@ FT_BEGIN_HEADER
    *   FT_Size_Request_Type
    *
    * @description:
-   *   An enumeration type that lists the supported size request types, i.e.,
-   *   what input size (in font units) maps to the requested output size (in
+   *   An enumeration type that lists the supported size_i32 request types, i.e.,
+   *   what input size_i32 (in font units) maps to the requested output size_i32 (in
    *   pixels, as computed from the arguments of @FT_Size_Request).
    *
    * @values:
@@ -2527,10 +2527,10 @@ FT_BEGIN_HEADER
    *     to determine both scaling values.
    *
    *     This is the standard scaling found in most applications.  In
-   *     particular, use this size request type for TrueType fonts if they
+   *     particular, use this size_i32 request type for TrueType fonts if they
    *     provide optical scaling or something similar.  Note, however, that
    *     `units_per_EM` is a rather abstract value which bears no relation to
-   *     the actual size of the glyphs in a font.
+   *     the actual size_i32 of the glyphs in a font.
    *
    *   FT_SIZE_REQUEST_TYPE_REAL_DIM ::
    *     The real dimension.  The sum of the `ascender` and (minus of) the
@@ -2547,7 +2547,7 @@ FT_BEGIN_HEADER
    *     the horizontal scaling value; the vertical scaling value is
    *     determined the same way as @FT_SIZE_REQUEST_TYPE_REAL_DIM does.
    *     Finally, both scaling values are set to the smaller one.  This type
-   *     is useful if you want to specify the font size for, say, a window of
+   *     is useful if you want to specify the font size_i32 for, say, a window of
    *     a given dimension and 80x24 cells.
    *
    *   FT_SIZE_REQUEST_TYPE_SCALES ::
@@ -2557,7 +2557,7 @@ FT_BEGIN_HEADER
    *   The above descriptions only apply to scalable formats.  For bitmap
    *   formats, the behaviour is up to the driver.
    *
-   *   See the note section of @FT_Size_Metrics if you wonder how size
+   *   See the note section of @FT_Size_Metrics if you wonder how size_i32
    *   requesting relates to scaling values.
    */
   typedef enum  FT_Size_Request_Type_
@@ -2579,18 +2579,18 @@ FT_BEGIN_HEADER
    *   FT_Size_RequestRec
    *
    * @description:
-   *   A structure to model a size request.
+   *   A structure to model a size_i32 request.
    *
    * @fields:
    *   type ::
    *     See @FT_Size_Request_Type.
    *
    *   width ::
-   *     The desired width, given as a 26.6 fractional point value (with 72pt
+   *     The desired width, given as a 26.6 fractional point_i32 value (with 72pt
    *     = 1in).
    *
    *   height ::
-   *     The desired height, given as a 26.6 fractional point value (with
+   *     The desired height, given as a 26.6 fractional point_i32 value (with
    *     72pt = 1in).
    *
    *   horiResolution ::
@@ -2629,7 +2629,7 @@ FT_BEGIN_HEADER
    *   FT_Size_Request
    *
    * @description:
-   *   A handle to a size request structure.
+   *   A handle to a size_i32 request structure.
    */
   typedef struct FT_Size_RequestRec_  *FT_Size_Request;
 
@@ -2658,9 +2658,9 @@ FT_BEGIN_HEADER
    *   you should not rely on this if you intend to select a particular
    *   bitmap strike.  Use @FT_Select_Size instead in that case.
    *
-   *   The relation between the requested size and the resulting glyph size
-   *   is dependent entirely on how the size is defined in the source face.
-   *   The font designer chooses the final size of each glyph relative to
+   *   The relation between the requested size_i32 and the resulting glyph size_i32
+   *   is dependent entirely on how the size_i32 is defined in the source face.
+   *   The font designer chooses the final size_i32 of each glyph relative to
    *   this size.  For more information refer to
    *   'https://www.freetype.org/freetype2/docs/glyphs/glyphs-2.html'.
    *
@@ -2681,7 +2681,7 @@ FT_BEGIN_HEADER
    *   FT_Set_Char_Size
    *
    * @description:
-   *   Call @FT_Request_Size to request the nominal size (in points).
+   *   Call @FT_Request_Size to request the nominal size_i32 (in points).
    *
    * @inout:
    *   face ::
@@ -2733,7 +2733,7 @@ FT_BEGIN_HEADER
    *   FT_Set_Pixel_Sizes
    *
    * @description:
-   *   Call @FT_Request_Size to request the nominal size (in pixels).
+   *   Call @FT_Request_Size to request the nominal size_i32 (in pixels).
    *
    * @inout:
    *   face ::
@@ -2889,7 +2889,7 @@ FT_BEGIN_HEADER
    *     `FT_LOAD_NO_SCALE` usually yields meaningless outlines because the
    *     subglyphs must be scaled and positioned with hinting instructions. 
    *     This can be solved by loading the font without `FT_LOAD_NO_SCALE`
-   *     and setting the character size to `font->units_per_EM`.
+   *     and setting the character size_i32 to `font->units_per_EM`.
    *
    *   FT_LOAD_NO_HINTING ::
    *     Disable hinting.  This generally generates 'blurrier' bitmap glyphs
@@ -3190,7 +3190,7 @@ FT_BEGIN_HEADER
    * @note:
    *   The transformation is only applied to scalable image formats after the
    *   glyph has been loaded.  It means that hinting is unaltered by the
-   *   transformation and is performed on the character size given in the
+   *   transformation and is performed on the character size_i32 given in the
    *   last call to @FT_Set_Char_Size or @FT_Set_Pixel_Sizes.
    *
    *   Note that this also transforms the `face.glyph.advance` field, but
@@ -3494,7 +3494,7 @@ FT_BEGIN_HEADER
    *     A handle to a source face object.
    *
    *   point_size ::
-   *     The point size in 16.16 fractional points.
+   *     The point_i32 size_i32 in 16.16 fractional points.
    *
    *   degree ::
    *     The degree of tightness.  Increasingly negative values represent
@@ -4332,7 +4332,7 @@ FT_BEGIN_HEADER
    *   of all variations supported by the font.
    *
    *   A variation may be either 'default' or 'non-default' for a given font.
-   *   A default variation is the one you will get for that code point if you
+   *   A default variation is the one you will get for that code point_i32 if you
    *   look it up in the standard Unicode cmap.  A non-default variation is a
    *   different glyph.
    *
@@ -4353,10 +4353,10 @@ FT_BEGIN_HEADER
    *     A handle to the source face object.
    *
    *   charcode ::
-   *     The character code point in Unicode.
+   *     The character code point_i32 in Unicode.
    *
    *   variantSelector ::
-   *     The Unicode code point of the variation selector.
+   *     The Unicode code point_i32 of the variation selector.
    *
    * @return:
    *   The glyph index.  0~means either 'undefined character code', or
@@ -4495,7 +4495,7 @@ FT_BEGIN_HEADER
    *     A handle to the source face object.
    *
    *   variantSelector ::
-   *     The variation selector code point in Unicode.
+   *     The variation selector code point_i32 in Unicode.
    *
    * @return:
    *   A list of all the code points that are specified by this selector
@@ -4589,7 +4589,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   Compute `(a*b)/0x10000` with maximum accuracy.  Its main use is to
-   *   multiply a given value by a 16.16 fixed-point factor.
+   *   multiply a given value by a 16.16 fixed-point_i32 factor.
    *
    * @input:
    *   a ::
@@ -4624,7 +4624,7 @@ FT_BEGIN_HEADER
    *
    * @description:
    *   Compute `(a*0x10000)/b` with maximum accuracy.  Its main use is to
-   *   divide a given value by a 16.16 fixed-point factor.
+   *   divide a given value by a 16.16 fixed-point_i32 factor.
    *
    * @input:
    *   a ::

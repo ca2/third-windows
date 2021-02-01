@@ -71,9 +71,9 @@ FT_BEGIN_HEADER
    *      non-PFR fonts.  Optional (parameter can be `NULL`).
    *
    *    ametrics_x_scale ::
-   *      A 16.16 fixed-point number used to scale distance expressed in
+   *      A 16.16 fixed-point_i32 number used to scale distance expressed in
    *      metrics units to device subpixels.  This is equivalent to
-   *      `face->size->x_scale`, but for metrics only.  Optional (parameter
+   *      `face->size_i32->x_scale`, but for metrics only.  Optional (parameter
    *      can be `NULL`).
    *
    *    ametrics_y_scale ::

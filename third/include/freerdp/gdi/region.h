@@ -33,13 +33,13 @@ extern "C"
 	FREERDP_API HGDI_RGN gdi_CreateRectRgn(INT32 nLeftRect, INT32 nTopRect, INT32 nRightRect,
 	                                       INT32 nBottomRect);
 	FREERDP_API HGDI_RECT gdi_CreateRect(INT32 xLeft, INT32 yTop, INT32 xRight, INT32 yBottom);
-	FREERDP_API BOOL gdi_RectToRgn(const HGDI_RECT rect, HGDI_RGN rgn);
+	FREERDP_API BOOL gdi_RectToRgn(const HGDI_RECT rectangle_i32, HGDI_RGN rgn);
 	FREERDP_API BOOL gdi_CRectToRgn(INT32 left, INT32 top, INT32 right, INT32 bottom, HGDI_RGN rgn);
-	FREERDP_API BOOL gdi_RectToCRgn(const HGDI_RECT rect, INT32* x, INT32* y, INT32* w, INT32* h);
+	FREERDP_API BOOL gdi_RectToCRgn(const HGDI_RECT rectangle_i32, INT32* x, INT32* y, INT32* w, INT32* h);
 	FREERDP_API BOOL gdi_CRectToCRgn(INT32 left, INT32 top, INT32 right, INT32 bottom, INT32* x,
 	                                 INT32* y, INT32* w, INT32* h);
-	FREERDP_API BOOL gdi_RgnToRect(const HGDI_RGN rgn, HGDI_RECT rect);
-	FREERDP_API BOOL gdi_CRgnToRect(INT64 x, INT64 y, INT32 w, INT32 h, HGDI_RECT rect);
+	FREERDP_API BOOL gdi_RgnToRect(const HGDI_RGN rgn, HGDI_RECT rectangle_i32);
+	FREERDP_API BOOL gdi_CRgnToRect(INT64 x, INT64 y, INT32 w, INT32 h, HGDI_RECT rectangle_i32);
 	FREERDP_API BOOL gdi_RgnToCRect(const HGDI_RGN rgn, INT32* left, INT32* top, INT32* right,
 	                                INT32* bottom);
 	FREERDP_API BOOL gdi_CRgnToCRect(INT32 x, INT32 y, INT32 w, INT32 h, INT32* left, INT32* top,

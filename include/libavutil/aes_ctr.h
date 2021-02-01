@@ -52,9 +52,9 @@ void av_aes_ctr_free(struct AVAESCTR *a);
  * Process a buffer using a previously initialized context.
  * @param dst destination array, can be equal to src
  * @param src source array, can be equal to dst
- * @param size the size of src and dst
+ * @param size_i32 the size_i32 of src and dst
  */
-void av_aes_ctr_crypt(struct AVAESCTR *a, uint8_t *dst, const uint8_t *src, int size);
+void av_aes_ctr_crypt(struct AVAESCTR *a, uint8_t *dst, const uint8_t *src, int size_i32);
 
 /**
  * Get the current iv

@@ -131,13 +131,13 @@ template<> struct MY_ALIGNED(8) my_alignment_imp<8> {};
 template<> struct MY_ALIGNED(16) my_alignment_imp<16> {};
 
 /**
-  A POD type with a given size and alignment.
+  A POD type with a given size_i32 and alignment.
 
   @remark If the compiler does not support a alignment attribute
           (MY_ALIGN macro), the default alignment of a double is
           used instead.
 
-  @tparam size        The minimum size.
+  @tparam size_i32        The minimum size.
   @tparam alignment   The desired alignment: 1, 2, 4, 8 or 16.
 */
 template <size_t size, size_t alignment>
@@ -145,7 +145,7 @@ struct my_aligned_storage
 {
   union
   {
-    char data[size];
+    char data[size_i32];
     my_alignment_imp<alignment> align;
   };
 };

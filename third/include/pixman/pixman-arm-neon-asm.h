@@ -139,7 +139,7 @@
 .elseif numbytes == 1
     pixldst0 op, 8, %(basereg+0), 1, mem_operand, abits
 .else
-    .error "unsupported size: numbytes"
+    .error "unsupported size_i32: numbytes"
 .endif
 .endm
 
@@ -326,7 +326,7 @@
 .elseif numbytes == 1
     pixld0_s elem_size, %(basereg+0), 1, mem_operand
 .else
-    .error "unsupported size: numbytes"
+    .error "unsupported size_i32: numbytes"
 .endif
 .endm
 
@@ -376,7 +376,7 @@
  * more data on the right side of the image - not a big issue and may
  * be actually helpful when rendering text glyphs). Additional trick is
  * the use of LDR instruction for prefetch instead of PLD when moving to
- * the next line, the point is that we have a high chance of getting TLB
+ * the next line, the point_i32 is that we have a high chance of getting TLB
  * miss in this case, and PLD would be useless.
  *
  * This sounds like it may introduce a noticeable overhead (when working with

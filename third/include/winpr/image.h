@@ -89,7 +89,7 @@ extern "C"
 	WINPR_API int winpr_image_write(wImage* image, const char* filename);
 	WINPR_API int winpr_image_read(wImage* image, const char* filename);
 
-	WINPR_API int winpr_image_read_buffer(wImage* image, const BYTE* buffer, int size);
+	WINPR_API int winpr_image_read_buffer(wImage* image, const BYTE* buffer, int size_i32);
 
 	WINPR_API wImage* winpr_image_new();
 	WINPR_API void winpr_image_free(wImage* image, BOOL bFreeBuffer);

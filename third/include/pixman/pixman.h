@@ -167,7 +167,7 @@ struct pixman_line_fixed
 };
 
 /*
- * Fixed point matrices
+ * Fixed point_i32 matrices
  */
 
 struct pixman_vector
@@ -255,7 +255,7 @@ pixman_bool_t pixman_transform_is_inverse       (const struct pixman_transform *
 						 const struct pixman_transform *b);
 
 /*
- * Floating point matrices
+ * Floating point_i32 matrices
  */
 typedef struct pixman_f_transform pixman_f_transform_t;
 typedef struct pixman_f_vector pixman_f_vector_t;
@@ -369,8 +369,8 @@ typedef enum
      *         height:          integer given as 16.16 fixpoint number
      *         x_phase_bits:	integer given as 16.16 fixpoint
      *         y_phase_bits:	integer given as 16.16 fixpoint
-     *         xtables:         (1 << x_phase_bits) tables of size width
-     *         ytables:         (1 << y_phase_bits) tables of size height
+     *         xtables:         (1 << x_phase_bits) tables of size_i32 width
+     *         ytables:         (1 << y_phase_bits) tables of size_i32 height
      *
      * When sampling at (x, y), the location is first rounded to one of
      * n_x_phases * n_y_phases subpixel positions. These subpixel positions
@@ -460,9 +460,9 @@ typedef struct pixman_rectangle16	pixman_rectangle16_t;
 typedef struct pixman_region16		pixman_region16_t;
 
 struct pixman_region16_data {
-    long		size;
+    long		size_i32;
     long		numRects;
-/*  pixman_box16_t	rects[size];   in memory but not explicitly declared */
+/*  pixman_box16_t	rects[size_i32];   in memory but not explicitly declared */
 };
 
 struct pixman_rectangle16
@@ -579,7 +579,7 @@ pixman_bool_t           pixman_region_contains_point     (pixman_region16_t *reg
 
 PIXMAN_API
 pixman_region_overlap_t pixman_region_contains_rectangle (pixman_region16_t *region,
-							  pixman_box16_t    *prect);
+							  pixman_box16_t    *prectangle);
 
 PIXMAN_API
 pixman_bool_t           pixman_region_not_empty          (pixman_region16_t *region);
@@ -616,9 +616,9 @@ typedef struct pixman_rectangle32	pixman_rectangle32_t;
 typedef struct pixman_region32		pixman_region32_t;
 
 struct pixman_region32_data {
-    long		size;
+    long		size_i32;
     long		numRects;
-/*  pixman_box32_t	rects[size];   in memory but not explicitly declared */
+/*  pixman_box32_t	rects[size_i32];   in memory but not explicitly declared */
 };
 
 struct pixman_rectangle32
@@ -720,7 +720,7 @@ pixman_bool_t           pixman_region32_contains_point     (pixman_region32_t *r
 
 PIXMAN_API
 pixman_region_overlap_t pixman_region32_contains_rectangle (pixman_region32_t *region,
-							    pixman_box32_t    *prect);
+							    pixman_box32_t    *prectangle);
 
 PIXMAN_API
 pixman_bool_t           pixman_region32_not_empty          (pixman_region32_t *region);
@@ -788,8 +788,8 @@ const char*   pixman_version_string     (void);
 typedef struct pixman_indexed		pixman_indexed_t;
 typedef struct pixman_gradient_stop	pixman_gradient_stop_t;
 
-typedef uint32_t (* pixman_read_memory_func_t) (const void *src, int size);
-typedef void     (* pixman_write_memory_func_t) (void *dst, uint32_t value, int size);
+typedef uint32_t (* pixman_read_memory_func_t) (const void *src, int size_i32);
+typedef void     (* pixman_write_memory_func_t) (void *dst, uint32_t value, int size_i32);
 
 typedef void     (* pixman_image_destroy_func_t) (pixman_image_t *image, void *data);
 
@@ -1281,7 +1281,7 @@ typedef struct pixman_span_fix pixman_span_fix_t;
 typedef struct pixman_triangle pixman_triangle_t;
 
 /*
- * An edge structure.  This represents a single polygon edge
+ * An edge structure.  This represents a single polygon_i32 edge
  * and can be quickly stepped across small or large gaps in the
  * sample grid
  */

@@ -94,7 +94,7 @@ LEAF_MIPS32R2(symbol)                                   \
 #define END(function)                                   \
                 .set    pop;                            \
                 .end    function;                       \
-                .size   function,.-function
+                .size_i32   function,.-function
 
 /*
  * Checks if stack offset is big enough for storing/restoring regs_num
@@ -102,7 +102,7 @@ LEAF_MIPS32R2(symbol)                                   \
  * or equal to the number of bytes needed for storing registers (regs_num*4).
  * Since MIPS ABI allows usage of first 16 bytes of stack frame (this is
  * preserved for input arguments of the functions, already stored in a0-a3),
- * stack size can be further optimized by utilizing this space.
+ * stack size_i32 can be further optimized by utilizing this space.
  */
 .macro CHECK_STACK_OFFSET regs_num, stack_offset
 .if \stack_offset < \regs_num * 4 - 16

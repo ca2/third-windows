@@ -36,15 +36,15 @@ typedef struct AVFifoBuffer {
 
 /**
  * Initialize an AVFifoBuffer.
- * @param size of FIFO
+ * @param size_i32 of FIFO
  * @return AVFifoBuffer or NULL in case of memory allocation failure
  */
-AVFifoBuffer *av_fifo_alloc(unsigned int size);
+AVFifoBuffer *av_fifo_alloc(unsigned int size_i32);
 
 /**
  * Initialize an AVFifoBuffer.
  * @param nmemb number of elements
- * @param size  size of the single element
+ * @param size_i32  size_i32 of the single element
  * @return AVFifoBuffer or NULL in case of memory allocation failure
  */
 AVFifoBuffer *av_fifo_alloc_array(size_t nmemb, size_t size);
@@ -71,7 +71,7 @@ void av_fifo_reset(AVFifoBuffer *f);
  * Return the amount of data in bytes in the AVFifoBuffer, that is the
  * amount of data you can read from it.
  * @param f AVFifoBuffer to read from
- * @return size
+ * @return size_i32
  */
 int av_fifo_size(const AVFifoBuffer *f);
 
@@ -79,7 +79,7 @@ int av_fifo_size(const AVFifoBuffer *f);
  * Return the amount of space in bytes in the AVFifoBuffer, that is the
  * amount of data you can write into it.
  * @param f AVFifoBuffer to write into
- * @return size
+ * @return size_i32
  */
 int av_fifo_space(const AVFifoBuffer *f);
 
@@ -118,7 +118,7 @@ int av_fifo_generic_read(AVFifoBuffer *f, void *dest, int buf_size, void (*func)
  * @param f AVFifoBuffer to write to
  * @param src data source; non-const since it may be used as a
  * modifiable context by the function defined in func
- * @param size number of bytes to write
+ * @param size_i32 number of bytes to write
  * @param func generic write function; the first parameter is src,
  * the second is dest_buf, the third is dest_buf_size.
  * func must return the number of bytes written to dest_buf, or <= 0 to
@@ -133,15 +133,15 @@ int av_fifo_generic_write(AVFifoBuffer *f, void *src, int size, int (*func)(void
  * In case of reallocation failure, the old FIFO is kept unchanged.
  *
  * @param f AVFifoBuffer to resize
- * @param size new AVFifoBuffer size in bytes
+ * @param size_i32 new AVFifoBuffer size_i32 in bytes
  * @return <0 for failure, >=0 otherwise
  */
-int av_fifo_realloc2(AVFifoBuffer *f, unsigned int size);
+int av_fifo_realloc2(AVFifoBuffer *f, unsigned int size_i32);
 
 /**
  * Enlarge an AVFifoBuffer.
  * In case of reallocation failure, the old FIFO is kept unchanged.
- * The new fifo size may be larger than the requested size.
+ * The new fifo size_i32 may be larger than the requested size.
  *
  * @param f AVFifoBuffer to resize
  * @param additional_space the amount of space in bytes to allocate in addition to av_fifo_size()
@@ -152,9 +152,9 @@ int av_fifo_grow(AVFifoBuffer *f, unsigned int additional_space);
 /**
  * Read and discard the specified amount of data from an AVFifoBuffer.
  * @param f AVFifoBuffer to read from
- * @param size amount of data to read in bytes
+ * @param size_i32 amount of data to read in bytes
  */
-void av_fifo_drain(AVFifoBuffer *f, int size);
+void av_fifo_drain(AVFifoBuffer *f, int size_i32);
 
 /**
  * Return a pointer to the data stored in a FIFO buffer at a certain offset.
@@ -162,9 +162,9 @@ void av_fifo_drain(AVFifoBuffer *f, int size);
  *
  * @param f    AVFifoBuffer to peek at, f must be non-NULL
  * @param offs an offset in bytes, its absolute value must be less
- *             than the used buffer size or the returned pointer will
- *             point outside to the buffer data.
- *             The used buffer size can be checked with av_fifo_size().
+ *             than the used buffer size_i32 or the returned pointer will
+ *             point_i32 outside to the buffer data.
+ *             The used buffer size_i32 can be checked with av_fifo_size().
  */
 static inline uint8_t *av_fifo_peek2(const AVFifoBuffer *f, int offs)
 {

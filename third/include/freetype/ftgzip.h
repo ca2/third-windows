@@ -117,10 +117,10 @@ FT_BEGIN_HEADER
    *
    * @inout:
    *   output_len ::
-   *     Before calling the function, this is the total size of the output
+   *     Before calling the function, this is the total size_i32 of the output
    *     buffer, which must be large enough to hold the entire uncompressed
-   *     data (so the size of the uncompressed data must be known in
-   *     advance).  After calling the function, `output_len` is the size of
+   *     data (so the size_i32 of the uncompressed data must be known in
+   *     advance).  After calling the function, `output_len` is the size_i32 of
    *     the used data in `output`.
    *
    * @return:

@@ -68,7 +68,7 @@ typedef struct _cairo_cogl_device {
      * to unsupported operators are NULL.
      *
      * The CAIRO_OPERATOR_ADD is the operator enum with the highest value that
-     * we support so we at least cap the size of the array by that.
+     * we support so we at least cap the size_i32 of the array by that.
      *
      * For each operator we have a template for when we have a solid source
      * and another for each texture format that could be used as a source.

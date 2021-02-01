@@ -77,7 +77,7 @@ enum AVSphericalProjection {
  * information about projection, initial layout, and any other view modifier.
  *
  * @note The struct must be allocated with av_spherical_alloc() and
- *       its size is not a part of the public ABI.
+ *       its size_i32 is not a part of the public ABI.
  */
 typedef struct AVSphericalMapping {
     /**
@@ -131,12 +131,12 @@ typedef struct AVSphericalMapping {
      */
 
     /**
-     * @name Bounding rectangle
+     * @name Bounding rectangle_i32
      * @anchor bounding
      * @{
      * These fields indicate the location of the current tile, and where
      * it should be mapped relative to the original surface. They are
-     * exported as 0.32 fixed point, and can be converted to classic
+     * exported as 0.32 fixed point_i32, and can be converted to classic
      * pixel values with av_spherical_bounds().
      *
      * @code{.unparsed}
@@ -152,7 +152,7 @@ typedef struct AVSphericalMapping {
      * @endcode
      *
      * If needed, the original video surface dimensions can be derived
-     * by adding the current stream or frame size to the related bounds,
+     * by adding the current stream or frame size_i32 to the related bounds,
      * like in the following example:
      *
      * @code{c}
@@ -188,11 +188,11 @@ typedef struct AVSphericalMapping {
  *
  * @return the newly allocated struct or NULL on failure
  */
-AVSphericalMapping *av_spherical_alloc(size_t *size);
+AVSphericalMapping *av_spherical_alloc(size_t *size_i32);
 
 /**
  * Convert the @ref bounding fields from an AVSphericalVideo
- * from 0.32 fixed point to pixels.
+ * from 0.32 fixed point_i32 to pixels.
  *
  * @param map    The AVSphericalVideo map to read bound values from.
  * @param width  Width of the current frame or stream.

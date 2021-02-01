@@ -46,8 +46,8 @@ CAIRO_BEGIN_DECLS
 /* Rectangles that take part in a composite operation.
  *
  * The source and mask track the extents of the respective patterns in device
- * space. The unbounded rectangle is essentially the clip rectangle. And the
- * intersection of all is the bounded rectangle, which is the minimum extents
+ * space. The unbounded rectangle_i32 is essentially the clip rectangle. And the
+ * intersection of all is the bounded rectangle_i32, which is the minimum extents
  * the operation may require. Whether or not the operation is actually bounded
  * is tracked in the is_bounded boolean.
  *
@@ -121,7 +121,7 @@ _cairo_composite_rectangles_init_for_polygon (cairo_composite_rectangles_t *exte
 					      cairo_surface_t		*surface,
 					      cairo_operator_t		 op,
 					      const cairo_pattern_t	*source,
-					      const cairo_polygon_t	*polygon,
+					      const cairo_polygon_t	*polygon_i32,
 					      const cairo_clip_t		*clip);
 
 cairo_private cairo_int_status_t

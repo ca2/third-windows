@@ -113,7 +113,7 @@ struct st_lock_list {
 
 typedef struct st_thr_lock {
   LIST list;
-  mysql_mutex_t mutex;
+  mysql_mutex_t ::mutex;
   struct st_lock_list read_wait;
   struct st_lock_list read;
   struct st_lock_list write_wait;

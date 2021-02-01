@@ -150,7 +150,7 @@
 
 /**
  * @def av_alloc_size(...)
- * Function attribute used on a function that allocates memory, whose size is
+ * Function attribute used on a function that allocates memory, whose size_i32 is
  * given by the specified parameter(s).
  *
  * @code{.c}
@@ -188,7 +188,7 @@
  * Allocate a memory block with alignment suitable for all memory accesses
  * (including vectors if available on the CPU).
  *
- * @param size Size in bytes for the memory block to be allocated
+ * @param size_i32 Size in bytes for the memory block to be allocated
  * @return Pointer to the allocated block, or `NULL` if the block cannot
  *         be allocated
  * @see av_mallocz()
@@ -200,7 +200,7 @@ void *av_malloc(size_t size) av_malloc_attrib av_alloc_size(1);
  * (including vectors if available on the CPU) and zero all the bytes of the
  * block.
  *
- * @param size Size in bytes for the memory block to be allocated
+ * @param size_i32 Size in bytes for the memory block to be allocated
  * @return Pointer to the allocated block, or `NULL` if it cannot be allocated
  * @see av_malloc()
  */
@@ -209,10 +209,10 @@ void *av_mallocz(size_t size) av_malloc_attrib av_alloc_size(1);
 /**
  * Allocate a memory block for an array with av_malloc().
  *
- * The allocated memory will have size `size * nmemb` bytes.
+ * The allocated memory will have size_i32 `size_i32 * nmemb` bytes.
  *
  * @param nmemb Number of element
- * @param size  Size of a single element
+ * @param size_i32  Size of a single element
  * @return Pointer to the allocated block, or `NULL` if the block cannot
  *         be allocated
  * @see av_malloc()
@@ -222,10 +222,10 @@ av_alloc_size(1, 2) void *av_malloc_array(size_t nmemb, size_t size);
 /**
  * Allocate a memory block for an array with av_mallocz().
  *
- * The allocated memory will have size `size * nmemb` bytes.
+ * The allocated memory will have size_i32 `size_i32 * nmemb` bytes.
  *
  * @param nmemb Number of elements
- * @param size  Size of the single element
+ * @param size_i32  Size of the single element
  * @return Pointer to the allocated block, or `NULL` if the block cannot
  *         be allocated
  *
@@ -244,13 +244,13 @@ void *av_calloc(size_t nmemb, size_t size) av_malloc_attrib;
 /**
  * Allocate, reallocate, or free a block of memory.
  *
- * If `ptr` is `NULL` and `size` > 0, allocate a new block. If `size` is
+ * If `ptr` is `NULL` and `size_i32` > 0, allocate a new block. If `size_i32` is
  * zero, free the memory block pointed to by `ptr`. Otherwise, expand or
- * shrink that block of memory according to `size`.
+ * shrink that block of memory according to `size_i32`.
  *
  * @param ptr  Pointer to a memory block already allocated with
  *             av_realloc() or `NULL`
- * @param size Size in bytes of the memory block to be allocated or
+ * @param size_i32 Size in bytes of the memory block to be allocated or
  *             reallocated
  *
  * @return Pointer to a newly-reallocated block or `NULL` if the block
@@ -267,14 +267,14 @@ void *av_realloc(void *ptr, size_t size) av_alloc_size(2);
  * Allocate, reallocate, or free a block of memory through a pointer to a
  * pointer.
  *
- * If `*ptr` is `NULL` and `size` > 0, allocate a new block. If `size` is
+ * If `*ptr` is `NULL` and `size_i32` > 0, allocate a new block. If `size_i32` is
  * zero, free the memory block pointed to by `*ptr`. Otherwise, expand or
- * shrink that block of memory according to `size`.
+ * shrink that block of memory according to `size_i32`.
  *
  * @param[in,out] ptr  Pointer to a pointer to a memory block already allocated
  *                     with av_realloc(), or a pointer to `NULL`. The pointer
  *                     is updated on success, or freed on failure.
- * @param[in]     size Size in bytes for the memory block to be allocated or
+ * @param[in]     size_i32 Size in bytes for the memory block to be allocated or
  *                     reallocated
  *
  * @return Zero on success, an AVERROR error code on failure
@@ -289,7 +289,7 @@ int av_reallocp(void *ptr, size_t size);
  * Allocate, reallocate, or free a block of memory.
  *
  * This function does the same thing as av_realloc(), except:
- * - It takes two size arguments and allocates `nelem * elsize` bytes,
+ * - It takes two size_i32 arguments and allocates `nelem * elsize` bytes,
  *   after checking the result of the multiplication for integer overflow.
  * - It frees the input block in case of failure, thus avoiding the memory
  *   leak with the classic
@@ -311,7 +311,7 @@ void *av_realloc_f(void *ptr, size_t nelem, size_t elsize);
  * @param ptr   Pointer to a memory block already allocated with
  *              av_realloc() or `NULL`
  * @param nmemb Number of elements in the array
- * @param size  Size of the single element of the array
+ * @param size_i32  Size of the single element of the array
  *
  * @return Pointer to a newly-reallocated block or NULL if the block
  *         cannot be reallocated or the function is used to free the memory block
@@ -332,7 +332,7 @@ av_alloc_size(2, 3) void *av_realloc_array(void *ptr, size_t nmemb, size_t size)
  *                      allocated with av_realloc(), or a pointer to `NULL`.
  *                      The pointer is updated on success, or freed on failure.
  * @param[in]     nmemb Number of elements
- * @param[in]     size  Size of the single element
+ * @param[in]     size_i32  Size of the single element
  *
  * @return Zero on success, an AVERROR error code on failure
  *
@@ -347,7 +347,7 @@ int av_reallocp_array(void *ptr, size_t nmemb, size_t size);
  * If the given buffer is `NULL`, then a new uninitialized buffer is allocated.
  *
  * If the given buffer is not large enough, and reallocation fails, `NULL` is
- * returned and `*size` is set to 0, but the original buffer is not changed or
+ * returned and `*size_i32` is set to 0, but the original buffer is not changed or
  * freed.
  *
  * A typical use pattern follows:
@@ -363,17 +363,17 @@ int av_reallocp_array(void *ptr, size_t nmemb, size_t size);
  * @endcode
  *
  * @param[in,out] ptr      Already allocated buffer, or `NULL`
- * @param[in,out] size     Pointer to the size of buffer `ptr`. `*size` is
+ * @param[in,out] size_i32     Pointer to the size_i32 of buffer `ptr`. `*size_i32` is
  *                         updated to the new allocated size, in particular 0
  *                         in case of failure.
- * @param[in]     min_size Desired minimal size of buffer `ptr`
+ * @param[in]     min_size Desired minimal size_i32 of buffer `ptr`
  * @return `ptr` if the buffer is large enough, a pointer to newly reallocated
  *         buffer if the buffer was not large enough, or `NULL` in case of
  *         error
  * @see av_realloc()
  * @see av_fast_malloc()
  */
-void *av_fast_realloc(void *ptr, unsigned int *size, size_t min_size);
+void *av_fast_realloc(void *ptr, unsigned int *size_i32, size_t min_size);
 
 /**
  * Allocate a buffer, reusing the given one if large enough.
@@ -397,14 +397,14 @@ void *av_fast_realloc(void *ptr, unsigned int *size, size_t min_size);
  * @param[in,out] ptr      Pointer to pointer to an already allocated buffer.
  *                         `*ptr` will be overwritten with pointer to new
  *                         buffer on success or `NULL` on failure
- * @param[in,out] size     Pointer to the size of buffer `*ptr`. `*size` is
+ * @param[in,out] size_i32     Pointer to the size_i32 of buffer `*ptr`. `*size_i32` is
  *                         updated to the new allocated size, in particular 0
  *                         in case of failure.
- * @param[in]     min_size Desired minimal size of buffer `*ptr`
+ * @param[in]     min_size Desired minimal size_i32 of buffer `*ptr`
  * @see av_realloc()
  * @see av_fast_mallocz()
  */
-void av_fast_malloc(void *ptr, unsigned int *size, size_t min_size);
+void av_fast_malloc(void *ptr, unsigned int *size_i32, size_t min_size);
 
 /**
  * Allocate and clear a buffer, reusing the given one if large enough.
@@ -418,13 +418,13 @@ void av_fast_malloc(void *ptr, unsigned int *size, size_t min_size);
  * @param[in,out] ptr      Pointer to pointer to an already allocated buffer.
  *                         `*ptr` will be overwritten with pointer to new
  *                         buffer on success or `NULL` on failure
- * @param[in,out] size     Pointer to the size of buffer `*ptr`. `*size` is
+ * @param[in,out] size_i32     Pointer to the size_i32 of buffer `*ptr`. `*size_i32` is
  *                         updated to the new allocated size, in particular 0
  *                         in case of failure.
- * @param[in]     min_size Desired minimal size of buffer `*ptr`
+ * @param[in]     min_size Desired minimal size_i32 of buffer `*ptr`
  * @see av_fast_malloc()
  */
-void av_fast_mallocz(void *ptr, unsigned int *size, size_t min_size);
+void av_fast_mallocz(void *ptr, unsigned int *size_i32, size_t min_size);
 
 /**
  * Free a memory block which has been allocated with a function of av_malloc()
@@ -487,7 +487,7 @@ char *av_strndup(const char *s, size_t len) av_malloc_attrib;
  * Duplicate a buffer with av_malloc().
  *
  * @param p    Buffer to be duplicated
- * @param size Size in bytes of the buffer copied
+ * @param size_i32 Size in bytes of the buffer copied
  * @return Pointer to a newly allocated buffer containing a
  *         copy of `p` or `NULL` if the buffer cannot be allocated
  */
@@ -497,7 +497,7 @@ void *av_memdup(const void *p, size_t size);
  * Overlapping memcpy() implementation.
  *
  * @param dst  Destination buffer
- * @param back Number of bytes back to start copying (i.e. the initial size of
+ * @param back Number of bytes back to start copying (i.e. the initial size_i32 of
  *             the overlapping window); must be > 0
  * @param cnt  Number of bytes to copy; must be >= 0
  *
@@ -526,7 +526,7 @@ void av_memcpy_backptr(uint8_t *dst, int back, int cnt);
  *
  * The first system stores pointers to values in a block of dynamically
  * allocated memory. Since only pointers are stored, the function does not need
- * to know the size of the type. Both av_dynarray_add() and
+ * to know the size_i32 of the type. Both av_dynarray_add() and
  * av_dynarray_add_nofree() implement this system.
  *
  * @code
@@ -553,7 +553,7 @@ void av_memcpy_backptr(uint8_t *dst, int back, int cnt);
  * @endcode
  *
  * The second system stores the value directly in a block of memory. As a
- * result, the function has to know the size of the type. av_dynarray2_add()
+ * result, the function has to know the size_i32 of the type. av_dynarray2_add()
  * implements this mechanism.
  *
  * @code
@@ -592,11 +592,11 @@ void av_memcpy_backptr(uint8_t *dst, int back, int cnt);
  * structures, and the element to add must be a pointer to an already
  * allocated structure.
  *
- * The array is reallocated when its size reaches powers of 2.
+ * The array is reallocated when its size_i32 reaches powers of 2.
  * Therefore, the amortized cost of adding an element is constant.
  *
  * In case of success, the pointer to the array is updated in order to
- * point to the new grown array, and the number pointed to by `nb_ptr`
+ * point_i32 to the new grown array, and the number pointed to by `nb_ptr`
  * is incremented.
  * In case of failure, the array is freed, `*tab_ptr` is set to `NULL` and
  * `*nb_ptr` is set to 0.
@@ -622,13 +622,13 @@ av_warn_unused_result
 int av_dynarray_add_nofree(void *tab_ptr, int *nb_ptr, void *elem);
 
 /**
- * Add an element of size `elem_size` to a dynamic array.
+ * Add an element of size_i32 `elem_size` to a dynamic array.
  *
  * The array is reallocated when its number of elements reaches powers of 2.
  * Therefore, the amortized cost of adding an element is constant.
  *
  * In case of success, the pointer to the array is updated in order to
- * point to the new grown array, and the number pointed to by `nb_ptr`
+ * point_i32 to the new grown array, and the number pointed to by `nb_ptr`
  * is incremented.
  * In case of failure, the array is freed, `*tab_ptr` is set to `NULL` and
  * `*nb_ptr` is set to 0.
@@ -678,14 +678,14 @@ static inline int av_size_mult(size_t a, size_t b, size_t *r)
 }
 
 /**
- * Set the maximum size that may be allocated in one block.
+ * Set the maximum size_i32 that may be allocated in one block.
  *
  * The value specified with this function is effective for all libavutil's @ref
  * lavu_mem_funcs "heap management functions."
  *
  * By default, the max value is defined as `INT_MAX`.
  *
- * @param max Value to be set as the new maximum size
+ * @param max Value to be set as the new maximum size_i32
  *
  * @warning Exercise extreme caution when using this function. Don't touch
  *          this if you do not understand the full consequence of doing so.

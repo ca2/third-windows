@@ -38,7 +38,7 @@
   /* - global hints: Usually some metrics that describe global properties  */
   /*                 of the face.  It is computed by scanning more or less */
   /*                 aggressively the glyphs in the face, and thus can be  */
-  /*                 very slow to compute (even if the size of global      */
+  /*                 very slow to compute (even if the size_i32 of global      */
   /*                 hints is really small).                               */
   /*                                                                       */
   /* - glyph hints:  These describe some important features of the glyph   */
@@ -99,7 +99,7 @@ FT_BEGIN_HEADER
   /* <Output>                                                              */
   /*    global_hints :: A typeless pointer to the global hints.            */
   /*                                                                       */
-  /*    global_len   :: The size in bytes of the global hints.             */
+  /*    global_len   :: The size_i32 in bytes of the global hints.             */
   /*                                                                       */
   typedef void
   (*FT_AutoHinter_GlobalGetFunc)( FT_AutoHinter  hinter,

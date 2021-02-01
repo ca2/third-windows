@@ -472,7 +472,7 @@ typedef png_info * PNG_RESTRICT png_inforp;
 typedef const png_info * PNG_RESTRICT png_const_inforp;
 
 /* Three color definitions.  The order of the red, green, and blue, (and the
- * exact size) is not important, although the size of the fields need to
+ * exact size_i32) is not important, although the size_i32 of the fields need to
  * be png_byte or png_uint_16 (as defined below).
  */
 typedef struct png_color_struct
@@ -650,7 +650,7 @@ typedef png_unknown_chunk * * png_unknown_chunkpp;
 #define PNG_UINT_32_MAX ((png_uint_32)(-1))
 #define PNG_SIZE_MAX ((size_t)(-1))
 
-/* These are constants for fixed point values encoded in the
+/* These are constants for fixed point_i32 values encoded in the
  * PNG specification manner (x100000)
  */
 #define PNG_FP_1    100000
@@ -943,7 +943,7 @@ PNG_EXPORT(7, void, png_set_compression_buffer_size, (png_structrp png_ptr,
 /* This function returns the jmp_buf built in to *png_ptr.  It must be
  * supplied with an appropriate 'longjmp' function to use on that jmp_buf
  * unless the default error function is overridden in which case NULL is
- * acceptable.  The size of the jmp_buf is checked against the actual size
+ * acceptable.  The size_i32 of the jmp_buf is checked against the actual size_i32
  * allocated by the library - the call will return NULL on a mismatch
  * indicating an ABI mismatch.
  */
@@ -1332,7 +1332,7 @@ PNG_EXPORT(49, void, png_set_quantize, (png_structrp png_ptr,
 
 #ifdef PNG_READ_GAMMA_SUPPORTED
 /* The threshold on gamma processing is configurable but hard-wired into the
- * library.  The following is the floating point variant.
+ * library.  The following is the floating point_i32 variant.
  */
 #define PNG_GAMMA_THRESHOLD (PNG_GAMMA_THRESHOLD_FIXED*.00001)
 
@@ -1344,7 +1344,7 @@ PNG_EXPORT(49, void, png_set_quantize, (png_structrp png_ptr,
  *
  * These routines accept the same gamma values as png_set_alpha_mode (described
  * above).  The PNG_GAMMA_ defines and PNG_DEFAULT_sRGB can be passed to either
- * API (floating point or fixed.)  Notice, however, that the 'file_gamma' value
+ * API (floating point_i32 or fixed.)  Notice, however, that the 'file_gamma' value
  * is the inverse of a 'screen gamma' value.
  */
 PNG_FP_EXPORT(50, void, png_set_gamma, (png_structrp png_ptr,
@@ -1657,7 +1657,7 @@ PNG_EXPORT(218, png_byte, png_get_current_pass_number, (png_const_structrp));
  *
  * negative: An error occurred; png_chunk_error will be called.
  *     zero: The chunk was not handled, the chunk will be saved. A critical
- *           chunk will cause an error at this point unless it is to be saved.
+ *           chunk will cause an error at this point_i32 unless it is to be saved.
  * positive: The chunk was handled, libpng will ignore/discard it.
  *
  * See "INTERACTION WITH USER CHUNK CALLBACKS" below for important notes about
@@ -1714,14 +1714,14 @@ PNG_EXPORT(93, void, png_progressive_combine_row, (png_const_structrp png_ptr,
 #endif /* PROGRESSIVE_READ */
 
 PNG_EXPORTA(94, png_voidp, png_malloc, (png_const_structrp png_ptr,
-    png_alloc_size_t size), PNG_ALLOCATED);
+    png_alloc_size_t size_i32), PNG_ALLOCATED);
 /* Added at libpng version 1.4.0 */
 PNG_EXPORTA(95, png_voidp, png_calloc, (png_const_structrp png_ptr,
-    png_alloc_size_t size), PNG_ALLOCATED);
+    png_alloc_size_t size_i32), PNG_ALLOCATED);
 
 /* Added at libpng version 1.2.4 */
 PNG_EXPORTA(96, png_voidp, png_malloc_warn, (png_const_structrp png_ptr,
-    png_alloc_size_t size), PNG_ALLOCATED);
+    png_alloc_size_t size_i32), PNG_ALLOCATED);
 
 /* Frees a pointer allocated by png_malloc() */
 PNG_EXPORT(97, void, png_free, (png_const_structrp png_ptr, png_voidp ptr));
@@ -1764,7 +1764,7 @@ PNG_EXPORT(99, void, png_data_freer, (png_const_structrp png_ptr,
 
 #ifdef PNG_USER_MEM_SUPPORTED
 PNG_EXPORTA(100, png_voidp, png_malloc_default, (png_const_structrp png_ptr,
-    png_alloc_size_t size), PNG_ALLOCATED PNG_DEPRECATED);
+    png_alloc_size_t size_i32), PNG_ALLOCATED PNG_DEPRECATED);
 PNG_EXPORTA(101, void, png_free_default, (png_const_structrp png_ptr,
     png_voidp ptr), PNG_DEPRECATED);
 #endif
@@ -1831,7 +1831,7 @@ PNG_EXPORT(109, void, png_set_benign_errors,
  * data was not available.
  *
  * These functions should be used instead of directly accessing png_info
- * to avoid problems with future changes in the size and internal layout of
+ * to avoid problems with future changes in the size_i32 and internal layout of
  * png_info_struct.
  */
 /* Returns "flag" if chunk data is valid in info_ptr. */
@@ -2153,8 +2153,8 @@ PNG_FP_EXPORT(168, png_uint_32, png_get_sCAL, (png_const_structrp png_ptr,
     png_const_inforp info_ptr, int *unit, double *width, double *height))
 #if defined(PNG_FLOATING_ARITHMETIC_SUPPORTED) || \
    defined(PNG_FLOATING_POINT_SUPPORTED)
-/* NOTE: this API is currently implemented using floating point arithmetic,
- * consequently it can only be used on systems with floating point support.
+/* NOTE: this API is currently implemented using floating point_i32 arithmetic,
+ * consequently it can only be used on systems with floating point_i32 support.
  * In any case the range of values supported by png_fixed_point is small and it
  * is highly recommended that png_get_sCAL_s be used instead.
  */
@@ -2849,20 +2849,20 @@ typedef struct
 
 #define PNG_IMAGE_SAMPLE_COMPONENT_SIZE(fmt)\
    ((((fmt) & PNG_FORMAT_FLAG_LINEAR) >> 2)+1)
-   /* Return the size in bytes of a single component of a pixel or color-map
+   /* Return the size_i32 in bytes of a single component of a pixel or color-map
     * entry (as appropriate) in the image: 1 or 2.
     */
 
 #define PNG_IMAGE_SAMPLE_SIZE(fmt)\
    (PNG_IMAGE_SAMPLE_CHANNELS(fmt) * PNG_IMAGE_SAMPLE_COMPONENT_SIZE(fmt))
-   /* This is the size of the sample data for one sample.  If the image is
-    * color-mapped it is the size of one color-map entry (and image pixels are
-    * one byte in size), otherwise it is the size of one image pixel.
+   /* This is the size_i32 of the sample data for one sample.  If the image is
+    * color-mapped it is the size_i32 of one color-map entry (and image pixels are
+    * one byte in size_i32), otherwise it is the size_i32 of one image pixel.
     */
 
 #define PNG_IMAGE_MAXIMUM_COLORMAP_COMPONENTS(fmt)\
    (PNG_IMAGE_SAMPLE_CHANNELS(fmt) * 256)
-   /* The maximum size of the color-map required by the format expressed in a
+   /* The maximum size_i32 of the color-map required by the format expressed in a
     * count of components.  This can be used to compile-time allocate a
     * color-map:
     *
@@ -2925,7 +2925,7 @@ typedef struct
 #define PNG_IMAGE_COLORMAP_SIZE(image)\
    (PNG_IMAGE_SAMPLE_SIZE((image).format) * (image).colormap_entries)
    /* Return the size, in bytes, of the color-map of this image.  If the image
-    * format is not a color-map format this will return a size sufficient for
+    * format is not a color-map format this will return a size_i32 sufficient for
     * 256 entries in the given format; check PNG_FORMAT_FLAG_COLORMAP if
     * you don't want to allocate a color-map in this case.
     */
@@ -2946,7 +2946,7 @@ typedef struct
     * images.  Do not use this option for images which will be distributed, only
     * used it when producing intermediate files that will be read back in
     * repeatedly.  For a typical 24-bit image the option will double the read
-    * speed at the cost of increasing the image size by 25%, however for many
+    * speed at the cost of increasing the image size_i32 by 25%, however for many
     * more compressible images the PNG file can be 10 times larger with only a
     * slight speed gain.
     */
@@ -3022,7 +3022,7 @@ PNG_EXPORT(237, int, png_image_finish_read, (png_imagep image,
     * on black and background is ignored.
     *
     * colormap must be supplied when PNG_FORMAT_FLAG_COLORMAP is set.  It must
-    * be at least the size (in bytes) returned by PNG_IMAGE_COLORMAP_SIZE.
+    * be at least the size_i32 (in bytes) returned by PNG_IMAGE_COLORMAP_SIZE.
     * image->colormap_entries will be updated to the actual number of entries
     * written to the colormap; this may be less than the original value.
     */
@@ -3067,13 +3067,13 @@ PNG_EXPORT(240, int, png_image_write_to_stdio, (png_imagep image, FILE *file,
  * gamma encoded according to the sRGB specification, otherwise a 16-bit linear
  * encoded PNG file is written.
  *
- * With color-mapped data formats the colormap parameter point to a color-map
+ * With color-mapped data formats the colormap parameter point_i32 to a color-map
  * with at least image->colormap_entries encoded in the specified format.  If
  * the format is linear the written PNG color-map will be converted to sRGB
  * regardless of the convert_to_8_bit flag.
  *
  * With all APIs row_stride is handled as in the read APIs - it is the spacing
- * from one row to the next in component sized units (1 or 2 bytes) and if
+ * from one row to the next in component size_f64 units (1 or 2 bytes) and if
  * negative indicates a bottom-up row layout in the buffer.  If row_stride is
  * zero, libpng will calculate it for you from the image width and number of
  * channels.
@@ -3094,7 +3094,7 @@ PNG_EXPORT(245, int, png_image_write_to_memory, (png_imagep image, void *memory,
     * success the number of bytes which would have been written will still be
     * stored in *memory_bytes.  On failure *memory_bytes will contain 0.
     *
-    * If 'memory' is not NULL it must point to memory[*memory_bytes] of
+    * If 'memory' is not NULL it must point_i32 to memory[*memory_bytes] of
     * writeable memory.
     *
     * If the function returns success memory[*memory_bytes] (if 'memory' is not
@@ -3112,18 +3112,18 @@ PNG_EXPORT(245, int, png_image_write_to_memory, (png_imagep image, void *memory,
    row_stride, colormap)\
    png_image_write_to_memory(&(image), 0, &(size), convert_to_8_bit, buffer,\
          row_stride, colormap)
-   /* Return the amount of memory in 'size' required to compress this image.
+   /* Return the amount of memory in 'size_i32' required to compress this image.
     * The png_image structure 'image' must be filled in as in the above
     * function and must not be changed before the actual write call, the buffer
     * and all other parameters must also be identical to that in the final
-    * write call.  The 'size' variable need not be initialized.
+    * write call.  The 'size_i32' variable need not be initialized.
     *
-    * NOTE: the macro returns true/false, if false is returned 'size' will be
+    * NOTE: the macro returns true/false, if false is returned 'size_i32' will be
     * set to zero and the write failed and probably will fail if tried again.
     */
 
-/* You can pre-allocate the buffer by making sure it is of sufficient size
- * regardless of the amount of compression achieved.  The buffer size will
+/* You can pre-allocate the buffer by making sure it is of sufficient size_i32
+ * regardless of the amount of compression achieved.  The buffer size_i32 will
  * always be bigger than the original image and it will never be filled.  The
  * following macros are provided to assist in allocating the buffer.
  */
@@ -3133,7 +3133,7 @@ PNG_EXPORT(245, int, png_image_write_to_memory, (png_imagep image, void *memory,
     *
     * NOTE: while PNG_IMAGE_SIZE cannot overflow for an image in memory this
     * macro can because of the extra bytes used in the PNG byte encoding.  You
-    * need to avoid this macro if your image size approaches 2^30 in width or
+    * need to avoid this macro if your image size_i32 approaches 2^30 in width or
     * height.  The same goes for the remainder of these macros; they all produce
     * bigger numbers than the actual in-memory image size.
     */
@@ -3149,7 +3149,7 @@ PNG_EXPORT(245, int, png_image_write_to_memory, (png_imagep image, void *memory,
 
 #define PNG_IMAGE_COMPRESSED_SIZE_MAX(image)\
    PNG_ZLIB_MAX_SIZE((png_alloc_size_t)PNG_IMAGE_DATA_SIZE(image))
-   /* An upper bound on the size of the data in the PNG IDAT chunks. */
+   /* An upper bound on the size_i32 of the data in the PNG IDAT chunks. */
 
 #define PNG_IMAGE_PNG_SIZE_MAX_(image, image_size)\
    ((8U/*sig*/+25U/*IHDR*/+16U/*gAMA*/+44U/*cHRM*/+12U/*IEND*/+\
@@ -3169,7 +3169,7 @@ PNG_EXPORT(245, int, png_image_write_to_memory, (png_imagep image, void *memory,
    /* An upper bound on the total length of the PNG data stream for 'image'.
     * The result is of type png_alloc_size_t, on 32-bit systems this may
     * overflow even though PNG_IMAGE_DATA_SIZE does not overflow; the write will
-    * run out of buffer space but return a corrected size which should work.
+    * run out of buffer space but return a corrected size_i32 which should work.
     */
 #endif /* SIMPLIFIED_WRITE */
 /*******************************************************************************

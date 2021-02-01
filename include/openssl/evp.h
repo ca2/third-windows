@@ -332,7 +332,7 @@ int (*EVP_CIPHER_meth_get_ctrl(const EVP_CIPHER *cipher))(EVP_CIPHER_CTX *,
 # define         EVP_CTRL_SET_SBOX                       0x1e
 /*
  * EVP_CTRL_SBOX_USED takes a 'size_t' and 'char *', pointing at a
- * pre-allocated buffer with specified size
+ * pre-allocated buffer with specified size_i32
  */
 # define         EVP_CTRL_SBOX_USED                      0x1f
 /* EVP_CTRL_KEY_MESH takes 'size_t' number of bytes to mesh the key after,
@@ -548,7 +548,7 @@ __owur int EVP_DigestUpdate(EVP_MD_CTX *ctx, const void *d,
 __owur int EVP_DigestFinal_ex(EVP_MD_CTX *ctx, unsigned char *md,
                                   unsigned int *s);
 __owur int EVP_Digest(const void *data, size_t count,
-                          unsigned char *md, unsigned int *size,
+                          unsigned char *md, unsigned int *size_i32,
                           const EVP_MD *type, ENGINE *impl);
 
 __owur int EVP_MD_CTX_copy(EVP_MD_CTX *out, const EVP_MD_CTX *in);

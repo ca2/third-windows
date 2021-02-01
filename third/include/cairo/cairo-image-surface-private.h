@@ -185,7 +185,7 @@ _cairo_image_surface_snapshot (void *abstract_surface);
 
 cairo_private_no_warn cairo_bool_t
 _cairo_image_surface_get_extents (void			  *abstract_surface,
-				  cairo_rectangle_int_t   *rectangle);
+				  cairo_rectangle_int_t   *rectangle_i32);
 
 cairo_private void
 _cairo_image_surface_get_font_options (void                  *abstract_surface,

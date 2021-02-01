@@ -22,6 +22,6 @@
   unlike that file.
 */
 
-#define MD5_HASH_SIZE 16 /* Hash size in bytes */
+#define MD5_HASH_SIZE 16 /* Hash size_i32 in bytes */
 
 #endif // MY_MD5_SIZE_INCLUDED

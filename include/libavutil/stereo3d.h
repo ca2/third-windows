@@ -171,7 +171,7 @@ enum AVStereo3DView {
  * within a single video surface, with additional information as needed.
  *
  * @note The struct must be allocated with av_stereo3d_alloc() and
- *       its size is not a part of the public ABI.
+ *       its size_i32 is not a part of the public ABI.
  */
 typedef struct AVStereo3D {
     /**

@@ -71,7 +71,7 @@ typedef struct _cef_resource_bundle_handler_t {
   ///
   // Called to retrieve data for the specified scale independent |resource_id|.
   // To provide the resource data set |data| and |data_size| to the data pointer
-  // and size respectively and return true (1). To use the default resource data
+  // and size_i32 respectively and return true (1). To use the default resource data
   // return false (0). The resource data will not be copied and must remain
   // resident in memory. Include cef_pack_resources.h for a listing of valid
   // resource ID values.
@@ -85,7 +85,7 @@ typedef struct _cef_resource_bundle_handler_t {
   ///
   // Called to retrieve data for the specified |resource_id| nearest the scale
   // factor |scale_factor|. To provide the resource data set |data| and
-  // |data_size| to the data pointer and size respectively and return true (1).
+  // |data_size| to the data pointer and size_i32 respectively and return true (1).
   // To use the default resource data return false (0). The resource data will
   // not be copied and must remain resident in memory. Include
   // cef_pack_resources.h for a listing of valid resource ID values.

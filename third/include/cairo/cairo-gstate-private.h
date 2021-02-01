@@ -334,7 +334,7 @@ _cairo_gstate_tag_end (cairo_gstate_t	*gstate,
 
 cairo_private cairo_status_t
 _cairo_gstate_set_font_size (cairo_gstate_t *gstate,
-			     double          size);
+			     double          size_i32);
 
 cairo_private void
 _cairo_gstate_get_font_matrix (cairo_gstate_t *gstate,

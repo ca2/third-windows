@@ -200,9 +200,9 @@ class CefRect : public CefStructBase<CefRectTraits> {
     x = x_val, y = y_val, width = width_val, height = height_val;
   }
 
-  // Returns true if the point identified by point_x and point_y falls inside
-  // this rectangle.  The point (x, y) is inside the rectangle, but the
-  // point (x + width, y + height) is not.
+  // Returns true if the point_i32 identified by point_x and point_y falls inside
+  // this rectangle.  The point_i32 (x, y) is inside the rectangle_i32, but the
+  // point_i32 (x + width, y + height) is not.
   bool Contains(int point_x, int point_y) const {
     return (point_x >= x) && (point_x < x + width) && (point_y >= y) &&
            (point_y < y + height);
@@ -392,7 +392,7 @@ struct CefScreenInfoTraits {
     target->depth = src->depth;
     target->depth_per_component = src->depth_per_component;
     target->is_monochrome = src->is_monochrome;
-    target->rect = src->rect;
+    target->rectangle_i32 = src->rectangle_i32;
     target->available_rect = src->available_rect;
   }
 };
@@ -412,10 +412,10 @@ class CefScreenInfo : public CefStructBase<CefScreenInfoTraits> {
                 int depth,
                 int depth_per_component,
                 bool is_monochrome,
-                const CefRect& rect,
+                const CefRect& rectangle,
                 const CefRect& available_rect)
       : parent() {
-    Set(device_scale_factor, depth, depth_per_component, is_monochrome, rect,
+    Set(device_scale_factor, depth, depth_per_component, is_monochrome, rectangle_i32,
         available_rect);
   }
 
@@ -429,7 +429,7 @@ class CefScreenInfo : public CefStructBase<CefScreenInfoTraits> {
     depth = depth_val;
     depth_per_component = depth_per_component_val;
     is_monochrome = is_monochrome_val;
-    rect = rect_val;
+    rectangle_i32 = rect_val;
     available_rect = available_rect_val;
   }
 };
@@ -844,7 +844,7 @@ struct CefCursorInfoTraits {
     target->hotspot = src->hotspot;
     target->image_scale_factor = src->image_scale_factor;
     target->buffer = src->buffer;
-    target->size = src->size;
+    target->size = src->size_i32;
   }
 };
 

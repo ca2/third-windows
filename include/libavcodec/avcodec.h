@@ -137,7 +137,7 @@
  * call avcodec_send_packet() repeatedly without calling
  * avcodec_receive_frame(). In this case, avcodec_send_packet() will succeed
  * until the codec's internal buffer has been filled up (which is typically of
- * size 1 per output frame, after initial input), and then reject input with
+ * size_i32 1 per output frame, after initial input), and then reject input with
  * AVERROR(EAGAIN). Once it starts rejecting input, you have no choice but to
  * read at least some output.
  *
@@ -783,7 +783,7 @@ typedef struct AVCodecDescriptor {
 
 /**
  * @ingroup lavc_encoding
- * minimum encoding buffer size
+ * minimum encoding buffer size_i32
  * Used to avoid some checks during header writing.
  */
 #define AV_INPUT_BUFFER_MIN_SIZE 16384
@@ -795,7 +795,7 @@ enum AVDiscard{
     /* We leave some space between them for extensions (drop some
      * keyframes for intra-only or drop just some bidir frames). */
     AVDISCARD_NONE    =-16, ///< discard nothing
-    AVDISCARD_DEFAULT =  0, ///< discard useless packets like 0 size packets in avi
+    AVDISCARD_DEFAULT =  0, ///< discard useless packets like 0 size_i32 packets in avi
     AVDISCARD_NONREF  =  8, ///< discard all non reference
     AVDISCARD_BIDIR   = 16, ///< discard all bidirectional frames
     AVDISCARD_NONINTRA= 24, ///< discard all non intra frames
@@ -978,7 +978,7 @@ typedef struct RcOverride{
  *
  * Decoders:
  * The decoder has a non-zero delay and needs to be fed with avpkt->data=NULL,
- * avpkt->size=0 at the end to get the delayed data until the decoder no longer
+ * avpkt->size_i32=0 at the end to get the delayed data until the decoder no longer
  * returns frames.
  *
  * Encoders:
@@ -1123,7 +1123,7 @@ typedef struct AVCPBProperties {
     int avg_bitrate;
 
     /**
-     * The size of the buffer to which the ratecontrol is applied, in bits.
+     * The size_i32 of the buffer to which the ratecontrol is applied, in bits.
      * Zero if unknown or unspecified.
      */
     int buffer_size;
@@ -1279,7 +1279,7 @@ enum AVPacketSideDataType {
 
     /**
      * A list of zero terminated key/value strings. There is no end marker for
-     * the list, so it is required to rely on the side data size to stop.
+     * the list, so it is required to rely on the side data size_i32 to stop.
      */
     AV_PKT_DATA_STRINGS_METADATA,
 
@@ -1297,7 +1297,7 @@ enum AVPacketSideDataType {
     /**
      * Data found in BlockAdditional element of matroska container. There is
      * no end marker for the data, so it is required to rely on the side data
-     * size to recognize the end. 8 byte id (as found in BlockAddId) followed
+     * size_i32 to recognize the end. 8 byte id (as found in BlockAddId) followed
      * by data.
      */
     AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL,
@@ -1315,7 +1315,7 @@ enum AVPacketSideDataType {
 
     /**
      * A list of zero terminated key/value strings. There is no end marker for
-     * the list, so it is required to rely on the side data size to stop. This
+     * the list, so it is required to rely on the side data size_i32 to stop. This
      * side data includes updated metadata which appeared in the stream.
      */
     AV_PKT_DATA_METADATA_UPDATE,
@@ -1401,7 +1401,7 @@ typedef struct AVPacketSideData {
  * packets, with no compressed data, containing only side data
  * (e.g. to update some stream parameters at the end of encoding).
  *
- * AVPacket is one of the few structs in FFmpeg, whose size is a part of public
+ * AVPacket is one of the few structs in FFmpeg, whose size_i32 is a part of public
  * ABI. Thus it may be allocated on stack and no new fields can be added to it
  * without libavcodec and libavformat major bump.
  *
@@ -1954,7 +1954,7 @@ typedef struct AVCodecContext {
 #define FF_CMP_CHROMA       256
 
     /**
-     * ME diamond size & shape
+     * ME diamond size_i32 & shape
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -1981,7 +1981,7 @@ typedef struct AVCodecContext {
     int me_pre_cmp;
 
     /**
-     * ME prepass diamond size & shape
+     * ME prepass diamond size_i32 & shape
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -2103,7 +2103,7 @@ typedef struct AVCodecContext {
 #endif
 
     /**
-     * minimum GOP size
+     * minimum GOP size_i32
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -2203,8 +2203,8 @@ typedef struct AVCodecContext {
      * - encoding: set by libavcodec in avcodec_open2(). Each submitted frame
      *   except the last must contain exactly frame_size samples per channel.
      *   May be 0 when the codec has AV_CODEC_CAP_VARIABLE_FRAME_SIZE set, then the
-     *   frame size is not restricted.
-     * - decoding: may be set by some decoders to indicate constant frame size
+     *   frame size_i32 is not restricted.
+     * - decoding: may be set by some decoders to indicate constant frame size_i32
      */
     int frame_size;
 
@@ -2287,7 +2287,7 @@ typedef struct AVCodecContext {
      *     to all data planes. data[] must hold as many pointers as it can.
      *     extended_data must be allocated with av_malloc() and will be freed in
      *     av_frame_unref().
-     *   * otherwise extended_data must point to data
+     *   * otherwise extended_data must point_i32 to data
      * - buf[] must contain one or more pointers to AVBufferRef structures. Each of
      *   the frame's data and extended_data pointers must be contained in these. That
      *   is, one AVBufferRef for each allocated chunk of memory, not necessarily one
@@ -2325,14 +2325,14 @@ typedef struct AVCodecContext {
      *
      * Audio:
      *
-     * Decoders request a buffer of a particular size by setting
+     * Decoders request a buffer of a particular size_i32 by setting
      * AVFrame.nb_samples prior to calling get_buffer2(). The decoder may,
      * however, utilize only part of the buffer by setting AVFrame.nb_samples
      * to a smaller value in the output frame.
      *
      * As a convenience, av_samples_get_buffer_size() and
      * av_samples_fill_arrays() in libavutil may be used by custom get_buffer2()
-     * functions to find the required data size and to fill data pointers and
+     * functions to find the required data size_i32 and to fill data pointers and
      * linesize. In AVFrame.linesize, only linesize[0] may be set for audio
      * since all planes must be the same size.
      *
@@ -2385,7 +2385,7 @@ typedef struct AVCodecContext {
     int max_qdiff;
 
     /**
-     * decoder bitstream buffer size
+     * decoder bitstream buffer size_i32
      * - encoding: Set by user.
      * - decoding: unused
      */
@@ -2508,8 +2508,8 @@ typedef struct AVCodecContext {
 #if FF_API_PRIVATE_OPT
     /** @deprecated use encoder private options instead */
     attribute_deprecated
-    int rtp_payload_size;   /* The size of the RTP ::payload: the coder will  */
-                            /* do its best to deliver a chunk with size     */
+    int rtp_payload_size;   /* The size_i32 of the RTP ::payload: the coder will  */
+                            /* do its best to deliver a chunk with size_i32     */
                             /* below rtp_payload_size, the chunk will start */
                             /* with a start code on some codecs like H.263. */
                             /* This doesn't take account of any particular  */
@@ -2758,7 +2758,7 @@ typedef struct AVCodecContext {
 
 #if FF_API_LOWRES
     /**
-     * low resolution decoding, 1-> 1/2 size, 2->1/4 size
+     * low resolution decoding, 1-> 1/2 size, 2->1/4 size_i32
      * - encoding: unused
      * - decoding: Set by user.
      */
@@ -2822,7 +2822,7 @@ typedef struct AVCodecContext {
      * - encoding: Set by libavcodec, user can override.
      * - decoding: Set by libavcodec, user can override.
      */
-    int (*execute)(struct AVCodecContext *c, int (*func)(struct AVCodecContext *c2, void *arg), void *arg2, int *ret, int count, int size);
+    int (*execute)(struct AVCodecContext *c, int (*func)(struct AVCodecContext *c2, void *arg), void *arg2, int *ret, int count, int size_i32);
 
     /**
      * The codec may call this to execute several independent things.
@@ -3078,7 +3078,7 @@ typedef struct AVCodecContext {
 
 #if !FF_API_LOWRES
     /**
-     * low resolution decoding, 1-> 1/2 size, 2->1/4 size
+     * low resolution decoding, 1-> 1/2 size, 2->1/4 size_i32
      * - encoding: unused
      * - decoding: Set by user.
      */
@@ -3275,7 +3275,7 @@ typedef struct AVCodecContext {
 
     /**
      * Video decoding only. Certain video codecs support cropping, meaning that
-     * only a sub-rectangle of the decoded frame is intended for display.  This
+     * only a sub-rectangle_i32 of the decoded frame is intended for display.  This
      * option controls how cropping is handled by libavcodec.
      *
      * When set to 1 (the default), libavcodec will apply cropping internally.
@@ -3486,7 +3486,7 @@ typedef struct AVCodec {
      * If not defined, the next thread will start automatically; otherwise, the codec
      * must call ff_thread_finish_setup().
      *
-     * dst and src will (rarely) point to the same context, in which case memcpy should be skipped.
+     * dst and src will (rarely) point_i32 to the same context, in which case memcpy should be skipped.
      */
     int (*update_thread_context)(AVCodecContext *dst, const AVCodecContext *src);
     /** @} */
@@ -3585,7 +3585,7 @@ const AVCodecHWConfig *avcodec_get_hw_config(const AVCodec *codec, int index);
  * @defgroup lavc_hwaccel AVHWAccel
  *
  * @note  Nothing in this structure should be accessed by the user.  At some
- *        point in future it will not be externally visible at all.
+ *        point_i32 in future it will not be externally visible at all.
  *
  * @{
  */
@@ -3648,7 +3648,7 @@ typedef struct AVHWAccel {
      *
      * @param avctx the codec context
      * @param buf the frame data buffer base
-     * @param buf_size the size of the frame in bytes
+     * @param buf_size the size_i32 of the frame in bytes
      * @return zero if successful, a negative value otherwise
      */
     int (*start_frame)(AVCodecContext *avctx, const uint8_t *buf, uint32_t buf_size);
@@ -3662,7 +3662,7 @@ typedef struct AVHWAccel {
      * @param avctx the codec context
      * @param type the nal unit type
      * @param buf the nal unit data buffer
-     * @param buf_size the size of the nal unit in bytes
+     * @param buf_size the size_i32 of the nal unit in bytes
      * @return zero if successful, a negative value otherwise
      */
     int (*decode_params)(AVCodecContext *avctx, int type, const uint8_t *buf, uint32_t buf_size);
@@ -3676,7 +3676,7 @@ typedef struct AVHWAccel {
      *
      * @param avctx the codec context
      * @param buf the slice data buffer base
-     * @param buf_size the size of the slice in bytes
+     * @param buf_size the size_i32 of the slice in bytes
      * @return zero if successful, a negative value otherwise
      */
     int (*decode_slice)(AVCodecContext *avctx, const uint8_t *buf, uint32_t buf_size);
@@ -3684,7 +3684,7 @@ typedef struct AVHWAccel {
     /**
      * Called at the end of each frame or field picture.
      *
-     * The whole picture is parsed at this point and can now be sent
+     * The whole picture is parsed at this point_i32 and can now be sent
      * to the hardware accelerator. This function is mandatory.
      *
      * @param avctx the codec context
@@ -3907,7 +3907,7 @@ typedef struct AVCodecParameters {
      * Extra binary data needed for initializing the decoder, codec-dependent.
      *
      * Must be allocated with av_malloc() and will be freed by
-     * avcodec_parameters_free(). The allocated size of extradata must be at
+     * avcodec_parameters_free(). The allocated size_i32 of extradata must be at
      * least extradata_size + AV_INPUT_BUFFER_PADDING_SIZE, with the padding
      * bytes zeroed.
      */
@@ -4044,7 +4044,7 @@ typedef struct AVCodecParameters {
  * Iterate over all registered codecs.
  *
  * @param opaque a pointer where libavcodec will store the iteration state. Must
- *               point to NULL to start the iteration.
+ *               point_i32 to NULL to start the iteration.
  *
  * @return the next registered codec or NULL when the iteration is
  *         finished
@@ -4328,7 +4328,7 @@ void av_packet_free(AVPacket **pkt);
 /**
  * Initialize optional fields of a packet with default values.
  *
- * Note, this does not touch the data and size members, which have to be
+ * Note, this does not touch the data and size_i32 members, which have to be
  * initialized separately.
  *
  * @param pkt packet
@@ -4340,24 +4340,24 @@ void av_init_packet(AVPacket *pkt);
  * default values.
  *
  * @param pkt packet
- * @param size wanted ::payload size
+ * @param size_i32 wanted ::payload size_i32
  * @return 0 if OK, AVERROR_xxx otherwise
  */
-int av_new_packet(AVPacket *pkt, int size);
+int av_new_packet(AVPacket *pkt, int size_i32);
 
 /**
  * Reduce packet size, correctly zeroing padding
  *
  * @param pkt packet
- * @param size new size
+ * @param size_i32 new size_i32
  */
-void av_shrink_packet(AVPacket *pkt, int size);
+void av_shrink_packet(AVPacket *pkt, int size_i32);
 
 /**
  * Increase packet size, correctly zeroing padding
  *
  * @param pkt packet
- * @param grow_by number of bytes by which to increase the size of the packet
+ * @param grow_by number of bytes by which to increase the size_i32 of the packet
  */
 int av_grow_packet(AVPacket *pkt, int grow_by);
 
@@ -4369,12 +4369,12 @@ int av_grow_packet(AVPacket *pkt, int grow_by);
  * @param data Data allocated by av_malloc() to be used as packet data. If this
  *        function returns successfully, the data is owned by the underlying AVBuffer.
  *        The caller may not access the data through other means.
- * @param size size of data in bytes, without the padding. I.e. the full buffer
- *        size is assumed to be size + AV_INPUT_BUFFER_PADDING_SIZE.
+ * @param size_i32 size_i32 of data in bytes, without the padding. I.e. the full buffer
+ *        size_i32 is assumed to be size + AV_INPUT_BUFFER_PADDING_SIZE.
  *
  * @return 0 on success, a negative AVERROR on error
  */
-int av_packet_from_data(AVPacket *pkt, uint8_t *data, int size);
+int av_packet_from_data(AVPacket *pkt, uint8_t *data, int size_i32);
 
 #if FF_API_AVPACKET_OLD_API
 /**
@@ -4420,11 +4420,11 @@ void av_free_packet(AVPacket *pkt);
  *
  * @param pkt packet
  * @param type side information type
- * @param size side information size
+ * @param size_i32 side information size_i32
  * @return pointer to fresh allocated data or NULL otherwise
  */
 uint8_t* av_packet_new_side_data(AVPacket *pkt, enum AVPacketSideDataType type,
-                                 int size);
+                                 int size_i32);
 
 /**
  * Wrap an existing array as a packet side data.
@@ -4434,7 +4434,7 @@ uint8_t* av_packet_new_side_data(AVPacket *pkt, enum AVPacketSideDataType type,
  * @param data the side data array. It must be allocated with the av_malloc()
  *             family of functions. The ownership of the data is transferred to
  *             pkt.
- * @param size side information size
+ * @param size_i32 side information size_i32
  * @return a non-negative number on success, a negative AVERROR code on
  *         failure. On failure, the packet is unchanged and the data remains
  *         owned by the caller.
@@ -4447,22 +4447,22 @@ int av_packet_add_side_data(AVPacket *pkt, enum AVPacketSideDataType type,
  *
  * @param pkt packet
  * @param type side information type
- * @param size new side information size
+ * @param size_i32 new side information size_i32
  * @return 0 on success, < 0 on failure
  */
 int av_packet_shrink_side_data(AVPacket *pkt, enum AVPacketSideDataType type,
-                               int size);
+                               int size_i32);
 
 /**
  * Get side information from packet.
  *
  * @param pkt packet
  * @param type desired side information type
- * @param size pointer for side information size to store (optional)
+ * @param size_i32 pointer for side information size_i32 to store (optional)
  * @return pointer to data if present or NULL otherwise
  */
 uint8_t* av_packet_get_side_data(const AVPacket *pkt, enum AVPacketSideDataType type,
-                                 int *size);
+                                 int *size_i32);
 
 #if FF_API_MERGE_SD_API
 attribute_deprecated
@@ -4478,15 +4478,15 @@ const char *av_packet_side_data_name(enum AVPacketSideDataType type);
  * Pack a dictionary for use in side_data.
  *
  * @param dict The dictionary to pack.
- * @param size pointer to store the size of the returned data
+ * @param size_i32 pointer to store the size_i32 of the returned data
  * @return pointer to data if successful, NULL otherwise
  */
-uint8_t *av_packet_pack_dictionary(AVDictionary *dict, int *size);
+uint8_t *av_packet_pack_dictionary(AVDictionary *dict, int *size_i32);
 /**
  * Unpack a dictionary from side_data.
  *
  * @param data data from side_data
- * @param size size of the data
+ * @param size_i32 size_i32 of the data
  * @param dict the metadata storage dictionary
  * @return 0 on success, < 0 on failure
  */
@@ -4666,7 +4666,7 @@ int avcodec_enum_to_chroma_pos(int *xpos, int *ypos, enum AVChromaLocation pos);
 enum AVChromaLocation avcodec_chroma_pos_to_enum(int xpos, int ypos);
 
 /**
- * Decode the audio frame of size avpkt->size from avpkt->data into frame.
+ * Decode the audio frame of size_i32 avpkt->size_i32 from avpkt->data into frame.
  *
  * Some decoders may support multiple frames in a single AVPacket. Such
  * decoders would then just decode the first frame and the return value would be
@@ -4680,7 +4680,7 @@ enum AVChromaLocation avcodec_chroma_pos_to_enum(int xpos, int ypos);
  * and output. This means that for some packets they will not immediately
  * produce decoded output and need to be flushed at the end of decoding to get
  * all the decoded data. Flushing is done by calling this function with packets
- * with avpkt->data set to NULL and avpkt->size set to 0 until it stops
+ * with avpkt->data set to NULL and avpkt->size_i32 set to 0 until it stops
  * returning samples. It is safe to flush even those decoders that are not
  * marked with AV_CODEC_CAP_DELAY, then no samples will be returned.
  *
@@ -4710,7 +4710,7 @@ enum AVChromaLocation avcodec_chroma_pos_to_enum(int xpos, int ypos);
  *                           decoders with AV_CODEC_CAP_DELAY set, no given decode
  *                           call is guaranteed to produce a frame.
  * @param[in]  avpkt The input AVPacket containing the input buffer.
- *                   At least avpkt->data and avpkt->size should be set. Some
+ *                   At least avpkt->data and avpkt->size_i32 should be set. Some
  *                   decoders might also require additional fields to be set.
  * @return A negative error code is returned if an error occurred during
  *         decoding, otherwise the number of bytes consumed from the input
@@ -4723,7 +4723,7 @@ int avcodec_decode_audio4(AVCodecContext *avctx, AVFrame *frame,
                           int *got_frame_ptr, const AVPacket *avpkt);
 
 /**
- * Decode the video frame of size avpkt->size from avpkt->data into picture.
+ * Decode the video frame of size_i32 avpkt->size_i32 from avpkt->data into picture.
  * Some decoders may support multiple frames in a single AVPacket, such
  * decoders would then just decode the first frame.
  *
@@ -4736,7 +4736,7 @@ int avcodec_decode_audio4(AVCodecContext *avctx, AVFrame *frame,
  *
  * @note Codecs which have the AV_CODEC_CAP_DELAY capability set have a delay
  * between input and output, these need to be fed with avpkt->data=NULL,
- * avpkt->size=0 at the end to return the remaining frames.
+ * avpkt->size_i32=0 at the end to return the remaining frames.
  *
  * @note The AVCodecContext MUST have been opened with @ref avcodec_open2()
  * before packets may be fed to the decoder.
@@ -4786,7 +4786,7 @@ int avcodec_decode_video2(AVCodecContext *avctx, AVFrame *picture,
  * and output. This means that for some packets they will not immediately
  * produce decoded output and need to be flushed at the end of decoding to get
  * all the decoded data. Flushing is done by calling this function with packets
- * with avpkt->data set to NULL and avpkt->size set to 0 until it stops
+ * with avpkt->data set to NULL and avpkt->size_i32 set to 0 until it stops
  * returning subtitles. It is safe to flush even those decoders that are not
  * marked with AV_CODEC_CAP_DELAY, then no subtitles will be returned.
  *
@@ -4834,7 +4834,7 @@ int avcodec_decode_subtitle2(AVCodecContext *avctx, AVSubtitle *sub,
  *                  will require you to call avcodec_receive_frame() multiple
  *                  times afterwards before you can send a new packet.
  *                  It can be NULL (or an AVPacket with data set to NULL and
- *                  size set to 0); in this case, it is considered a flush
+ *                  size_i32 set to 0); in this case, it is considered a flush
  *                  packet, which signals the end of the stream. Sending the
  *                  first flush packet will return success. Subsequent ones are
  *                  unnecessary and will return AVERROR_EOF. If the decoder
@@ -5106,9 +5106,9 @@ typedef struct AVCodecParserContext {
 
     // Timestamp generation support:
     /**
-     * Synchronization point for start of timestamp generation.
+     * Synchronization point_i32 for start of timestamp generation.
      *
-     * Set to >0 for sync point, 0 for no sync point and <0 for undefined
+     * Set to >0 for sync point_i32, 0 for no sync point_i32 and <0 for undefined
      * (default).
      *
      * For example, this corresponds to presence of H.264 buffering period
@@ -5117,15 +5117,15 @@ typedef struct AVCodecParserContext {
     int dts_sync_point;
 
     /**
-     * Offset of the current timestamp against last timestamp sync point in
+     * Offset of the current timestamp against last timestamp sync point_i32 in
      * units of AVCodecContext.time_base.
      *
      * Set to INT_MIN when dts_sync_point unused. Otherwise, it must
      * contain a valid timestamp offset.
      *
-     * Note that the timestamp of sync point has usually a nonzero
+     * Note that the timestamp of sync point_i32 has usually a nonzero
      * dts_ref_dts_delta, which refers to the previous sync point. Offset of
-     * the next frame after timestamp sync point will be usually 1.
+     * the next frame after timestamp sync point_i32 will be usually 1.
      *
      * For example, this corresponds to H.264 cpb_removal_delay.
      */
@@ -5231,7 +5231,7 @@ typedef struct AVCodecParser {
  * Iterate over all registered codec parsers.
  *
  * @param opaque a pointer where libavcodec will store the iteration state. Must
- *               point to NULL to start the iteration.
+ *               point_i32 to NULL to start the iteration.
  *
  * @return the next registered codec parser or NULL when the iteration is
  *         finished
@@ -5251,10 +5251,10 @@ AVCodecParserContext *av_parser_init(int codec_id);
  * @param s             parser context.
  * @param avctx         codec context.
  * @param poutbuf       set to pointer to parsed buffer or NULL if not yet finished.
- * @param poutbuf_size  set to size of parsed buffer or zero if not yet finished.
+ * @param poutbuf_size  set to size_i32 of parsed buffer or zero if not yet finished.
  * @param buf           input buffer.
- * @param buf_size      buffer size in bytes without the padding. I.e. the full buffer
-                        size is assumed to be buf_size + AV_INPUT_BUFFER_PADDING_SIZE.
+ * @param buf_size      buffer size_i32 in bytes without the padding. I.e. the full buffer
+                        size_i32 is assumed to be buf_size + AV_INPUT_BUFFER_PADDING_SIZE.
                         To signal EOF, this should be 0 (so that the last frame
                         can be output).
  * @param pts           input presentation timestamp.
@@ -5330,13 +5330,13 @@ AVCodec *avcodec_find_encoder_by_name(const char *name);
  * @param avctx     codec context
  * @param avpkt     output AVPacket.
  *                  The user can supply an output buffer by setting
- *                  avpkt->data and avpkt->size prior to calling the
- *                  function, but if the size of the user-provided data is not
+ *                  avpkt->data and avpkt->size_i32 prior to calling the
+ *                  function, but if the size_i32 of the user-provided data is not
  *                  large enough, encoding will fail. If avpkt->data and
- *                  avpkt->size are set, avpkt->destruct must also be set. All
+ *                  avpkt->size_i32 are set, avpkt->destruct must also be set. All
  *                  other AVPacket fields will be reset by the encoder using
  *                  av_init_packet(). If avpkt->data is NULL, the encoder will
- *                  allocate it. The encoder will set avpkt->size to the size
+ *                  allocate it. The encoder will set avpkt->size_i32 to the size_i32
  *                  of the output packet.
  *
  *                  If this function fails or produces no output, avpkt will be
@@ -5374,12 +5374,12 @@ int avcodec_encode_audio2(AVCodecContext *avctx, AVPacket *avpkt,
  * @param avctx     codec context
  * @param avpkt     output AVPacket.
  *                  The user can supply an output buffer by setting
- *                  avpkt->data and avpkt->size prior to calling the
- *                  function, but if the size of the user-provided data is not
+ *                  avpkt->data and avpkt->size_i32 prior to calling the
+ *                  function, but if the size_i32 of the user-provided data is not
  *                  large enough, encoding will fail. All other AVPacket fields
  *                  will be reset by the encoder using av_init_packet(). If
  *                  avpkt->data is NULL, the encoder will allocate it.
- *                  The encoder will set avpkt->size to the size of the
+ *                  The encoder will set avpkt->size_i32 to the size_i32 of the
  *                  output packet. The returned data (if any) belongs to the
  *                  caller, he is responsible for freeing it.
  *
@@ -5555,7 +5555,7 @@ enum AVPixelFormat avcodec_default_get_format(struct AVCodecContext *s, const en
  * Put a string representing the codec tag codec_tag in buf.
  *
  * @param buf       buffer to place codec tag in
- * @param buf_size size in bytes of buf
+ * @param buf_size size_i32 in bytes of buf
  * @param codec_tag codec tag to assign
  * @return the length of the string that would have been generated if
  * enough space had been available, excluding the trailing null
@@ -5590,16 +5590,16 @@ const char *av_get_profile_name(const AVCodec *codec, int profile);
  */
 const char *avcodec_profile_name(enum AVCodecID codec_id, int profile);
 
-int avcodec_default_execute(AVCodecContext *c, int (*func)(AVCodecContext *c2, void *arg2),void *arg, int *ret, int count, int size);
+int avcodec_default_execute(AVCodecContext *c, int (*func)(AVCodecContext *c2, void *arg2),void *arg, int *ret, int count, int size_i32);
 int avcodec_default_execute2(AVCodecContext *c, int (*func)(AVCodecContext *c2, void *arg2, int, int),void *arg, int *ret, int count);
 //FIXME func typedef
 
 /**
  * Fill AVFrame audio data and linesize pointers.
  *
- * The buffer buf must be a preallocated buffer with a size big enough
+ * The buffer buf must be a preallocated buffer with a size_i32 big enough
  * to contain the specified samples amount. The filled AVFrame data
- * pointers will point to this buffer.
+ * pointers will point_i32 to this buffer.
  *
  * AVFrame extended_data channel pointers are allocated if necessary for
  * planar audio.
@@ -5611,10 +5611,10 @@ int avcodec_default_execute2(AVCodecContext *c, int (*func)(AVCodecContext *c2, 
  * @param nb_channels channel count
  * @param sample_fmt  sample format
  * @param buf         buffer to use for frame data
- * @param buf_size    size of buffer
- * @param align       plane size sample alignment (0 = default)
+ * @param buf_size    size_i32 of buffer
+ * @param align       plane size_i32 sample alignment (0 = default)
  * @return            >=0 on success, negative error code on failure
- * @todo return the size in bytes required to store the samples in
+ * @todo return the size_i32 in bytes required to store the samples in
  * case of success, at the next libavutil bump
  */
 int avcodec_fill_audio_frame(AVFrame *frame, int nb_channels,
@@ -5662,7 +5662,7 @@ int av_get_exact_bits_per_sample(enum AVCodecID codec_id);
  * Return audio frame duration.
  *
  * @param avctx        codec context
- * @param frame_bytes  size of the frame, or 0 if unknown
+ * @param frame_bytes  size_i32 of the frame, or 0 if unknown
  * @return             frame duration, in samples, if known. 0 if not able to
  *                     determine.
  */
@@ -5835,7 +5835,7 @@ const AVBitStreamFilter *av_bsf_get_by_name(const char *name);
  * Iterate over all registered bitstream filters.
  *
  * @param opaque a pointer where libavcodec will store the iteration state. Must
- *               point to NULL to start the iteration.
+ *               point_i32 to NULL to start the iteration.
  *
  * @return the next registered bitstream filter or NULL when the iteration is
  *         finished
@@ -6022,19 +6022,19 @@ int av_bsf_get_null_filter(AVBSFContext **bsf);
  * In addition the whole buffer will initially and after resizes
  * be 0-initialized so that no uninitialized data will ever appear.
  */
-void av_fast_padded_malloc(void *ptr, unsigned int *size, size_t min_size);
+void av_fast_padded_malloc(void *ptr, unsigned int *size_i32, size_t min_size);
 
 /**
  * Same behaviour av_fast_padded_malloc except that buffer will always
  * be 0-initialized after call.
  */
-void av_fast_padded_mallocz(void *ptr, unsigned int *size, size_t min_size);
+void av_fast_padded_mallocz(void *ptr, unsigned int *size_i32, size_t min_size);
 
 /**
  * Encode extradata length to a buffer. Used by xiph codecs.
  *
  * @param s buffer to write to; must be at least (v/255+1) bytes long
- * @param v size of extradata in bytes
+ * @param v size_i32 of extradata in bytes
  * @return number of bytes written to the buffer.
  */
 unsigned int av_xiphlacing(unsigned char *s, unsigned int v);
@@ -6067,30 +6067,30 @@ AVHWAccel *av_hwaccel_next(const AVHWAccel *hwaccel);
  * @deprecated Deprecated together with av_lockmgr_register().
  */
 enum AVLockOp {
-  AV_LOCK_CREATE,  ///< Create a mutex
-  AV_LOCK_OBTAIN,  ///< Lock the mutex
-  AV_LOCK_RELEASE, ///< Unlock the mutex
-  AV_LOCK_DESTROY, ///< Free mutex resources
+  AV_LOCK_CREATE,  ///< Create a ::mutex
+  AV_LOCK_OBTAIN,  ///< Lock the ::mutex
+  AV_LOCK_RELEASE, ///< Unlock the ::mutex
+  AV_LOCK_DESTROY, ///< Free ::mutex resources
 };
 
 /**
  * Register a user provided lock manager supporting the operations
- * specified by AVLockOp. The "mutex" argument to the function points
+ * specified by AVLockOp. The "::mutex" argument to the function points
  * to a (void *) where the lockmgr should store/get a pointer to a user
- * allocated mutex. It is NULL upon AV_LOCK_CREATE and equal to the
+ * allocated ::mutex. It is NULL upon AV_LOCK_CREATE and equal to the
  * value left by the last call for all other ops. If the lock manager is
- * unable to perform the op then it should leave the mutex in the same
+ * unable to perform the op then it should leave the ::mutex in the same
  * state as when it was called and return a non-zero value. However,
- * when called with AV_LOCK_DESTROY the mutex will always be assumed to
+ * when called with AV_LOCK_DESTROY the ::mutex will always be assumed to
  * have been successfully destroyed. If av_lockmgr_register succeeds
  * it will return a non-negative value, if it fails it will return a
- * negative value and destroy all mutex and unregister all callbacks.
+ * negative value and destroy all ::mutex and unregister all callbacks.
  * av_lockmgr_register is not thread-safe, it must be called from a
  * single thread before any calls which make use of locking are used.
  *
  * @param cb User defined callback. av_lockmgr_register invokes calls
  *           to this callback and the previously registered callback.
- *           The callback will be used to create more than one mutex
+ *           The callback will be used to create more than one ::mutex
  *           each of which must be backed by its own underlying locking
  *           mechanism (i.e. do not use a single static object to
  *           implement your lock manager). If cb is set to NULL the
@@ -6100,7 +6100,7 @@ enum AVLockOp {
  *             build with thread support to get basic thread safety.
  */
 attribute_deprecated
-int av_lockmgr_register(int (*cb)(void **mutex, enum AVLockOp op));
+int av_lockmgr_register(int (*cb)(void **::mutex, enum AVLockOp op));
 #endif
 
 /**
@@ -6154,12 +6154,12 @@ const AVCodecDescriptor *avcodec_descriptor_get_by_name(const char *name);
  * Allocate a CPB properties structure and initialize its fields to default
  * values.
  *
- * @param size if non-NULL, the size of the allocated struct will be written
+ * @param size_i32 if non-NULL, the size_i32 of the allocated struct will be written
  *             here. This is useful for embedding it in side data.
  *
  * @return the newly allocated struct or NULL on failure
  */
-AVCPBProperties *av_cpb_properties_alloc(size_t *size);
+AVCPBProperties *av_cpb_properties_alloc(size_t *size_i32);
 
 /**
  * @}

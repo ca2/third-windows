@@ -114,7 +114,7 @@ struct mpg123_handle_struct
 	float *dithernoise;
 #endif
 	unsigned char* rawdecwin; /* the block with all decwins */
-	int rawdecwins; /* size of rawdecwin memory */
+	int rawdecwins; /* size_i32 of rawdecwin memory */
 	real *decwin; /* _the_ decode table */
 #ifdef OPT_MMXORSSE
 	/* I am not really sure that I need both of them... used in assembler */
@@ -210,7 +210,7 @@ struct mpg123_handle_struct
 	int original;
 	int emphasis;
 	int framesize; /* computed framesize */
-	int freesize;  /* free format frame size */
+	int freesize;  /* free format frame size_i32 */
 	enum mpg123_vbr vbr; /* 1 if variable bitrate was detected */
 	off_t num; /* frame offset ... */
 	off_t input_offset; /* byte offset of this frame in input stream */

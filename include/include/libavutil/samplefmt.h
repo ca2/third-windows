@@ -41,7 +41,7 @@
  *   Sample values can be expressed by native C types, hence the lack of a signed
  *   24-bit sample format even though it is a common raw audio data format.
  *
- * - The floating-point formats are based on full volume being in the range
+ * - The floating-point_i32 formats are based on full volume being in the range
  *   [-1.0, 1.0]. Any values outside this range are beyond full volume level.
  *
  * - The data layout as used in av_samples_fill_arrays() and elsewhere in FFmpeg
@@ -121,7 +121,7 @@ enum AVSampleFormat av_get_planar_sample_fmt(enum AVSampleFormat sample_fmt);
  * sample_fmt, or a header if sample_fmt is negative.
  *
  * @param buf the buffer where to write the string
- * @param buf_size the size of buf
+ * @param buf_size the size_i32 of buf
  * @param sample_fmt the number of the sample format to print the
  * corresponding info string, or a negative value to print the
  * corresponding header.
@@ -148,13 +148,13 @@ int av_get_bytes_per_sample(enum AVSampleFormat sample_fmt);
 int av_sample_fmt_is_planar(enum AVSampleFormat sample_fmt);
 
 /**
- * Get the required buffer size for the given audio parameters.
+ * Get the required buffer size_i32 for the given audio parameters.
  *
  * @param[out] linesize calculated linesize, may be NULL
  * @param nb_channels   the number of channels
  * @param nb_samples    the number of samples in a single channel
  * @param sample_fmt    the sample format
- * @param align         buffer size alignment (0 = default, 1 = no alignment)
+ * @param align         buffer size_i32 alignment (0 = default, 1 = no alignment)
  * @return              required buffer size, or negative error code on failure
  */
 int av_samples_get_buffer_size(int *linesize, int nb_channels, int nb_samples,
@@ -174,16 +174,16 @@ int av_samples_get_buffer_size(int *linesize, int nb_channels, int nb_samples,
  * format sample_fmt.
  *
  * The audio_data array is filled with the pointers to the samples data planes:
- * for planar, set the start point of each channel's data within the buffer,
- * for packed, set the start point of the entire buffer only.
+ * for planar, set the start point_i32 of each channel's data within the buffer,
+ * for packed, set the start point_i32 of the entire buffer only.
  *
- * The value pointed to by linesize is set to the aligned size of each
- * channel's data buffer for planar layout, or to the aligned size of the
+ * The value pointed to by linesize is set to the aligned size_i32 of each
+ * channel's data buffer for planar layout, or to the aligned size_i32 of the
  * buffer for all channels for packed layout.
  *
  * The buffer in buf must be big enough to contain all the samples
- * (use av_samples_get_buffer_size() to compute its minimum size),
- * otherwise the audio_data pointers will point to invalid data.
+ * (use av_samples_get_buffer_size() to compute its minimum size_i32),
+ * otherwise the audio_data pointers will point_i32 to invalid data.
  *
  * @see enum AVSampleFormat
  * The documentation for AVSampleFormat describes the data layout.
@@ -194,9 +194,9 @@ int av_samples_get_buffer_size(int *linesize, int nb_channels, int nb_samples,
  * @param nb_channels      the number of channels
  * @param nb_samples       the number of samples in a single channel
  * @param sample_fmt       the sample format
- * @param align            buffer size alignment (0 = default, 1 = no alignment)
+ * @param align            buffer size_i32 alignment (0 = default, 1 = no alignment)
  * @return                 >=0 on success or a negative error code on failure
- * @todo return minimum size in bytes required for the buffer in case
+ * @todo return minimum size_i32 in bytes required for the buffer in case
  * of success at the next bump
  */
 int av_samples_fill_arrays(uint8_t **audio_data, int *linesize,
@@ -214,12 +214,12 @@ int av_samples_fill_arrays(uint8_t **audio_data, int *linesize,
  * The documentation for AVSampleFormat describes the data layout.
  *
  * @param[out] audio_data  array to be filled with the pointer for each channel
- * @param[out] linesize    aligned size for audio buffer(s), may be NULL
+ * @param[out] linesize    aligned size_i32 for audio buffer(s), may be NULL
  * @param nb_channels      number of audio channels
  * @param nb_samples       number of samples per channel
- * @param align            buffer size alignment (0 = default, 1 = no alignment)
+ * @param align            buffer size_i32 alignment (0 = default, 1 = no alignment)
  * @return                 >=0 on success or a negative error code on failure
- * @todo return the size of the allocated buffer in case of success at the next bump
+ * @todo return the size_i32 of the allocated buffer in case of success at the next bump
  * @see av_samples_fill_arrays()
  * @see av_samples_alloc_array_and_samples()
  */

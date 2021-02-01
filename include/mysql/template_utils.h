@@ -17,7 +17,7 @@
 #define TEMPLATE_UTILS_INCLUDED
 
 /**
-  Clears a container, but deletes all objects that the elements point to first.
+  Clears a container, but deletes all objects that the elements point_i32 to first.
   @tparam Container of pointers.
  */
 template<typename Container_type>
@@ -33,7 +33,7 @@ void delete_container_pointers(Container_type &container)
 }
 
 /**
-  Clears a container, but frees all objects that the elements point to first.
+  Clears a container, but frees all objects that the elements point_i32 to first.
   @tparam Container of pointers.
  */
 template<typename Container_type>

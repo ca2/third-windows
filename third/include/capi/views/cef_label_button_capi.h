@@ -116,7 +116,7 @@ typedef struct _cef_label_button_t {
   // where: - FONT_FAMILY_LIST is a comma-separated list of font family names, -
   // STYLES is an optional space-separated list of style names (case-sensitive
   //   "Bold" and "Italic" are supported), and
-  // - SIZE is an integer font size in pixels with the suffix "px".
+  // - SIZE is an integer font size_i32 in pixels with the suffix "px".
   //
   // Here are examples of valid font description strings: - "Arial, Helvetica,
   // Bold Italic 14px" - "Arial, 14px"
@@ -133,16 +133,16 @@ typedef struct _cef_label_button_t {
       cef_horizontal_alignment_t alignment);
 
   ///
-  // Reset the minimum size of this LabelButton to |size|.
+  // Reset the minimum size_i32 of this LabelButton to |size_i32|.
   ///
   void(CEF_CALLBACK* set_minimum_size)(struct _cef_label_button_t* self,
-                                       const cef_size_t* size);
+                                       const cef_size_t* size_i32);
 
   ///
-  // Reset the maximum size of this LabelButton to |size|.
+  // Reset the maximum size_i32 of this LabelButton to |size_i32|.
   ///
   void(CEF_CALLBACK* set_maximum_size)(struct _cef_label_button_t* self,
-                                       const cef_size_t* size);
+                                       const cef_size_t* size_i32);
 } cef_label_button_t;
 
 ///
@@ -150,7 +150,7 @@ typedef struct _cef_label_button_t {
 // click. |text| will be shown on the LabelButton and used as the default
 // accessible name. If |with_frame| is true (1) the button will have a visible
 // frame at all times, center alignment, additional padding and a default
-// minimum size of 70x33 DIP. If |with_frame| is false (0) the button will only
+// minimum size_i32 of 70x33 DIP. If |with_frame| is false (0) the button will only
 // have a visible frame on hover/press, left alignment, less padding and no
 // default minimum size.
 ///

@@ -344,7 +344,7 @@ typedef struct _cef_settings_t {
   // Specify a positive value to enable the CefRenderProcessHandler::
   // OnUncaughtException() callback. Specify 0 (default value) and
   // OnUncaughtException() will not be called. Also configurable using the
-  // "uncaught-exception-stack-size" command-line switch.
+  // "uncaught-exception-stack-size_i32" command-line switch.
   ///
   int uncaught_exception_stack_size;
 
@@ -1566,27 +1566,27 @@ typedef struct _cef_screen_info_t {
 
   ///
   // This is set from the rcMonitor member of MONITORINFOEX, to whit:
-  //   "A RECT structure that specifies the display monitor rectangle,
+  //   "A RECT structure that specifies the display monitor rectangle_i32,
   //   expressed in virtual-screen coordinates. Note that if the monitor
-  //   is not the primary display monitor, some of the rectangle's
+  //   is not the primary display monitor, some of the rectangle_i32's
   //   coordinates may be negative values."
   //
-  // The |rect| and |available_rect| properties are used to determine the
+  // The |rectangle_i32| and |available_rect| properties are used to determine the
   // available surface for rendering popup views.
   ///
-  cef_rect_t rect;
+  cef_rect_t rectangle_i32;
 
   ///
   // This is set from the rcWork member of MONITORINFOEX, to whit:
-  //   "A RECT structure that specifies the work area rectangle of the
+  //   "A RECT structure that specifies the work area rectangle_i32 of the
   //   display monitor that can be used by applications, expressed in
-  //   virtual-screen coordinates. Windows uses this rectangle to
+  //   virtual-screen coordinates. Windows uses this rectangle_i32 to
   //   maximize an application on the monitor. The rest of the area in
   //   rcMonitor contains system windows such as the task bar and side
   //   bars. Note that if the monitor is not the primary display monitor,
-  //   some of the rectangle's coordinates may be negative values".
+  //   some of the rectangle_i32's coordinates may be negative values".
   //
-  // The |rect| and |available_rect| properties are used to determine the
+  // The |rectangle_i32| and |available_rect| properties are used to determine the
   // available surface for rendering popup views.
   ///
   cef_rect_t available_rect;
@@ -2158,7 +2158,7 @@ typedef enum {
 
 ///
 // Structure representing cursor information. |buffer| will be
-// |size.width|*|size.height|*4 bytes in size and represents a BGRA image with
+// |size.width|*|size.height|*4 bytes in size_i32 and represents a BGRA image with
 // an upper-left origin.
 ///
 typedef struct _cef_cursor_info_t {
@@ -2336,8 +2336,8 @@ typedef struct _cef_pdf_print_settings_t {
   cef_string_t header_footer_url;
 
   ///
-  // Output page size in microns. If either of these values is less than or
-  // equal to zero then the default paper size (A4) will be used.
+  // Output page size_i32 in microns. If either of these values is less than or
+  // equal to zero then the default paper size_i32 (A4) will be used.
   ///
   int page_width;
   int page_height;
@@ -2656,7 +2656,7 @@ typedef struct _cef_box_layout_settings_t {
 
   ///
   // Default flex for views when none is specified via CefBoxLayout methods.
-  // Using the preferred size as the basis, free space along the main axis is
+  // Using the preferred size_i32 as the basis, free space along the main axis is
   // distributed to views in the ratio of their flex weights. Similarly, if the
   // views will overflow the parent, space is subtracted in these ratios. A flex
   // of 0 means this view is not resized. Flex values must not be negative.

@@ -102,8 +102,8 @@ enum enum_vio_io_event
 
 #define VIO_LOCALHOST 1                         /* a localhost connection */
 #define VIO_BUFFERED_READ 2                     /* use buffered read */
-#define VIO_READ_BUFFER_SIZE 16384              /* size of read buffer */
-#define VIO_DESCRIPTION_SIZE 30                 /* size of description */
+#define VIO_READ_BUFFER_SIZE 16384              /* size_i32 of read buffer */
+#define VIO_DESCRIPTION_SIZE 30                 /* size_i32 of description */
 
 Vio* vio_new(my_socket sd, enum enum_vio_type type, uint flags);
 Vio*  mysql_socket_vio_new(MYSQL_SOCKET mysql_socket, enum enum_vio_type type, uint flags);
@@ -239,7 +239,7 @@ void vio_end(void);
 #if !defined(DONT_MAP_VIO)
 #define vio_delete(vio)                         (vio)->viodelete(vio)
 #define vio_errno(vio)                          (vio)->vioerrno(vio)
-#define vio_read(vio, buf, size)                ((vio)->read)(vio,buf,size)
+#define vio_read(vio, buf, size)                ((vio)->read)(vio,buf, size)
 #define vio_write(vio, buf, size)               ((vio)->write)(vio, buf, size)
 #define vio_fastsend(vio)                       (vio)->fastsend(vio)
 #define vio_keepalive(vio, set_keep_alive)  (vio)->viokeepalive(vio, set_keep_alive)

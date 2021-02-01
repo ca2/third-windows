@@ -123,9 +123,9 @@ enum AVAppToDevMessageType {
     AV_APP_TO_DEV_NONE = MKBETAG('N','O','N','E'),
 
     /**
-     * Window size change message.
+     * Window size_i32 change message.
      *
-     * Message is sent to the device every time the application changes the size
+     * Message is sent to the device every time the application changes the size_i32
      * of the window device renders to.
      * Message should also be sent right after window is created.
      *
@@ -209,11 +209,11 @@ enum AVDevToAppMessageType {
      * frame and all one-shot initializations should be done here.
      * Application is allowed to ignore preferred window buffer size.
      *
-     * @note: Application is obligated to inform about window buffer size
+     * @note: Application is obligated to inform about window buffer size_i32
      *        with AV_APP_TO_DEV_WINDOW_SIZE message.
      *
-     * data: AVDeviceRect: preferred size of the window buffer.
-     *       NULL: no preferred size of the window buffer.
+     * data: AVDeviceRect: preferred size_i32 of the window buffer.
+     *       NULL: no preferred size_i32 of the window buffer.
      */
     AV_DEV_TO_APP_CREATE_WINDOW_BUFFER = MKBETAG('B','C','R','E'),
 
@@ -299,7 +299,7 @@ enum AVDevToAppMessageType {
  * @param s         device context.
  * @param type      message type.
  * @param data      message data. Exact type depends on message type.
- * @param data_size size of message data.
+ * @param data_size size_i32 of message data.
  * @return >= 0 on success, negative on error.
  *         AVERROR(ENOSYS) when device doesn't implement handler of the message.
  */
@@ -313,7 +313,7 @@ int avdevice_app_to_dev_control_message(struct AVFormatContext *s,
  * @param s         device context.
  * @param type      message type.
  * @param data      message data. Can be NULL.
- * @param data_size size of message data.
+ * @param data_size size_i32 of message data.
  * @return >= 0 on success, negative on error.
  *         AVERROR(ENOSYS) when application doesn't implement handler of the message.
  */
@@ -344,9 +344,9 @@ int avdevice_dev_to_app_control_message(struct AVFormatContext *s,
  *  - Capabilities valid for video devices:
  *    - pixel_format:   supported pixel formats.
  *                      type: AV_OPT_TYPE_INT (AVPixelFormat value)
- *    - window_size:    supported window sizes (describes size of the window size presented to the user).
+ *    - window_size:    supported window sizes (describes size_i32 of the window size_i32 presented to the user).
  *                      type: AV_OPT_TYPE_IMAGE_SIZE
- *    - frame_size:     supported frame sizes (describes size of provided video frames).
+ *    - frame_size:     supported frame sizes (describes size_i32 of provided video frames).
  *                      type: AV_OPT_TYPE_IMAGE_SIZE
  *    - fps:            supported fps values
  *                      type: AV_OPT_TYPE_RATIONAL

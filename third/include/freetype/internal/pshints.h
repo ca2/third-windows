@@ -229,7 +229,7 @@ FT_BEGIN_HEADER
    *     A handle to the Type 1 hints recorder.
    *
    *   end_point ::
-   *     The index of the last point in the input glyph in which the
+   *     The index of the last point_i32 in the input glyph in which the
    *     previously defined hints apply.
    *
    */
@@ -252,7 +252,7 @@ FT_BEGIN_HEADER
    *     A handle to the Type 1 hints recorder.
    *
    *   end_point ::
-   *     The index of the last point in the input glyph.
+   *     The index of the last point_i32 in the input glyph.
    *
    * @return:
    *   FreeType error code.  0 means success.
@@ -483,7 +483,7 @@ FT_BEGIN_HEADER
    *     A handle to the Type 2 hints recorder.
    *
    *   end_point ::
-   *     The glyph index of the last point to which the previously defined or
+   *     The glyph index of the last point_i32 to which the previously defined or
    *     activated hints apply.
    *
    *   bit_count ::
@@ -493,7 +493,7 @@ FT_BEGIN_HEADER
    *     An array of bytes modelling the hint mask.
    *
    * @note:
-   *   If the hintmask starts the charstring (before any glyph point
+   *   If the hintmask starts the charstring (before any glyph point_i32
    *   definition), the value of `end_point` should be 0.
    *
    *   `bit_count` is the number of meaningful bits in the 'bytes' array; it
@@ -525,7 +525,7 @@ FT_BEGIN_HEADER
    *     A handle to the Type 2 hints recorder.
    *
    *   end_point ::
-   *     A glyph index of the last point to which the previously defined or
+   *     A glyph index of the last point_i32 to which the previously defined or
    *     active hints apply.
    *
    *   bit_count ::
@@ -535,7 +535,7 @@ FT_BEGIN_HEADER
    *     An array of bytes modelling the hint mask.
    *
    * @note:
-   *   If the hintmask starts the charstring (before any glyph point
+   *   If the hintmask starts the charstring (before any glyph point_i32
    *   definition), the value of `end_point` should be 0.
    *
    *   `bit_count` is the number of meaningful bits in the 'bytes' array; it
@@ -566,7 +566,7 @@ FT_BEGIN_HEADER
    *     A handle to the Type 2 hints recorder.
    *
    *   end_point ::
-   *     The index of the last point in the input glyph.
+   *     The index of the last point_i32 in the input glyph.
    *
    * @return:
    *   FreeType error code.  0 means success.

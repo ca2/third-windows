@@ -397,8 +397,8 @@ extern "C"
 	WINPR_API void ASN1open_free(ASN1open_t* open);
 	WINPR_API void ASN1utf8string_free(ASN1wstring_t* utf8string);
 
-	WINPR_API LPVOID ASN1DecAlloc(ASN1decoding_t dec, ASN1uint32_t size);
-	WINPR_API LPVOID ASN1DecRealloc(ASN1decoding_t dec, LPVOID ptr, ASN1uint32_t size);
+	WINPR_API LPVOID ASN1DecAlloc(ASN1decoding_t dec, ASN1uint32_t size_i32);
+	WINPR_API LPVOID ASN1DecRealloc(ASN1decoding_t dec, LPVOID ptr, ASN1uint32_t size_i32);
 
 	WINPR_API void ASN1Free(LPVOID ptr);
 

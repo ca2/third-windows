@@ -318,14 +318,14 @@ FT_BEGIN_HEADER
    *   TT_Set_SBit_Strike_Func
    *
    * @description:
-   *   Select an sbit strike for a given size request.
+   *   Select an sbit strike for a given size_i32 request.
    *
    * @input:
    *   face ::
    *     The target face object.
    *
    *   req ::
-   *     The size request.
+   *     The size_i32 request.
    *
    * @output:
    *   astrike_index ::

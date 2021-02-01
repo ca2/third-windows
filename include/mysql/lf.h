@@ -158,9 +158,9 @@ typedef struct st_lf_hash {
   CHARSET_INFO *charset;                /* see HASH */
   lf_hash_func *hash_function;          /* see HASH */
   uint key_offset, key_length;          /* see HASH */
-  uint element_size;                    /* size of memcpy'ed area on insert */
+  uint element_size;                    /* size_i32 of memcpy'ed area on insert */
   uint flags;                           /* LF_HASH_UNIQUE, etc */
-  int32 volatile size;                  /* size of array */
+  int32 volatile size;                  /* size_i32 of array */
   int32 volatile count;                 /* number of elements in the hash */
   /**
     "Initialize" hook - called to finish initialization of object provided by

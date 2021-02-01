@@ -56,7 +56,7 @@ class CefLabelButton : public CefButton {
   // button click. |text| will be shown on the LabelButton and used as the
   // default accessible name. If |with_frame| is true the button will have a
   // visible frame at all times, center alignment, additional padding and a
-  // default minimum size of 70x33 DIP. If |with_frame| is false the button will
+  // default minimum size_i32 of 70x33 DIP. If |with_frame| is false the button will
   // only have a visible frame on hover/press, left alignment, less padding and
   // no default minimum size.
   ///
@@ -121,7 +121,7 @@ class CefLabelButton : public CefButton {
   // - FONT_FAMILY_LIST is a comma-separated list of font family names,
   // - STYLES is an optional space-separated list of style names (case-sensitive
   //   "Bold" and "Italic" are supported), and
-  // - SIZE is an integer font size in pixels with the suffix "px".
+  // - SIZE is an integer font size_i32 in pixels with the suffix "px".
   //
   // Here are examples of valid font description strings:
   // - "Arial, Helvetica, Bold Italic 14px"
@@ -138,13 +138,13 @@ class CefLabelButton : public CefButton {
   virtual void SetHorizontalAlignment(cef_horizontal_alignment_t alignment) = 0;
 
   ///
-  // Reset the minimum size of this LabelButton to |size|.
+  // Reset the minimum size_i32 of this LabelButton to |size_i32|.
   ///
   /*--cef()--*/
   virtual void SetMinimumSize(const CefSize& size) = 0;
 
   ///
-  // Reset the maximum size of this LabelButton to |size|.
+  // Reset the maximum size_i32 of this LabelButton to |size_i32|.
   ///
   /*--cef()--*/
   virtual void SetMaximumSize(const CefSize& size) = 0;

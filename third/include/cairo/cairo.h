@@ -181,7 +181,7 @@ typedef struct _cairo_device cairo_device_t;
  *
  * A #cairo_matrix_t holds an affine transformation, such as a scale,
  * rotation, shear, or a combination of those. The transformation of
- * a point (x, y) is given by:
+ * a point_i32 (x, y) is given by:
  * <programlisting>
  *     x_new = xx * x + xy * y + x0;
  *     y_new = yx * x + yy * y + y0;
@@ -253,7 +253,7 @@ typedef struct _cairo_user_data_key {
  * @CAIRO_STATUS_NO_MEMORY: out of memory (Since 1.0)
  * @CAIRO_STATUS_INVALID_RESTORE: cairo_restore() called without matching cairo_save() (Since 1.0)
  * @CAIRO_STATUS_INVALID_POP_GROUP: no saved group to pop, i.e. cairo_pop_group() without matching cairo_push_group() (Since 1.0)
- * @CAIRO_STATUS_NO_CURRENT_POINT: no current point defined (Since 1.0)
+ * @CAIRO_STATUS_NO_CURRENT_POINT: no current point_i32 defined (Since 1.0)
  * @CAIRO_STATUS_INVALID_MATRIX: invalid matrix (not invertible) (Since 1.0)
  * @CAIRO_STATUS_INVALID_STATUS: invalid value for an input #cairo_status_t (Since 1.0)
  * @CAIRO_STATUS_NULL_POINTER: %NULL pointer (Since 1.0)
@@ -281,7 +281,7 @@ typedef struct _cairo_user_data_key {
  * @CAIRO_STATUS_INVALID_CLUSTERS: input clusters do not represent the accompanying text and glyph array (Since 1.8)
  * @CAIRO_STATUS_INVALID_SLANT: invalid value for an input #cairo_font_slant_t (Since 1.8)
  * @CAIRO_STATUS_INVALID_WEIGHT: invalid value for an input #cairo_font_weight_t (Since 1.8)
- * @CAIRO_STATUS_INVALID_SIZE: invalid value (typically too big) for the size of the input (surface, pattern, etc.) (Since 1.10)
+ * @CAIRO_STATUS_INVALID_SIZE: invalid value (typically too big) for the size_i32 of the input (surface, pattern, etc.) (Since 1.10)
  * @CAIRO_STATUS_USER_FONT_NOT_IMPLEMENTED: user-font method not implemented (Since 1.10)
  * @CAIRO_STATUS_DEVICE_TYPE_MISMATCH: the device type is not appropriate for the operation (Since 1.10)
  * @CAIRO_STATUS_DEVICE_ERROR: an operation to the device caused an unspecified error (Since 1.10)
@@ -470,12 +470,12 @@ typedef cairo_status_t (*cairo_read_func_t) (void		*closure,
 
 /**
  * cairo_rectangle_int_t:
- * @x: X coordinate of the left side of the rectangle
- * @y: Y coordinate of the the top side of the rectangle
- * @width: width of the rectangle
- * @height: height of the rectangle
+ * @x: X coordinate of the left side of the rectangle_i32
+ * @y: Y coordinate of the the top side of the rectangle_i32
+ * @width: width of the rectangle_i32
+ * @height: height of the rectangle_i32
  *
- * A data structure for holding a rectangle with integer coordinates.
+ * A data structure for holding a rectangle_i32 with integer coordinates.
  *
  * Since: 1.10
  **/
@@ -729,17 +729,17 @@ cairo_set_antialias (cairo_t *cr, cairo_antialias_t antialias);
  * left-to-right, counts +1. If the path crosses the ray
  * from right to left, counts -1. (Left and right are determined
  * from the perspective of looking along the ray from the starting
- * point.) If the total count is non-zero, the point will be filled. (Since 1.0)
+ * point.) If the total count is non-zero, the point_i32 will be filled. (Since 1.0)
  * @CAIRO_FILL_RULE_EVEN_ODD: Counts the total number of
  * intersections, without regard to the orientation of the contour. If
- * the total number of intersections is odd, the point will be
+ * the total number of intersections is odd, the point_i32 will be
  * filled. (Since 1.0)
  *
  * #cairo_fill_rule_t is used to select how paths are filled. For both
- * fill rules, whether or not a point is included in the fill is
- * determined by taking a ray from that point to infinity and looking
+ * fill rules, whether or not a point_i32 is included in the fill is
+ * determined by taking a ray from that point_i32 to infinity and looking
  * at intersections with the path. The ray can be in any direction,
- * as long as it doesn't pass through the end point of a segment
+ * as long as it doesn't pass through the end point_i32 of a segment
  * or have a tricky intersection such as intersecting tangent to the path.
  * (Note that filling is not actually implemented in this way. This
  * is just a description of the rule that is applied.)
@@ -763,9 +763,9 @@ cairo_set_line_width (cairo_t *cr, double width);
 
 /**
  * cairo_line_cap_t:
- * @CAIRO_LINE_CAP_BUTT: start(stop) the line exactly at the start(end) point (Since 1.0)
- * @CAIRO_LINE_CAP_ROUND: use a round ending, the center of the circle is the end point (Since 1.0)
- * @CAIRO_LINE_CAP_SQUARE: use squared ending, the center of the square is the end point (Since 1.0)
+ * @CAIRO_LINE_CAP_BUTT: start(stop) the line exactly at the start(end) point_i32 (Since 1.0)
+ * @CAIRO_LINE_CAP_ROUND: use a round ending, the center of the circle is the end point_i32 (Since 1.0)
+ * @CAIRO_LINE_CAP_SQUARE: use squared ending, the center of the square is the end point_i32 (Since 1.0)
  *
  * Specifies how to render the endpoints of the path when stroking.
  *
@@ -787,9 +787,9 @@ cairo_set_line_cap (cairo_t *cr, cairo_line_cap_t line_cap);
  * @CAIRO_LINE_JOIN_MITER: use a sharp (angled) corner, see
  * cairo_set_miter_limit() (Since 1.0)
  * @CAIRO_LINE_JOIN_ROUND: use a rounded join, the center of the circle is the
- * joint point (Since 1.0)
+ * joint point_i32 (Since 1.0)
  * @CAIRO_LINE_JOIN_BEVEL: use a cut-off join, the join is cut off at half
- * the line width from the joint point (Since 1.0)
+ * the line width from the joint point_i32 (Since 1.0)
  *
  * Specifies how to render the junction of two lines when stroking.
  *
@@ -990,10 +990,10 @@ cairo_clip_extents (cairo_t *cr,
 
 /**
  * cairo_rectangle_t:
- * @x: X coordinate of the left side of the rectangle
- * @y: Y coordinate of the the top side of the rectangle
- * @width: width of the rectangle
- * @height: height of the rectangle
+ * @x: X coordinate of the left side of the rectangle_i32
+ * @y: Y coordinate of the the top side of the rectangle_i32
+ * @width: width of the rectangle_i32
+ * @height: height of the rectangle_i32
  *
  * A data structure for holding a rectangle.
  *
@@ -1005,7 +1005,7 @@ typedef struct _cairo_rectangle {
 
 /**
  * cairo_rectangle_list_t:
- * @status: Error status of the rectangle list
+ * @status: Error status of the rectangle_i32 list
  * @rectangles: Array containing the rectangles
  * @num_rectangles: Number of rectangles in this list
  * 
@@ -1042,7 +1042,7 @@ cairo_tag_end (cairo_t *cr, const char *tag_name);
 /**
  * cairo_scaled_font_t:
  *
- * A #cairo_scaled_font_t is a font scaled to a particular size and device
+ * A #cairo_scaled_font_t is a font scaled to a particular size_i32 and device
  * resolution. A #cairo_scaled_font_t is most useful for low-level font
  * usage where a library or application wants to cache a reference
  * to a scaled font to speed up the computation of metrics.
@@ -1062,10 +1062,10 @@ typedef struct _cairo_scaled_font cairo_scaled_font_t;
  * cairo_font_face_t:
  *
  * A #cairo_font_face_t specifies all aspects of a font other
- * than the size or font matrix (a font matrix is used to distort
+ * than the size_i32 or font matrix (a font matrix is used to distort
  * a font by shearing it or scaling it unequally in the two
  * directions) . A font face can be set on a #cairo_t by using
- * cairo_set_font_face(); the size and font matrix are set with
+ * cairo_set_font_face(); the size_i32 and font matrix are set with
  * cairo_set_font_size() and cairo_set_font_matrix().
  *
  * There are various types of font faces, depending on the
@@ -1447,7 +1447,7 @@ cairo_select_font_face (cairo_t              *cr,
 			cairo_font_weight_t  weight);
 
 cairo_public void
-cairo_set_font_size (cairo_t *cr, double size);
+cairo_set_font_size (cairo_t *cr, double size_i32);
 
 cairo_public void
 cairo_set_font_matrix (cairo_t		    *cr,
@@ -1719,7 +1719,7 @@ cairo_user_font_face_create (void);
  * in the previous paragraph will be used.
  *
  * Note that @scaled_font is not fully initialized at this
- * point and trying to use it for text operations in the callback will result
+ * point_i32 and trying to use it for text operations in the callback will result
  * in deadlock.
  *
  * Returns: %CAIRO_STATUS_SUCCESS upon success, or an error status on error.
@@ -1750,7 +1750,7 @@ typedef cairo_status_t (*cairo_user_scaled_font_init_func_t) (cairo_scaled_font_
  * than the default source on @cr is used.  That means, glyph bitmaps should
  * be rendered using cairo_mask() instead of cairo_paint().
  *
- * Other non-default settings on @cr include a font size of 1.0 (given that
+ * Other non-default settings on @cr include a font size_i32 of 1.0 (given that
  * it is set up to be in font space), and font options corresponding to
  * @scaled_font.
  *
@@ -1855,7 +1855,7 @@ typedef cairo_status_t (*cairo_user_scaled_font_text_to_glyphs_func_t) (cairo_sc
 /**
  * cairo_user_scaled_font_unicode_to_glyph_func_t:
  * @scaled_font: the scaled-font being created
- * @unicode: input unicode character code-point
+ * @unicode: input unicode character code-point_i32
  * @glyph_index: output glyph index
  *
  * #cairo_user_scaled_font_unicode_to_glyph_func_t is the type of function which
@@ -2014,8 +2014,8 @@ typedef enum _cairo_path_data_type {
  * where the number of points for each element type is as follows:
  *
  * <programlisting>
- *     %CAIRO_PATH_MOVE_TO:     1 point
- *     %CAIRO_PATH_LINE_TO:     1 point
+ *     %CAIRO_PATH_MOVE_TO:     1 point_i32
+ *     %CAIRO_PATH_LINE_TO:     1 point_i32
  *     %CAIRO_PATH_CURVE_TO:    3 points
  *     %CAIRO_PATH_CLOSE_PATH:  0 points
  * </programlisting>
@@ -2073,7 +2073,7 @@ union _cairo_path_data_t {
     } header;
     struct {
 	double x, y;
-    } point;
+    } point_i32;
 };
 
 /**
@@ -3098,7 +3098,7 @@ cairo_public cairo_region_t *
 cairo_region_create (void);
 
 cairo_public cairo_region_t *
-cairo_region_create_rectangle (const cairo_rectangle_int_t *rectangle);
+cairo_region_create_rectangle (const cairo_rectangle_int_t *rectangle_i32);
 
 cairo_public cairo_region_t *
 cairo_region_create_rectangles (const cairo_rectangle_int_t *rects,
@@ -3129,14 +3129,14 @@ cairo_region_num_rectangles (const cairo_region_t *region);
 cairo_public void
 cairo_region_get_rectangle (const cairo_region_t  *region,
 			    int                    nth,
-			    cairo_rectangle_int_t *rectangle);
+			    cairo_rectangle_int_t *rectangle_i32);
 
 cairo_public cairo_bool_t
 cairo_region_is_empty (const cairo_region_t *region);
 
 cairo_public cairo_region_overlap_t
 cairo_region_contains_rectangle (const cairo_region_t *region,
-				 const cairo_rectangle_int_t *rectangle);
+				 const cairo_rectangle_int_t *rectangle_i32);
 
 cairo_public cairo_bool_t
 cairo_region_contains_point (const cairo_region_t *region, int x, int y);
@@ -3149,28 +3149,28 @@ cairo_region_subtract (cairo_region_t *dst, const cairo_region_t *other);
 
 cairo_public cairo_status_t
 cairo_region_subtract_rectangle (cairo_region_t *dst,
-				 const cairo_rectangle_int_t *rectangle);
+				 const cairo_rectangle_int_t *rectangle_i32);
 
 cairo_public cairo_status_t
 cairo_region_intersect (cairo_region_t *dst, const cairo_region_t *other);
 
 cairo_public cairo_status_t
 cairo_region_intersect_rectangle (cairo_region_t *dst,
-				  const cairo_rectangle_int_t *rectangle);
+				  const cairo_rectangle_int_t *rectangle_i32);
 
 cairo_public cairo_status_t
 cairo_region_union (cairo_region_t *dst, const cairo_region_t *other);
 
 cairo_public cairo_status_t
 cairo_region_union_rectangle (cairo_region_t *dst,
-			      const cairo_rectangle_int_t *rectangle);
+			      const cairo_rectangle_int_t *rectangle_i32);
 
 cairo_public cairo_status_t
 cairo_region_xor (cairo_region_t *dst, const cairo_region_t *other);
 
 cairo_public cairo_status_t
 cairo_region_xor_rectangle (cairo_region_t *dst,
-			    const cairo_rectangle_int_t *rectangle);
+			    const cairo_rectangle_int_t *rectangle_i32);
 
 /* Functions to be used while debugging (not intended for use in production code) */
 cairo_public void

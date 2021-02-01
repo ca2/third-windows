@@ -133,7 +133,7 @@ _cairo_traps_path (const cairo_traps_t *traps,
 		   cairo_path_fixed_t  *path);
 
 cairo_private cairo_int_status_t
-_cairo_rasterise_polygon_to_traps (cairo_polygon_t			*polygon,
+_cairo_rasterise_polygon_to_traps (cairo_polygon_t			*polygon_i32,
 				   cairo_fill_rule_t			 fill_rule,
 				   cairo_antialias_t			 antialias,
 				   cairo_traps_t *traps);

@@ -114,7 +114,7 @@ FT_BEGIN_HEADER
 
 #define FT_MAKE_EMPTY_FIELD( frame_op )  { frame_op, 0, 0 }
 
-#define FT_FRAME_START( size )   { ft_frame_start, 0, size }
+#define FT_FRAME_START( size_i32 )   { ft_frame_start, 0, size_i32 }
 #define FT_FRAME_END             { ft_frame_end, 0, 0 }
 
 #define FT_FRAME_LONG( f )       FT_FRAME_FIELD( ft_frame_long_be, f )
@@ -343,7 +343,7 @@ FT_BEGIN_HEADER
   FT_BASE( void )
   FT_Stream_OpenMemory( FT_Stream       stream,
                         const FT_Byte*  base,
-                        FT_ULong        size );
+                        FT_ULong        size_i32 );
 
   /* close a stream (does not destroy the stream structure) */
   FT_BASE( void )
@@ -509,7 +509,7 @@ FT_BEGIN_HEADER
           FT_SET_ERROR( FT_Stream_ReadFields( stream, fields, object ) )
 
 
-#define FT_FRAME_ENTER( size )                                           \
+#define FT_FRAME_ENTER( size_i32 )                                           \
           FT_SET_ERROR(                                                  \
             FT_DEBUG_INNER( FT_Stream_EnterFrame( stream,                \
                                                   (FT_ULong)(size) ) ) )

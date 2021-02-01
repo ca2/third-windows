@@ -45,7 +45,7 @@ class CefView;
 ///
 // A Layout manager that arranges child views vertically or horizontally in a
 // side-by-side fashion with spacing around and between the child views. The
-// child views are always sized according to their preferred size. If the
+// child views are always size_f64 according to their preferred size. If the
 // host's bounds provide insufficient space, child views will be clamped.
 // Excess space will not be distributed. Methods must be called on the browser
 // process UI thread unless otherwise indicated.
@@ -54,7 +54,7 @@ class CefView;
 class CefBoxLayout : public CefLayout {
  public:
   ///
-  // Set the flex weight for the given |view|. Using the preferred size as
+  // Set the flex weight for the given |view|. Using the preferred size_i32 as
   // the basis, free space along the main axis is distributed to views in the
   // ratio of their flex weights. Similarly, if the views will overflow the
   // parent, space is subtracted in these ratios. A flex of 0 means this view is

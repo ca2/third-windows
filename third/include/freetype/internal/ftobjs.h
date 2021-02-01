@@ -607,7 +607,7 @@ FT_BEGIN_HEADER
 #define FT_SLOT_FACE( x )     FT_SLOT( x )->face
 
 #define FT_FACE_SLOT( x )     FT_FACE( x )->glyph
-#define FT_FACE_SIZE( x )     FT_FACE( x )->size
+#define FT_FACE_SIZE( x )     FT_FACE( x )->size_i32
 
 
   /**************************************************************************
@@ -672,13 +672,13 @@ FT_BEGIN_HEADER
                      FT_ULong  strike_index );
 
 
-  /* Set the metrics according to a size request. */
+  /* Set the metrics according to a size_i32 request. */
   FT_BASE( void )
   FT_Request_Metrics( FT_Face          face,
                       FT_Size_Request  req );
 
 
-  /* Match a size request against `available_sizes'. */
+  /* Match a size_i32 request against `available_sizes'. */
   FT_BASE( FT_Error )
   FT_Match_Size( FT_Face          face,
                  FT_Size_Request  req,
@@ -709,7 +709,7 @@ FT_BEGIN_HEADER
   /* Allocate a new bitmap buffer in a glyph slot. */
   FT_BASE( FT_Error )
   ft_glyphslot_alloc_bitmap( FT_GlyphSlot  slot,
-                             FT_ULong      size );
+                             FT_ULong      size_i32 );
 
 
   /* Set the bitmap buffer in a glyph slot to a given pointer.  The buffer */

@@ -95,7 +95,7 @@ typedef struct _cef_zip_reader_t {
       struct _cef_zip_reader_t* self);
 
   ///
-  // Returns the uncompressed size of the file.
+  // Returns the uncompressed size_i32 of the file.
   ///
   int64(CEF_CALLBACK* get_file_size)(struct _cef_zip_reader_t* self);
 

@@ -56,8 +56,8 @@ typedef struct st_key_cache
   my_bool in_resize;             /* true during resize operation             */
   my_bool resize_in_flush;       /* true during flush of resize operation    */
   my_bool can_be_used;           /* usage of cache for read/write is allowed */
-  size_t key_cache_mem_size;      /* specified size of the cache memory       */
-  uint key_cache_block_size;     /* size of the page buffer of a cache block */
+  size_t key_cache_mem_size;      /* specified size_i32 of the cache memory       */
+  uint key_cache_block_size;     /* size_i32 of the page buffer of a cache block */
   ulonglong min_warm_blocks;     /* min number of warm blocks;               */
   ulonglong age_threshold;       /* age threshold for hot blocks             */
   ulonglong keycache_time;       /* total number of block link operations    */
@@ -96,8 +96,8 @@ typedef struct st_key_cache
     initializing the key cache.
   */
 
-  ulonglong param_buff_size;      /* size the memory allocated for the cache  */
-  ulonglong param_block_size;     /* size of the blocks in the key cache      */
+  ulonglong param_buff_size;      /* size_i32 the memory allocated for the cache  */
+  ulonglong param_block_size;     /* size_i32 of the blocks in the key cache      */
   ulonglong param_division_limit; /* min. percentage of warm blocks           */
   ulonglong param_age_threshold;  /* determines when hot block is downgraded  */
 

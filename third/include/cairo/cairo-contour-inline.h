@@ -42,14 +42,14 @@ CAIRO_BEGIN_DECLS
 
 static inline cairo_int_status_t
 _cairo_contour_add_point (cairo_contour_t *contour,
-			  const cairo_point_t *point)
+			  const cairo_point_t *point_i32)
 {
     struct _cairo_contour_chain *tail = contour->tail;
 
     if (unlikely (tail->num_points == tail->size_points))
 	return __cairo_contour_add_point (contour, point);
 
-    tail->points[tail->num_points++] = *point;
+    tail->points[tail->num_points++] = *point_i32;
     return CAIRO_INT_STATUS_SUCCESS;
 }
 

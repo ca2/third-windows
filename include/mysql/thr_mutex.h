@@ -17,7 +17,7 @@
    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA */
 
 /**
-  MySQL mutex implementation.
+  MySQL ::mutex implementation.
 
   There are three "layers":
   1) native_mutex_*()
@@ -45,7 +45,7 @@ typedef pthread_mutex_t native_mutex_t;
 typedef pthread_mutexattr_t native_mutexattr_t;
 #endif
 
-/* Define mutex types, see my_thr_init.c */
+/* Define ::mutex types, see my_thr_init.c */
 #define MY_MUTEX_INIT_SLOW   NULL
 
 /* Can be set in /usr/include/pthread.h */
@@ -64,71 +64,71 @@ extern native_mutexattr_t my_errorcheck_mutexattr;
 #define MY_MUTEX_INIT_ERRCHK   NULL
 #endif
 
-static inline int native_mutex_init(native_mutex_t *mutex,
+static inline int native_mutex_init(native_mutex_t *::mutex,
                                     const native_mutexattr_t *attr)
 {
 #ifdef _WIN32
-  InitializeCriticalSection(mutex);
+  InitializeCriticalSection(::mutex);
   return 0;
 #else
-  return pthread_mutex_init(mutex, attr);
+  return pthread_mutex_init(::mutex, attr);
 #endif
 }
 
-static inline int native_mutex_lock(native_mutex_t *mutex)
+static inline int native_mutex_lock(native_mutex_t *::mutex)
 {
 #ifdef _WIN32
-  EnterCriticalSection(mutex);
+  EnterCriticalSection(::mutex);
   return 0;
 #else
-  return pthread_mutex_lock(mutex);
+  return pthread_mutex_lock(::mutex);
 #endif
 }
 
-static inline int native_mutex_trylock(native_mutex_t *mutex)
+static inline int native_mutex_trylock(native_mutex_t *::mutex)
 {
 #ifdef _WIN32
-  if (TryEnterCriticalSection(mutex))
+  if (TryEnterCriticalSection(::mutex))
   {
     /* Don't allow recursive lock */
-    if (mutex->RecursionCount > 1){
-      LeaveCriticalSection(mutex);
+    if (::mutex->RecursionCount > 1){
+      LeaveCriticalSection(::mutex);
       return EBUSY;
     }
     return 0;
   }
   return EBUSY;
 #else
-  return pthread_mutex_trylock(mutex);
+  return pthread_mutex_trylock(::mutex);
 #endif
 }
 
-static inline int native_mutex_unlock(native_mutex_t *mutex)
+static inline int native_mutex_unlock(native_mutex_t *::mutex)
 {
 #ifdef _WIN32
-  LeaveCriticalSection(mutex);
+  LeaveCriticalSection(::mutex);
   return 0;
 #else
-  return pthread_mutex_unlock(mutex);
+  return pthread_mutex_unlock(::mutex);
 #endif
 }
 
-static inline int native_mutex_destroy(native_mutex_t *mutex)
+static inline int native_mutex_destroy(native_mutex_t *::mutex)
 {
 #ifdef _WIN32
-  DeleteCriticalSection(mutex);
+  DeleteCriticalSection(::mutex);
   return 0;
 #else
-  return pthread_mutex_destroy(mutex);
+  return pthread_mutex_destroy(::mutex);
 #endif
 }
 
 
 #ifdef SAFE_MUTEX
-/* safe_mutex adds checking to mutex for easier debugging */
+/* safe_mutex adds checking to ::mutex for easier debugging */
 typedef struct st_safe_mutex_t
 {
-  native_mutex_t global, mutex;
+  native_mutex_t global, ::mutex;
   const char *file;
   uint line, count;
   my_thread_t thread;

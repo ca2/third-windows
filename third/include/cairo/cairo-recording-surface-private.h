@@ -141,7 +141,7 @@ typedef struct _cairo_recording_surface {
     cairo_surface_t base;
 
     /* A recording-surface is logically unbounded, but when used as a
-     * source we need to render it to an image, so we need a size at
+     * source we need to render it to an image, so we need a size_i32 at
      * which to create that image. */
     cairo_rectangle_t extents_pixels;
     cairo_rectangle_int_t extents;

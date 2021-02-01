@@ -50,7 +50,7 @@ RASTERIZE_EDGES (pixman_image_t  *image,
 #if N_BITS == 1
 	/* For the non-antialiased case, round the coordinates up, in effect
 	 * sampling just slightly to the left of the pixel. This is so that
-	 * when the sample point lies exactly on the line, we round towards
+	 * when the sample point_i32 lies exactly on the line, we round towards
 	 * north-west.
 	 *
 	 * (The AA case does a similar  adjustment in RENDER_SAMPLES_X)

@@ -54,8 +54,8 @@ struct _cef_textfield_t;
 struct _cef_window_t;
 
 ///
-// A View is a rectangle within the views View hierarchy. It is the base
-// structure for all Views. All size and position values are in density
+// A View is a rectangle_i32 within the views View hierarchy. It is the base
+// structure for all Views. All size_i32 and position values are in density
 // independent pixels (DIP) unless otherwise indicated. Methods must be called
 // on the browser process UI thread unless otherwise indicated.
 ///
@@ -195,13 +195,13 @@ typedef struct _cef_view_t {
   cef_rect_t(CEF_CALLBACK* get_bounds_in_screen)(struct _cef_view_t* self);
 
   ///
-  // Sets the size of this View without changing the position.
+  // Sets the size_i32 of this View without changing the position.
   ///
   void(CEF_CALLBACK* set_size)(struct _cef_view_t* self,
-                               const cef_size_t* size);
+                               const cef_size_t* size_i32);
 
   ///
-  // Returns the size of this View.
+  // Returns the size_i32 of this View.
   ///
   cef_size_t(CEF_CALLBACK* get_size)(struct _cef_view_t* self);
 
@@ -218,7 +218,7 @@ typedef struct _cef_view_t {
   cef_point_t(CEF_CALLBACK* get_position)(struct _cef_view_t* self);
 
   ///
-  // Returns the size this View would like to be if enough space is available.
+  // Returns the size_i32 this View would like to be if enough space is available.
   ///
   cef_size_t(CEF_CALLBACK* get_preferred_size)(struct _cef_view_t* self);
 
@@ -228,12 +228,12 @@ typedef struct _cef_view_t {
   void(CEF_CALLBACK* size_to_preferred_size)(struct _cef_view_t* self);
 
   ///
-  // Returns the minimum size for this View.
+  // Returns the minimum size_i32 for this View.
   ///
   cef_size_t(CEF_CALLBACK* get_minimum_size)(struct _cef_view_t* self);
 
   ///
-  // Returns the maximum size for this View.
+  // Returns the maximum size_i32 for this View.
   ///
   cef_size_t(CEF_CALLBACK* get_maximum_size)(struct _cef_view_t* self);
 
@@ -327,59 +327,59 @@ typedef struct _cef_view_t {
   cef_color_t(CEF_CALLBACK* get_background_color)(struct _cef_view_t* self);
 
   ///
-  // Convert |point| from this View's coordinate system to that of the screen.
+  // Convert |point_i32| from this View's coordinate system to that of the screen.
   // This View must belong to a Window when calling this function. Returns true
   // (1) if the conversion is successful or false (0) otherwise. Use
   // cef_display_t::convert_point_to_pixels() after calling this function if
   // further conversion to display-specific pixel coordinates is desired.
   ///
   int(CEF_CALLBACK* convert_point_to_screen)(struct _cef_view_t* self,
-                                             cef_point_t* point);
+                                             cef_point_t* point_i32);
 
   ///
-  // Convert |point| to this View's coordinate system from that of the screen.
+  // Convert |point_i32| to this View's coordinate system from that of the screen.
   // This View must belong to a Window when calling this function. Returns true
   // (1) if the conversion is successful or false (0) otherwise. Use
   // cef_display_t::convert_point_from_pixels() before calling this function if
   // conversion from display-specific pixel coordinates is necessary.
   ///
   int(CEF_CALLBACK* convert_point_from_screen)(struct _cef_view_t* self,
-                                               cef_point_t* point);
+                                               cef_point_t* point_i32);
 
   ///
-  // Convert |point| from this View's coordinate system to that of the Window.
+  // Convert |point_i32| from this View's coordinate system to that of the Window.
   // This View must belong to a Window when calling this function. Returns true
   // (1) if the conversion is successful or false (0) otherwise.
   ///
   int(CEF_CALLBACK* convert_point_to_window)(struct _cef_view_t* self,
-                                             cef_point_t* point);
+                                             cef_point_t* point_i32);
 
   ///
-  // Convert |point| to this View's coordinate system from that of the Window.
+  // Convert |point_i32| to this View's coordinate system from that of the Window.
   // This View must belong to a Window when calling this function. Returns true
   // (1) if the conversion is successful or false (0) otherwise.
   ///
   int(CEF_CALLBACK* convert_point_from_window)(struct _cef_view_t* self,
-                                               cef_point_t* point);
+                                               cef_point_t* point_i32);
 
   ///
-  // Convert |point| from this View's coordinate system to that of |view|.
+  // Convert |point_i32| from this View's coordinate system to that of |view|.
   // |view| needs to be in the same Window but not necessarily the same view
   // hierarchy. Returns true (1) if the conversion is successful or false (0)
   // otherwise.
   ///
   int(CEF_CALLBACK* convert_point_to_view)(struct _cef_view_t* self,
                                            struct _cef_view_t* view,
-                                           cef_point_t* point);
+                                           cef_point_t* point_i32);
 
   ///
-  // Convert |point| to this View's coordinate system from that |view|. |view|
+  // Convert |point_i32| to this View's coordinate system from that |view|. |view|
   // needs to be in the same Window but not necessarily the same view hierarchy.
   // Returns true (1) if the conversion is successful or false (0) otherwise.
   ///
   int(CEF_CALLBACK* convert_point_from_view)(struct _cef_view_t* self,
                                              struct _cef_view_t* view,
-                                             cef_point_t* point);
+                                             cef_point_t* point_i32);
 } cef_view_t;
 
 #ifdef __cplusplus

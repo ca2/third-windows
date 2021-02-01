@@ -146,7 +146,7 @@ class String
   char *m_ptr;
   size_t m_length;
   const CHARSET_INFO *m_charset;
-  uint32 m_alloced_length; // should be size_t, but kept uint32 for size reasons
+  uint32 m_alloced_length; // should be size_t, but kept uint32 for size_i32 reasons
   bool m_is_alloced;
 public:
   String()
@@ -605,7 +605,7 @@ public:
 
 
 /**
-  String class wrapper with a preallocated buffer of size buff_sz
+  String class wrapper with a preallocated buffer of size_i32 buff_sz
 
   This class allows to replace sequences of:
      char buff[12345];

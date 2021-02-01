@@ -40,8 +40,8 @@ The type argument _Maptype must take the type of the std::map to be
 introspected.
 
 This class accounts for 'internal' memory per entry only, that is, the
-size returned does neither include the actual size of the std::map class
-itself, nor does it include the size of referenced keys and values (also
+size_i32 returned does neither include the actual size_i32 of the std::map class
+itself, nor does it include the size_i32 of referenced keys and values (also
 the actual bytes required for std::string type keys or values are not
 counted). For example, the total memory usage should be something like:
 
@@ -159,7 +159,7 @@ public:
  at least two pointers, one for left and one for right are required.
  Since it is handy, many implementations also have a parent pointer.
 
- We let the compiler calculate the size of the above mentioned items by
+ We let the compiler calculate the size_i32 of the above mentioned items by
  using a fake structure. By using a real structure (in contrast to just
  adding numbers/bytes) we'll get correct pointer sizes as well as any
  padding applied for free.
@@ -190,7 +190,7 @@ private:
 	/* The memory required for each node will likely look like this
 	 structure. We will just multiply sizeof(_Node) by the number
 	 of nodes to get the total memory of all nodes. By using the
-	 size of the structure, we will also take care of the compiler's
+	 size_i32 of the structure, we will also take care of the compiler's
 	 default padding.
 	*/
 	typedef struct {

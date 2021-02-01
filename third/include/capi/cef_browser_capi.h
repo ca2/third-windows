@@ -539,7 +539,7 @@ typedef struct _cef_browser_host_t {
 
   ///
   // Notify the browser that the widget has been resized. The browser will first
-  // call cef_render_handler_t::GetViewRect to get the new size and then call
+  // call cef_render_handler_t::GetViewRect to get the new size_i32 and then call
   // cef_render_handler_t::OnPaint asynchronously with the updated regions. This
   // function is only used when window rendering is disabled.
   ///

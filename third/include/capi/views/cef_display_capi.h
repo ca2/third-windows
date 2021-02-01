@@ -49,7 +49,7 @@ extern "C" {
 ///
 // This structure typically, but not always, corresponds to a physical display
 // connected to the system. A fake Display may exist on a headless system, or a
-// Display may correspond to a remote, virtual display. All size and position
+// Display may correspond to a remote, virtual display. All size_i32 and position
 // values are in density independent pixels (DIP) unless otherwise indicated.
 // Methods must be called on the browser process UI thread unless otherwise
 // indicated.
@@ -74,21 +74,21 @@ typedef struct _cef_display_t {
   float(CEF_CALLBACK* get_device_scale_factor)(struct _cef_display_t* self);
 
   ///
-  // Convert |point| from density independent pixels (DIP) to pixel coordinates
+  // Convert |point_i32| from density independent pixels (DIP) to pixel coordinates
   // using this Display's device scale factor.
   ///
   void(CEF_CALLBACK* convert_point_to_pixels)(struct _cef_display_t* self,
-                                              cef_point_t* point);
+                                              cef_point_t* point_i32);
 
   ///
-  // Convert |point| from pixel coordinates to density independent pixels (DIP)
+  // Convert |point_i32| from pixel coordinates to density independent pixels (DIP)
   // using this Display's device scale factor.
   ///
   void(CEF_CALLBACK* convert_point_from_pixels)(struct _cef_display_t* self,
-                                                cef_point_t* point);
+                                                cef_point_t* point_i32);
 
   ///
-  // Returns this Display's bounds. This is the full size of the display.
+  // Returns this Display's bounds. This is the full size_i32 of the display.
   ///
   cef_rect_t(CEF_CALLBACK* get_bounds)(struct _cef_display_t* self);
 
@@ -110,11 +110,11 @@ typedef struct _cef_display_t {
 CEF_EXPORT cef_display_t* cef_display_get_primary();
 
 ///
-// Returns the Display nearest |point|. Set |input_pixel_coords| to true (1) if
-// |point| is in pixel coordinates instead of density independent pixels (DIP).
+// Returns the Display nearest |point_i32|. Set |input_pixel_coords| to true (1) if
+// |point_i32| is in pixel coordinates instead of density independent pixels (DIP).
 ///
 CEF_EXPORT cef_display_t* cef_display_get_nearest_point(
-    const cef_point_t* point,
+    const cef_point_t* point_i32,
     int input_pixel_coords);
 
 ///

@@ -51,7 +51,7 @@ typedef struct AVDRMObjectDescriptor {
      */
     int fd;
     /**
-     * Total size of the object.
+     * Total size_i32 of the object.
      *
      * (This includes any parts not which do not contain image data.)
      */

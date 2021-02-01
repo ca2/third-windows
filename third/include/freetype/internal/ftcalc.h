@@ -318,7 +318,7 @@ FT_BEGIN_HEADER
 
   /*
    * This function normalizes a vector and returns its original length.  The
-   * normalized vector is a 16.16 fixed-point unit vector with length close
+   * normalized vector is a 16.16 fixed-point_i32 unit vector with length close
    * to 0x10000.  The accuracy of the returned length is limited to 16 bits
    * also.  The function utilizes quick inverse square root approximation
    * without divisions and square roots relying on Newton's iterations
@@ -343,7 +343,7 @@ FT_BEGIN_HEADER
 
   /*
    * Return TRUE if a corner is flat or nearly flat.  This is equivalent to
-   * saying that the corner point is close to its neighbors, or inside an
+   * saying that the corner point_i32 is close to its neighbors, or inside an
    * ellipse defined by the neighbor focal points to be more precise.
    */
   FT_BASE( FT_Int )
@@ -410,7 +410,7 @@ FT_BEGIN_HEADER
 
   /*
    * Return sqrt(x*x+y*y), which is the same as `FT_Vector_Length' but uses
-   * two fixed-point arguments instead.
+   * two fixed-point_i32 arguments instead.
    */
   FT_BASE( FT_Fixed )
   FT_Hypot( FT_Fixed  x,
@@ -425,7 +425,7 @@ FT_BEGIN_HEADER
    *   FT_SqrtFixed
    *
    * @description:
-   *   Computes the square root of a 16.16 fixed-point value.
+   *   Computes the square root of a 16.16 fixed-point_i32 value.
    *
    * @input:
    *   x ::

@@ -306,10 +306,10 @@ extern "C"
 	FREERDP_API rdpShadowServer* shadow_server_new(void);
 	FREERDP_API void shadow_server_free(rdpShadowServer* server);
 
-	FREERDP_API int shadow_capture_align_clip_rect(RECTANGLE_16* rect, RECTANGLE_16* clip);
+	FREERDP_API int shadow_capture_align_clip_rect(RECTANGLE_16* rectangle_i32, RECTANGLE_16* clip);
 	FREERDP_API int shadow_capture_compare(BYTE* pData1, UINT32 nStep1, UINT32 nWidth,
 	                                       UINT32 nHeight, BYTE* pData2, UINT32 nStep2,
-	                                       RECTANGLE_16* rect);
+	                                       RECTANGLE_16* rectangle_i32);
 
 	FREERDP_API void shadow_subsystem_frame_update(rdpShadowSubsystem* subsystem);
 

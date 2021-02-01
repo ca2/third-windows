@@ -24,7 +24,7 @@
  * @file
  * An API-specific header for AV_HWDEVICE_TYPE_DXVA2.
  *
- * Only fixed-size pools are supported.
+ * Only fixed-size_i32 pools are supported.
  *
  * For user-allocated pools, AVHWFramesContext.pool must return AVBufferRefs
  * with the data pointer set to a pointer to IDirect3DSurface9.

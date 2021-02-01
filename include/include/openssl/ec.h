@@ -28,15 +28,15 @@ extern "C" {
 #  define OPENSSL_ECC_MAX_FIELD_BITS 661
 # endif
 
-/** Enum for the point conversion form as defined in X9.62 (ECDSA)
- *  for the encoding of a elliptic curve point (x,y) */
+/** Enum for the point_i32 conversion form as defined in X9.62 (ECDSA)
+ *  for the encoding of a elliptic curve point_i32 (x,y) */
 typedef enum {
-        /** the point is encoded as z||x, where the octet z specifies
+        /** the point_i32 is encoded as z||x, where the octet z specifies
          *  which solution of the quadratic equation y is  */
     POINT_CONVERSION_COMPRESSED = 2,
-        /** the point is encoded as z||x||y, where z is the octet 0x04  */
+        /** the point_i32 is encoded as z||x||y, where z is the octet 0x04  */
     POINT_CONVERSION_UNCOMPRESSED = 4,
-        /** the point is encoded as z||x||y, where the octet z specifies
+        /** the point_i32 is encoded as z||x||y, where the octet z specifies
          *  which solution of the quadratic equation y is  */
     POINT_CONVERSION_HYBRID = 6
 } point_conversion_form_t;
@@ -428,14 +428,14 @@ int EC_curve_nist2nid(const char *name);
 EC_POINT *EC_POINT_new(const EC_GROUP *group);
 
 /** Frees a EC_POINT object
- *  \param  point  EC_POINT object to be freed
+ *  \param  point_i32  EC_POINT object to be freed
  */
-void EC_POINT_free(EC_POINT *point);
+void EC_POINT_free(EC_POINT *point_i32);
 
 /** Clears and frees a EC_POINT object
- *  \param  point  EC_POINT object to be cleared and freed
+ *  \param  point_i32  EC_POINT object to be cleared and freed
  */
-void EC_POINT_clear_free(EC_POINT *point);
+void EC_POINT_clear_free(EC_POINT *point_i32);
 
 /** Copies EC_POINT object
  *  \param  dst  destination EC_POINT object
@@ -453,17 +453,17 @@ int EC_POINT_copy(EC_POINT *dst, const EC_POINT *src);
 EC_POINT *EC_POINT_dup(const EC_POINT *src, const EC_GROUP *group);
 
 /** Returns the EC_METHOD used in EC_POINT object
- *  \param  point  EC_POINT object
+ *  \param  point_i32  EC_POINT object
  *  \return the EC_METHOD used
  */
-const EC_METHOD *EC_POINT_method_of(const EC_POINT *point);
+const EC_METHOD *EC_POINT_method_of(const EC_POINT *point_i32);
 
-/** Sets a point to infinity (neutral element)
+/** Sets a point_i32 to infinity (neutral element)
  *  \param  group  underlying EC_GROUP object
- *  \param  point  EC_POINT to set to infinity
+ *  \param  point_i32  EC_POINT to set to infinity
  *  \return 1 on success and 0 if an error occurred
  */
-int EC_POINT_set_to_infinity(const EC_GROUP *group, EC_POINT *point);
+int EC_POINT_set_to_infinity(const EC_GROUP *group, EC_POINT *point_i32);
 
 /** Sets the jacobian projective coordinates of a EC_POINT over GFp
  *  \param  group  underlying EC_GROUP object
@@ -621,7 +621,7 @@ DEPRECATEDIN_1_2_0(int EC_POINT_set_compressed_coordinates_GF2m(const EC_GROUP *
 /** Encodes a EC_POINT object to a octet string
  *  \param  group  underlying EC_GROUP object
  *  \param  p      EC_POINT object
- *  \param  form   point conversion form
+ *  \param  form   point_i32 conversion form
  *  \param  buf    memory buffer for the result. If NULL the function returns
  *                 required buffer size.
  *  \param  len    length of the memory buffer
@@ -635,8 +635,8 @@ size_t EC_POINT_point2oct(const EC_GROUP *group, const EC_POINT *p,
 /** Decodes a EC_POINT from a octet string
  *  \param  group  underlying EC_GROUP object
  *  \param  p      EC_POINT object
- *  \param  buf    memory buffer with the encoded ec point
- *  \param  len    length of the encoded ec point
+ *  \param  buf    memory buffer with the encoded ec point_i32
+ *  \param  len    length of the encoded ec point_i32
  *  \param  ctx    BN_CTX object (optional)
  *  \return 1 on success and 0 if an error occurred
  */
@@ -645,13 +645,13 @@ int EC_POINT_oct2point(const EC_GROUP *group, EC_POINT *p,
 
 /** Encodes an EC_POINT object to an allocated octet string
  *  \param  group  underlying EC_GROUP object
- *  \param  point  EC_POINT object
- *  \param  form   point conversion form
+ *  \param  point_i32  EC_POINT object
+ *  \param  form   point_i32 conversion form
  *  \param  pbuf   returns pointer to allocated buffer
  *  \param  ctx    BN_CTX object (optional)
  *  \return the length of the encoded octet string or 0 if an error occurred
  */
-size_t EC_POINT_point2buf(const EC_GROUP *group, const EC_POINT *point,
+size_t EC_POINT_point2buf(const EC_GROUP *group, const EC_POINT *point_i32,
                           point_conversion_form_t form,
                           unsigned char **pbuf, BN_CTX *ctx);
 
@@ -698,20 +698,20 @@ int EC_POINT_dbl(const EC_GROUP *group, EC_POINT *r, const EC_POINT *a,
  */
 int EC_POINT_invert(const EC_GROUP *group, EC_POINT *a, BN_CTX *ctx);
 
-/** Checks whether the point is the neutral element of the group
+/** Checks whether the point_i32 is the neutral element of the group
  *  \param  group  the underlying EC_GROUP object
  *  \param  p      EC_POINT object
- *  \return 1 if the point is the neutral element and 0 otherwise
+ *  \return 1 if the point_i32 is the neutral element and 0 otherwise
  */
 int EC_POINT_is_at_infinity(const EC_GROUP *group, const EC_POINT *p);
 
-/** Checks whether the point is on the curve
+/** Checks whether the point_i32 is on the curve
  *  \param  group  underlying EC_GROUP object
- *  \param  point  EC_POINT object to check
+ *  \param  point_i32  EC_POINT object to check
  *  \param  ctx    BN_CTX object (optional)
- *  \return 1 if the point is on the curve, 0 if not, or -1 on error
+ *  \return 1 if the point_i32 is on the curve, 0 if not, or -1 on error
  */
-int EC_POINT_is_on_curve(const EC_GROUP *group, const EC_POINT *point,
+int EC_POINT_is_on_curve(const EC_GROUP *group, const EC_POINT *point_i32,
                          BN_CTX *ctx);
 
 /** Compares two EC_POINTs
@@ -724,7 +724,7 @@ int EC_POINT_is_on_curve(const EC_GROUP *group, const EC_POINT *point,
 int EC_POINT_cmp(const EC_GROUP *group, const EC_POINT *a, const EC_POINT *b,
                  BN_CTX *ctx);
 
-int EC_POINT_make_affine(const EC_GROUP *group, EC_POINT *point, BN_CTX *ctx);
+int EC_POINT_make_affine(const EC_GROUP *group, EC_POINT *point_i32, BN_CTX *ctx);
 int EC_POINTs_make_affine(const EC_GROUP *group, size_t num,
                           EC_POINT *points[], BN_CTX *ctx);
 
@@ -733,8 +733,8 @@ int EC_POINTs_make_affine(const EC_GROUP *group, size_t num,
  *  \param  r      EC_POINT object for the result
  *  \param  n      BIGNUM with the multiplier for the group generator (optional)
  *  \param  num    number further summands
- *  \param  p      array of size num of EC_POINT objects
- *  \param  m      array of size num of BIGNUM objects
+ *  \param  p      array of size_i32 num of EC_POINT objects
+ *  \param  m      array of size_i32 num of BIGNUM objects
  *  \param  ctx    BN_CTX object (optional)
  *  \return 1 on success and 0 if an error occurred
  */
@@ -754,7 +754,7 @@ int EC_POINTs_mul(const EC_GROUP *group, EC_POINT *r, const BIGNUM *n,
 int EC_POINT_mul(const EC_GROUP *group, EC_POINT *r, const BIGNUM *n,
                  const EC_POINT *q, const BIGNUM *m, BN_CTX *ctx);
 
-/** Stores multiples of generator for faster point multiplication
+/** Stores multiples of generator for faster point_i32 multiplication
  *  \param  group  EC_GROUP object
  *  \param  ctx    BN_CTX object (optional)
  *  \return 1 on success and 0 if an error occurred
@@ -959,7 +959,7 @@ int EC_KEY_set_public_key_affine_coordinates(EC_KEY *key, BIGNUM *x,
 
 /** Encodes an EC_KEY public key to an allocated octet string
  *  \param  key    key to encode
- *  \param  form   point conversion form
+ *  \param  form   point_i32 conversion form
  *  \param  pbuf   returns pointer to allocated buffer
  *  \param  ctx    BN_CTX object (optional)
  *  \return the length of the encoded octet string or 0 if an error occurred
@@ -969,8 +969,8 @@ size_t EC_KEY_key2buf(const EC_KEY *key, point_conversion_form_t form,
 
 /** Decodes a EC_KEY public key from a octet string
  *  \param  key    key to decode
- *  \param  buf    memory buffer with the encoded ec point
- *  \param  len    length of the encoded ec point
+ *  \param  buf    memory buffer with the encoded ec point_i32
+ *  \param  len    length of the encoded ec point_i32
  *  \param  ctx    BN_CTX object (optional)
  *  \return 1 on success and 0 if an error occurred
  */
@@ -1187,7 +1187,7 @@ ECDSA_SIG *ECDSA_do_sign(const unsigned char *dgst, int dgst_len,
                          EC_KEY *eckey);
 
 /** Computes ECDSA signature of a given hash value using the supplied
- *  private key (note: sig must point to ECDSA_size(eckey) bytes of memory).
+ *  private key (note: sig must point_i32 to ECDSA_size(eckey) bytes of memory).
  *  \param  dgst     pointer to the hash value to sign
  *  \param  dgstlen  length of the hash value
  *  \param  kinv     BIGNUM with a pre-computed inverse k (optional)
@@ -1222,7 +1222,7 @@ int ECDSA_do_verify(const unsigned char *dgst, int dgst_len,
 int ECDSA_sign_setup(EC_KEY *eckey, BN_CTX *ctx, BIGNUM **kinv, BIGNUM **rp);
 
 /** Computes ECDSA signature of a given hash value using the supplied
- *  private key (note: sig must point to ECDSA_size(eckey) bytes of memory).
+ *  private key (note: sig must point_i32 to ECDSA_size(eckey) bytes of memory).
  *  \param  type     this parameter is ignored
  *  \param  dgst     pointer to the hash value to sign
  *  \param  dgstlen  length of the hash value
@@ -1235,7 +1235,7 @@ int ECDSA_sign(int type, const unsigned char *dgst, int dgstlen,
                unsigned char *sig, unsigned int *siglen, EC_KEY *eckey);
 
 /** Computes ECDSA signature of a given hash value using the supplied
- *  private key (note: sig must point to ECDSA_size(eckey) bytes of memory).
+ *  private key (note: sig must point_i32 to ECDSA_size(eckey) bytes of memory).
  *  \param  type     this parameter is ignored
  *  \param  dgst     pointer to the hash value to sign
  *  \param  dgstlen  length of the hash value

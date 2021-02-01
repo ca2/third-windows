@@ -46,22 +46,22 @@ extern "C"
 	typedef struct _REGION16 REGION16;
 
 	/** computes if two rectangles are equal
-	 * @param r1 first rectangle
-	 * @param r2 second rectangle
+	 * @param r1 first rectangle_i32
+	 * @param r2 second rectangle_i32
 	 * @return if the two rectangles are equal
 	 */
 	FREERDP_API BOOL rectangles_equal(const RECTANGLE_16* r1, const RECTANGLE_16* r2);
 
 	/** computes if two rectangles intersect
-	 * @param r1 first rectangle
-	 * @param r2 second rectangle
+	 * @param r1 first rectangle_i32
+	 * @param r2 second rectangle_i32
 	 * @return if the two rectangles intersect
 	 */
 	FREERDP_API BOOL rectangles_intersects(const RECTANGLE_16* r1, const RECTANGLE_16* r2);
 
 	/** computes the intersection of two rectangles
-	 * @param r1 first rectangle
-	 * @param r2 second rectangle
+	 * @param r1 first rectangle_i32
+	 * @param r2 second rectangle_i32
 	 * @param dst resulting intersection
 	 * @return if the two rectangles intersect
 	 */
@@ -84,14 +84,14 @@ extern "C"
 	 */
 	FREERDP_API const RECTANGLE_16* region16_rects(const REGION16* region, UINT32* nbRects);
 
-	/** @return the extents rectangle of this region */
+	/** @return the extents rectangle_i32 of this region */
 	FREERDP_API const RECTANGLE_16* region16_extents(const REGION16* region);
 
-	/** returns if the rectangle is empty
-	 * @param rect
-	 * @return if the rectangle is empty
+	/** returns if the rectangle_i32 is empty
+	 * @param rectangle_i32
+	 * @return if the rectangle_i32 is empty
 	 */
-	FREERDP_API BOOL rectangle_is_empty(const RECTANGLE_16* rect);
+	FREERDP_API BOOL rectangle_is_empty(const RECTANGLE_16* rectangle_i32);
 
 	/** returns if the region is empty
 	 * @param region
@@ -116,26 +116,26 @@ extern "C"
 	 */
 	FREERDP_API BOOL region16_copy(REGION16* dst, const REGION16* src);
 
-	/** adds a rectangle in src and stores the resulting region in dst
+	/** adds a rectangle_i32 in src and stores the resulting region in dst
 	 * @param dst destination region
 	 * @param src source region
-	 * @param rect the rectangle to add
+	 * @param rectangle_i32 the rectangle_i32 to add
 	 * @return if the operation was successful (false meaning out-of-memory)
 	 */
 	FREERDP_API BOOL region16_union_rect(REGION16* dst, const REGION16* src,
-	                                     const RECTANGLE_16* rect);
+	                                     const RECTANGLE_16* rectangle_i32);
 
-	/** returns if a rectangle intersects the region
+	/** returns if a rectangle_i32 intersects the region
 	 * @param src the region
-	 * @param arg2 the rectangle
-	 * @return if region and rectangle intersect
+	 * @param arg2 the rectangle_i32
+	 * @return if region and rectangle_i32 intersect
 	 */
 	FREERDP_API BOOL region16_intersects_rect(const REGION16* src, const RECTANGLE_16* arg2);
 
-	/** computes the intersection between a region and a rectangle
+	/** computes the intersection between a region and a rectangle_i32
 	 * @param dst destination region
 	 * @param src the source region
-	 * @param arg2 the rectangle that intersects
+	 * @param arg2 the rectangle_i32 that intersects
 	 * @return if the operation was successful (false meaning out-of-memory)
 	 */
 	FREERDP_API BOOL region16_intersect_rect(REGION16* dst, const REGION16* src,

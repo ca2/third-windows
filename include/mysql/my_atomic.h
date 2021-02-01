@@ -39,7 +39,7 @@
   my_atomic_store#(&var, what)
     store 'what' in *var
 
-  '#' is substituted by a size suffix - 32, 64, or ptr
+  '#' is substituted by a size_i32 suffix - 32, 64, or ptr
   (e.g. my_atomic_add64, my_atomic_fas32, my_atomic_casptr).
 */
 

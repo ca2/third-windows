@@ -71,14 +71,14 @@ FT_BEGIN_HEADER
    *   FT_Alloc_Func
    *
    * @description:
-   *   A function used to allocate `size` bytes from `memory`.
+   *   A function used to allocate `size_i32` bytes from `memory`.
    *
    * @input:
    *   memory ::
    *     A handle to the source memory manager.
    *
-   *   size ::
-   *     The size in bytes to allocate.
+   *   size_i32 ::
+   *     The size_i32 in bytes to allocate.
    *
    * @return:
    *   Address of new memory block.  0~in case of failure.
@@ -86,7 +86,7 @@ FT_BEGIN_HEADER
    */
   typedef void*
   (*FT_Alloc_Func)( FT_Memory  memory,
-                    long       size );
+                    long       size_i32 );
 
 
   /**************************************************************************
@@ -123,7 +123,7 @@ FT_BEGIN_HEADER
    *     A handle to the source memory manager.
    *
    *   cur_size ::
-   *     The block's current size in bytes.
+   *     The block's current size_i32 in bytes.
    *
    *   new_size ::
    *     The block's requested new size.
@@ -284,12 +284,12 @@ FT_BEGIN_HEADER
    *     byte in memory.  This field should always be set to `NULL` for
    *     disk-based streams.
    *
-   *   size ::
-   *     The stream size in bytes.
+   *   size_i32 ::
+   *     The stream size_i32 in bytes.
    *
-   *     In case of compressed streams where the size is unknown before
+   *     In case of compressed streams where the size_i32 is unknown before
    *     actually doing the decompression, the value is set to 0x7FFFFFFF.
-   *     (Note that this size value can occur for normal streams also; it is
+   *     (Note that this size_i32 value can occur for normal streams also; it is
    *     thus just a hint.)
    *
    *   pos ::

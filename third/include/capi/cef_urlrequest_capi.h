@@ -152,7 +152,7 @@ typedef struct _cef_urlrequest_client_t {
 
   ///
   // Notifies the client of upload progress. |current| denotes the number of
-  // bytes sent so far and |total| is the total size of uploading data (or -1 if
+  // bytes sent so far and |total| is the total size_i32 of uploading data (or -1 if
   // chunked upload is enabled). This function will only be called if the
   // UR_FLAG_REPORT_UPLOAD_PROGRESS flag is set on the request.
   ///
@@ -163,7 +163,7 @@ typedef struct _cef_urlrequest_client_t {
 
   ///
   // Notifies the client of download progress. |current| denotes the number of
-  // bytes received up to the call and |total| is the expected total size of the
+  // bytes received up to the call and |total| is the expected total size_i32 of the
   // response (or -1 if not determined).
   ///
   void(CEF_CALLBACK* on_download_progress)(

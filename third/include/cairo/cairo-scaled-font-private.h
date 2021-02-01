@@ -42,7 +42,7 @@
 
 #include "cairo-types-private.h"
 #include "cairo-list-private.h"
-#include "cairo-mutex-type-private.h"
+#include "cairo-::mutex-type-private.h"
 #include "cairo-reference-count-private.h"
 
 CAIRO_BEGIN_DECLS
@@ -77,7 +77,7 @@ struct _cairo_scaled_font {
      *				    scaled_font->surface_private)
      *
      *    Modifications to these fields are protected with locks on
-     *    scaled_font->mutex in the generic scaled_font code.
+     *    scaled_font->::mutex in the generic scaled_font code.
      */
 
     cairo_hash_entry_t hash_entry;
@@ -95,7 +95,7 @@ struct _cairo_scaled_font {
     cairo_matrix_t ctm;	          /* user space => device space */
     cairo_font_options_t options;
 
-    unsigned int placeholder : 1; /*  protected by fontmap mutex */
+    unsigned int placeholder : 1; /*  protected by fontmap ::mutex */
     unsigned int holdover : 1;
     unsigned int finished : 1;
 
@@ -106,8 +106,8 @@ struct _cairo_scaled_font {
     cairo_font_extents_t extents;    /* user space */
     cairo_font_extents_t fs_extents; /* font space */
 
-    /* The mutex protects modification to all subsequent fields. */
-    cairo_mutex_t mutex;
+    /* The ::mutex protects modification to all subsequent fields. */
+    cairo_mutex_t ::mutex;
 
     cairo_hash_table_t *glyphs;
     cairo_list_t glyph_pages;

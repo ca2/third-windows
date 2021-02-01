@@ -74,11 +74,11 @@ _cairo_tristrip_translate (cairo_tristrip_t *strip, int x, int y);
 
 cairo_private void
 _cairo_tristrip_move_to (cairo_tristrip_t *strip,
-			 const cairo_point_t *point);
+			 const cairo_point_t *point_i32);
 
 cairo_private void
 _cairo_tristrip_add_point (cairo_tristrip_t *strip,
-			   const cairo_point_t *point);
+			   const cairo_point_t *point_i32);
 
 cairo_private void
 _cairo_tristrip_extents (const cairo_tristrip_t *strip,
